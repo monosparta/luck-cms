@@ -39,3 +39,6 @@
     font-size: 14px;
     font-weight: bold;
 }
+.submit__btn > span{
+    display: none;
+}
