@@ -7,6 +7,8 @@ import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Appbar.css";
 
+
+
 const Appbar = () => {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -35,8 +37,8 @@ const Appbar = () => {
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position='static' >
-				<Toolbar backgroundColor='#BCD5DE'>
+			<AppBar position='static' elevation={0} style={{ background: '#BCD5DE' }} >
+				<Toolbar>
 					<img src='./mono.png' alt='' className='logo' />
 					<p className='title'>會員置物櫃管理系統</p>
 					<Box sx={{ flexGrow: 1 }} />
@@ -48,7 +50,7 @@ const Appbar = () => {
 						<div className='Bar-logout'>
 							<LogoutIcon></LogoutIcon>
               <stack>
-							<Button variant="Logout" className='Bar-logout' style={{textTransform: 'none'}}> Logout </Button>
+							<Button variant="Logout" sx={{ minHeight: 0, minWidth: 0, padding: 0 }} className='Bar-logout' style={{textTransform: 'none'}}> Logout </Button>
               </stack>
 						</div>
 					</div>
