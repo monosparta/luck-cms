@@ -1,7 +1,7 @@
 import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -43,12 +43,12 @@ const Appbar = () => {
               <stack>
 							<Button variant="Logout" sx={{ minHeight: 0, minWidth: 0, padding: 0 }} className='Bar-logout' style={{textTransform: 'none'}} onClick={(e) => handleClick(e)}> Logout </Button>
               </stack>
-						</div>
-					</div>
-				</Toolbar>
-			</AppBar>
-		</Box>
-	);
+            </div>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 };
 
 export default Appbar;

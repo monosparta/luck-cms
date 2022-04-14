@@ -15,7 +15,7 @@ const Logout = () => {
     localStorage.removeItem("token");
 
     dispatch(login());
-    navigate("/");
+    navigate("/login");
   };
 
   return (
