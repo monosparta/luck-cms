@@ -14,6 +14,7 @@ import "./App.css";
 // 第一次登入無法跳頁
 
 const tkn = localStorage.getItem("token");
+
 const App = () => {
   return (
     <Router>
@@ -29,5 +30,6 @@ const App = () => {
     </Router>
   );
 };
+
 
 export default App;
