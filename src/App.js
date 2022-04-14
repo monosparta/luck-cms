@@ -20,17 +20,16 @@ const App = () => {
     <Router>
       <Routes>
         {tkn ? (
-          <Route path="/" element={<Luck />} />
+          <Route path="/" element={<Appbar />}>
+            <Route path="/" element={<Luck />} />
+          </Route>
         ) : (
           <Route path="*" element={<Navigate to="/login" replace />} />
         )}
         <Route path="/login" index element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-
       </Routes>
     </Router>
   );
 };
-
 
 export default App;
