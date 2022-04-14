@@ -26,6 +26,7 @@ const App = () => {
         )}
         <Route path="/login" index element={<Login />} />
         <Route path="/logout" element={<Logout />} />
+
       </Routes>
     </Router>
   );
