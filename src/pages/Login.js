@@ -8,7 +8,6 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import "./Login.css";
 
@@ -39,7 +38,7 @@ const Login = () => {
     }
     if (isSuccess) {
       dispatch(clearState());
-      navigate("/logout");
+      navigate("/");
     }
   }, [isError, isSuccess]);
 
