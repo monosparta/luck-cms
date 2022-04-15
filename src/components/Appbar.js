@@ -27,7 +27,7 @@ const Appbar = () => {
 
   return (
     <div className="Appbar">
-      <AppBar position="static" elevation={0} style={{ background: "#BCD5DE" }}>
+      <AppBar position="static" elevation={0} style={{ background: "#363F4E" }}>
         <Toolbar>
           <img src="./mono.png" alt="" className="logo" />
           <p className="title">會員置物櫃管理系統</p>

@@ -4,17 +4,20 @@ export const login = createAsyncThunk(
   "user/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await fetch("http://192.168.168.24:8000/api/login", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const response = await fetch(
+        "https://539e-211-72-239-241.ngrok.io/api/login",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
       let data = await response.json();
       console.log("response", data);
       if (response.status === 200) {
