@@ -1,11 +1,46 @@
 import React from "react";
 import "./Luck.css";
 import ToggleButton from "@mui/material/ToggleButton";
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import CircleIcon from '@mui/icons-material/Circle';
+import { useNavigate } from "react-router-dom";
 
 const Luck = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+
+    navigate("/Info");
+  };
   return (
     <div id="Luck">
-      <div className="luck__title">置物櫃當前使用狀態</div>
+      <div className="status">
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              width: 160,
+              height: 164,
+              borderRadius: "10%",
+              borderColor: "#000000",
+              border: "1px solid ",
+            },
+          }}
+        >
+          <Paper className="p" elevation={0} >
+            <div className="cir"><CircleIcon sx={{ color: "#363F4E", height:"20px",width:"20px"}}></CircleIcon>
+            使用中</div>
+            <div className="cir"><CircleIcon sx={{ color: "#000000",height:"20px",width:"20px"}}></CircleIcon>
+            可使用</div>
+            <div className="cir"><CircleIcon sx={{ color: "#FF5A5A", height:"20px",width:"20px"}}></CircleIcon>
+            異常&ensp; </div>
+            </Paper>
+        </Box>
+      </div>
+      <div className="luck__title" >置物櫃當前使用狀態</div>
       <div className="luck__toggle">
         <div className="toggle-btn">
           <ToggleButton
@@ -13,12 +48,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             00
           </ToggleButton>
@@ -27,12 +66,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             01
           </ToggleButton>
@@ -40,52 +83,57 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
+            }}
+
+          ></ToggleButton>
+          <ToggleButton
+            className="btn"
+            disabled="True"
+            style={{
+              width: 90,
+              height: 90,
+              background: "#FFF",
+              border: "1px solid #E0E0E0",
+              borderStyle: "dashed",
+              borderWidth: "1px",
+              borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
-            }}
-          ></ToggleButton>
-          <ToggleButton
-            className="btn"
-            disabled="True"
-            style={{
-              width: 64,
-              height: 64,
-              background: "#FFF",
-              border: "1px solid #E0E0E0",
-              borderStyle: "dashed",
-              borderWidth: "2px",
-              borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
@@ -93,12 +141,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             02
           </ToggleButton>
@@ -108,12 +160,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             03
           </ToggleButton>
@@ -122,12 +178,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             04
           </ToggleButton>
@@ -135,52 +195,56 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
@@ -188,12 +252,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             05
           </ToggleButton>
@@ -203,12 +271,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             06
           </ToggleButton>
@@ -217,12 +289,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             07
           </ToggleButton>
@@ -231,12 +307,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             08
           </ToggleButton>
@@ -245,12 +325,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             09
           </ToggleButton>
@@ -259,12 +343,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             10
           </ToggleButton>
@@ -273,12 +361,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             11
           </ToggleButton>
@@ -287,12 +379,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             12
           </ToggleButton>
@@ -302,12 +398,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             13
           </ToggleButton>
@@ -316,12 +416,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             14
           </ToggleButton>
@@ -330,12 +434,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             15
           </ToggleButton>
@@ -344,12 +452,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             16
           </ToggleButton>
@@ -358,12 +470,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             17
           </ToggleButton>
@@ -372,12 +488,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             18
           </ToggleButton>
@@ -386,12 +506,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             19
           </ToggleButton>
@@ -401,12 +525,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             20
           </ToggleButton>
@@ -415,12 +543,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             21
           </ToggleButton>
@@ -429,12 +561,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             22
           </ToggleButton>
@@ -443,12 +579,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             23
           </ToggleButton>
@@ -457,12 +597,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             24
           </ToggleButton>
@@ -471,12 +615,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             25
           </ToggleButton>
@@ -485,12 +633,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             26
           </ToggleButton>
@@ -500,12 +652,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             27
           </ToggleButton>
@@ -514,12 +670,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             28
           </ToggleButton>
@@ -528,12 +688,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             29
           </ToggleButton>
@@ -542,12 +706,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             30
           </ToggleButton>
@@ -556,12 +724,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             31
           </ToggleButton>
@@ -570,12 +742,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             32
           </ToggleButton>
@@ -584,12 +760,16 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             33
           </ToggleButton>
