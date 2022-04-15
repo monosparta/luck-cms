@@ -1,11 +1,38 @@
 import React from "react";
 import "./Luck.css";
 import ToggleButton from "@mui/material/ToggleButton";
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import CircleIcon from '@mui/icons-material/Circle';
 
 const Luck = () => {
   return (
     <div id="Luck">
-      <div className="luck__title">置物櫃當前使用狀態</div>
+      <div className="status">
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              width: 160,
+              height: 164,
+              borderRadius: "10%",
+              borderColor: "#000000",
+              border: "1px solid ",
+            },
+          }}
+        >
+          <Paper className="p" elevation={0} >
+            <div className="cir"><CircleIcon sx={{ color: "#363F4E", height:"20px",width:"20px"}}></CircleIcon>
+            使用中</div>
+            <div className="cir"><CircleIcon sx={{ color: "#000000",height:"20px",width:"20px"}}></CircleIcon>
+            可使用</div>
+            <div className="cir"><CircleIcon sx={{ color: "#FF5A5A", height:"20px",width:"20px"}}></CircleIcon>
+            異常&ensp; </div>
+            </Paper>
+        </Box>
+      </div>
+      <div className="luck__title" >置物櫃當前使用狀態</div>
       <div className="luck__toggle">
         <div className="toggle-btn">
           <ToggleButton
@@ -13,11 +40,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             00
@@ -27,11 +57,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             01
@@ -40,52 +73,57 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
+              
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
@@ -93,11 +131,15 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
+              
             }}
           >
             02
@@ -108,11 +150,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             03
@@ -122,11 +167,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             04
@@ -135,52 +183,56 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
             className="btn"
             disabled="True"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
-              borderWidth: "2px",
+              borderWidth: "1px",
               borderRadius: "12%",
+              borderColor: "#000000",
             }}
           ></ToggleButton>
           <ToggleButton
@@ -188,11 +240,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             05
@@ -203,11 +258,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             06
@@ -217,11 +275,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             07
@@ -231,11 +292,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             08
@@ -245,11 +309,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             09
@@ -259,11 +326,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             10
@@ -273,11 +343,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             11
@@ -287,11 +360,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             12
@@ -302,11 +378,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             13
@@ -316,11 +395,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             14
@@ -330,11 +412,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             15
@@ -344,11 +429,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             16
@@ -358,11 +446,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             17
@@ -372,11 +463,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             18
@@ -386,11 +480,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             19
@@ -401,11 +498,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             20
@@ -415,11 +515,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             21
@@ -429,11 +532,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             22
@@ -443,11 +549,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             23
@@ -457,11 +566,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             24
@@ -471,11 +583,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             25
@@ -485,11 +600,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             26
@@ -500,11 +618,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             27
@@ -514,11 +635,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             28
@@ -528,11 +652,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             29
@@ -542,11 +669,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             30
@@ -556,11 +686,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             31
@@ -570,11 +703,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             32
@@ -584,11 +720,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 64,
-              height: 64,
+              width: 90,
+              height: 90,
+              background: "#FFF",
               color: "#000",
               fontWeight: "bold",
               borderRadius: "12%",
+              borderColor: "#000000",
+              fontSize: "25px",
             }}
           >
             33
