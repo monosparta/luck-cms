@@ -1,0 +1,36 @@
+.Info{
+    height: 90vh;
+    background-color:#F5F5F5;
+}
+.info__section{
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.section-base{
+    width: 30%;
+    height: 55%;
+    background-color:#fff;
+    border-radius: 10px;
+    box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1), -4px 4px 8px rgba(54, 63, 78, 0.1);
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.section-record{
+    width: 60%;
+    height: 55%;
+    background-color:#fff;
+    border-radius: 10px;
+    box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1), -4px 4px 8px rgba(54, 63, 78, 0.1);
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -34,21 +34,28 @@ const Appbar = () => {
           <Box sx={{ flexGrow: 1 }} />
           <div className="Bar">
             <div className="Bar-user">
-              <Avatar>R</Avatar>
+              <Avatar
+                className="avatar"
+                src="./user.png"
+                sx={{ width: 36, height: 36 }}
+              ></Avatar>
               <p className="username"> Rosa </p>
             </div>
             <div className="Bar-logout">
-              <LogoutIcon></LogoutIcon>
               <stack>
                 <Button
                   variant="Logout"
-                  sx={{ minHeight: 0, minWidth: 0, padding: 0 }}
                   className="Bar-logout"
-                  style={{ textTransform: "none" }}
+                  style={{
+                    background: "#5CB4FD",
+                    height: 44,
+                    width: 88,
+                    textTransform: "none",
+                  }}
                   onClick={(e) => handleClick(e)}
                 >
-                  {" "}
-                  Logout{" "}
+                  <LogoutIcon className="logout-icon"></LogoutIcon>
+                  Logout
                 </Button>
               </stack>
             </div>
