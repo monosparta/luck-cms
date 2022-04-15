@@ -4,8 +4,16 @@ import ToggleButton from "@mui/material/ToggleButton";
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import CircleIcon from '@mui/icons-material/Circle';
+import { useNavigate } from "react-router-dom";
 
 const Luck = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = (e) => {
+
+    navigate("/Info");
+  };
   return (
     <div id="Luck">
       <div className="status">
@@ -49,6 +57,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             00
           </ToggleButton>
@@ -66,6 +75,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             01
           </ToggleButton>
@@ -81,8 +91,8 @@ const Luck = () => {
               borderWidth: "1px",
               borderRadius: "12%",
               borderColor: "#000000",
-              
             }}
+
           ></ToggleButton>
           <ToggleButton
             className="btn"
@@ -139,8 +149,8 @@ const Luck = () => {
               borderRadius: "12%",
               borderColor: "#000000",
               fontSize: "25px",
-              
             }}
+            onClick={(e) => handleClick(e)}
           >
             02
           </ToggleButton>
@@ -159,6 +169,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             03
           </ToggleButton>
@@ -176,6 +187,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             04
           </ToggleButton>
@@ -249,6 +261,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             05
           </ToggleButton>
@@ -267,6 +280,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             06
           </ToggleButton>
@@ -284,6 +298,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             07
           </ToggleButton>
@@ -301,6 +316,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             08
           </ToggleButton>
@@ -318,6 +334,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             09
           </ToggleButton>
@@ -335,6 +352,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             10
           </ToggleButton>
@@ -352,6 +370,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             11
           </ToggleButton>
@@ -369,6 +388,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             12
           </ToggleButton>
@@ -387,6 +407,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             13
           </ToggleButton>
@@ -404,6 +425,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             14
           </ToggleButton>
@@ -421,6 +443,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             15
           </ToggleButton>
@@ -438,6 +461,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             16
           </ToggleButton>
@@ -455,6 +479,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             17
           </ToggleButton>
@@ -472,6 +497,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             18
           </ToggleButton>
@@ -489,6 +515,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             19
           </ToggleButton>
@@ -507,6 +534,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             20
           </ToggleButton>
@@ -524,6 +552,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             21
           </ToggleButton>
@@ -541,6 +570,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             22
           </ToggleButton>
@@ -558,6 +588,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             23
           </ToggleButton>
@@ -575,6 +606,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             24
           </ToggleButton>
@@ -592,6 +624,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             25
           </ToggleButton>
@@ -609,6 +642,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             26
           </ToggleButton>
@@ -627,6 +661,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             27
           </ToggleButton>
@@ -644,6 +679,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             28
           </ToggleButton>
@@ -661,6 +697,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             29
           </ToggleButton>
@@ -678,6 +715,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             30
           </ToggleButton>
@@ -695,6 +733,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             31
           </ToggleButton>
@@ -712,6 +751,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             32
           </ToggleButton>
@@ -729,6 +769,7 @@ const Luck = () => {
               borderColor: "#000000",
               fontSize: "25px",
             }}
+            onClick={(e) => handleClick(e)}
           >
             33
           </ToggleButton>
