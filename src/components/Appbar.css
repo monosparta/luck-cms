@@ -4,9 +4,18 @@
     margin-right: 20px;
 }
 
+.title{
+    font-weight: 400;
+}
+
+.avatar{
+    margin:10px;
+}
+
 .username{
     padding: 10px 0px 10px 10px;
 }
+
 .LogoutIcon{
     padding: 10px;
 }
@@ -21,20 +30,9 @@
 .Bar-user,.Bar-logout{
     display:flex;
     align-items: center;
+    margin: 0 20px;
 }
 
-.Bar-logout{
-    padding: 0px 0px;
-}
-
-.css-hip9hq-MuiPaper-root-MuiAppBar-root{
-    box-shadow: 0px 2px 4px -1px rgb(0 0 0 0), 0px 4px 5px 0px rgb(0 0 0 0), 0px 1px 10px 0px rgb(0 0 0 0);
-}
-
-.Bar-user::after {
-    content:"";
-    margin: 25px;
-    height: 100%;
-    border-right: solid #FFFFFF 1px;
-    z-index: 999;
+.logout-icon{
+    padding-right:5px;
 }

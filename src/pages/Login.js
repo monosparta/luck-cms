@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { login, clearState, selectUser } from "../redux/userSlice";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
+import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Button from "@mui/material/Button";
@@ -42,12 +43,35 @@ const Login = () => {
     }
   }, [isError, isSuccess]);
 
+  const CssTextField = styled(TextField)({
+    "& .MuiFormHelperText-root": {
+      "&.Mui-focused": {
+        //提示文字
+        color: "#02A2EE",
+      },
+    },
+    "& label.Mui-focused": {
+      //上排文字
+      color: "#02A2EE",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "black",
+      },
+      "&:hover fieldset": {
+        borderColor: "black",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#363F4E", //FIELD 框
+      },
+    },
+  });
   return (
     <div className="login">
       <Toaster />
       <div className="login__side">
         <p className="side-name">會員置物櫃管理系統</p>
-        <img src="./mono.png" alt="" className="side-logo" />
+        <img src="./mono-l.png" alt="" className="side-logo" />
       </div>
       <div className="login__form">
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -57,7 +81,7 @@ const Login = () => {
             </div>
             <div className="form-item-user">
               <h2>帳號 Username or Email</h2>
-              <TextField
+              <CssTextField
                 required
                 type="email"
                 id="input-email"
@@ -73,12 +97,12 @@ const Login = () => {
             </div>
             <div className="form-item-pswd">
               <h2>密碼 Password</h2>
-              <TextField
+              <CssTextField
                 required
                 type="password"
                 id="input-password"
                 placeholder="請輸入密碼"
-                sx={{ width: "100%" }}
+                sx={{ width: "100%", borderColor: "#000" }}
                 inputProps={{
                   style: {
                     height: "14px",
@@ -89,16 +113,16 @@ const Login = () => {
             </div>
             <div className="form-item-check">
               <FormControlLabel
-                control={<Checkbox size="small" color="default" />}
+                control={<Checkbox size="small" style={{ color: "#363F4E" }} />}
                 label={<Typography sx={{ fontSize: 12 }}>保持登入</Typography>}
               />
             </div>
             <div className="form-item-btn">
               <span>
                 {isFetching
-                  ? toast.loading("Loading", { id: "loading" })
+                  ? toast.loading("登入中", { id: "loading" })
                   : toast.remove("loading")}
-                {isError ? toast.error("Error") : null}
+                {isError ? toast.error("帳號或密碼錯誤") : null}
               </span>
               <Button
                 type="submit"
@@ -106,7 +130,7 @@ const Login = () => {
                 style={{
                   width: "100%",
                   height: 47,
-                  background: "#C4C4C4",
+                  background: "#363F4E",
                   boxShadow: "none",
                   fontSize: 18,
                 }}
