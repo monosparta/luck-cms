@@ -47,9 +47,12 @@ const Appbar = () => {
                   variant="Logout"
                   className="Bar-logout"
                   style={{
-                    background: "#5CB4FD",
-                    height: 44,
-                    width: 88,
+                    border: "1px solid",
+                    borderColor: "#fff",
+                    borderSize: "border-box",
+                    borderRadius: "4px",
+                    height: 36,
+                    width: 116,
                     textTransform: "none",
                   }}
                   onClick={(e) => handleClick(e)}

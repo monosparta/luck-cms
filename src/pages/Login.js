@@ -120,9 +120,9 @@ const Login = () => {
             <div className="form-item-btn">
               <span>
                 {isFetching
-                  ? toast.loading("Loading", { id: "loading" })
+                  ? toast.loading("登入中", { id: "loading" })
                   : toast.remove("loading")}
-                {isError ? toast.error("Error") : null}
+                {isError ? toast.error("帳號或密碼錯誤") : null}
               </span>
               <Button
                 type="submit"

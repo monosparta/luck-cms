@@ -3,38 +3,34 @@
 	flex-direction: column;
 	align-items: center;
 	background-color: #f5f5f5;
-	height: 100vh;
+	height: 100%;
+	width: 100%;
 }
 .luck__title {
 	text-align: center;
 	font-size: 28px;
 	font-weight: 700;
 	font-style: bold;
-	line-height: 40px;
-	margin: 30px 0;
+	line-height: 30px;
+	margin: 40px 0 30px 0;
 	color: #363f4e;
 }
 .toggle-btn {
-	max-width: 800px;
+	width: 800px;
 	text-align: center;
 }
 .toggle-btn .btn {
-	margin: 7px;
+	margin: 10px 5px 10px 5px;
     
 }
-.status {
-	position: relative;
-
-}
-
 .p{
     font-size:24px;
+	font-weight: 700;
+	font-style: bold;
     display: flex;
     justify-content: center; 
     align-items: center; 
     flex-direction: column;
-
-    
 }
 
 .cir{
@@ -42,14 +38,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    margin: 10px 0 ;
+    margin: 7px 0 ;
 }
 
 .status {
     position: absolute;
-    Top:600px;
-    Left:1220px;
-    
-
+	bottom: 19%;
+	right: 5%;
 }
-
