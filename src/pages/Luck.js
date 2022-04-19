@@ -6,15 +6,16 @@ import Paper from '@mui/material/Paper';
 import CircleIcon from '@mui/icons-material/Circle';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { clearState, LuckStatus } from "../redux/luckSlice";
-import { useDispatch } from "react-redux";
+import { LuckStatus, selectLuck } from "../redux/luckSlice";
+import { useSelector, useDispatch } from "react-redux";
+
 
 const Luck = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(123);
     dispatch(LuckStatus());
   }, []);
+  useSelector(selectLuck);
 
   const navigate = useNavigate();
 
@@ -58,8 +59,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -76,8 +77,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -93,8 +94,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -108,8 +109,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -122,8 +123,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -136,8 +137,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -151,8 +152,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -171,8 +172,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -189,8 +190,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -206,8 +207,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -220,8 +221,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -234,8 +235,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -248,8 +249,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -263,8 +264,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -282,8 +283,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -300,8 +301,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -318,8 +319,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -336,8 +337,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -354,8 +355,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -372,8 +373,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -390,8 +391,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -409,8 +410,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -427,8 +428,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -445,8 +446,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -463,8 +464,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -481,8 +482,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -499,8 +500,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -517,8 +518,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -536,8 +537,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -554,8 +555,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -572,8 +573,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -590,8 +591,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -608,8 +609,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -626,8 +627,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -644,8 +645,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -663,8 +664,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -681,8 +682,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -699,8 +700,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -717,8 +718,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -735,8 +736,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -753,8 +754,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",
@@ -771,8 +772,8 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               background: "#FFF",
               color: "#000",
               fontWeight: "bold",

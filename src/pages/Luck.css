@@ -16,33 +16,32 @@
 	color: #363f4e;
 }
 .toggle-btn {
-	width: 800px;
+	width: 770px;
 	text-align: center;
 }
 .toggle-btn .btn {
 	margin: 10px 5px 10px 5px;
-    
 }
-.p{
-    font-size:24px;
+.p {
+	font-size: 24px;
 	font-weight: 700;
 	font-style: bold;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: column;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
-.cir{
-    width: 70%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    margin: 7px 0 ;
+.cir {
+	width: 70%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 7px 0;
 }
 
 .status {
-    position: absolute;
+	position: absolute;
 	bottom: 19%;
 	right: 5%;
 }

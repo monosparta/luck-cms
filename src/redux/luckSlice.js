@@ -4,7 +4,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 export const LuckStatus = createAsyncThunk(
     "Luck/status",
     async (thunkAPI) => {
-        console.log(457)
         try {
             const token = localStorage.getItem("token");
             const response = await fetch(
@@ -14,7 +13,7 @@ export const LuckStatus = createAsyncThunk(
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
-                        token,
+                        "token": "pkmxafD0P0mSIbLQcJg75AZL8idnysZBe1tl1BdIHxvIlDiqJF2mPq4o0iQW",
                     },
 
                 }
@@ -23,6 +22,7 @@ export const LuckStatus = createAsyncThunk(
             console.log("response", data);
             if (response.status === 200) {
                 return data;
+
             } else {
                 throw data.message;
             }
@@ -36,9 +36,9 @@ export const LuckStatus = createAsyncThunk(
 export const luckSlice = createSlice({
     name: "Luck",
     initialState: {
-        userId: "",
-        lockup: "",
-        lockNo: "",
+        lockNo: [],
+        lockUp: [],
+        userId: [],
         isFetching: false,
         isSuccess: false,
         isError: false,
@@ -53,8 +53,31 @@ export const luckSlice = createSlice({
             return state;
         },
     },
-}
-);
+    extraReducers: {
+        [LuckStatus.fulfilled]: (state, { payload }) => {
+            console.log("Good", payload);
+            state.isFetching = false;
+            state.isSuccess = true;
+            state.lockNo = payload.lockNo;
+            state.lockUp = payload.lockUp;
+            state.userId = payload.userIrd;
+            return state;
+        },
+        [LuckStatus.pending]: (state) => {
+            state.isFetching = true;
+            console.log("loading");
+            return state;
+        },
+        [LuckStatus.rejected]: (state, { payload }) => {
+            console.log("Bad", payload);
+            state.isFetching = false;
+            state.isError = true;
+            state.errorMessage = payload.message;
+            return state;
+        },
+    },
+});
+
 
 export const { clearState } = luckSlice.actions;
 
