@@ -5,7 +5,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await fetch(
-        "https://ee62-211-72-239-241.ngrok.io/api/login",
+        "https://2456-211-72-239-241.ngrok.io/api/login",
         {
           method: "POST",
           headers: {
@@ -68,7 +68,7 @@ export const userSlice = createSlice({
       return state;
     },
     [login.rejected]: (state, { payload }) => {
-      console.log("payload", payload);
+      console.log("payload1", payload);
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
