@@ -67,3 +67,8 @@
     margin-top: 35px;
     text-align: center;
 }
+.record.title{
+    color: #363F4E;
+    font-weight: 400;
+    font-size: 24px;
+}

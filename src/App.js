@@ -16,8 +16,7 @@ import "./App.css";
 // 登出後按上一頁還是可以進到後台
 // useEffect tkn ?
 
-// const tkn = localStorage.getItem("token");
-const tkn = true;
+const tkn = localStorage.getItem("token");
 const App = () => {
   return (
     <Router>

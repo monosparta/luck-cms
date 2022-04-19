@@ -42,25 +42,23 @@ const Appbar = () => {
               <p className="username"> Rosa </p>
             </div>
             <div className="Bar-logout">
-              <stack>
-                <Button
-                  variant="Logout"
-                  className="Bar-logout"
-                  style={{
-                    border: "1px solid",
-                    borderColor: "#fff",
-                    borderSize: "border-box",
-                    borderRadius: "4px",
-                    height: 36,
-                    width: 116,
-                    textTransform: "none",
-                  }}
-                  onClick={(e) => handleClick(e)}
-                >
-                  <LogoutIcon className="logout-icon"></LogoutIcon>
-                  Logout
-                </Button>
-              </stack>
+              <Button
+                variant="Logout"
+                className="Bar-logout"
+                style={{
+                  border: "1px solid",
+                  borderColor: "#fff",
+                  borderSize: "border-box",
+                  borderRadius: "4px",
+                  height: 36,
+                  width: 116,
+                  textTransform: "none",
+                }}
+                onClick={(e) => handleClick(e)}
+              >
+                <LogoutIcon className="logout-icon"></LogoutIcon>
+                Logout
+              </Button>
             </div>
           </div>
         </Toolbar>
