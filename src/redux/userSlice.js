@@ -68,7 +68,7 @@ export const userSlice = createSlice({
       return state;
     },
     [login.rejected]: (state, { payload }) => {
-      console.log("payload", payload);
+      console.log("payload1", payload);
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;

@@ -1,20 +1,56 @@
 import React from "react";
 import "./Luck.css";
 import ToggleButton from "@mui/material/ToggleButton";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import CircleIcon from "@mui/icons-material/Circle";
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import CircleIcon from '@mui/icons-material/Circle';
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { clearState, LuckStatus } from "../redux/luckSlice";
+import { useDispatch } from "react-redux";
 
 const Luck = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(123);
+    dispatch(LuckStatus());
+  }, []);
+
   const navigate = useNavigate();
 
   const handleClick = (e) => {
+
     navigate("/Info");
   };
+
+
   return (
     <div id="Luck">
-      <div className="luck__title">置物櫃當前使用狀態</div>
+      <div className="status">
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            '& > :not(style)': {
+              width: 160,
+              height: 164,
+              borderRadius: "10%",
+              borderColor: "#000000",
+              border: "1px solid ",
+            },
+          }}
+        >
+          <Paper className="p" elevation={0} >
+            <div className="cir"><CircleIcon sx={{ color: "#363F4E", height: "20px", width: "20px" }}></CircleIcon>
+              使用中</div>
+            <div className="cir"><CircleIcon sx={{ color: "#000000", height: "20px", width: "20px" }}></CircleIcon>
+              可使用</div>
+            <div className="cir"><CircleIcon sx={{ color: "#FF5A5A", height: "20px", width: "20px" }}></CircleIcon>
+              異常&ensp; </div>
+          </Paper>
+        </Box>
+      </div>
+      <div className="luck__title" >置物櫃當前使用狀態</div>
       <div className="luck__toggle">
         <div className="toggle-btn">
           <ToggleButton
@@ -22,14 +58,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -40,14 +76,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -57,8 +93,23 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
+              background: "#FFF",
+              border: "1px solid #E0E0E0",
+              borderStyle: "dashed",
+              borderWidth: "1px",
+              borderRadius: "12%",
+              borderColor: "#000000",
+            }}
+
+          ></ToggleButton>
+          <ToggleButton
+            className="btn"
+            disabled="True"
+            style={{
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -71,8 +122,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -85,22 +136,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 100,
-              height: 100,
-              background: "#FFF",
-              border: "1px solid #E0E0E0",
-              borderStyle: "dashed",
-              borderWidth: "1px",
-              borderRadius: "12%",
-              borderColor: "#000000",
-            }}
-          ></ToggleButton>
-          <ToggleButton
-            className="btn"
-            disabled="True"
-            style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -114,14 +151,15 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
+
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -133,14 +171,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -151,14 +189,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -168,8 +206,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -182,8 +220,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -196,8 +234,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -210,8 +248,8 @@ const Luck = () => {
             className="btn"
             disabled="True"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               border: "1px solid #E0E0E0",
               borderStyle: "dashed",
@@ -225,14 +263,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -244,14 +282,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -262,14 +300,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -280,14 +318,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -298,14 +336,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -316,14 +354,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -334,14 +372,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -352,14 +390,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -371,14 +409,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -389,14 +427,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -407,14 +445,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -425,14 +463,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -443,14 +481,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -461,14 +499,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -479,14 +517,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -498,14 +536,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -516,14 +554,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -534,14 +572,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -552,14 +590,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -570,14 +608,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -588,14 +626,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -606,14 +644,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -625,14 +663,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -643,14 +681,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -661,14 +699,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -679,14 +717,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -697,14 +735,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -715,14 +753,14 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
@@ -733,56 +771,20 @@ const Luck = () => {
             className="btn"
             color="primary"
             style={{
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               background: "#FFF",
               color: "#000",
-              fontFamily: "Mulish",
+              fontWeight: "bold",
               borderRadius: "12%",
               borderColor: "#000000",
-              fontSize: "24px",
+              fontSize: "25px",
             }}
             onClick={(e) => handleClick(e)}
           >
             33
           </ToggleButton>
         </div>
-      </div>
-      <div className="status">
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            "& > :not(style)": {
-              width: 160,
-              height: 164,
-              borderRadius: "10%",
-              borderColor: "#000000",
-              border: "1px solid ",
-            },
-          }}
-        >
-          <Paper className="p" elevation={0}>
-            <div className="cir">
-              <CircleIcon
-                sx={{ color: "#363F4E", height: "20px", width: "20px" }}
-              ></CircleIcon>
-              使用中
-            </div>
-            <div className="cir">
-              <CircleIcon
-                sx={{ color: "#000000", height: "20px", width: "20px" }}
-              ></CircleIcon>
-              可使用
-            </div>
-            <div className="cir">
-              <CircleIcon
-                sx={{ color: "#FF5A5A", height: "20px", width: "20px" }}
-              ></CircleIcon>
-              異常&ensp;{" "}
-            </div>
-          </Paper>
-        </Box>
       </div>
     </div>
   );
