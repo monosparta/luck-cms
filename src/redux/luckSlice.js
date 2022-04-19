@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 
 export const LuckStatus = createAsyncThunk(
-    "Luck/status",
+    "Luck/LuckStatus",
     async (thunkAPI) => {
         try {
             const token = localStorage.getItem("token");
@@ -13,7 +13,7 @@ export const LuckStatus = createAsyncThunk(
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
-                        "token": "pkmxafD0P0mSIbLQcJg75AZL8idnysZBe1tl1BdIHxvIlDiqJF2mPq4o0iQW",
+                        "token": "l1sRIjDonPhyNRitoXYsunDPvBT6uT2TI1DcBBYDnFEzpykFa3CYWfHd2Blf",
                     },
 
                 }
@@ -52,6 +52,9 @@ export const luckSlice = createSlice({
 
             return state;
         },
+        // saveLock: (state, { payload }) => {
+
+        // }
     },
     extraReducers: {
         [LuckStatus.fulfilled]: (state, { payload }) => {
@@ -60,7 +63,7 @@ export const luckSlice = createSlice({
             state.isSuccess = true;
             state.lockNo = payload.lockNo;
             state.lockUp = payload.lockUp;
-            state.userId = payload.userIrd;
+            state.userId = payload.userId;
             return state;
         },
         [LuckStatus.pending]: (state) => {

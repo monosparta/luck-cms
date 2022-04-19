@@ -1,6 +1,5 @@
 import React from "react";
 import "./Luck.css";
-import ToggleButton from "@mui/material/ToggleButton";
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import CircleIcon from '@mui/icons-material/Circle';
@@ -8,22 +7,23 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LuckStatus, selectLuck } from "../redux/luckSlice";
 import { useSelector, useDispatch } from "react-redux";
+import Item from "../components/Lock";
 
 
-const Luck = () => {
+const Luck = ({ state }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(LuckStatus());
+
   }, []);
+
+
   useSelector(selectLuck);
-
+  // const lockList = useSelector((state => state.luckNo))
   const navigate = useNavigate();
-
   const handleClick = (e) => {
-
     navigate("/Info");
   };
-
 
   return (
     <div id="Luck">
@@ -53,7 +53,7 @@ const Luck = () => {
       </div>
       <div className="luck__title" >置物櫃當前使用狀態</div>
       <div className="luck__toggle">
-        <div className="toggle-btn">
+        {/* <div className="toggle-btn">
           <ToggleButton
             value="00"
             className="btn"
@@ -785,7 +785,12 @@ const Luck = () => {
           >
             33
           </ToggleButton>
-        </div>
+        </div> */}
+      </div>
+      <div style={{ width: 770 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)' }}>
+          <Item></Item>
+        </Box>
       </div>
     </div>
   );
