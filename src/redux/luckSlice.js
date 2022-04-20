@@ -13,7 +13,7 @@ export const LuckStatus = createAsyncThunk(
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json",
-                        "token": "l1sRIjDonPhyNRitoXYsunDPvBT6uT2TI1DcBBYDnFEzpykFa3CYWfHd2Blf",
+                        token,
                     },
 
                 }
@@ -36,7 +36,7 @@ export const LuckStatus = createAsyncThunk(
 export const luckSlice = createSlice({
     name: "Luck",
     initialState: {
-        lockNo: [],
+        lockNo: [{}],
         lockUp: [],
         userId: [],
         isFetching: false,
