@@ -7,6 +7,13 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
 
 const Info = () => {
   const navigate = useNavigate();
@@ -20,6 +27,42 @@ const Info = () => {
     navigate("/");
   };
 
+  const [open, setOpen] = React.useState(false);
+  const [checkopen, setCheckOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClickCheckOpen = () => {
+    setCheckOpen(true);
+    setOpen(false);
+  };
+
+  const handleCheckClose = () => {
+    setCheckOpen(false);
+  };
+  const CssTextField = styled(TextField)({
+    "& .MuiFormHelperText-root": {
+      "&.Mui-focused": {
+        //提示文字
+        color: "#02A2EE",
+      },
+    },
+    "& label.Mui-focused": {
+      //上排文字
+      color: "#02A2EE",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "#A0A0A0", //FIELD 框
+      },
+    },
+  });
   return (
     <div id="Info">
       <div className="info__back">
@@ -27,6 +70,153 @@ const Info = () => {
           <img src="./chevron.png" alt="" />
         </button>
       </div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          m: "auto",
+          "& .MuiDialog-container": {
+            "& .MuiPaper-root": {
+              width: 440,
+              height: 300, // Set your width here
+            },
+            "& .MuiOutlinedInput-root": {
+              width: 328,
+              height: 156, // Set your width here
+            },
+            "& .MuiDialogContent-root ": {
+              padding: 0,
+            },
+          },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title" sx={{ textAlign: "center" }}>
+          {"強制開鎖原因"}
+        </DialogTitle>
+        <div className="diacontent">
+          <DialogContent sx={{ m: "0 auto", width: 328, height: 156 }}>
+            <CssTextField
+              required
+              multiline
+              id="input-reason"
+              placeholder="請輸入提醒內容"
+              inputProps={{
+                style: {
+                  width: 328,
+                  height: 156,
+                },
+              }}
+            />
+          </DialogContent>
+        </div>
+        <DialogActions sx={{ width: 328 }}>
+          <Button
+            variant="contained"
+            onClick={handleClickCheckOpen}
+            style={{
+              width: 108,
+              height: 36,
+              background: "#2F384F",
+              boxShadow: "none",
+              fontSize: 12,
+              margin: 5,
+            }}
+          >
+            提交
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleClose}
+            style={{
+              width: 108,
+              height: 36,
+              background: "#fff",
+              color: "#2F384F",
+              boxShadow: "none",
+              fontSize: 12,
+              margin: 5,
+              border: "1px solid #2F384F",
+            }}
+          >
+            取消
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={checkopen}
+        onClose={handleCheckClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          m: "auto",
+          borderRadius: "10px",
+          "& .MuiDialog-container": {
+            "& .MuiPaper-root": {
+              width: 375,
+              height: 250, // Set your width here
+              borderRadius: "10px",
+            },
+            "& .MuiOutlinedInput-root": {
+              width: 244, // Set your width here
+              height: 150,
+            },
+            "& .MuiDialogContent-root ": {
+              padding: 0,
+            },
+            "& .MuiDialogActions-root ": {
+              margin: "0 auto",
+            },
+          },
+        }}
+      >
+        <DialogTitle
+          id="alert-dialog-title"
+          sx={{ textAlign: "center", padding: "16px 24px 0 24px" }}
+        >
+          <div className="alert">
+            <img src="./alert.png" alt="" className="alert" />
+            <p>確定要執行強制開鎖的動作嗎？</p>
+          </div>
+        </DialogTitle>
+        <DialogActions sx={{ width: 244 }}>
+          <Button
+            variant="contained"
+            onClick={handleCheckClose}
+            style={{
+              width: 108,
+              height: 36,
+              background: "#2F384F",
+              boxShadow: "none",
+              fontSize: 12,
+              margin: 5,
+            }}
+          >
+            確認
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleCheckClose}
+            style={{
+              width: 108,
+              height: 36,
+              background: "#fff",
+              color: "#2F384F",
+              boxShadow: "none",
+              fontSize: 12,
+              margin: 5,
+              border: "1px solid #2F384F",
+            }}
+          >
+            取消
+          </Button>
+        </DialogActions>
+      </Dialog>
       <div className="info__section">
         <div className="section-base">
           <div className="base lock">
@@ -55,6 +245,7 @@ const Info = () => {
           <div className="control-btn">
             <Button
               variant="contained"
+              onClick={handleClickOpen}
               style={{
                 width: "80%",
                 height: 39,
@@ -87,94 +278,299 @@ const Info = () => {
             <Accordion
               expanded={expanded === "panel1"}
               onChange={handleChange("panel1")}
+              sx={{
+                marginBottom: 2,
+                border: "1px solid black",
+                boxShadow: "none",
+                borderRadius: "4px",
+              }}
             >
               <AccordionSummary
+                sx={{ height: 64 }}
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1bh-content"
                 id="panel1bh-header"
               >
                 <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  General settings
+                  Username
                 </Typography>
                 <Typography sx={{ color: "text.secondary" }}>
-                  I am an accordion
+                  於 03/21(一) 17:08:20 關閉第 12 櫃
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-                  feugiat. Aliquam eget maximus est, id dignissim quam.
-                </Typography>
+              <AccordionDetails
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "4px",
+                  margin: 2,
+                }}
+              >
+                <Typography>詳細</Typography>
               </AccordionDetails>
             </Accordion>
             <Accordion
-              expanded={expanded === "panel2"}
-              onChange={handleChange("panel2")}
+              // expanded={expanded === "panel2"}
+              // onChange={handleChange("panel2")}
+              sx={{
+                marginBottom: 2,
+                border: "1px solid black",
+                boxShadow: "none",
+                borderRadius: "4px",
+              }}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2bh-content"
-                id="panel2bh-header"
+                sx={{ height: 64 }}
+                // expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
               >
                 <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Users
+                  Username
                 </Typography>
                 <Typography sx={{ color: "text.secondary" }}>
-                  You are currently not an owner
+                  於 03/21(一) 17:08:20 關閉第 12 櫃
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Donec placerat, lectus sed mattis semper, neque lectus feugiat
-                  lectus, varius pulvinar diam eros in elit. Pellentesque
-                  convallis laoreet laoreet.
-                </Typography>
-              </AccordionDetails>
+              {/* <AccordionDetails
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "4px",
+                  margin: 2,
+                }}
+              >
+                <Typography>詳細</Typography>
+              </AccordionDetails> */}
             </Accordion>
             <Accordion
-              expanded={expanded === "panel3"}
-              onChange={handleChange("panel3")}
+              // expanded={expanded === "panel2"}
+              // onChange={handleChange("panel2")}
+              sx={{
+                marginBottom: 2,
+                border: "1px solid black",
+                boxShadow: "none",
+                borderRadius: "4px",
+              }}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel3bh-content"
-                id="panel3bh-header"
+                sx={{ height: 64 }}
+                // expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
               >
                 <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Advanced settings
+                  Username
                 </Typography>
                 <Typography sx={{ color: "text.secondary" }}>
-                  Filtering has been entirely disabled for whole web server
+                  於 03/21(一) 17:08:20 關閉第 12 櫃
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
-                  Integer sit amet egestas eros, vitae egestas augue. Duis vel
-                  est augue.
-                </Typography>
-              </AccordionDetails>
+              {/* <AccordionDetails
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "4px",
+                  margin: 2,
+                }}
+              >
+                <Typography>詳細</Typography>
+              </AccordionDetails> */}
             </Accordion>
             <Accordion
-              expanded={expanded === "panel4"}
-              onChange={handleChange("panel4")}
+              // expanded={expanded === "panel2"}
+              // onChange={handleChange("panel2")}
+              sx={{
+                marginBottom: 2,
+                border: "1px solid black",
+                boxShadow: "none",
+                borderRadius: "4px",
+              }}
             >
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel4bh-content"
-                id="panel4bh-header"
+                sx={{ height: 64 }}
+                // expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
               >
                 <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Personal data
+                  Username
+                </Typography>
+                <Typography sx={{ color: "text.secondary" }}>
+                  於 03/21(一) 17:08:20 關閉第 12 櫃
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Nunc vitae orci ultricies, auctor nunc in, volutpat nisl.
-                  Integer sit amet egestas eros, vitae egestas augue. Duis vel
-                  est augue.
+              {/* <AccordionDetails
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "4px",
+                  margin: 2,
+                }}
+              >
+                <Typography>詳細</Typography>
+              </AccordionDetails> */}
+            </Accordion>
+            <Accordion
+              // expanded={expanded === "panel2"}
+              // onChange={handleChange("panel2")}
+              sx={{
+                marginBottom: 2,
+                border: "1px solid black",
+                boxShadow: "none",
+                borderRadius: "4px",
+              }}
+            >
+              <AccordionSummary
+                sx={{ height: 64 }}
+                // expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  Username
                 </Typography>
-              </AccordionDetails>
+                <Typography sx={{ color: "text.secondary" }}>
+                  於 03/21(一) 17:08:20 關閉第 12 櫃
+                </Typography>
+              </AccordionSummary>
+              {/* <AccordionDetails
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "4px",
+                  margin: 2,
+                }}
+              >
+                <Typography>詳細</Typography>
+              </AccordionDetails> */}
+            </Accordion>
+            <Accordion
+              // expanded={expanded === "panel2"}
+              // onChange={handleChange("panel2")}
+              sx={{
+                marginBottom: 2,
+                border: "1px solid black",
+                boxShadow: "none",
+                borderRadius: "4px",
+              }}
+            >
+              <AccordionSummary
+                sx={{ height: 64 }}
+                // expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  Username
+                </Typography>
+                <Typography sx={{ color: "text.secondary" }}>
+                  於 03/21(一) 17:08:20 關閉第 12 櫃
+                </Typography>
+              </AccordionSummary>
+              {/* <AccordionDetails
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "4px",
+                  margin: 2,
+                }}
+              >
+                <Typography>詳細</Typography>
+              </AccordionDetails> */}
+            </Accordion>
+            <Accordion
+              // expanded={expanded === "panel2"}
+              // onChange={handleChange("panel2")}
+              sx={{
+                marginBottom: 2,
+                border: "1px solid black",
+                boxShadow: "none",
+                borderRadius: "4px",
+              }}
+            >
+              <AccordionSummary
+                sx={{ height: 64 }}
+                // expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  Username
+                </Typography>
+                <Typography sx={{ color: "text.secondary" }}>
+                  於 03/21(一) 17:08:20 關閉第 12 櫃
+                </Typography>
+              </AccordionSummary>
+              {/* <AccordionDetails
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "4px",
+                  margin: 2,
+                }}
+              >
+                <Typography>詳細</Typography>
+              </AccordionDetails> */}
+            </Accordion>
+            <Accordion
+              // expanded={expanded === "panel2"}
+              // onChange={handleChange("panel2")}
+              sx={{
+                marginBottom: 2,
+                border: "1px solid black",
+                boxShadow: "none",
+                borderRadius: "4px",
+              }}
+            >
+              <AccordionSummary
+                sx={{ height: 64 }}
+                // expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  Username
+                </Typography>
+                <Typography sx={{ color: "text.secondary" }}>
+                  於 03/21(一) 17:08:20 關閉第 12 櫃
+                </Typography>
+              </AccordionSummary>
+              {/* <AccordionDetails
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "4px",
+                  margin: 2,
+                }}
+              >
+                <Typography>詳細</Typography>
+              </AccordionDetails> */}
+            </Accordion>
+            <Accordion
+              // expanded={expanded === "panel2"}
+              // onChange={handleChange("panel2")}
+              sx={{
+                marginBottom: 2,
+                border: "1px solid black",
+                boxShadow: "none",
+                borderRadius: "4px",
+              }}
+            >
+              <AccordionSummary
+                sx={{ height: 64 }}
+                // expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  Username
+                </Typography>
+                <Typography sx={{ color: "text.secondary" }}>
+                  於 03/21(一) 17:08:20 關閉第 12 櫃
+                </Typography>
+              </AccordionSummary>
+              {/* <AccordionDetails
+                sx={{
+                  border: "1px solid black",
+                  borderRadius: "4px",
+                  margin: 2,
+                }}
+              >
+                <Typography>詳細</Typography>
+              </AccordionDetails> */}
             </Accordion>
           </div>
         </div>
