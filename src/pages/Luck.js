@@ -8,20 +8,26 @@ import { useEffect } from "react";
 import { LuckStatus, selectLuck } from "../redux/luckSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Item from "../components/Lock";
+import _ from "lodash";
 
 const Luck = ({ state }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(LuckStatus());
   }, []);
-
+  const lockList = useSelector((state) => state.Luck.Lock);
   useSelector(selectLuck);
   // const lockList = useSelector((state => state.luckNo))
   const navigate = useNavigate();
   const handleClick = (e) => {
     navigate("/Info");
   };
+  console.log(lockList, "hi");
 
+  const test = [
+    { name: "xxx", sex: "s" },
+    { name: "yyy", sex: "m" },
+  ];
   return (
     <div id="Luck">
       <div className="status">
@@ -61,9 +67,12 @@ const Luck = ({ state }) => {
         </Box>
       </div>
       <div className="luck__title">置物櫃當前使用狀態</div>
+
       <div style={{ width: 770 }}>
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
-          <Item></Item>
+          {_.map(lockList, (item, index) => (
+            <Item>{item.lockerNo}</Item>
+          ))}
         </Box>
       </div>
     </div>

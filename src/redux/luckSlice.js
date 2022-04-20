@@ -33,9 +33,7 @@ export const LuckStatus = createAsyncThunk(
 export const luckSlice = createSlice({
   name: "Luck",
   initialState: {
-    lockNo: [{}],
-    lockUp: [],
-    userId: [],
+    Lock: [{}],
     isFetching: false,
     isSuccess: false,
     isError: false,
@@ -43,6 +41,7 @@ export const luckSlice = createSlice({
   },
   reducers: {
     clearState: (state) => {
+      state.lock = [{}];
       state.isError = false;
       state.isSuccess = false;
       state.isFetching = false;
@@ -58,9 +57,7 @@ export const luckSlice = createSlice({
       console.log("Good", payload);
       state.isFetching = false;
       state.isSuccess = true;
-      state.lockNo = payload.lockNo;
-      state.lockUp = payload.lockUp;
-      state.userId = payload.userId;
+      state.Lock = payload;
       return state;
     },
     [LuckStatus.pending]: (state) => {
