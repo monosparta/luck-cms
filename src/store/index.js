@@ -8,7 +8,7 @@ const store = configureStore({
     reducer: {
         // reducer: rootReducer,
         user: userReducer,
-        luckReducer
+        Luck: luckReducer
     },
 })
 
