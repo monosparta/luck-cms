@@ -30,9 +30,9 @@ const Luck = ({ state }) => {
       <div className="status">
         <Box
           sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            '& > :not(style)': {
+            display: "flex",
+            flexWrap: "wrap",
+            "& > :not(style)": {
               width: 160,
               height: 164,
               borderRadius: "10%",
@@ -41,13 +41,25 @@ const Luck = ({ state }) => {
             },
           }}
         >
-          <Paper className="p" elevation={0} >
-            <div className="cir"><CircleIcon sx={{ color: "#363F4E", height: "20px", width: "20px" }}></CircleIcon>
-              使用中</div>
-            <div className="cir"><CircleIcon sx={{ color: "#000000", height: "20px", width: "20px" }}></CircleIcon>
-              可使用</div>
-            <div className="cir"><CircleIcon sx={{ color: "#FF5A5A", height: "20px", width: "20px" }}></CircleIcon>
-              異常&ensp; </div>
+          <Paper className="p" elevation={0}>
+            <div className="cir">
+              <CircleIcon
+                sx={{ color: "#363F4E", height: "20px", width: "20px" }}
+              ></CircleIcon>
+              使用中
+            </div>
+            <div className="cir">
+              <CircleIcon
+                sx={{ color: "#000000", height: "20px", width: "20px" }}
+              ></CircleIcon>
+              可使用
+            </div>
+            <div className="cir">
+              <CircleIcon
+                sx={{ color: "#FF5A5A", height: "20px", width: "20px" }}
+              ></CircleIcon>
+              異常&ensp;{" "}
+            </div>
           </Paper>
         </Box>
       </div>
@@ -56,6 +68,7 @@ const Luck = ({ state }) => {
         <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)' }}>
           <Item></Item>
         </Box>
+        </div>
       </div>
     </div>
   );
