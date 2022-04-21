@@ -21,9 +21,12 @@ export default function Item(props) {
         color: "#000",
         fontWeight: "bold",
         borderRadius: "12%",
-        borderColor: "#000000",
+        border: "1px solid #000",
         fontSize: "25px",
+        textAlign: "center",
+        lineHeight: "100px",
         margin: "10px 5px 10px 5px",
+        fontFamily: "Mulish",
         ...sx,
       }}
       onClick={(e) => handleClick(e)}
