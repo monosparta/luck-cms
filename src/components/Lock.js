@@ -1,12 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import "./Lock.css";
 import { selectLuck } from "../redux/luckSlice";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+
 export default function Item(props) {
-  const navigate = useNavigate();
   const { sx, ...other } = props;
   return (
     <Box

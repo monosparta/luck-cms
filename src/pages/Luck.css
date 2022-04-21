@@ -6,6 +6,10 @@
 	height: 100%;
 	width: 100%;
 }
+.luck__btn {
+	display: flex;
+	align-items: flex-end;
+}
 .luck__title {
 	text-align: center;
 	font-size: 28px;
@@ -19,7 +23,6 @@
 .p {
 	font-size: 24px;
 	font-weight: 700;
-	font-style: bold;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -32,10 +35,11 @@
 	justify-content: space-between;
 	align-items: center;
 	margin: 7px 0;
+	font-family: "Roboto";
+	font-style: "normal";
 }
 
 .status {
-	position: absolute;
-	bottom: -20%;
-	right: 5%;
+	padding: 10px;
+	margin-left: 90px;
 }
