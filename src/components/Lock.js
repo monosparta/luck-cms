@@ -4,14 +4,10 @@ import Box from "@mui/material/Box";
 import "./Lock.css";
 import { selectLuck } from "../redux/luckSlice";
 import { useSelector } from "react-redux";
-
+import { Link, useLocation } from "react-router-dom";
 export default function Item(props) {
   const navigate = useNavigate();
   const { sx, ...other } = props;
-
-  const handleClick = (e) => {
-    navigate("/Info");
-  };
   return (
     <Box
       sx={{
@@ -29,7 +25,6 @@ export default function Item(props) {
         fontFamily: "Mulish",
         ...sx,
       }}
-      onClick={(e) => handleClick(e)}
       {...other}
     />
   );
