@@ -8,9 +8,9 @@ import { LuckStatus, selectLuck } from "../redux/luckSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Item from "../components/Lock";
 import _ from "lodash";
-import { color } from "@mui/system";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
+import { useNavigate } from "react-router-dom";
 
 const Luck = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,10 @@ const Luck = () => {
   }, []);
   const lockList = useSelector((state) => state.Luck.Lock);
   useSelector(selectLuck);
-  console.log(lockList, "hi");
+  const navigate = useNavigate();
+  const handleClick = (e) => {
+    navigate("/Info");
+  };
 
   // const colorList = [
   //   { background: "#363F4E", color: "#FFFFFF" },
@@ -29,70 +32,28 @@ const Luck = () => {
 
   return (
     <div id="Luck">
-      <div className="status">
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            "& > :not(style)": {
-              width: 160,
-              height: 164,
-              borderRadius: "10%",
-              borderColor: "#000000",
-              border: "1px solid ",
-            },
-          }}
-        >
-          <Paper className="p" elevation={0}>
-            <div className="cir">
-              <CircleIcon
-                sx={{
-                  color: "#363F4E",
-                  height: "20px",
-                  width: "20px",
-                }}
-              ></CircleIcon>
-              使用中
-            </div>
-            <div className="cir">
-              <CircleIcon
-                sx={{
-                  color: "#000000",
-                  height: "20px",
-                  width: "20px",
-                }}
-              ></CircleIcon>
-              可使用
-            </div>
-            <div className="cir">
-              <CircleIcon
-                sx={{
-                  color: "#FF5A5A",
-                  height: "20px",
-                  width: "20px",
-                }}
-              ></CircleIcon>
-              異常&ensp;{" "}
-            </div>
-          </Paper>
-        </Box>
-      </div>
+
+
       <div className="luck__title">置物櫃當前使用狀態</div>
 
-      <div style={{ width: 770 }}>
+      <div className="luck__btn" style={{ width: 770 }}>
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
           {_.map(lockList, (item, index) => (
             <Item
               sx={{
+                position: "relative",
                 background: item.userId !== null ? "#363F4E" : "#FFFFFF",
                 color: item.userId !== null ? "#FFFFFF" : "#000000",
-                border: item.userId !== null ? "none" : "1px solid #000",
+                border: item.userId !== null ? "none" : item.lockerNo === null ? "1px dashed" : "1px solid #000",
+
               }}
             >
+              {item.lockerNo}
               {item.userId !== null && item.lockUp === 1 ? (
                 <LockIcon
                   sx={{
-                    position: "relative",
+                    position: "absolute",
+                    top: "10px",
                   }}
                 />
               ) : (
@@ -101,16 +62,67 @@ const Luck = () => {
               {item.userId !== null && item.lockUp === 0 ? (
                 <LockOpenIcon
                   sx={{
-                    position: "relative",
+                    position: "absolute",
+                    top: "8px",
                   }}
                 />
               ) : (
                 ""
               )}
-              {item.lockerNo}
+
             </Item>
           ))}
         </Box>
+        <div className="status">
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              "& > :not(style)": {
+                width: 160,
+                height: 164,
+                borderRadius: "10%",
+                borderColor: "#000000",
+                border: "1px solid ",
+              },
+            }}
+          >
+            <Paper className="p" elevation={0}>
+              <div className="cir">
+                <CircleIcon
+                  sx={{
+                    color: "#363F4E",
+                    height: "20px",
+                    width: "20px",
+                  }}
+                ></CircleIcon>
+                使用中
+              </div>
+              <div className="cir">
+                <CircleIcon
+                  sx={{
+                    color: "#FFFFFF",
+                    border: "1px solid #C4C4C4",
+                    borderRadius: "50%",
+                    height: "20px",
+                    width: "20px",
+                  }}
+                ></CircleIcon>
+                可使用
+              </div>
+              <div className="cir">
+                <CircleIcon
+                  sx={{
+                    color: "#FF5A5A",
+                    height: "20px",
+                    width: "20px",
+                  }}
+                ></CircleIcon>
+                異常&ensp;{" "}
+              </div>
+            </Paper>
+          </Box>
+        </div>
       </div>
     </div>
   );
