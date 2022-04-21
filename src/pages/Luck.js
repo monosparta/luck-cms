@@ -19,11 +19,6 @@ const Luck = () => {
   }, []);
   const lockList = useSelector((state) => state.Luck.Lock);
   useSelector(selectLuck);
-<<<<<<< HEAD
-
-=======
-  // const lockList = useSelector((state => state.luckNo))
->>>>>>> 190101a0a5a16f71520ac9aa14ab9a20c2d0b6d3
   console.log(lockList, "hi");
 
   // const colorList = [
@@ -33,8 +28,8 @@ const Luck = () => {
   // ];
 
   return (
-    <div id='Luck'>
-      <div className='status'>
+    <div id="Luck">
+      <div className="status">
         <Box
           sx={{
             display: "flex",
@@ -46,39 +41,43 @@ const Luck = () => {
               borderColor: "#000000",
               border: "1px solid ",
             },
-          }}>
-          <Paper className='p' elevation={0}>
-            <div className='cir'>
+          }}
+        >
+          <Paper className="p" elevation={0}>
+            <div className="cir">
               <CircleIcon
                 sx={{
                   color: "#363F4E",
                   height: "20px",
                   width: "20px",
-                }}></CircleIcon>
+                }}
+              ></CircleIcon>
               使用中
             </div>
-            <div className='cir'>
+            <div className="cir">
               <CircleIcon
                 sx={{
                   color: "#000000",
                   height: "20px",
                   width: "20px",
-                }}></CircleIcon>
+                }}
+              ></CircleIcon>
               可使用
             </div>
-            <div className='cir'>
+            <div className="cir">
               <CircleIcon
                 sx={{
                   color: "#FF5A5A",
                   height: "20px",
                   width: "20px",
-                }}></CircleIcon>
+                }}
+              ></CircleIcon>
               異常&ensp;{" "}
             </div>
           </Paper>
         </Box>
       </div>
-      <div className='luck__title'>置物櫃當前使用狀態</div>
+      <div className="luck__title">置物櫃當前使用狀態</div>
 
       <div style={{ width: 770 }}>
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
@@ -88,13 +87,26 @@ const Luck = () => {
                 background: item.userId !== null ? "#363F4E" : "#FFFFFF",
                 color: item.userId !== null ? "#FFFFFF" : "#000000",
                 border: item.userId !== null ? "none" : "1px solid #000",
-              }}>
-              {item.userId !== null && item.lockUp === 1 ? <LockIcon sx={{
-                position: "relative"
-              }} /> : ''}
-              {item.userId !== null && item.lockUp === 0 ? <LockOpenIcon sx={{
-                position: "relative"
-              }} /> : ''}
+              }}
+            >
+              {item.userId !== null && item.lockUp === 1 ? (
+                <LockIcon
+                  sx={{
+                    position: "relative",
+                  }}
+                />
+              ) : (
+                ""
+              )}
+              {item.userId !== null && item.lockUp === 0 ? (
+                <LockOpenIcon
+                  sx={{
+                    position: "relative",
+                  }}
+                />
+              ) : (
+                ""
+              )}
               {item.lockerNo}
             </Item>
           ))}
