@@ -10,6 +10,7 @@ import Item from "../components/Lock";
 import _ from "lodash";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
+import { Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Luck = () => {
@@ -21,9 +22,12 @@ const Luck = () => {
   useSelector(selectLuck);
   const navigate = useNavigate();
   const handleClick = (e) => {
-    navigate("/Info");
+    navigate("/Info" + "?" + e.target.innerText, { state: e.target.innerText });
+    console.log(e.target.innerText);
   };
-
+  const handleClickStop = (e) => {
+    e.preventDefault();
+  };
   // const colorList = [
   //   { background: "#363F4E", color: "#FFFFFF" },
   //   { background: "#FF5A5A", color: "#FFFFFF" },
@@ -40,6 +44,11 @@ const Luck = () => {
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
           {_.map(lockList, (item, index) => (
             <Item
+              onClick={
+                item.lockerNo !== null
+                  ? (e) => handleClick(e)
+                  : (e) => handleClickStop
+              }
               sx={{
                 position: "relative",
                 background: item.userId !== null ? "#363F4E" : "#FFFFFF",

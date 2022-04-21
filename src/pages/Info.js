@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
+import { useParams, useLocation } from "react-router-dom";
 
 const Info = () => {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ const Info = () => {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  const location = useLocation();
+  console.log(location.state);
 
   const handleClick = () => {
     navigate("/");
@@ -225,7 +228,7 @@ const Info = () => {
         <div className="section-base">
           <div className="base lock">
             <img src="./lock.png" alt="" />
-            <h1>所選鎖櫃編號：lock</h1>
+            <h1>所選鎖櫃編號：{location.state}</h1>
           </div>
           <div className="base state">
             <h2>狀態：目前為state</h2>
