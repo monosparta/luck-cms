@@ -10,7 +10,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
+import { selectLuck } from "../redux/luckSlice";
+import { useSelector } from "react-redux";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
@@ -26,6 +27,9 @@ const Info = () => {
   const handleClick = () => {
     navigate("/");
   };
+
+  const lockList = useSelector((state) => state.Luck.Lock);
+  useSelector(selectLuck);
 
   const [open, setOpen] = React.useState(false);
   const [checkopen, setCheckOpen] = React.useState(false);

@@ -3,25 +3,20 @@ import "./Luck.css";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import CircleIcon from "@mui/icons-material/Circle";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LuckStatus, selectLuck } from "../redux/luckSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Item from "../components/Lock";
 import _ from "lodash";
 
-const Luck = ({ state }) => {
+const Luck = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(LuckStatus());
   }, []);
   const lockList = useSelector((state) => state.Luck.Lock);
   useSelector(selectLuck);
-  // const lockList = useSelector((state => state.luckNo))
-  const navigate = useNavigate();
-  const handleClick = (e) => {
-    navigate("/Info");
-  };
+
   console.log(lockList, "hi");
 
   const test = [

@@ -34,6 +34,7 @@ export const luckSlice = createSlice({
   name: "Luck",
   initialState: {
     Lock: [{}],
+    currentNumber: "",
     isFetching: false,
     isSuccess: false,
     isError: false,
@@ -41,7 +42,7 @@ export const luckSlice = createSlice({
   },
   reducers: {
     clearState: (state) => {
-      state.lock = [{}];
+      state.Lock = [{}];
       state.isError = false;
       state.isSuccess = false;
       state.isFetching = false;
