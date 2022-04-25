@@ -8,17 +8,22 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Dialog from "@mui/material/Dialog";
+import { useEffect } from "react";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { selectLuck } from "../redux/luckSlice";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { userInfo } from "../redux/infoSlice";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Info = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -30,9 +35,6 @@ const Info = () => {
   const handleClick = () => {
     navigate("/");
   };
-
-  const lockList = useSelector((state) => state.Luck.Lock);
-  useSelector(selectLuck);
 
   const [open, setOpen] = React.useState(false);
   const [checkopen, setCheckOpen] = React.useState(false);
@@ -228,7 +230,7 @@ const Info = () => {
         <div className="section-base">
           <div className="base lock">
             <img src="./lock.png" alt="" />
-            <h1>所選鎖櫃編號：{location.state}</h1>
+            <h1>置物櫃 - {location.state}</h1>
           </div>
           <div className="base state">
             <h2>狀態：目前為state</h2>

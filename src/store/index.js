@@ -1,15 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from "@reduxjs/toolkit";
 
-import rootReducer from './store';
 import userReducer from "../redux/userSlice";
-import luckReducer from '../redux/luckSlice'
+import luckReducer from "../redux/luckSlice";
+import userInfoSlice from "../redux/infoSlice";
 
 const store = configureStore({
-    reducer: {
-        // reducer: rootReducer,
-        user: userReducer,
-        Luck: luckReducer
-    },
-})
+  reducer: {
+    // reducer: rootReducer,
+    user: userReducer,
+    Luck: luckReducer,
+    userInfo: userInfoSlice,
+  },
+});
 
 export default store;
