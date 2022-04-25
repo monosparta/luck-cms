@@ -11,16 +11,23 @@ import Dialog from "@mui/material/Dialog";
 import { useEffect } from "react";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { userInfo } from "../redux/userSlice";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import { useLocation } from "react-router-dom";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Collapse from "@mui/material/Collapse";
-import { userInfo, selectUser } from "../redux/userSlice";
-
+import { useLocation } from "react-router-dom";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import { selectUser } from "../redux/userSlice";
+import { useSelector } from "react-redux";
 const Info = () => {
   const navigate = useNavigate();
 
@@ -44,7 +51,7 @@ const Info = () => {
 
   const [open, setOpen] = React.useState(false);
   const [alertOpen, setAlertOpen] = React.useState(false);
-  const [checkopen, setCheckOpen] = React.useState(false);
+  const [checkOpen, setCheckOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -168,7 +175,7 @@ const Info = () => {
         </DialogActions>
       </Dialog>
       <Dialog
-        open={checkopen}
+        open={checkOpen}
         onClose={handleCheckClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -244,23 +251,27 @@ const Info = () => {
             <img src="./lock.png" alt="" />
             <h1>置物櫃 - {location.state}</h1>
           </div>
-          <div className="base state">
-            <h2>狀態：目前為state</h2>
+          <div className="base state" style={{ display: "flex" }}>
+            <CheckCircleIcon
+              style={{ color: "green", padding: "0px 8px 0px 0px" }}
+            />
+            <h2>狀態：目前為使用中</h2>
+            {/* <AccessTimeFilledIcon style={{ color: "grey", padding: "0px 8px 0px 0px" }} /><h2>狀態：目前為閒置中</h2> */}
           </div>
           <div className="base name">
-            <img src="./name.png" alt="" />
+            <AccountCircleIcon style={{ fontSize: "30" }} />
             <p>{user.name}</p>
           </div>
           <div className="base card">
-            <img src="./card.png" alt="" />
+            <CreditCardIcon style={{ fontSize: "30" }} />
             <p>{user.cardId}</p>
           </div>
           <div className="base phone">
-            <img src="./phone.png" alt="" />
+            <PhoneAndroidIcon style={{ fontSize: "30" }} />
             <p>{user.phone}</p>
           </div>
           <div className="base mail">
-            <img src="./mail.png" alt="" />
+            <MailOutlineIcon style={{ fontSize: "30" }} />
             <p>{user.email}</p>
           </div>
           <div className="control-btn">
@@ -611,7 +622,7 @@ const Info = () => {
         >
           <Collapse in={alertOpen}>
             <Alert variant="filled" severity="success">
-              This is a success alert — check it out!
+              已完成強制開鎖
             </Alert>
           </Collapse>
         </Stack>

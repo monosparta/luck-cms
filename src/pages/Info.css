@@ -41,7 +41,6 @@
 	align-items: center;
 }
 .base.lock {
-	width: 85%;
 	margin-top: 35px;
 }
 .base h1 {
@@ -52,8 +51,8 @@
 	color: #363f4e;
 	margin: 0 0 0 15px;
 }
-.base h2 {
-	margin: 5px 0 55px 35px;
+.base.state {
+	margin: 5px 0 55px 0;
 }
 .base p {
 	font-weight: 400;
