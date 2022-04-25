@@ -12,32 +12,31 @@ import { useEffect } from "react";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { useSelector, useDispatch } from "react-redux";
-import { userInfo } from "../redux/infoSlice";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-<<<<<<< HEAD
 import { useLocation } from "react-router-dom";
-=======
-import Alert from '@mui/material/Alert';
-import Stack from '@mui/material/Stack';
-import Collapse from '@mui/material/Collapse';
-import { useParams, useLocation } from "react-router-dom";
->>>>>>> d39aec9b9073af7dbaaa874c9cdde491f72bbe5d
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import Collapse from "@mui/material/Collapse";
+import { userInfo, selectUser } from "../redux/userSlice";
 
 const Info = () => {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  console.log(location.state);
   const dispatch = useDispatch();
+
+  const { user, records, isFetching } = useSelector(selectUser);
   useEffect(() => {
-    dispatch(userInfo());
+    dispatch(userInfo(location.state));
   }, []);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const location = useLocation();
-  console.log(location.state);
 
   const handleClick = () => {
     navigate("/");
@@ -67,7 +66,6 @@ const Info = () => {
       setAlertOpen(false);
     }, 3000);
   };
-
 
   const CssTextField = styled(TextField)({
     "& .MuiFormHelperText-root": {
@@ -241,7 +239,6 @@ const Info = () => {
         </DialogActions>
       </Dialog>
       <div className="info__section">
-
         <div className="section-base">
           <div className="base lock">
             <img src="./lock.png" alt="" />
@@ -252,19 +249,19 @@ const Info = () => {
           </div>
           <div className="base name">
             <img src="./name.png" alt="" />
-            <p>username</p>
+            <p>{user.name}</p>
           </div>
           <div className="base card">
             <img src="./card.png" alt="" />
-            <p>4856565475</p>
+            <p>{user.cardId}</p>
           </div>
           <div className="base phone">
             <img src="./phone.png" alt="" />
-            <p>0987654321</p>
+            <p>{user.phone}</p>
           </div>
           <div className="base mail">
             <img src="./mail.png" alt="" />
-            <p>000@example.com</p>
+            <p>{user.email}</p>
           </div>
           <div className="control-btn">
             <Button
@@ -597,15 +594,21 @@ const Info = () => {
               </AccordionDetails> */}
             </Accordion>
           </div>
-          <div>
-
-          </div>
+          <div></div>
         </div>
-
-
       </div>
       <div>
-        <Stack className="success" sx={{ width: '478px', height: '52px', top: '107px', position: "absolute", right: '24px', }} spacing={2}>
+        <Stack
+          className="success"
+          sx={{
+            width: "478px",
+            height: "52px",
+            top: "107px",
+            position: "absolute",
+            right: "24px",
+          }}
+          spacing={2}
+        >
           <Collapse in={alertOpen}>
             <Alert variant="filled" severity="success">
               This is a success alert — check it out!

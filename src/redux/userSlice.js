@@ -34,11 +34,47 @@ export const login = createAsyncThunk(
   }
 );
 
+export const userInfo = createAsyncThunk(
+  "user/info",
+  async (state, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "https://dd82-211-72-239-241.ngrok.io/api/record",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+          body: JSON.stringify({
+            lockerNo: state,
+          }),
+        }
+      );
+      let data = await response.json();
+      console.log("response", data);
+      if (response.status === 200) {
+        console.log(data.message);
+        return data;
+      } else {
+        throw data.message;
+      }
+    } catch (e) {
+      console.log(thunkAPI.rejectWithValue(e));
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {
     email: "",
     password: "",
+    user: [],
+    records: [],
     isFetching: false,
     isSuccess: false,
     isError: false,
@@ -72,6 +108,28 @@ export const userSlice = createSlice({
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
+      return state;
+    },
+    [userInfo.fulfilled]: (state, { payload }) => {
+      console.log("payload", payload);
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.user = payload.user;
+      state.records = payload.records;
+      return state;
+    },
+    [userInfo.pending]: (state) => {
+      state.isFetching = true;
+      console.log("loading");
+      return state;
+    },
+    [userInfo.rejected]: (state, { payload }) => {
+      console.log("payload1", payload);
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload.message;
+      state.user = [];
+      state.records = [];
       return state;
     },
   },

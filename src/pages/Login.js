@@ -16,8 +16,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { isFetching, isSuccess, isError, errorMessage } =
-    useSelector(selectUser);
+  const { isFetching, isSuccess, isError } = useSelector(selectUser);
   const onSubmit = (data) => {
     dispatch(login(data));
   };

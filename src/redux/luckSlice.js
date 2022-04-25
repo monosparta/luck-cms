@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const LuckStatus = createAsyncThunk(
-<<<<<<< HEAD
   "Luck/LuckStatus",
   async (thunkAPI) => {
     try {
@@ -15,33 +14,6 @@ export const LuckStatus = createAsyncThunk(
             "Content-Type": "application/json",
             token,
           },
-=======
-    "Luck/LuckStatus",
-    async (thunkAPI) => {
-        try {
-            const token = localStorage.getItem("token");
-            const response = await fetch(
-                "https://dd82-211-72-239-241.ngrok.io/api/locker",
-                {
-                    method: "GET",
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        token,
-                    },
-                }
-            );
-            let data = await response.json();
-            console.log("response", data);
-            if (response.status === 200) {
-                return data;
-            } else {
-                throw data.message;
-            }
-        } catch (e) {
-            console.log(thunkAPI.rejectWithValue(e));
-            return thunkAPI.rejectWithValue(e);
->>>>>>> d39aec9b9073af7dbaaa874c9cdde491f72bbe5d
         }
       );
       let data = await response.json();
