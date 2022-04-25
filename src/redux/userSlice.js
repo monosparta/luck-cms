@@ -5,7 +5,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await fetch(
-        "https://2456-211-72-239-241.ngrok.io/api/login",
+        "https://dd82-211-72-239-241.ngrok.io/api/login",
         {
           method: "POST",
           headers: {
