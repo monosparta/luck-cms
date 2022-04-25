@@ -15,6 +15,9 @@ import { useSelector } from "react-redux";
 import DialogTitle from "@mui/material/DialogTitle";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import Collapse from '@mui/material/Collapse';
 import { useParams, useLocation } from "react-router-dom";
 
 const Info = () => {
@@ -35,6 +38,7 @@ const Info = () => {
   useSelector(selectLuck);
 
   const [open, setOpen] = React.useState(false);
+  const [alertOpen, setAlertOpen] = React.useState(false);
   const [checkopen, setCheckOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -52,7 +56,13 @@ const Info = () => {
 
   const handleCheckClose = () => {
     setCheckOpen(false);
+    setAlertOpen(true);
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 3000);
   };
+
+
   const CssTextField = styled(TextField)({
     "& .MuiFormHelperText-root": {
       "&.Mui-focused": {
@@ -225,6 +235,7 @@ const Info = () => {
         </DialogActions>
       </Dialog>
       <div className="info__section">
+
         <div className="section-base">
           <div className="base lock">
             <img src="./lock.png" alt="" />
@@ -580,7 +591,21 @@ const Info = () => {
               </AccordionDetails> */}
             </Accordion>
           </div>
+          <div>
+
+          </div>
         </div>
+
+
+      </div>
+      <div>
+        <Stack className="success" sx={{ width: '478px', height: '52px', top: '107px', position: "absolute", right: '24px', }} spacing={2}>
+          <Collapse in={alertOpen}>
+            <Alert variant="filled" severity="success">
+              This is a success alert — check it out!
+            </Alert>
+          </Collapse>
+        </Stack>
       </div>
     </div>
   );
