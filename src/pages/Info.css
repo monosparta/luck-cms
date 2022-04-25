@@ -17,25 +17,6 @@
 	padding: 12px 0px 12px 24px;
 }
 .section-base {
-<<<<<<< HEAD
-  width: 30%;
-  height: 85%;
-  background-color: #fff;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.section-record {
-  width: 60%;
-  height: 85%;
-  background-color: #fff;
-  box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
-    -4px 4px 8px rgba(54, 63, 78, 0.1);
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-=======
 	width: 30%;
 	height: 85%;
 	background-color: #fff;
@@ -57,7 +38,6 @@
 	padding: 5px;
 	display: flex;
 	flex-direction: column;
->>>>>>> d39aec9b9073af7dbaaa874c9cdde491f72bbe5d
 }
 .base {
 	width: 80%;
@@ -65,7 +45,6 @@
 	align-items: center;
 }
 .base.lock {
-	width: 85%;
 	margin-top: 35px;
 }
 .base h1 {
@@ -76,8 +55,8 @@
 	color: #363f4e;
 	margin: 0 0 0 15px;
 }
-.base h2 {
-	margin: 5px 0 55px 35px;
+.base.state {
+	margin: 5px 0 55px 0;
 }
 .base p {
 	font-weight: 400;
