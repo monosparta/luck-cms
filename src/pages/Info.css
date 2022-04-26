@@ -17,23 +17,23 @@
 	padding: 12px 0px 12px 24px;
 }
 .section-base {
-  width: 30%;
-  height: 85%;
-  background-color: #fff;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	width: 30%;
+	height: 85%;
+	background-color: #fff;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 .section-record {
-  width: 60%;
-  height: 85%;
-  background-color: #fff;
-  box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
-    -4px 4px 8px rgba(54, 63, 78, 0.1);
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
+	width: 60%;
+	height: 85%;
+	background-color: #fff;
+	box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
+		-4px 4px 8px rgba(54, 63, 78, 0.1);
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
 }
 .base {
 	width: 80%;
@@ -42,7 +42,7 @@
 }
 .base.lock {
 	height: 30px;
-	margin: 35px 0 5px -10px
+	margin: 35px 0 5px -10px;
 }
 .base h1 {
 	font-weight: 700;
@@ -59,11 +59,11 @@
 	font-weight: 400;
 	margin: 15px 0 15px 25px;
 }
-.control-btn {
+/* .control-btn {
 	width: 100%;
 	margin-top: 35px;
 	text-align: center;
-}
+} */
 .record.title {
 	color: #363f4e;
 	font-weight: 400;
@@ -117,6 +117,6 @@
 	font-size: 16px;
 }
 
-.success {
+/* .success {
 	float: "right";
-}
+} */
