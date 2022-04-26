@@ -26,8 +26,11 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import { selectUser } from "../redux/userSlice";
+import { selectUser, clearState } from "../redux/userSlice";
 import { useSelector } from "react-redux";
+import Skeleton from "@mui/material/Skeleton";
+import Record from "../components/Record";
+
 const Info = () => {
   const navigate = useNavigate();
 
@@ -37,6 +40,7 @@ const Info = () => {
 
   const { user, records, isFetching } = useSelector(selectUser);
   useEffect(() => {
+    dispatch(clearState());
     dispatch(userInfo(location.state));
   }, []);
   const [expanded, setExpanded] = React.useState(false);
@@ -249,7 +253,11 @@ const Info = () => {
         <div className="section-base">
           <div className="base lock">
             <img src="./lock.png" alt="" />
-            <h1>置物櫃 - {location.state}</h1>
+            {isFetching ? (
+              <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
+            ) : (
+              <h1>置物櫃 - {location.state}</h1>
+            )}
           </div>
           <div className="base state" style={{ display: "flex" }}>
             <CheckCircleIcon
@@ -259,20 +267,36 @@ const Info = () => {
             {/* <AccessTimeFilledIcon style={{ color: "grey", padding: "0px 8px 0px 0px" }} /><h2>狀態：目前為閒置中</h2> */}
           </div>
           <div className="base name">
-            <AccountCircleIcon style={{ fontSize: "30" }} />
-            <p>{user.name}</p>
+            <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
+            {isFetching ? (
+              <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
+            ) : (
+              <p>{user.name}</p>
+            )}
           </div>
           <div className="base card">
-            <CreditCardIcon style={{ fontSize: "30" }} />
-            <p>{user.cardId}</p>
+            <CreditCardIcon style={{ fontSize: "30", margin: "8px 0" }} />
+            {isFetching ? (
+              <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
+            ) : (
+              <p>{user.cardId}</p>
+            )}
           </div>
           <div className="base phone">
-            <PhoneAndroidIcon style={{ fontSize: "30" }} />
-            <p>{user.phone}</p>
+            <PhoneAndroidIcon style={{ fontSize: "30", margin: "8px 0" }} />
+            {isFetching ? (
+              <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
+            ) : (
+              <p>{user.phone}</p>
+            )}
           </div>
           <div className="base mail">
-            <MailOutlineIcon style={{ fontSize: "30" }} />
-            <p>{user.email}</p>
+            <MailOutlineIcon style={{ fontSize: "30", margin: "8px 0" }} />
+            {isFetching ? (
+              <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
+            ) : (
+              <p>{user.email}</p>
+            )}
           </div>
           <div className="control-btn">
             <Button
@@ -307,303 +331,7 @@ const Info = () => {
         <div className="section-record">
           <p className="record title">操作紀錄</p>
           <div className="record panel">
-            <Accordion
-              expanded={expanded === "panel1"}
-              onChange={handleChange("panel1")}
-              sx={{
-                marginBottom: 2,
-                border: "1px solid black",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-            >
-              <AccordionSummary
-                sx={{ height: 64 }}
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Username
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  於 03/21(一) 17:08:20 關閉第 12 櫃
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails
-                sx={{
-                  border: "1px solid black",
-                  borderRadius: "4px",
-                  margin: 2,
-                }}
-              >
-                <Typography>詳細</Typography>
-              </AccordionDetails>
-            </Accordion>
-            <Accordion
-              // expanded={expanded === "panel2"}
-              // onChange={handleChange("panel2")}
-              sx={{
-                marginBottom: 2,
-                border: "1px solid black",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-            >
-              <AccordionSummary
-                sx={{ height: 64 }}
-                // expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Username
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  於 03/21(一) 17:08:20 關閉第 12 櫃
-                </Typography>
-              </AccordionSummary>
-              {/* <AccordionDetails
-                sx={{
-                  border: "1px solid black",
-                  borderRadius: "4px",
-                  margin: 2,
-                }}
-              >
-                <Typography>詳細</Typography>
-              </AccordionDetails> */}
-            </Accordion>
-            <Accordion
-              // expanded={expanded === "panel2"}
-              // onChange={handleChange("panel2")}
-              sx={{
-                marginBottom: 2,
-                border: "1px solid black",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-            >
-              <AccordionSummary
-                sx={{ height: 64 }}
-                // expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Username
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  於 03/21(一) 17:08:20 關閉第 12 櫃
-                </Typography>
-              </AccordionSummary>
-              {/* <AccordionDetails
-                sx={{
-                  border: "1px solid black",
-                  borderRadius: "4px",
-                  margin: 2,
-                }}
-              >
-                <Typography>詳細</Typography>
-              </AccordionDetails> */}
-            </Accordion>
-            <Accordion
-              // expanded={expanded === "panel2"}
-              // onChange={handleChange("panel2")}
-              sx={{
-                marginBottom: 2,
-                border: "1px solid black",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-            >
-              <AccordionSummary
-                sx={{ height: 64 }}
-                // expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Username
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  於 03/21(一) 17:08:20 關閉第 12 櫃
-                </Typography>
-              </AccordionSummary>
-              {/* <AccordionDetails
-                sx={{
-                  border: "1px solid black",
-                  borderRadius: "4px",
-                  margin: 2,
-                }}
-              >
-                <Typography>詳細</Typography>
-              </AccordionDetails> */}
-            </Accordion>
-            <Accordion
-              // expanded={expanded === "panel2"}
-              // onChange={handleChange("panel2")}
-              sx={{
-                marginBottom: 2,
-                border: "1px solid black",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-            >
-              <AccordionSummary
-                sx={{ height: 64 }}
-                // expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Username
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  於 03/21(一) 17:08:20 關閉第 12 櫃
-                </Typography>
-              </AccordionSummary>
-              {/* <AccordionDetails
-                sx={{
-                  border: "1px solid black",
-                  borderRadius: "4px",
-                  margin: 2,
-                }}
-              >
-                <Typography>詳細</Typography>
-              </AccordionDetails> */}
-            </Accordion>
-            <Accordion
-              // expanded={expanded === "panel2"}
-              // onChange={handleChange("panel2")}
-              sx={{
-                marginBottom: 2,
-                border: "1px solid black",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-            >
-              <AccordionSummary
-                sx={{ height: 64 }}
-                // expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Username
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  於 03/21(一) 17:08:20 關閉第 12 櫃
-                </Typography>
-              </AccordionSummary>
-              {/* <AccordionDetails
-                sx={{
-                  border: "1px solid black",
-                  borderRadius: "4px",
-                  margin: 2,
-                }}
-              >
-                <Typography>詳細</Typography>
-              </AccordionDetails> */}
-            </Accordion>
-            <Accordion
-              // expanded={expanded === "panel2"}
-              // onChange={handleChange("panel2")}
-              sx={{
-                marginBottom: 2,
-                border: "1px solid black",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-            >
-              <AccordionSummary
-                sx={{ height: 64 }}
-                // expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Username
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  於 03/21(一) 17:08:20 關閉第 12 櫃
-                </Typography>
-              </AccordionSummary>
-              {/* <AccordionDetails
-                sx={{
-                  border: "1px solid black",
-                  borderRadius: "4px",
-                  margin: 2,
-                }}
-              >
-                <Typography>詳細</Typography>
-              </AccordionDetails> */}
-            </Accordion>
-            <Accordion
-              // expanded={expanded === "panel2"}
-              // onChange={handleChange("panel2")}
-              sx={{
-                marginBottom: 2,
-                border: "1px solid black",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-            >
-              <AccordionSummary
-                sx={{ height: 64 }}
-                // expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Username
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  於 03/21(一) 17:08:20 關閉第 12 櫃
-                </Typography>
-              </AccordionSummary>
-              {/* <AccordionDetails
-                sx={{
-                  border: "1px solid black",
-                  borderRadius: "4px",
-                  margin: 2,
-                }}
-              >
-                <Typography>詳細</Typography>
-              </AccordionDetails> */}
-            </Accordion>
-            <Accordion
-              // expanded={expanded === "panel2"}
-              // onChange={handleChange("panel2")}
-              sx={{
-                marginBottom: 2,
-                border: "1px solid black",
-                boxShadow: "none",
-                borderRadius: "4px",
-              }}
-            >
-              <AccordionSummary
-                sx={{ height: 64 }}
-                // expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1bh-content"
-                id="panel1bh-header"
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  Username
-                </Typography>
-                <Typography sx={{ color: "text.secondary" }}>
-                  於 03/21(一) 17:08:20 關閉第 12 櫃
-                </Typography>
-              </AccordionSummary>
-              {/* <AccordionDetails
-                sx={{
-                  border: "1px solid black",
-                  borderRadius: "4px",
-                  margin: 2,
-                }}
-              >
-                <Typography>詳細</Typography>
-              </AccordionDetails> */}
-            </Accordion>
+            <Record />
           </div>
           <div></div>
         </div>

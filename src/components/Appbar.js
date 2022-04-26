@@ -21,13 +21,16 @@ const Appbar = () => {
     e.preventDefault();
     localStorage.removeItem("token");
 
-    dispatch(login());
     navigate("/login");
   };
 
   return (
     <div className="Appbar">
-      <AppBar position="static" elevation={0} style={{ background: "#363F4E", padding: '8px 0px' }}>
+      <AppBar
+        position="static"
+        elevation={0}
+        style={{ background: "#363F4E", padding: "8px 0px" }}
+      >
         <Toolbar>
           <img src="./mono.png" alt="" className="logo" />
           <p className="title">會員置物櫃管理系統</p>
