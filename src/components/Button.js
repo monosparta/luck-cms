@@ -12,8 +12,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -24,7 +22,7 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import "./Button.css";
 
-const Buttons = () => {
+const Buttons = (props) => {
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -88,6 +86,39 @@ const Buttons = () => {
 
     return (
         <div>
+
+            <div className="base name">
+                <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
+                {isFetching ? (
+                    <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
+                ) : (
+                    <p>{user.name !== undefined ? user.name : "沒有使用者"}</p>
+                )}
+            </div>
+            <div className="base card">
+                <CreditCardIcon style={{ fontSize: "30", margin: "8px 0" }} />
+                {isFetching ? (
+                    <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
+                ) : (
+                    <p>{user.cardId !== undefined ? user.cardId : "沒有卡號"}</p>
+                )}
+            </div>
+            <div className="base phone">
+                <PhoneAndroidIcon style={{ fontSize: "30", margin: "8px 0" }} />
+                {isFetching ? (
+                    <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
+                ) : (
+                    <p>{user.phone !== undefined ? user.phone : "沒有電話"}</p>
+                )}
+            </div>
+            <div className="base mail">
+                <MailOutlineIcon style={{ fontSize: "30", margin: "8px 0" }} />
+                {isFetching ? (
+                    <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
+                ) : (
+                    <p>{user.email !== undefined ? user.email : "沒有信箱"}</p>
+                )}
+            </div>
             <div className="control-btn">
                 <Button
                     variant="contained"
@@ -266,45 +297,6 @@ const Buttons = () => {
                     編輯基本資訊
                 </Button>
             </div>
-            <div className="base state" style={{ display: "flex" }}>
-                {user.id !== undefined ? (
-                    <CheckCircleIconStyle />
-                ) : (
-                    <AccessTimeFilledIconStyle />
-                )}
-            </div>
-            <div className="base name">
-                <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
-                {isFetching ? (
-                    <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
-                ) : (
-                    <p>{user.name !== undefined ? user.name : "沒有使用者"}</p>
-                )}
-            </div>
-            <div className="base card">
-                <CreditCardIcon style={{ fontSize: "30", margin: "8px 0" }} />
-                {isFetching ? (
-                    <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
-                ) : (
-                    <p>{user.cardId !== undefined ? user.cardId : "沒有卡號"}</p>
-                )}
-            </div>
-            <div className="base phone">
-                <PhoneAndroidIcon style={{ fontSize: "30", margin: "8px 0" }} />
-                {isFetching ? (
-                    <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
-                ) : (
-                    <p>{user.phone !== undefined ? user.phone : "沒有電話"}</p>
-                )}
-            </div>
-            <div className="base mail">
-                <MailOutlineIcon style={{ fontSize: "30", margin: "8px 0" }} />
-                {isFetching ? (
-                    <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
-                ) : (
-                    <p>{user.email !== undefined ? user.email : "沒有信箱"}</p>
-                )}
-            </div>
             <Stack
                 className="success"
                 sx={{
@@ -315,12 +307,14 @@ const Buttons = () => {
                     right: "24px",
                 }}
                 spacing={2}
-            ></Stack>
-            <Collapse in={alertOpen}>
-                <Alert variant="filled" severity="success">
-                    已完成強制開鎖
-                </Alert>
-            </Collapse>
+            >
+                <Collapse in={alertOpen}>
+                    <Alert variant="filled" severity="success">
+                        已完成強制開鎖
+                    </Alert>
+                </Collapse>
+            </Stack>
+
         </div>
     )
 }
