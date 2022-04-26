@@ -2,11 +2,6 @@ import React from "react";
 import "./Info.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Dialog from "@mui/material/Dialog";
 import { useEffect } from "react";
 import DialogActions from "@mui/material/DialogActions";
@@ -28,6 +23,7 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { selectUser, clearState } from "../redux/userSlice";
 import { useSelector } from "react-redux";
+import Box from '@mui/material/Box';
 import Skeleton from "@mui/material/Skeleton";
 import Record from "../components/Record";
 
@@ -35,28 +31,30 @@ const Info = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  console.log(location.state);
   const dispatch = useDispatch();
 
-  const { user, records, isFetching } = useSelector(selectUser);
+  const { user, isFetching } = useSelector(selectUser);
   console.log("user", user.id);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
   }, []);
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
 
   const handleClick = () => {
     navigate("/");
   };
 
+
   const [open, setOpen] = React.useState(false);
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [checkOpen, setCheckOpen] = React.useState(false);
+
+
+  const handleEdit = () => {
+
+
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -280,7 +278,7 @@ const Info = () => {
             {isFetching ? (
               <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
             ) : (
-              <p>{user.cardId}</p>
+              <p>{user.cardId !== undefined ? user.cardId : "沒有卡號"}</p>
             )}
           </div>
           <div className="base phone">
@@ -288,7 +286,7 @@ const Info = () => {
             {isFetching ? (
               <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
             ) : (
-              <p>{user.phone}</p>
+              <p>{user.phone !== undefined ? user.phone : "沒有電話"}</p>
             )}
           </div>
           <div className="base mail">
@@ -296,7 +294,7 @@ const Info = () => {
             {isFetching ? (
               <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
             ) : (
-              <p>{user.email}</p>
+              <p>{user.email !== undefined ? user.email : "沒有信箱"}</p>
             )}
           </div>
           <div className="control-btn">
@@ -315,6 +313,7 @@ const Info = () => {
               強制開鎖
             </Button>
             <Button
+              onClick={handleEdit}
               variant="contained"
               style={{
                 width: "80%",
