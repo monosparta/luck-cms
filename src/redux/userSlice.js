@@ -164,6 +164,24 @@ export const userSlice = createSlice({
       state.records = [];
       return state;
     },
+    [userUnlock.fulfilled]: (state, { payload }) => {
+      console.log("payload", payload);
+      state.isFetching = false;
+      state.isSuccess = true;
+      return state;
+    },
+    [userUnlock.pending]: (state) => {
+      state.isFetching = true;
+      console.log("loading");
+      return state;
+    },
+    [userUnlock.rejected]: (state, { payload }) => {
+      console.log("payload1", payload);
+      state.isFetching = false;
+      state.isError = true;
+      state.errorMessage = payload.message;
+      return state;
+    },
   },
 });
 

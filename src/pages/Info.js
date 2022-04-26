@@ -35,7 +35,7 @@ const Info = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const { user, records, isFetching } = useSelector(selectUser);
+  const { user, records, isFetching, isSuccess } = useSelector(selectUser);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
