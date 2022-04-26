@@ -36,6 +36,7 @@ const Info = () => {
   const dispatch = useDispatch();
 
   const { user, records, isFetching } = useSelector(selectUser);
+  console.log('user', user.id)
   useEffect(() => {
     dispatch(userInfo(location.state));
   }, []);
@@ -252,15 +253,11 @@ const Info = () => {
             <h1>置物櫃 - {location.state}</h1>
           </div>
           <div className="base state" style={{ display: "flex" }}>
-            <CheckCircleIcon
-              style={{ color: "green", padding: "0px 8px 0px 0px" }}
-            />
-            <h2>狀態：目前為使用中</h2>
-            {/* <AccessTimeFilledIcon style={{ color: "grey", padding: "0px 8px 0px 0px" }} /><h2>狀態：目前為閒置中</h2> */}
+            {user.id !== undefined ? <CheckCircleIconStyle /> : <AccessTimeFilledIconStyle />}
           </div>
           <div className="base name">
             <AccountCircleIcon style={{ fontSize: "30" }} />
-            <p>{user.name}</p>
+            <p>{user.name !== undefined ? user.name : '沒有使用者'}</p>
           </div>
           <div className="base card">
             <CreditCardIcon style={{ fontSize: "30" }} />
@@ -627,6 +624,23 @@ const Info = () => {
           </Collapse>
         </Stack>
       </div>
+    </div>
+  );
+};
+
+const CheckCircleIconStyle = () => {
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <CheckCircleIcon style={{ color: "green", padding: "0px 8px 0px 0px" }} />
+      <h2>狀態：目前為使用中</h2>
+    </div>
+  );
+};
+const AccessTimeFilledIconStyle = () => {
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <AccessTimeFilledIcon style={{ color: "grey", padding: "0px 8px 0px 0px" }} />
+      <h2>狀態：目前為閒置中</h2>
     </div>
   );
 };

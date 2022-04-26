@@ -36,21 +36,18 @@ export const login = createAsyncThunk(
 
 export const userInfo = createAsyncThunk(
   "user/info",
-  async (state, thunkAPI) => {
+  async (lockerNo, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://dd82-211-72-239-241.ngrok.io/api/record",
+        `https://dd82-211-72-239-241.ngrok.io/api/record/${lockerNo}`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             token,
           },
-          body: JSON.stringify({
-            lockerNo: state,
-          }),
         }
       );
       let data = await response.json();
