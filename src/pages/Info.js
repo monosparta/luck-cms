@@ -1,6 +1,5 @@
 import React from "react";
 import "./Info.css";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import { useEffect } from "react";
@@ -26,74 +25,80 @@ import { useSelector } from "react-redux";
 import Box from '@mui/material/Box';
 import Skeleton from "@mui/material/Skeleton";
 import Record from "../components/Record";
+import Button from "../components/Button";
 
-const Info = () => {
+
+const Info = (props) => {
   const navigate = useNavigate();
+  const { Button } = props;
+
 
   const location = useLocation();
   const dispatch = useDispatch();
 
   const { user, isFetching } = useSelector(selectUser);
-  console.log("user", user.id);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
   }, []);
-
 
   const handleClick = () => {
     navigate("/");
   };
 
 
-  const [open, setOpen] = React.useState(false);
-  const [alertOpen, setAlertOpen] = React.useState(false);
-  const [checkOpen, setCheckOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
+  // const [alertOpen, setAlertOpen] = React.useState(false);
+  // const [checkOpen, setCheckOpen] = React.useState(false);
+  // const [userInfoEdit, setUserInfoEdit] = React.useState(true);
+  // const [userInfoUnderline, setUserInfoUnderline] = React.useState(true);
 
 
-  const handleEdit = () => {
 
+  // const handleEdit = () => {
 
-  };
+  //   setUserInfoEdit(!userInfoEdit);
+  //   setUserInfoUnderline(!userInfoUnderline);
+  // };
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
-  const handleClickCheckOpen = () => {
-    setCheckOpen(true);
-    setOpen(false);
-  };
+  // const handleClickCheckOpen = () => {
+  //   setCheckOpen(true);
+  //   setOpen(false);
+  // };
 
-  const handleCheckClose = () => {
-    setCheckOpen(false);
-    setAlertOpen(true);
-    setTimeout(() => {
-      setAlertOpen(false);
-    }, 3000);
-  };
+  // const handleCheckClose = () => {
+  //   setCheckOpen(false);
+  //   setAlertOpen(true);
+  //   setTimeout(() => {
+  //     setAlertOpen(false);
+  //   }, 3000);
+  // };
 
-  const CssTextField = styled(TextField)({
-    "& .MuiFormHelperText-root": {
-      "&.Mui-focused": {
-        //提示文字
-        color: "#02A2EE",
-      },
-    },
-    "& label.Mui-focused": {
-      //上排文字
-      color: "#02A2EE",
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-focused fieldset": {
-        borderColor: "#A0A0A0", //FIELD 框
-      },
-    },
-  });
+  // const CssTextField = styled(TextField)({
+  //   "& .MuiFormHelperText-root": {
+  //     "&.Mui-focused": {
+  //       //提示文字
+  //       color: "#02A2EE",
+  //     },
+  //   },
+  //   "& label.Mui-focused": {
+  //     //上排文字
+  //     color: "#02A2EE",
+  //   },
+  //   "& .MuiOutlinedInput-root": {
+  //     "&.Mui-focused fieldset": {
+  //       borderColor: "#A0A0A0", //FIELD 框
+  //     },
+  //   },
+  // });
   return (
     <div id="Info">
       <div className="info__back">
@@ -101,7 +106,7 @@ const Info = () => {
           <img src="./chevron.png" alt="" />
         </button>
       </div>
-      <Dialog
+      {/* <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
@@ -124,11 +129,11 @@ const Info = () => {
             },
           },
         }}
-      >
-        <DialogTitle id="alert-dialog-title" sx={{ textAlign: "center" }}>
+      > */}
+      {/* <DialogTitle id="alert-dialog-title" sx={{ textAlign: "center" }}>
           {"強制開鎖原因"}
-        </DialogTitle>
-        <div className="diacontent">
+        </DialogTitle> */}
+      {/* <div className="diacontent">
           <DialogContent sx={{ m: "0 auto", width: 328, height: 156 }}>
             <CssTextField
               required
@@ -143,8 +148,8 @@ const Info = () => {
               }}
             />
           </DialogContent>
-        </div>
-        <DialogActions sx={{ width: 328 }}>
+        </div> */}
+      {/* <DialogActions sx={{ width: 328 }}>
           <Button
             variant="contained"
             onClick={handleClickCheckOpen}
@@ -176,8 +181,8 @@ const Info = () => {
             取消
           </Button>
         </DialogActions>
-      </Dialog>
-      <Dialog
+      </Dialog> */}
+      {/* <Dialog
         open={checkOpen}
         onClose={handleCheckClose}
         aria-labelledby="alert-dialog-title"
@@ -205,8 +210,8 @@ const Info = () => {
             },
           },
         }}
-      >
-        <DialogTitle
+      > */}
+      {/* <DialogTitle
           id="alert-dialog-title"
           sx={{ textAlign: "center", padding: "16px 24px 0 24px" }}
         >
@@ -214,9 +219,9 @@ const Info = () => {
             <img src="./alert.png" alt="" className="alert" />
             <p>確定要執行強制開鎖的動作嗎？</p>
           </div>
-        </DialogTitle>
-        <DialogActions sx={{ width: 244 }}>
-          <Button
+        </DialogTitle> */}
+      {/* <DialogActions sx={{ width: 244 }}> */}
+      {/* <Button
             variant="contained"
             onClick={handleCheckClose}
             style={{
@@ -245,9 +250,9 @@ const Info = () => {
             }}
           >
             取消
-          </Button>
-        </DialogActions>
-      </Dialog>
+          </Button> */}
+      {/* </DialogActions> */}
+      {/* </Dialog> */}
       <div className="info__section">
         <div className="section-base">
           <div className="base lock">
@@ -265,7 +270,7 @@ const Info = () => {
               <AccessTimeFilledIconStyle />
             )}
           </div>
-          <div className="base name">
+          {/* <div className="base name">
             <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
@@ -296,8 +301,19 @@ const Info = () => {
             ) : (
               <p>{user.email !== undefined ? user.email : "沒有信箱"}</p>
             )}
-          </div>
-          <div className="control-btn">
+          </div> */}
+          {/* <div>
+            <TextField
+              id="standard-read-only-input"
+              defaultValue={user.email !== undefined ? user.email : "沒有信箱"}
+              InputProps={{
+                readOnly: userInfoEdit,
+                disableUnderline: userInfoUnderline,
+              }}
+              variant="standard"
+            />
+          </div> */}
+          {/* <div className="control-btn">
             <Button
               variant="contained"
               onClick={handleClickOpen}
@@ -326,7 +342,7 @@ const Info = () => {
             >
               編輯基本資訊
             </Button>
-          </div>
+          </div> */}
         </div>
         <div className="section-record">
           <p className="record title">操作紀錄</p>
@@ -337,7 +353,7 @@ const Info = () => {
         </div>
       </div>
       <div>
-        <Stack
+        {/* <Stack
           className="success"
           sx={{
             width: "478px",
@@ -353,9 +369,9 @@ const Info = () => {
               已完成強制開鎖
             </Alert>
           </Collapse>
-        </Stack>
+        </Stack> */}
       </div>
-    </div>
+    </div >
   );
 };
 
