@@ -65,6 +65,41 @@ export const userInfo = createAsyncThunk(
   }
 );
 
+export const userUnlock = createAsyncThunk(
+  "user/unlock",
+  async (cardId, description, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "https://dd82-211-72-239-241.ngrok.io/api/unlock",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+          body: JSON.stringify({
+            cardId,
+            description,
+          }),
+        }
+      );
+      let data = await response.json();
+      console.log("response", data);
+      if (response.status === 200) {
+        console.log(data.message);
+        return data;
+      } else {
+        throw data.message;
+      }
+    } catch (e) {
+      console.log(thunkAPI.rejectWithValue(e));
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {

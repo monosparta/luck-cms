@@ -2,11 +2,6 @@ import React from "react";
 import "./Info.css";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import Accordion from "@mui/material/Accordion";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Dialog from "@mui/material/Dialog";
 import { useEffect } from "react";
 import DialogActions from "@mui/material/DialogActions";
@@ -30,6 +25,8 @@ import { selectUser, clearState } from "../redux/userSlice";
 import { useSelector } from "react-redux";
 import Skeleton from "@mui/material/Skeleton";
 import Record from "../components/Record";
+import _ from "lodash";
+import Box from "@mui/material/Box";
 
 const Info = () => {
   const navigate = useNavigate();
@@ -39,17 +36,10 @@ const Info = () => {
   const dispatch = useDispatch();
 
   const { user, records, isFetching } = useSelector(selectUser);
-  console.log("user", user.id);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
   }, []);
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
-
   const handleClick = () => {
     navigate("/");
   };
@@ -261,7 +251,9 @@ const Info = () => {
             )}
           </div>
           <div className="base state" style={{ display: "flex" }}>
-            {user.id !== undefined ? (
+            {isFetching ? (
+              <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
+            ) : user.id !== undefined ? (
               <CheckCircleIconStyle />
             ) : (
               <AccessTimeFilledIconStyle />
@@ -332,9 +324,52 @@ const Info = () => {
         <div className="section-record">
           <p className="record title">操作紀錄</p>
           <div className="record panel">
-            <Record />
+            {isFetching ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Skeleton
+                  variant="rectangular"
+                  width="100%"
+                  height={64}
+                  sx={{ margin: "0 0 10px 0", borderRadius: "8px" }}
+                />
+                <Skeleton
+                  variant="circular"
+                  width={10}
+                  height={10}
+                  sx={{ margin: "5px" }}
+                />
+                <Skeleton
+                  variant="circular"
+                  width={10}
+                  height={10}
+                  sx={{ margin: "5px" }}
+                />
+                <Skeleton
+                  variant="circular"
+                  width={10}
+                  height={10}
+                  sx={{ margin: "5px" }}
+                />
+              </Box>
+            ) : (
+              <div>
+                {_.map(records, (item, index) => (
+                  <Record
+                    name={item.name}
+                    record={item.time}
+                    lucknum={location.state}
+                    description={item.description}
+                  />
+                ))}
+              </div>
+            )}
           </div>
-          <div></div>
         </div>
       </div>
       <div>

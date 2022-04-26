@@ -5,47 +5,62 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-const Record = () => {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
-
+import Box from "@mui/material/Box";
+const Record = (props) => {
   return (
     <div>
-      <Accordion
-        // expanded={expanded === "panel1"}
-        // onChange={handleChange("panel1")}
-        sx={{
-          marginBottom: 2,
-          border: "1px solid black",
-          boxShadow: "none",
-          borderRadius: "4px",
-        }}
-      >
-        <AccordionSummary
-          sx={{ height: 64 }}
-          //   expandIcon={<ExpandMoreIcon />}
-          //   aria-controls="panel1bh-content"
-          //   id="panel1bh-header"
-        >
-          <Typography sx={{ width: "33%", flexShrink: 0 }}>Username</Typography>
-          <Typography sx={{ color: "text.secondary" }}>
-            於 03/21(一) 17:08:20 關閉第 12 櫃
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails
+      {props.name !== "root2" ? (
+        <Box
           sx={{
+            marginBottom: "16px",
             border: "1px solid black",
+            boxShadow: "none",
             borderRadius: "4px",
-            margin: 2,
           }}
         >
-          <Typography>詳細</Typography>
-        </AccordionDetails>
-      </Accordion>
+          <AccordionSummary sx={{ height: 64 }}>
+            <Typography sx={{ width: "33%", flexShrink: 0 }}>
+              {props.name}
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              於 {props.record} 關閉第 {props.lucknum} 櫃
+            </Typography>
+          </AccordionSummary>
+        </Box>
+      ) : (
+        <div className="record-box">
+          <Accordion
+            sx={{
+              border: "1px solid black",
+              boxShadow: "none",
+              borderRadius: "4px",
+            }}
+          >
+            <AccordionSummary
+              sx={{ height: 64 }}
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                管理員 - {props.name}
+              </Typography>
+              <Typography sx={{ color: "text.secondary" }}>
+                於 {props.record} 強制開啟 {props.lucknum} 櫃
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails
+              sx={{
+                border: "1px solid black",
+                borderRadius: "4px",
+                margin: 2,
+              }}
+            >
+              <Typography>{props.description}</Typography>
+            </AccordionDetails>
+          </Accordion>
+        </div>
+      )}
     </div>
   );
 };
