@@ -1,5 +1,6 @@
 import React from "react";
 import "./Info.css";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -13,19 +14,26 @@ import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import Record from "../components/Record";
 import _ from "lodash";
-import Buttons from "../components/Button";
+import Readmode from "../components/Readmode";
+import Editmode from "../components/Editmode";
 
 const Info = (props) => {
   const navigate = useNavigate();
 
   const location = useLocation();
   const dispatch = useDispatch();
+  const [userInfoEdit, setUserInfoEdit] = React.useState(true);
+  const [userInfoUnderline, setUserInfoUnderline] = React.useState(true);
 
   const { user, records, isFetching } = useSelector(selectUser);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
   }, []);
+
+  const handleEdit = () => {
+    setUserInfoEdit(!userInfoEdit);
+  };
 
   const handleClick = () => {
     navigate("/");
@@ -58,7 +66,33 @@ const Info = (props) => {
               <AccessTimeFilledIconStyle />
             )}
           </div>
-          <Buttons></Buttons>
+          {userInfoEdit ? <Readmode /> : <Editmode />}
+          <Button
+            onClick={handleEdit}
+            variant="contained"
+            style={{
+              width: "80%",
+              height: 39,
+              background: "#A0A0A0",
+              boxShadow: "none",
+              fontSize: 18,
+              margin: 5,
+            }}
+          >
+            編輯基本資訊
+          </Button>
+
+          {/* <div>
+            <TextField
+              id="standard-read-only-input"
+              defaultValue={user.email !== undefined ? user.email : "沒有信箱"}
+              InputProps={{
+                readOnly: userInfoEdit,
+                disableUnderline: userInfoUnderline,
+              }}
+              variant="standard"
+            />
+          </div>  */}
         </div>
         <div className="section-record">
           <p className="record title">操作紀錄</p>
