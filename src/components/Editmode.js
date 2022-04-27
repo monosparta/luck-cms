@@ -20,9 +20,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import "./Button.css";
 
-const Buttons = (props) => {
+const Editmode = (props) => {
     const dispatch = useDispatch();
     const location = useLocation();
 
@@ -92,7 +91,16 @@ const Buttons = (props) => {
                 {isFetching ? (
                     <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
                 ) : (
-                    <p>{user.name !== undefined ? user.name : "沒有使用者"}</p>
+                    <CssTextField sx={{ width: "100%", borderColor: "#000", margin: "6px", }}
+                        label="姓名"
+                        autoComplete="current-password"
+                        inputProps={{
+                            size: "small",
+                            style: {
+                                height: "8px",
+
+                            },
+                        }}>{user.name !== undefined ? user.name : "沒有使用者"}</CssTextField>
                 )}
             </div>
             <div className="base card">
@@ -100,7 +108,14 @@ const Buttons = (props) => {
                 {isFetching ? (
                     <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
                 ) : (
-                    <p>{user.cardId !== undefined ? user.cardId : "沒有卡號"}</p>
+                    <CssTextField sx={{ width: "100%", borderColor: "#000", margin: "6px", }}
+                        label="卡號"
+                        autoComplete="current-password"
+                        inputProps={{
+                            style: {
+                                height: "8px",
+                            },
+                        }}>{user.cardId !== undefined ? user.cardId : "沒有卡號"}</CssTextField>
                 )}
             </div>
             <div className="base phone">
@@ -108,7 +123,14 @@ const Buttons = (props) => {
                 {isFetching ? (
                     <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
                 ) : (
-                    <p>{user.phone !== undefined ? user.phone : "沒有電話"}</p>
+                    <CssTextField sx={{ width: "100%", borderColor: "#000", margin: "6px", }}
+                        label="電話"
+                        autoComplete="current-password"
+                        inputProps={{
+                            style: {
+                                height: "8px",
+                            },
+                        }}>{user.phone !== undefined ? user.phone : "沒有電話"}</CssTextField>
                 )}
             </div>
             <div className="base mail">
@@ -116,7 +138,14 @@ const Buttons = (props) => {
                 {isFetching ? (
                     <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
                 ) : (
-                    <p>{user.email !== undefined ? user.email : "沒有信箱"}</p>
+                    <CssTextField sx={{ width: "100%", borderColor: "#000", margin: "6px", }}
+                        label="電子信箱"
+                        autoComplete="current-password"
+                        inputProps={{
+                            style: {
+                                height: "8px",
+                            },
+                        }}>{user.email !== undefined ? user.email : "沒有信箱"}</CssTextField>
                 )}
             </div>
             <div className="control-btn">
@@ -321,4 +350,4 @@ const Buttons = (props) => {
 
 
 
-export default Buttons;
+export default Editmode;
