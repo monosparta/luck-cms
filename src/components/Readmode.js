@@ -20,9 +20,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import "./Button.css";
+import "./Readmode.css";
 
-const Buttons = (props) => {
+const Readmode = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -56,6 +56,14 @@ const Buttons = (props) => {
     setOpen(false);
   };
 
+  const handleCheckClose = () => {
+    ////////////////////////////////
+    setCheckOpen(false);
+    setAlertOpen(true);
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 3000);
+  };
   const CssTextField = styled(TextField)({
     "& .MuiFormHelperText-root": {
       "&.Mui-focused": {
@@ -73,15 +81,6 @@ const Buttons = (props) => {
       },
     },
   });
-
-  const handleCheckClose = () => {
-    ////////////////////////////////
-    setCheckOpen(false);
-    setAlertOpen(true);
-    setTimeout(() => {
-      setAlertOpen(false);
-    }, 3000);
-  };
 
   return (
     <div>
@@ -279,21 +278,6 @@ const Buttons = (props) => {
             </Button>
           </DialogActions>
         </Dialog>
-
-        <Button
-          onClick={handleEdit}
-          variant="contained"
-          style={{
-            width: "80%",
-            height: 39,
-            background: "#A0A0A0",
-            boxShadow: "none",
-            fontSize: 18,
-            margin: 5,
-          }}
-        >
-          編輯基本資訊
-        </Button>
       </div>
       <Stack
         className="success"
@@ -316,4 +300,4 @@ const Buttons = (props) => {
   );
 };
 
-export default Buttons;
+export default Readmode;
