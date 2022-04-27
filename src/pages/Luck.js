@@ -57,15 +57,22 @@ const Luck = () => {
                 sx={{
                   cursor: item.lockerNo !== null ? "pointer" : "",
                   position: "relative",
-                  background: item.userId !== null ? "#363F4E" : "#FFFFFF",
-                  // background: item.error === 1 ? "#FF5A5A" : "#FFFFFF",
-                  color: item.userId !== null ? "#FFFFFF" : "#000000",
+                  background: item.error === 1 ? "#FF5A5A" : item.userId !== null ? "#363F4E" : "#FFFFFF",
+                  color: item.error !== 1 ? item.userId !== null ? "#FFFFFF" : "#000000" : "#FFFFFF",
                   border:
-                    item.userId !== null
-                      ? "none"
-                      : item.lockerNo === null
-                        ? "1px dashed"
-                        : "1px solid #000",
+                    item.error !== 1
+                      ?
+                      item.userId !== null
+                        ? "none"
+                        : item.lockerNo === null
+                          ? "1px dashed"
+                          : "1px solid #000"
+                      :
+                      item.userId !== null
+                        ? "none"
+                        :
+                        "#363F4E",
+
                 }}
               >
                 {item.lockerNo}
