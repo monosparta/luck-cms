@@ -57,15 +57,10 @@ const Editmode = (props) => {
   };
 
   const CssTextField = styled(TextField)({
-    "& .MuiFormHelperText-root": {
-      "&.Mui-focused": {
-        //提示文字
-        color: "#A0A0A0",
-      },
-    },
+    "& .MuiFormHelperText-root": {},
     "& label.Mui-focused": {
       //上排文字
-      color: "#A0A0A0",
+      color: "#02A2EE",
     },
     "& .MuiOutlinedInput-root": {
       "&.Mui-focused fieldset": {
