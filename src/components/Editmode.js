@@ -310,21 +310,6 @@ const Editmode = (props) => {
                         </Button>
                     </DialogActions>
                 </Dialog>
-
-                <Button
-                    onClick={handleEdit}
-                    variant="contained"
-                    style={{
-                        width: "80%",
-                        height: 39,
-                        background: "#A0A0A0",
-                        boxShadow: "none",
-                        fontSize: 18,
-                        margin: 5,
-                    }}
-                >
-                    編輯基本資訊
-                </Button>
             </div>
             <Stack
                 className="success"
