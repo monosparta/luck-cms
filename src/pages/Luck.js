@@ -58,13 +58,14 @@ const Luck = () => {
                   cursor: item.lockerNo !== null ? "pointer" : "",
                   position: "relative",
                   background: item.userId !== null ? "#363F4E" : "#FFFFFF",
+                  // background: item.error === 1 ? "#FF5A5A" : "#FFFFFF",
                   color: item.userId !== null ? "#FFFFFF" : "#000000",
                   border:
                     item.userId !== null
                       ? "none"
                       : item.lockerNo === null
-                      ? "1px dashed"
-                      : "1px solid #000",
+                        ? "1px dashed"
+                        : "1px solid #000",
                 }}
               >
                 {item.lockerNo}
@@ -98,7 +99,7 @@ const Luck = () => {
                 flexWrap: "wrap",
                 "& > :not(style)": {
                   width: 160,
-                  height: 164,
+                  height: 220,
                   borderRadius: "10%",
                   borderColor: "#000000",
                   border: "1px solid ",
@@ -106,6 +107,26 @@ const Luck = () => {
               }}
             >
               <Paper className="p" elevation={0}>
+                <div className="cir">
+                  <LockOpenIcon
+                    sx={{
+                      color: "#363F4E",
+                      height: "20px",
+                      width: "20px",
+                    }}
+                  ></LockOpenIcon>
+                  開啟中
+                </div>
+                <div className="cir">
+                  <LockIcon
+                    sx={{
+                      color: "#363F4E",
+                      height: "20px",
+                      width: "20px",
+                    }}
+                  ></LockIcon>
+                  關閉中
+                </div>
                 <div className="cir">
                   <CircleIcon
                     sx={{
@@ -121,7 +142,7 @@ const Luck = () => {
                     sx={{
                       color: "#FFFFFF",
                       border: "1px solid #C4C4C4",
-                      borderRadius: "50%",
+                      // borderRadius: "50%",
                       height: "20px",
                       width: "20px",
                     }}
