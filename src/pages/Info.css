@@ -52,6 +52,9 @@
 	height: 30px;
 	margin: 36px 0 0 90px;
 }
+.base.lock > img{
+	margin: 3px 0;
+}
 .base h1 {
 	font-weight: 700;
 	font-size: 25px;

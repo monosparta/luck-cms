@@ -53,7 +53,7 @@ export const userInfo = createAsyncThunk(
       let data = await response.json();
       console.log("response", data);
       if (response.status === 200) {
-        console.log(data.message);
+        console.log(data);
         return data;
       } else {
         throw data.message;
@@ -67,9 +67,11 @@ export const userInfo = createAsyncThunk(
 
 export const userUnlock = createAsyncThunk(
   "user/unlock",
-  async (cardId, description, thunkAPI) => {
+  async (inputData, thunkAPI) => {
     try {
+      console.log("############", inputData);
       const token = localStorage.getItem("token");
+
       const response = await fetch(
         "https://dd82-211-72-239-241.ngrok.io/api/unlock",
         {
@@ -80,18 +82,17 @@ export const userUnlock = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            cardId,
-            description,
+            cardId: inputData[0].cardId,
+            description: inputData[0].description,
           }),
         }
       );
-      let data = await response.json();
-      console.log("response", data);
+      let data = response.json();
+      console.log("Success");
       if (response.status === 200) {
-        console.log(data.message);
         return data;
       } else {
-        throw data.message;
+        throw data;
       }
     } catch (e) {
       console.log(thunkAPI.rejectWithValue(e));
@@ -159,13 +160,12 @@ export const userSlice = createSlice({
       console.log("payload1", payload);
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
+      state.errorMessage = payload;
       state.user = [];
       state.records = [];
       return state;
     },
-    [userUnlock.fulfilled]: (state, { payload }) => {
-      console.log("payload", payload);
+    [userUnlock.fulfilled]: (state) => {
       state.isFetching = false;
       state.isSuccess = true;
       return state;
@@ -175,11 +175,9 @@ export const userSlice = createSlice({
       console.log("loading");
       return state;
     },
-    [userUnlock.rejected]: (state, { payload }) => {
-      console.log("payload1", payload);
+    [userUnlock.rejected]: (state) => {
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
       return state;
     },
   },

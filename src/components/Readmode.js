@@ -20,23 +20,32 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { userUnlock } from "../redux/userSlice";
 import "./Readmode.css";
 
 const Readmode = (props) => {
-  const dispatch = useDispatch();
-  const location = useLocation();
-
-  const { user, isFetching } = useSelector(selectUser);
-  useEffect(() => {
-    dispatch(clearState());
-    dispatch(userInfo(location.state));
-  }, []);
-
   const [open, setOpen] = React.useState(false);
   const [userInfoEdit, setUserInfoEdit] = React.useState(true);
   const [userInfoUnderline, setUserInfoUnderline] = React.useState(true);
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [checkOpen, setCheckOpen] = React.useState(false);
+  const [inputDescription, setInputDescription] = React.useState("");
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [update, setUpdate] = React.useState(false);
+
+  const { user, isFetching, records } = useSelector(selectUser);
+
+  useEffect(() => {
+    dispatch(clearState());
+    dispatch(userInfo(location.state));
+  }, []);
+
+  useEffect(() => {
+    dispatch(userInfo(location.state));
+  }, [update]);
+
+  console.log(inputDescription);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -56,31 +65,23 @@ const Readmode = (props) => {
     setOpen(false);
   };
 
-  const handleCheckClose = () => {
-    ////////////////////////////////
+  const handleCheckCloseAPI = () => {
+    dispatch(
+      userUnlock([{ cardId: user.cardId, description: inputDescription }])
+    );
+    setUpdate(true);
+    dispatch(userInfo(location.state));
     setCheckOpen(false);
     setAlertOpen(true);
     setTimeout(() => {
       setAlertOpen(false);
     }, 3000);
   };
-  const CssTextField = styled(TextField)({
-    "& .MuiFormHelperText-root": {
-      "&.Mui-focused": {
-        //提示文字
-        color: "#02A2EE",
-      },
-    },
-    "& label.Mui-focused": {
-      //上排文字
-      color: "#02A2EE",
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-focused fieldset": {
-        borderColor: "#A0A0A0", //FIELD 框
-      },
-    },
-  });
+
+  const handleCheckClose = () => {
+    setInputDescription("");
+    setCheckOpen(false);
+  };
 
   return (
     <div>
@@ -160,9 +161,11 @@ const Readmode = (props) => {
           </DialogTitle>
           <div className="diacontent">
             <DialogContent sx={{ m: "0 auto", width: 328, height: 156 }}>
-              <CssTextField
+              <TextField
                 required
                 multiline
+                value={inputDescription}
+                onChange={(e) => setInputDescription(e.target.value)}
                 id="input-reason"
                 placeholder="請輸入提醒內容"
                 inputProps={{
@@ -248,7 +251,7 @@ const Readmode = (props) => {
           <DialogActions sx={{ width: 244 }}>
             <Button
               variant="contained"
-              onClick={handleCheckClose}
+              onClick={handleCheckCloseAPI}
               style={{
                 width: 108,
                 height: 36,

@@ -9,7 +9,7 @@ import Box from "@mui/material/Box";
 const Record = (props) => {
   return (
     <div>
-      {props.name !== "root2" ? (
+      {props.permission !== 0 ? (
         <Box
           sx={{
             marginBottom: "16px",

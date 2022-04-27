@@ -32,9 +32,6 @@ const Info = (props) => {
     dispatch(userInfo(location.state));
   }, []);
 
-  const unlock = () => {
-    dispatch(userUnlock(user.cardId, records.description));
-  };
   const handleEdit = () => {
     setUserInfoEdit(!userInfoEdit);
   };
@@ -144,6 +141,7 @@ const Info = (props) => {
                     record={item.time}
                     lucknum={location.state}
                     description={item.description}
+                    permission={item.permission}
                   />
                 ))}
               </div>
