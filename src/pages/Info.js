@@ -26,23 +26,30 @@ const Info = (props) => {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const [mode, setMode] = React.useState("Readmode")
+  const [mode, setMode] = React.useState("Readmode");
+  const [luckIconStatus, setLuckIconStatus] = React.useState(null);
 
 
   const { user, records, isFetching, isSuccess } = useSelector(selectUser);
+
   const lockList = useSelector((state) => state.Luck.Lock);
+  // console.log('li', lockList);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
+    _.map(lockList, (item, index) => {
+      if (item.lockerNo === location.state) {
+        console.log('dd', item)
+        setLuckIconStatus(item.lockUp)
+      }
+    })
   }, []);
-
 
 
   const handleClick = () => {
     navigate("/");
   };
 
-  console.log(lockList);
   return (
     <div id="Info">
       <div className="info__back">
@@ -54,7 +61,8 @@ const Info = (props) => {
         <div className="section-base">
           <div className="base lock">
 
-            {/* {lockList[location.state].lockUp === 1 ? <LockIcon /> : <LockOpenIcon />} */}
+            {luckIconStatus === 1 ? <LockIcon /> : <LockOpenIcon />}
+
 
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
@@ -127,6 +135,7 @@ const Info = (props) => {
               <div>
                 {_.map(records, (item, index) => (
                   <Record
+                    key={index}
                     name={item.name}
                     record={item.time}
                     lucknum={location.state}
