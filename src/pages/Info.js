@@ -1,13 +1,17 @@
 import React from "react";
-import "./Info.css";
+
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userInfo, userUnlock, userupdate } from "../redux/userSlice";
 import { useLocation } from "react-router-dom";
+import "./Info.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import LockIcon from "@mui/icons-material/Lock";
 import { selectUser, clearState } from "../redux/userSlice";
+import { selectLuck } from "../redux/luckSlice";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
@@ -15,34 +19,30 @@ import Record from "../components/Record";
 import _ from "lodash";
 import Readmode from "../components/Readmode";
 import Editmode from "../components/Editmode";
+import Adduser from "../components/Adduser";
 
 const Info = (props) => {
   const navigate = useNavigate();
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const [userInfoEdit, setUserInfoEdit] = React.useState(true);
-  // const [buttonChange, setButtonChange] = React.useState("編輯基本資訊");
+  const [mode, setMode] = React.useState("Readmode")
 
 
   const { user, records, isFetching, isSuccess } = useSelector(selectUser);
-
+  const lockList = useSelector((state) => state.Luck.Lock);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
   }, []);
 
-  // const handleEdit = () => {
-  //   { userInfoEdit ? setButtonChange("儲存") && dispatch(userupdate(Infodata)) : setButtonChange("編輯基本資訊") }
-  //   setUserInfoEdit(!userInfoEdit);
-  // };
 
 
   const handleClick = () => {
     navigate("/");
   };
 
-
+  console.log(lockList);
   return (
     <div id="Info">
       <div className="info__back">
@@ -53,7 +53,9 @@ const Info = (props) => {
       <div className="info__section">
         <div className="section-base">
           <div className="base lock">
-            <img src="./lock.png" alt="" />
+
+            {/* {lockList[location.state].lockUp === 1 ? <LockIcon /> : <LockOpenIcon />} */}
+
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
             ) : (
@@ -70,23 +72,8 @@ const Info = (props) => {
             )}
           </div>
           <div className="basemode">
-            {userInfoEdit ? <Readmode /> : <Editmode />}
+            {user.id === undefined && mode !== "Editmode" ? <Adduser setMode={setMode} /> : mode === "Readmode" && user.id !== undefined ? <Readmode setMode={setMode} /> : <Editmode setMode={setMode} />}
           </div>
-
-          {/* <Button
-            onClick={handleEdit}
-            variant="contained"
-            style={{
-              width: "72%",
-              height: 39,
-              background: "#A0A0A0",
-              boxShadow: "none",
-              fontSize: 18,
-              margin: 5,
-            }}
-          >
-            {buttonChange}
-          </Button> */}
 
           {/* <div>
             <TextField

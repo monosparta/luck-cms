@@ -4,13 +4,11 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { login, clearState, selectUser } from "../redux/userSlice";
-import TextField from "@mui/material/TextField";
-import Checkbox from "@mui/material/Checkbox";
-import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Button from "@mui/material/Button";
+
+
 import "./Login.css";
+
+import { TextField, Checkbox, Typography, FormControlLabel, Button, styled } from "@mui/material";
 
 const Login = () => {
   const dispatch = useDispatch();

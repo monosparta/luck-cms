@@ -1,17 +1,16 @@
-import React from "react";
-import "./Luck.css";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import CircleIcon from "@mui/icons-material/Circle";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { LuckStatus, selectLuck } from "../redux/luckSlice";
 import { useSelector, useDispatch } from "react-redux";
+
+import "./Luck.css";
 import Item from "../components/Lock";
 import _ from "lodash";
+
+import { Box, Paper, Skeleton } from "@mui/material";
+import CircleIcon from "@mui/icons-material/Circle";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
-import { useNavigate } from "react-router-dom";
-import Skeleton from "@mui/material/Skeleton";
 
 const Luck = () => {
   const dispatch = useDispatch();

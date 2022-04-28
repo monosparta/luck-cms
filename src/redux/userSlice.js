@@ -88,7 +88,6 @@ export const userUnlock = createAsyncThunk(
         }
       );
       let data = response.json();
-      console.log("Success");
       if (response.status === 200) {
         return data;
       } else {
@@ -118,11 +117,16 @@ export const userupdate = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            id,
+            // id: 16,
+            // name: "Dr. Oh My GGGG",
+            // email: "GG4mida@example.com",
+            // phone: "0965958958",
+            // cardId: "0164100758147681"
+            id: 16,
             name,
             email,
             phone,
-            cardId,
+            cardId
           }),
         }
       );
@@ -215,6 +219,20 @@ export const userSlice = createSlice({
       return state;
     },
     [userUnlock.rejected]: (state) => {
+      state.isFetching = false;
+      state.isError = true;
+      return state;
+    },
+    [userupdate.fulfilled]: (state) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      return state;
+    },
+    [userupdate.pending]: (state) => {
+      state.isFetching = true;
+      return state;
+    },
+    [userupdate.rejected]: (state) => {
       state.isFetching = false;
       state.isError = true;
       return state;
