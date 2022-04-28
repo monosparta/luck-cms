@@ -36,17 +36,13 @@ const Info = (props) => {
     dispatch(userInfo(location.state));
   }, []);
 
-  // const handleEdit = () => {
-  //   { userInfoEdit ? setButtonChange("儲存") && dispatch(userupdate(Infodata)) : setButtonChange("編輯基本資訊") }
-  //   setUserInfoEdit(!userInfoEdit);
-  // };
 
 
   const handleClick = () => {
     navigate("/");
   };
 
-
+  console.log(lockList);
   return (
     <div id="Info">
       <div className="info__back">
@@ -59,6 +55,7 @@ const Info = (props) => {
           <div className="base lock">
 
             {/* {lockList[location.state].lockUp === 1 ? <LockIcon /> : <LockOpenIcon />} */}
+
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
             ) : (
@@ -77,20 +74,6 @@ const Info = (props) => {
           <div className="basemode">
             {user.id === undefined && mode !== "Editmode" ? <Adduser setMode={setMode} /> : mode === "Readmode" && user.id !== undefined ? <Readmode setMode={setMode} /> : <Editmode setMode={setMode} />}
           </div>
-          {/* <Button
-            onClick={handleEdit}
-            variant="contained"
-            style={{
-              width: "72%",
-              height: 39,
-              background: "#A0A0A0",
-              boxShadow: "none",
-              fontSize: 18,
-              margin: 5,
-            }}
-          >
-            {buttonChange}
-          </Button> */}
 
           {/* <div>
             <TextField

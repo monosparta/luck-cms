@@ -57,7 +57,7 @@ const Editmode = (props) => {
         },
     });
 
-    let Infodata = { 'id': location.state, 'name': inputName, 'email': inputEmail, 'phone': inputPhone, 'cardId': inputCard }
+    let Infodata = { 'id': user.id, 'name': inputName, 'email': inputEmail, 'phone': inputPhone, 'cardId': inputCard }
 
     console.log(Infodata)
 
