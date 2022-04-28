@@ -1,6 +1,5 @@
 import React from "react";
 import Collapse from "@mui/material/Collapse";
-import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
@@ -26,8 +25,6 @@ import "./Readmode.css";
 
 const Readmode = (props) => {
     const [open, setOpen] = React.useState(false);
-    // const [userInfoEdit, setUserInfoEdit] = React.useState(true);
-    // const [userInfoUnderline, setUserInfoUnderline] = React.useState(true);
     const [alertOpen, setAlertOpen] = React.useState(false);
     const [checkOpen, setCheckOpen] = React.useState(false);
     const [inputDescription, setInputDescription] = React.useState("");
@@ -36,7 +33,7 @@ const Readmode = (props) => {
     const [update, setUpdate] = React.useState(false);
 
     const { user, isFetching, records } = useSelector(selectUser);
-    // const [buttonChange, setButtonChange] = React.useState("編輯基本資訊");
+
 
     useEffect(() => {
         dispatch(clearState());
@@ -62,14 +59,12 @@ const Readmode = (props) => {
         setInputDescription("");
         setOpen(false);
     };
-    //   const handleEdit = () => {
-    //     setUserInfoEdit(!userInfoEdit);
-    //     setUserInfoUnderline(!userInfoUnderline);
-    //   };
 
     const handleClickCheckOpen = () => {
-        setCheckOpen(true);
-        setOpen(false);
+        if (inputDescription !== "") {
+            setCheckOpen(true);
+            setOpen(false)
+        }
     };
 
     const handleCheckCloseAPI = () => {

@@ -20,6 +20,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import userupdate from "../redux/userSlice";
 import "./Editmode.css";
 
 const Editmode = (props) => {
@@ -33,23 +34,23 @@ const Editmode = (props) => {
     }, []);
 
     const [open, setOpen] = React.useState(false);
-    // const [userInfoEdit, setUserInfoEdit] = React.useState(true);
-    // const [userInfoUnderline, setUserInfoUnderline] = React.useState(true);
     const [alertOpen, setAlertOpen] = React.useState(false);
     const [checkOpen, setCheckOpen] = React.useState(false);
     const [inputName, setInputName] = React.useState("");
     const [inputCard, setInputCard] = React.useState("");
     const [inputPhone, setInputPhone] = React.useState("");
     const [inputEmail, setInputEmail] = React.useState("");
-    // const [buttonChange, setButtonChange] = React.useState("");
 
 
+    const handleLeave = () => {
+        props.setMode("Readmode");
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    }
 
     const handleEdit = () => {
+        dispatch(
+            userupdate(Infodata)
+        );
         props.setMode("Readmode");
     }
     const handleClose = () => {
@@ -175,27 +176,12 @@ const Editmode = (props) => {
             </div>
             <div className="control-btn">
                 <Button
-                    variant="contained"
-                    onClick={handleClickOpen}
-                    style={{
-                        width: "80%",
-                        height: 39,
-                        background: "#FFC440",
-                        boxShadow: "none",
-                        fontSize: 18,
-                        margin: 5,
-                    }}
-                >
-                    強制開鎖
-                </Button>
-
-                <Button
                     onClick={handleEdit}
                     variant="contained"
                     style={{
-                        width: "80%",
+                        width: "40%",
                         height: 39,
-                        background: "#A0A0A0",
+                        background: "#363F4E",
                         boxShadow: "none",
                         fontSize: 18,
                         margin: 5,
@@ -203,171 +189,22 @@ const Editmode = (props) => {
                 >
                     儲存
                 </Button>
-                <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        m: "auto",
-                        "& .MuiDialog-container": {
-                            "& .MuiPaper-root": {
-                                width: 440,
-                                height: 300, // Set your width here
-                            },
-                            "& .MuiOutlinedInput-root": {
-                                width: 328,
-                                height: 156, // Set your width here
-                            },
-                            "& .MuiDialogContent-root ": {
-                                padding: 0,
-                            },
-                        },
+
+                <Button
+                    onClick={handleLeave}
+                    variant="contained"
+                    style={{
+                        width: "40%",
+                        height: 39,
+                        background: "#363F4E",
+                        boxShadow: "none",
+                        fontSize: 18,
+                        margin: 5,
                     }}
                 >
-                    <DialogTitle id="alert-dialog-title" sx={{ textAlign: "center" }}>
-                        {"強制開鎖原因"}
-                    </DialogTitle>
-                    <div className="diacontent">
-                        <DialogContent sx={{ m: "0 auto", width: 328, height: 156 }}>
-                            <CssTextField
-                                required
-                                multiline
-                                id="input-reason"
-                                placeholder="請輸入提醒內容"
-                                inputProps={{
-                                    style: {
-                                        width: 328,
-                                        height: 156,
-                                    },
-                                }}
-                            />
-                        </DialogContent>
-                    </div>
-                    <DialogActions sx={{ width: 328 }}>
-                        <Button
-                            variant="contained"
-                            onClick={handleClickCheckOpen}
-                            style={{
-                                width: 108,
-                                height: 36,
-                                background: "#2F384F",
-                                boxShadow: "none",
-                                fontSize: 12,
-                                margin: 5,
-                            }}
-                        >
-                            提交
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={handleClose}
-                            style={{
-                                width: 108,
-                                height: 36,
-                                background: "#fff",
-                                color: "#2F384F",
-                                boxShadow: "none",
-                                fontSize: 12,
-                                margin: 5,
-                                border: "1px solid #2F384F",
-                            }}
-                        >
-                            取消
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-                <Dialog
-                    open={checkOpen}
-                    onClose={handleCheckClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        m: "auto",
-                        borderRadius: "10px",
-                        "& .MuiDialog-container": {
-                            "& .MuiPaper-root": {
-                                width: 375,
-                                height: 250, // Set your width here
-                                borderRadius: "10px",
-                            },
-                            "& .MuiOutlinedInput-root": {
-                                width: 244, // Set your width here
-                                height: 150,
-                            },
-                            "& .MuiDialogContent-root ": {
-                                padding: 0,
-                            },
-                            "& .MuiDialogActions-root ": {
-                                margin: "0 auto",
-                            },
-                        },
-                    }}
-                >
-                    <DialogTitle
-                        id="alert-dialog-title"
-                        sx={{ textAlign: "center", padding: "16px 24px 0 24px" }}
-                    >
-                        <div className="alert">
-                            <img src="./alert.png" alt="" className="alert" />
-                            <p>確定要執行強制開鎖的動作嗎？</p>
-                        </div>
-                    </DialogTitle>
-                    <DialogActions sx={{ width: 244 }}>
-                        <Button
-                            variant="contained"
-                            onClick={handleCheckClose}
-                            style={{
-                                width: 108,
-                                height: 36,
-                                background: "#2F384F",
-                                boxShadow: "none",
-                                fontSize: 12,
-                                margin: 5,
-                            }}
-                        >
-                            確認
-                        </Button>
-                        <Button
-                            variant="contained"
-                            onClick={handleCheckClose}
-                            style={{
-                                width: 108,
-                                height: 36,
-                                background: "#fff",
-                                color: "#2F384F",
-                                boxShadow: "none",
-                                fontSize: 12,
-                                margin: 5,
-                                border: "1px solid #2F384F",
-                            }}
-                        >
-                            取消
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </div>
-            <Stack
-                className="success"
-                sx={{
-                    width: "478px",
-                    height: "52px",
-                    top: "107px",
-                    position: "absolute",
-                    right: "24px",
-                }}
-                spacing={2}
-            >
-                <Collapse in={alertOpen}>
-                    <Alert variant="filled" severity="success">
-                        已完成強制開鎖
-                    </Alert>
-                </Collapse>
-            </Stack>
+                    取消
+                </Button>
+               </div>
         </div>
     );
 };

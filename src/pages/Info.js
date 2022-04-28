@@ -1,10 +1,13 @@
 import React from "react";
-import "./Info.css";
+
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userInfo, userUnlock, userupdate } from "../redux/userSlice";
 import { useLocation } from "react-router-dom";
+
+import "./Info.css";
+
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { selectUser, clearState } from "../redux/userSlice";
@@ -21,7 +24,6 @@ const Info = (props) => {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const [userInfoEdit, setUserInfoEdit] = React.useState(true);
   const [mode, setMode] = React.useState("Readmode")
 
 
