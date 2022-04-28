@@ -1,17 +1,10 @@
 import React from "react";
-import Collapse from "@mui/material/Collapse";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { selectUser, clearState } from "../redux/userSlice";
 import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
@@ -33,9 +26,6 @@ const Editmode = (props) => {
         dispatch(userInfo(location.state));
     }, []);
 
-    const [open, setOpen] = React.useState(false);
-    const [alertOpen, setAlertOpen] = React.useState(false);
-    const [checkOpen, setCheckOpen] = React.useState(false);
     const [inputName, setInputName] = React.useState("");
     const [inputCard, setInputCard] = React.useState("");
     const [inputPhone, setInputPhone] = React.useState("");
@@ -53,15 +43,6 @@ const Editmode = (props) => {
         );
         props.setMode("Readmode");
     }
-    const handleClose = () => {
-        setOpen(false);
-    };
-
-    const handleClickCheckOpen = () => {
-        setCheckOpen(true);
-        setOpen(false);
-    };
-
     const CssTextField = styled(TextField)({
         "& .MuiFormHelperText-root": {},
         "& label.Mui-focused": {
@@ -74,14 +55,6 @@ const Editmode = (props) => {
             },
         },
     });
-
-    const handleCheckClose = () => {
-        setCheckOpen(false);
-        setAlertOpen(true);
-        setTimeout(() => {
-            setAlertOpen(false);
-        }, 3000);
-    };
 
     let Infodata = { 'id': location.state, 'name': inputName, 'email': inputEmail, 'phone': inputPhone, 'cardId': inputCard }
 
@@ -204,7 +177,7 @@ const Editmode = (props) => {
                 >
                     取消
                 </Button>
-               </div>
+            </div>
         </div>
     );
 };
