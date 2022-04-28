@@ -101,6 +101,45 @@ export const userUnlock = createAsyncThunk(
   }
 );
 
+
+export const userupdate = createAsyncThunk(
+  "user/update",
+  async ({ id, name, email, phone, cardId }, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "https://dd82-211-72-239-241.ngrok.io/api/update",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+          body: JSON.stringify({
+            id,
+            name,
+            email,
+            phone,
+            cardId,
+          }),
+        }
+      );
+      let data = response.json();
+      console.log("Success");
+      if (response.status === 200) {
+        return data;
+      } else {
+        throw data;
+      }
+    } catch (e) {
+      console.log(thunkAPI.rejectWithValue(e));
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {
