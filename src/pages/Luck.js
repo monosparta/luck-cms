@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Luck.css";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import CircleIcon from "@mui/icons-material/Circle";
-import { useEffect } from "react";
 import { LuckStatus, selectLuck } from "../redux/luckSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Item from "../components/Lock";

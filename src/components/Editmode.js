@@ -33,8 +33,8 @@ const Editmode = (props) => {
     }, []);
 
     const [open, setOpen] = React.useState(false);
-    const [userInfoEdit, setUserInfoEdit] = React.useState(true);
-    const [userInfoUnderline, setUserInfoUnderline] = React.useState(true);
+    // const [userInfoEdit, setUserInfoEdit] = React.useState(true);
+    // const [userInfoUnderline, setUserInfoUnderline] = React.useState(true);
     const [alertOpen, setAlertOpen] = React.useState(false);
     const [checkOpen, setCheckOpen] = React.useState(false);
     const [inputName, setInputName] = React.useState("");
@@ -50,10 +50,8 @@ const Editmode = (props) => {
     };
 
     const handleEdit = () => {
-        setUserInfoEdit(!userInfoEdit);
-        setUserInfoUnderline(!userInfoUnderline);
-    };
-
+        props.setMode("Readmode");
+    }
     const handleClose = () => {
         setOpen(false);
     };
@@ -86,7 +84,7 @@ const Editmode = (props) => {
 
     let Infodata = { 'id': location.state, 'name': inputName, 'email': inputEmail, 'phone': inputPhone, 'cardId': inputCard }
 
-
+    console.log(Infodata)
 
     return (
         <div>
@@ -195,7 +193,7 @@ const Editmode = (props) => {
                     onClick={handleEdit}
                     variant="contained"
                     style={{
-                        width: "72%",
+                        width: "80%",
                         height: 39,
                         background: "#A0A0A0",
                         boxShadow: "none",
@@ -203,7 +201,6 @@ const Editmode = (props) => {
                         margin: 5,
                     }}
                 >
-                    {/* {buttonChange} */}
                     儲存
                 </Button>
                 <Dialog

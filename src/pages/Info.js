@@ -22,7 +22,7 @@ const Info = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [userInfoEdit, setUserInfoEdit] = React.useState(true);
-  // const [buttonChange, setButtonChange] = React.useState("編輯基本資訊");
+  const [mode, setMode] = React.useState("Readmode")
 
 
   const { user, records, isFetching, isSuccess } = useSelector(selectUser);
@@ -70,7 +70,8 @@ const Info = (props) => {
             )}
           </div>
           <div className="basemode">
-            {userInfoEdit ? <Readmode /> : <Editmode />}
+            {mode === "Readmode" ? <Readmode setMode={setMode} /> : <Editmode setMode={setMode} />}
+
           </div>
 
           {/* <Button
