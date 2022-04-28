@@ -20,6 +20,7 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUnlock } from "../redux/userSlice";
+import EditIcon from '@mui/icons-material/Edit';
 
 import "./Readmode.css";
 
@@ -146,6 +147,7 @@ const Readmode = (props) => {
                         fontSize: 18,
                         margin: 5,
                     }}
+                    startIcon={<EditIcon />}
                 >
                     編輯基本資訊
                 </Button>

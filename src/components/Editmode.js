@@ -13,6 +13,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import EditIcon from '@mui/icons-material/Edit';
 import { userupdate } from "../redux/userSlice";
 import "./Editmode.css";
 
@@ -39,7 +40,7 @@ const Editmode = (props) => {
 
     const handleEdit = () => {
         dispatch(
-            userupdate()
+            userupdate(Infodata)
         );
         props.setMode("Readmode");
     }
@@ -68,7 +69,7 @@ const Editmode = (props) => {
                     <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
-                        value={inputName}
+                        value={user.name}
                         onChange={(e) => setInputName(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="姓名"
@@ -90,7 +91,7 @@ const Editmode = (props) => {
                     <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
-                        value={inputCard}
+                        value={user.cardId}
                         onChange={(e) => setInputCard(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="卡號"
@@ -111,7 +112,7 @@ const Editmode = (props) => {
                     <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
-                        value={inputPhone}
+                        value={user.phone}
                         onChange={(e) => setInputPhone(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="電話"
@@ -132,7 +133,7 @@ const Editmode = (props) => {
                     <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
-                        value={inputEmail}
+                        value={user.email}
                         onChange={(e) => setInputEmail(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="電子信箱"

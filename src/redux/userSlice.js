@@ -104,10 +104,13 @@ export const userUnlock = createAsyncThunk(
 
 export const userupdate = createAsyncThunk(
   "user/update",
-  // { id, name, email, phone, cardId }
-  async (aaa, thunkAPI) => {
+  async ({ id, name, email, phone, cardId }, thunkAPI) => {
     try {
-      console.log(aaa);
+      console.log(id,
+        name,
+        email,
+        phone,
+        cardId);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -120,11 +123,11 @@ export const userupdate = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            id: 16,
-            name: "Dr. Delphine Tromp",
-            email: "lawrence54@example.com",
-            phone: "0965958958",
-            cardId: "0164100758147681"
+            id,
+            name,
+            email,
+            phone,
+            cardId,
           }),
         }
       );

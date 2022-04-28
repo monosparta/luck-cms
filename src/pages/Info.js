@@ -5,9 +5,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userInfo, userUnlock, userupdate } from "../redux/userSlice";
 import { useLocation } from "react-router-dom";
-
 import "./Info.css";
-
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import { selectUser, clearState } from "../redux/userSlice";
@@ -18,6 +16,7 @@ import Record from "../components/Record";
 import _ from "lodash";
 import Readmode from "../components/Readmode";
 import Editmode from "../components/Editmode";
+import Adduser from "../components/Adduser";
 
 const Info = (props) => {
   const navigate = useNavigate();
@@ -72,10 +71,8 @@ const Info = (props) => {
             )}
           </div>
           <div className="basemode">
-            {mode === "Readmode" ? <Readmode setMode={setMode} /> : <Editmode setMode={setMode} />}
-
+            {user.id === undefined ? <Adduser setMode={setMode} /> : mode === "Readmode" && user.id !== undefined ? <Readmode setMode={setMode} /> : <Editmode setMode={setMode} />}
           </div>
-
           {/* <Button
             onClick={handleEdit}
             variant="contained"
