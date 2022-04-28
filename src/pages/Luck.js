@@ -21,7 +21,7 @@ const Luck = () => {
   useSelector(selectLuck);
   const navigate = useNavigate();
   const handleClick = (e) => {
-    navigate("/Info" + "?" + e.target.innerText, { state: e.target.innerText });
+    navigate("/Info?No=" + e.target.innerText, { state: e.target.innerText });
     console.log(e.target.innerText);
   };
   const handleClickStop = (e) => {
@@ -48,6 +48,7 @@ const Luck = () => {
           <Box sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
             {_.map(lockList, (item, index) => (
               <Item
+                key={item.id}
                 onClick={
                   item.lockerNo !== null
                     ? (e) => handleClick(e)

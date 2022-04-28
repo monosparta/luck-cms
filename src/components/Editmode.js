@@ -39,6 +39,7 @@ const Editmode = (props) => {
     }
 
     const handleEdit = () => {
+        console.log('54', Infodata)
         dispatch(
             userupdate(Infodata)
         );
@@ -59,7 +60,7 @@ const Editmode = (props) => {
 
     let Infodata = { 'id': user.id, 'name': inputName, 'email': inputEmail, 'phone': inputPhone, 'cardId': inputCard }
 
-    console.log(Infodata)
+    console.log('===infodata===', Infodata);
 
     return (
         <div>
