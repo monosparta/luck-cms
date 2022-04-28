@@ -37,6 +37,13 @@ const Editmode = (props) => {
     const [userInfoUnderline, setUserInfoUnderline] = React.useState(true);
     const [alertOpen, setAlertOpen] = React.useState(false);
     const [checkOpen, setCheckOpen] = React.useState(false);
+    const [inputName, setInputName] = React.useState("");
+    const [inputCard, setInputCard] = React.useState("");
+    const [inputPhone, setInputPhone] = React.useState("");
+    const [inputEmail, setInputEmail] = React.useState("");
+    // const [buttonChange, setButtonChange] = React.useState("");
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -77,6 +84,10 @@ const Editmode = (props) => {
         }, 3000);
     };
 
+    let Infodata = { 'id': location.state, 'name': inputName, 'email': inputEmail, 'phone': inputPhone, 'cardId': inputCard }
+
+
+
     return (
         <div>
             <div className="base name">
@@ -84,7 +95,9 @@ const Editmode = (props) => {
                 {isFetching ? (
                     <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
                 ) : (
-                    <CssTextField
+                    <TextField
+                        value={inputName}
+                        onChange={(e) => setInputName(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="姓名"
                         autoComplete="current-password"
@@ -96,7 +109,7 @@ const Editmode = (props) => {
                         }}
                     >
                         {user.name !== undefined ? user.name : "沒有使用者"}
-                    </CssTextField>
+                    </TextField>
                 )}
             </div>
             <div className="base card">
@@ -104,7 +117,9 @@ const Editmode = (props) => {
                 {isFetching ? (
                     <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
                 ) : (
-                    <CssTextField
+                    <TextField
+                        value={inputCard}
+                        onChange={(e) => setInputCard(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="卡號"
                         autoComplete="current-password"
@@ -115,7 +130,7 @@ const Editmode = (props) => {
                         }}
                     >
                         {user.cardId !== undefined ? user.cardId : "沒有卡號"}
-                    </CssTextField>
+                    </TextField>
                 )}
             </div>
             <div className="base phone">
@@ -123,7 +138,9 @@ const Editmode = (props) => {
                 {isFetching ? (
                     <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
                 ) : (
-                    <CssTextField
+                    <TextField
+                        value={inputPhone}
+                        onChange={(e) => setInputPhone(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="電話"
                         autoComplete="current-password"
@@ -134,7 +151,7 @@ const Editmode = (props) => {
                         }}
                     >
                         {user.phone !== undefined ? user.phone : "沒有電話"}
-                    </CssTextField>
+                    </TextField>
                 )}
             </div>
             <div className="base mail">
@@ -142,7 +159,9 @@ const Editmode = (props) => {
                 {isFetching ? (
                     <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
                 ) : (
-                    <CssTextField
+                    <TextField
+                        value={inputEmail}
+                        onChange={(e) => setInputEmail(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="電子信箱"
                         autoComplete="current-password"
@@ -153,7 +172,7 @@ const Editmode = (props) => {
                         }}
                     >
                         {user.email !== undefined ? user.email : "沒有信箱"}
-                    </CssTextField>
+                    </TextField>
                 )}
             </div>
             <div className="control-btn">
@@ -170,6 +189,22 @@ const Editmode = (props) => {
                     }}
                 >
                     強制開鎖
+                </Button>
+
+                <Button
+                    onClick={handleEdit}
+                    variant="contained"
+                    style={{
+                        width: "72%",
+                        height: 39,
+                        background: "#A0A0A0",
+                        boxShadow: "none",
+                        fontSize: 18,
+                        margin: 5,
+                    }}
+                >
+                    {/* {buttonChange} */}
+                    儲存
                 </Button>
                 <Dialog
                     open={open}

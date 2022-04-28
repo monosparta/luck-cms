@@ -1,10 +1,9 @@
 import React from "react";
 import "./Info.css";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { userInfo, userUnlock } from "../redux/userSlice";
+import { userInfo, userUnlock, userupdate } from "../redux/userSlice";
 import { useLocation } from "react-router-dom";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
@@ -23,7 +22,8 @@ const Info = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [userInfoEdit, setUserInfoEdit] = React.useState(true);
-  const [userInfoUnderline, setUserInfoUnderline] = React.useState(true);
+  // const [buttonChange, setButtonChange] = React.useState("編輯基本資訊");
+
 
   const { user, records, isFetching, isSuccess } = useSelector(selectUser);
 
@@ -32,13 +32,16 @@ const Info = (props) => {
     dispatch(userInfo(location.state));
   }, []);
 
-  const handleEdit = () => {
-    setUserInfoEdit(!userInfoEdit);
-  };
+  // const handleEdit = () => {
+  //   { userInfoEdit ? setButtonChange("儲存") && dispatch(userupdate(Infodata)) : setButtonChange("編輯基本資訊") }
+  //   setUserInfoEdit(!userInfoEdit);
+  // };
+
 
   const handleClick = () => {
     navigate("/");
   };
+
 
   return (
     <div id="Info">
@@ -70,7 +73,7 @@ const Info = (props) => {
             {userInfoEdit ? <Readmode /> : <Editmode />}
           </div>
 
-          <Button
+          {/* <Button
             onClick={handleEdit}
             variant="contained"
             style={{
@@ -82,8 +85,8 @@ const Info = (props) => {
               margin: 5,
             }}
           >
-            編輯基本資訊
-          </Button>
+            {buttonChange}
+          </Button> */}
 
           {/* <div>
             <TextField

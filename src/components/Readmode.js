@@ -21,6 +21,7 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUnlock } from "../redux/userSlice";
+
 import "./Readmode.css";
 
 const Readmode = (props) => {
@@ -35,6 +36,7 @@ const Readmode = (props) => {
   const [update, setUpdate] = React.useState(false);
 
   const { user, isFetching, records } = useSelector(selectUser);
+  // const [buttonChange, setButtonChange] = React.useState("編輯基本資訊");
 
   useEffect(() => {
     dispatch(clearState());
@@ -46,21 +48,25 @@ const Readmode = (props) => {
     setInputDescription("");
   }, [update]);
 
+  const handleEdit = () => {
+    setUserInfoEdit(!userInfoEdit);
+    setUserInfoUnderline(!userInfoUnderline);
+  };
+
   console.log(inputDescription);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleEdit = () => {
-    setUserInfoEdit(!userInfoEdit);
-    setUserInfoUnderline(!userInfoUnderline);
-  };
-
   const handleClose = () => {
     setInputDescription("");
     setOpen(false);
   };
+  //   const handleEdit = () => {
+  //     setUserInfoEdit(!userInfoEdit);
+  //     setUserInfoUnderline(!userInfoUnderline);
+  //   };
 
   const handleClickCheckOpen = () => {
     setCheckOpen(true);
@@ -133,6 +139,22 @@ const Readmode = (props) => {
           }}
         >
           強制開鎖
+        </Button>
+
+        <Button
+          onClick={handleEdit}
+          variant="contained"
+          style={{
+            width: "72%",
+            height: 39,
+            background: "#A0A0A0",
+            boxShadow: "none",
+            fontSize: 18,
+            margin: 5,
+          }}
+        >
+          {/* {buttonChange} */}
+          編輯基本資訊
         </Button>
         <Dialog
           open={open}
