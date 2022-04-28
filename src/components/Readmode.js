@@ -21,6 +21,7 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUnlock } from "../redux/userSlice";
 import EditIcon from '@mui/icons-material/Edit';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 import "./Readmode.css";
 
@@ -132,6 +133,7 @@ const Readmode = (props) => {
                         fontSize: 18,
                         margin: 5,
                     }}
+                    startIcon={<LockOpenIcon />}
                 >
                     強制開鎖
                 </Button>

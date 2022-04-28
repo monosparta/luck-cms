@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 const Adduser = (props) => {
 
     const handleAddUser = () => {
-        props.setMode("Editmode")
+        props.setMode("Editmode");
     }
     return (
         <div>

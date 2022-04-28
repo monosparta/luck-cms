@@ -69,7 +69,7 @@ const Editmode = (props) => {
                     <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
-                        value={user.name}
+                        defaultValue={user.name}
                         onChange={(e) => setInputName(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="姓名"
@@ -91,7 +91,7 @@ const Editmode = (props) => {
                     <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
-                        value={user.cardId}
+                        defaultValue={user.cardId}
                         onChange={(e) => setInputCard(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="卡號"
@@ -112,7 +112,7 @@ const Editmode = (props) => {
                     <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
-                        value={user.phone}
+                        defaultValue={user.phone}
                         onChange={(e) => setInputPhone(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="電話"
@@ -133,7 +133,7 @@ const Editmode = (props) => {
                     <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
-                        value={user.email}
+                        defaultValue={user.email}
                         onChange={(e) => setInputEmail(e.target.value)}
                         sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
                         label="電子信箱"

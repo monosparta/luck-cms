@@ -8,7 +8,10 @@ import { useLocation } from "react-router-dom";
 import "./Info.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import LockIcon from "@mui/icons-material/Lock";
 import { selectUser, clearState } from "../redux/userSlice";
+import { selectLuck } from "../redux/luckSlice";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
@@ -27,7 +30,7 @@ const Info = (props) => {
 
 
   const { user, records, isFetching, isSuccess } = useSelector(selectUser);
-
+  const lockList = useSelector((state) => state.Luck.Lock);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
@@ -54,7 +57,8 @@ const Info = (props) => {
       <div className="info__section">
         <div className="section-base">
           <div className="base lock">
-            <img src="./lock.png" alt="" />
+
+            {/* {lockList[location.state].lockUp === 1 ? <LockIcon /> : <LockOpenIcon />} */}
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
             ) : (
@@ -71,7 +75,7 @@ const Info = (props) => {
             )}
           </div>
           <div className="basemode">
-            {user.id === undefined ? <Adduser setMode={setMode} /> : mode === "Readmode" && user.id !== undefined ? <Readmode setMode={setMode} /> : <Editmode setMode={setMode} />}
+            {user.id === undefined && mode !== "Editmode" ? <Adduser setMode={setMode} /> : mode === "Readmode" && user.id !== undefined ? <Readmode setMode={setMode} /> : <Editmode setMode={setMode} />}
           </div>
           {/* <Button
             onClick={handleEdit}
