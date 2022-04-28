@@ -19,7 +19,7 @@ export const login = createAsyncThunk(
         }
       );
       let data = await response.json();
-      console.log("response", data);
+      console.log("Login Response", data);
       if (response.status === 200) {
         localStorage.setItem("token", data.message.token);
         console.log(data.message.token);
@@ -51,7 +51,7 @@ export const userInfo = createAsyncThunk(
         }
       );
       let data = await response.json();
-      console.log("response", data);
+      console.log("Info Response", data);
       if (response.status === 200) {
         console.log(data);
         return data;
@@ -105,6 +105,7 @@ export const userupdate = createAsyncThunk(
   "user/update",
   async ({ id, name, email, phone, cardId }, thunkAPI) => {
     try {
+      console.log('54321', id, name, email, phone, cardId);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -117,16 +118,16 @@ export const userupdate = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            // id: 16,
-            // name: "Dr. Oh My GGGG",
-            // email: "GG4mida@example.com",
-            // phone: "0965958958",
-            // cardId: "0164100758147681"
-            id: 16,
-            name,
-            email,
-            phone,
-            cardId
+            id: 4,
+            name: "Dr. Oh My GGGG",
+            email: "GG4mida@example.comxxx",
+            phone: "0965958958xxx",
+            cardId: "0164100758147681xx"
+            // id,
+            // name,
+            // email,
+            // phone,
+            // cardId
           }),
         }
       );
@@ -187,7 +188,7 @@ export const userSlice = createSlice({
       return state;
     },
     [userInfo.fulfilled]: (state, { payload }) => {
-      console.log("payload", payload);
+      console.log("userInfo payload", payload);
       state.isFetching = false;
       state.isSuccess = true;
       state.user = payload.user;
@@ -196,11 +197,11 @@ export const userSlice = createSlice({
     },
     [userInfo.pending]: (state) => {
       state.isFetching = true;
-      console.log("loading");
+      console.log("userInfo loading");
       return state;
     },
     [userInfo.rejected]: (state, { payload }) => {
-      console.log("payload1", payload);
+      console.log("userInfo payload1", payload);
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload;
@@ -215,7 +216,7 @@ export const userSlice = createSlice({
     },
     [userUnlock.pending]: (state) => {
       state.isFetching = true;
-      console.log("loading");
+      console.log("userUnlock loading");
       return state;
     },
     [userUnlock.rejected]: (state) => {
