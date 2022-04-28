@@ -120,11 +120,11 @@ export const userupdate = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            "id": 16,
-            "name": "Dr. Delphine Tromp",
-            "email": "lawrence54@example.com",
-            "phone": "0965958958",
-            "cardId": "0164100758147681"
+            id: 16,
+            name: "Dr. Delphine Tromp",
+            email: "lawrence54@example.com",
+            phone: "0965958958",
+            cardId: "0164100758147681"
           }),
         }
       );

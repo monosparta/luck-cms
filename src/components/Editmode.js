@@ -13,7 +13,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import userupdate from "../redux/userSlice";
+import { userupdate } from "../redux/userSlice";
 import "./Editmode.css";
 
 const Editmode = (props) => {
@@ -39,7 +39,7 @@ const Editmode = (props) => {
 
     const handleEdit = () => {
         dispatch(
-            userupdate(Infodata)
+            userupdate()
         );
         props.setMode("Readmode");
     }
