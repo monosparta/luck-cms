@@ -43,6 +43,7 @@ const Readmode = (props) => {
 
   useEffect(() => {
     dispatch(userInfo(location.state));
+    setInputDescription("");
   }, [update]);
 
   console.log(inputDescription);
@@ -57,6 +58,7 @@ const Readmode = (props) => {
   };
 
   const handleClose = () => {
+    setInputDescription("");
     setOpen(false);
   };
 
