@@ -27,7 +27,6 @@ const Info = (props) => {
   const [mode, setMode] = React.useState("Readmode");
   const [luckIconStatus, setLuckIconStatus] = React.useState(null);
 
-
   const { user, records, isFetching } = useSelector(selectUser);
 
   const lockList = useSelector((state) => state.Luck.Lock);
@@ -37,12 +36,11 @@ const Info = (props) => {
     dispatch(userInfo(location.state));
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
-        console.log('dd', item)
-        setLuckIconStatus(item.lockUp)
+        console.log("dd", item);
+        setLuckIconStatus(item.lockUp);
       }
-    })
+    });
   }, []);
-
 
   const handleClick = () => {
     navigate("/");
@@ -58,9 +56,9 @@ const Info = (props) => {
       <div className="info__section">
         <div className="section-base">
           <div className="base lock">
+            {/* {lockList[location.state].lockUp === 1 ? <LockIcon /> : <LockOpenIcon />} */}
 
             {luckIconStatus === 1 ? <LockIcon /> : <LockOpenIcon />}
-
 
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
@@ -78,7 +76,13 @@ const Info = (props) => {
             )}
           </div>
           <div className="basemode">
-            {user.id === undefined && mode !== "Editmode" ? <Adduser setMode={setMode} /> : mode === "Readmode" && user.id !== undefined ? <Readmode setMode={setMode} /> : <Editmode setMode={setMode} />}
+            {user.id === undefined && mode !== "Editmode" ? (
+              <Adduser setMode={setMode} />
+            ) : mode === "Readmode" && user.id !== undefined ? (
+              <Readmode setMode={setMode} />
+            ) : (
+              <Editmode setMode={setMode} />
+            )}
           </div>
 
           {/* <div>

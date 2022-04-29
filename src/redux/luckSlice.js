@@ -55,7 +55,6 @@ export const luckSlice = createSlice({
   },
   extraReducers: {
     [LuckStatus.fulfilled]: (state, { payload }) => {
-      console.log("Good", payload);
       state.isFetching = false;
       state.isSuccess = true;
       state.Lock = payload;

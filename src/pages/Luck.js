@@ -36,6 +36,7 @@ const Luck = () => {
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
           {_.map(array, (item, index) => (
             <Skeleton
+              key={index}
               variant="rectangular"
               width={100}
               height={100}
@@ -48,7 +49,7 @@ const Luck = () => {
           <Box sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
             {_.map(lockList, (item, index) => (
               <Item
-                key={item.id}
+                key={index}
                 onClick={
                   item.lockerNo !== null
                     ? (e) => handleClick(e)
@@ -57,22 +58,28 @@ const Luck = () => {
                 sx={{
                   cursor: item.lockerNo !== null ? "pointer" : "",
                   position: "relative",
-                  background: item.error === 1 ? "#FF5A5A" : item.userId !== null ? "#363F4E" : "#FFFFFF",
-                  color: item.error !== 1 ? item.userId !== null ? "#FFFFFF" : "#000000" : "#FFFFFF",
+                  background:
+                    item.error === 1
+                      ? "#FF5A5A"
+                      : item.userId !== null
+                      ? "#363F4E"
+                      : "#FFFFFF",
+                  color:
+                    item.error !== 1
+                      ? item.userId !== null
+                        ? "#FFFFFF"
+                        : "#000000"
+                      : "#FFFFFF",
                   border:
                     item.error !== 1
-                      ?
-                      item.userId !== null
+                      ? item.userId !== null
                         ? "none"
                         : item.lockerNo === null
-                          ? "1px dashed"
-                          : "1px solid #000"
-                      :
-                      item.userId !== null
-                        ? "none"
-                        :
-                        "#363F4E",
-
+                        ? "1px dashed"
+                        : "1px solid #000"
+                      : item.userId !== null
+                      ? "none"
+                      : "#363F4E",
                 }}
               >
                 {item.lockerNo}
@@ -99,9 +106,7 @@ const Luck = () => {
               </Item>
             ))}
           </Box>
-
         </div>
-
       )}
       <div className="status">
         <Box
@@ -174,8 +179,6 @@ const Luck = () => {
         </Box>
       </div>
     </div>
-
-
   );
 };
 

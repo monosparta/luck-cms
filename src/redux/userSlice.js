@@ -100,7 +100,6 @@ export const userUnlock = createAsyncThunk(
   }
 );
 
-
 export const userupdate = createAsyncThunk(
   "user/update",
   async ({ id, name, email, phone, cardId }, thunkAPI) => {
@@ -118,11 +117,16 @@ export const userupdate = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            id: 16,
-            name: "Dr. Delphine Trop GG",
-            email: "lawrence@examle.com",
-            phone: "0965989585",
-            cardId: "00007770000"
+            // id: 16,
+            // name: "Dr. Oh My GGGG",
+            // email: "GG4mida@example.com",
+            // phone: "0965958958",
+            // cardId: "0164100758147681"
+            id,
+            name,
+            email,
+            phone,
+            cardId,
           }),
         }
       );
