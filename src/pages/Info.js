@@ -26,8 +26,7 @@ const Info = (props) => {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const [mode, setMode] = React.useState("Readmode")
-
+  const [mode, setMode] = React.useState("Readmode");
 
   const { user, records, isFetching, isSuccess } = useSelector(selectUser);
   const lockList = useSelector((state) => state.Luck.Lock);
@@ -35,8 +34,6 @@ const Info = (props) => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
   }, []);
-
-
 
   const handleClick = () => {
     navigate("/");
@@ -53,7 +50,6 @@ const Info = (props) => {
       <div className="info__section">
         <div className="section-base">
           <div className="base lock">
-
             {/* {lockList[location.state].lockUp === 1 ? <LockIcon /> : <LockOpenIcon />} */}
 
             {isFetching ? (
@@ -72,7 +68,13 @@ const Info = (props) => {
             )}
           </div>
           <div className="basemode">
-            {user.id === undefined && mode !== "Editmode" ? <Adduser setMode={setMode} /> : mode === "Readmode" && user.id !== undefined ? <Readmode setMode={setMode} /> : <Editmode setMode={setMode} />}
+            {user.id === undefined && mode !== "Editmode" ? (
+              <Adduser setMode={setMode} />
+            ) : mode === "Readmode" && user.id !== undefined ? (
+              <Readmode setMode={setMode} />
+            ) : (
+              <Editmode setMode={setMode} />
+            )}
           </div>
 
           {/* <div>

@@ -100,7 +100,6 @@ export const userUnlock = createAsyncThunk(
   }
 );
 
-
 export const userupdate = createAsyncThunk(
   "user/update",
   async ({ id, name, email, phone, cardId }, thunkAPI) => {
@@ -122,11 +121,11 @@ export const userupdate = createAsyncThunk(
             // email: "GG4mida@example.com",
             // phone: "0965958958",
             // cardId: "0164100758147681"
-            id: 16,
+            id,
             name,
             email,
             phone,
-            cardId
+            cardId,
           }),
         }
       );
@@ -154,6 +153,7 @@ export const userSlice = createSlice({
     isFetching: false,
     isSuccess: false,
     isError: false,
+    updating: false,
     errorMessage: "",
   },
   reducers: {
@@ -224,16 +224,16 @@ export const userSlice = createSlice({
       return state;
     },
     [userupdate.fulfilled]: (state) => {
-      state.isFetching = false;
+      state.updating = false;
       state.isSuccess = true;
       return state;
     },
     [userupdate.pending]: (state) => {
-      state.isFetching = true;
+      state.updating = true;
       return state;
     },
     [userupdate.rejected]: (state) => {
-      state.isFetching = false;
+      state.updating = false;
       state.isError = true;
       return state;
     },

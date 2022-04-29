@@ -20,6 +20,8 @@
 	width: 30%;
 	height: 85%;
 	background-color: #fff;
+	box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
+		-4px 4px 8px rgba(54, 63, 78, 0.1);
 	padding: 5px;
 	display: flex;
 	flex-direction: column;
