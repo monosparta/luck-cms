@@ -1,5 +1,4 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
@@ -61,7 +60,11 @@ const Editmode = (props) => {
     cardId: inputCard,
   };
 
-  console.log(Infodata);
+  const handleSave = () => {
+    console.log("54", Infodata);
+    dispatch(userupdate(Infodata));
+    props.setMode("Readmode");
+  };
 
   return (
     <div>
@@ -152,7 +155,7 @@ const Editmode = (props) => {
       </div>
       <div className="control-btn">
         <Button
-          onClick={handleEdit}
+          onClick={handleSave}
           variant="contained"
           style={{
             width: "40%",

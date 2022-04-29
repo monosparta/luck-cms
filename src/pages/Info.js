@@ -1,9 +1,8 @@
 import React from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { userInfo, userUnlock, userupdate } from "../redux/userSlice";
+import { userInfo } from "../redux/userSlice";
 import { useLocation } from "react-router-dom";
 import "./Info.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -11,7 +10,6 @@ import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import { selectUser, clearState } from "../redux/userSlice";
-import { selectLuck } from "../redux/luckSlice";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
@@ -27,19 +25,27 @@ const Info = (props) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [mode, setMode] = React.useState("Readmode");
+  const [luckIconStatus, setLuckIconStatus] = React.useState(null);
 
-  const { user, records, isFetching, isSuccess } = useSelector(selectUser);
+  const { user, records, isFetching } = useSelector(selectUser);
+
   const lockList = useSelector((state) => state.Luck.Lock);
+  // console.log('li', lockList);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
+    _.map(lockList, (item, index) => {
+      if (item.lockerNo === location.state) {
+        console.log("dd", item);
+        setLuckIconStatus(item.lockUp);
+      }
+    });
   }, []);
 
   const handleClick = () => {
     navigate("/");
   };
 
-  console.log(lockList);
   return (
     <div id="Info">
       <div className="info__back">
@@ -51,6 +57,8 @@ const Info = (props) => {
         <div className="section-base">
           <div className="base lock">
             {/* {lockList[location.state].lockUp === 1 ? <LockIcon /> : <LockOpenIcon />} */}
+
+            {luckIconStatus === 1 ? <LockIcon /> : <LockOpenIcon />}
 
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
@@ -129,6 +137,7 @@ const Info = (props) => {
               <div>
                 {_.map(records, (item, index) => (
                   <Record
+                    key={index}
                     name={item.name}
                     record={item.time}
                     lucknum={location.state}
