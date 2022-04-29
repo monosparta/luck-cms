@@ -13,7 +13,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import EditIcon from '@mui/icons-material/Edit';
 import { userupdate } from "../redux/userSlice";
 import "./Editmode.css";
 

@@ -1,9 +1,8 @@
 import React from "react";
-
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { userInfo, userUnlock, userupdate } from "../redux/userSlice";
+import { userInfo } from "../redux/userSlice";
 import { useLocation } from "react-router-dom";
 import "./Info.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -11,7 +10,6 @@ import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import { selectUser, clearState } from "../redux/userSlice";
-import { selectLuck } from "../redux/luckSlice";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
@@ -30,7 +28,7 @@ const Info = (props) => {
   const [luckIconStatus, setLuckIconStatus] = React.useState(null);
 
 
-  const { user, records, isFetching, isSuccess } = useSelector(selectUser);
+  const { user, records, isFetching } = useSelector(selectUser);
 
   const lockList = useSelector((state) => state.Luck.Lock);
   // console.log('li', lockList);

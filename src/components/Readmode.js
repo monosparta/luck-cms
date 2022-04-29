@@ -34,7 +34,7 @@ const Readmode = (props) => {
     const location = useLocation();
     const [update, setUpdate] = React.useState(false);
 
-    const { user, isFetching, records } = useSelector(selectUser);
+    const { user, isFetching } = useSelector(selectUser);
 
 
     useEffect(() => {

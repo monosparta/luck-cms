@@ -6,15 +6,10 @@ import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login, selectUser } from "../redux/userSlice";
 import "./Appbar.css";
 
 const Appbar = () => {
-  const user = useSelector(selectUser);
-
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = (e) => {
