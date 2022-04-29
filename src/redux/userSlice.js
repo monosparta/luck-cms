@@ -105,7 +105,7 @@ export const userupdate = createAsyncThunk(
   "user/update",
   async ({ id, name, email, phone, cardId }, thunkAPI) => {
     try {
-      console.log('54321', id, name, email, phone, cardId);
+      console.log(id, name, email, phone, cardId);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -118,16 +118,11 @@ export const userupdate = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            id: 4,
-            name: "Dr. Oh My GGGG",
-            email: "GG4mida@example.comxxx",
-            phone: "0965958958xxx",
-            cardId: "0164100758147681xx"
-            // id,
-            // name,
-            // email,
-            // phone,
-            // cardId
+            id: 16,
+            name: "Dr. Delphine Trop GG",
+            email: "lawrence@examle.com",
+            phone: "0965989585",
+            cardId: "00007770000"
           }),
         }
       );
@@ -155,6 +150,7 @@ export const userSlice = createSlice({
     isFetching: false,
     isSuccess: false,
     isError: false,
+    updating: false,
     errorMessage: "",
   },
   reducers: {
@@ -225,16 +221,16 @@ export const userSlice = createSlice({
       return state;
     },
     [userupdate.fulfilled]: (state) => {
-      state.isFetching = false;
+      state.updating = false;
       state.isSuccess = true;
       return state;
     },
     [userupdate.pending]: (state) => {
-      state.isFetching = true;
+      state.updating = true;
       return state;
     },
     [userupdate.rejected]: (state) => {
-      state.isFetching = false;
+      state.updating = false;
       state.isError = true;
       return state;
     },

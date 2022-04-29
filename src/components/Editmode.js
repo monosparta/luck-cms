@@ -1,5 +1,4 @@
 import React from "react";
-import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
@@ -20,7 +19,7 @@ const Editmode = (props) => {
     const dispatch = useDispatch();
     const location = useLocation();
 
-    const { user, isFetching } = useSelector(selectUser);
+    const { user, updating } = useSelector(selectUser);
     useEffect(() => {
         dispatch(clearState());
         dispatch(userInfo(location.state));
@@ -37,25 +36,13 @@ const Editmode = (props) => {
 
     }
 
-    const handleEdit = () => {
+    const handleSave = () => {
         console.log('54', Infodata)
         dispatch(
             userupdate(Infodata)
         );
         props.setMode("Readmode");
     }
-    const CssTextField = styled(TextField)({
-        "& .MuiFormHelperText-root": {},
-        "& label.Mui-focused": {
-            //上排文字
-            color: "#A0A0A0",
-        },
-        "& .MuiOutlinedInput-root": {
-            "&.Mui-focused fieldset": {
-                borderColor: "#A0A0A0", //FIELD 框
-            },
-        },
-    });
 
     let Infodata = { 'id': user.id, 'name': inputName, 'email': inputEmail, 'phone': inputPhone, 'cardId': inputCard }
 
@@ -65,7 +52,7 @@ const Editmode = (props) => {
         <div>
             <div className="base name">
                 <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
-                {isFetching ? (
+                {updating ? (
                     <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
@@ -87,7 +74,7 @@ const Editmode = (props) => {
             </div>
             <div className="base card">
                 <CreditCardIcon style={{ fontSize: "30", margin: "8px 0" }} />
-                {isFetching ? (
+                {updating ? (
                     <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
@@ -108,7 +95,7 @@ const Editmode = (props) => {
             </div>
             <div className="base phone">
                 <PhoneAndroidIcon style={{ fontSize: "30", margin: "8px 0" }} />
-                {isFetching ? (
+                {updating ? (
                     <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
@@ -129,7 +116,7 @@ const Editmode = (props) => {
             </div>
             <div className="base mail">
                 <MailOutlineIcon style={{ fontSize: "30", margin: "8px 0" }} />
-                {isFetching ? (
+                {updating ? (
                     <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
                 ) : (
                     <TextField
@@ -150,7 +137,7 @@ const Editmode = (props) => {
             </div>
             <div className="control-btn">
                 <Button
-                    onClick={handleEdit}
+                    onClick={handleSave}
                     variant="contained"
                     style={{
                         width: "40%",
