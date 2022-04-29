@@ -24,7 +24,7 @@ const Appbar = () => {
       <AppBar
         position="static"
         elevation={0}
-        style={{ background: "#363F4E", padding: "8px 0px" }}
+        style={{ background: "#363F4E" }}
       >
         <Toolbar>
           <img src="./mono.png" alt="" className="logo" />
@@ -34,7 +34,7 @@ const Appbar = () => {
             <div className="Bar-user">
               <Avatar
                 className="avatar"
-                src="./user.png"
+                src="./ROSA.png"
                 sx={{ width: 36, height: 36 }}
               ></Avatar>
               <p className="username"> Rosa </p>

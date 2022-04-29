@@ -27,7 +27,8 @@ const Info = (props) => {
   const [mode, setMode] = React.useState("Readmode");
   const [luckIconStatus, setLuckIconStatus] = React.useState(null);
 
-  const { user, records, isFetching } = useSelector(selectUser);
+
+  const { user, records, isFetching, updating } = useSelector(selectUser);
 
   const lockList = useSelector((state) => state.Luck.Lock);
   // console.log('li', lockList);

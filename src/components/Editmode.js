@@ -12,7 +12,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import EditIcon from "@mui/icons-material/Edit";
 import { userupdate } from "../redux/userSlice";
 import "./Editmode.css";
 
@@ -34,23 +33,6 @@ const Editmode = (props) => {
   const handleLeave = () => {
     props.setMode("Readmode");
   };
-
-  const handleEdit = () => {
-    dispatch(userupdate(Infodata));
-    props.setMode("Readmode");
-  };
-  const CssTextField = styled(TextField)({
-    "& .MuiFormHelperText-root": {},
-    "& label.Mui-focused": {
-      //上排文字
-      color: "#A0A0A0",
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-focused fieldset": {
-        borderColor: "#A0A0A0", //FIELD 框
-      },
-    },
-  });
 
   let Infodata = {
     id: user.id,
