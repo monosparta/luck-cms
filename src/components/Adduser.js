@@ -1,16 +1,26 @@
 import React from 'react'
 import Button from "@mui/material/Button";
 import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch } from "react-redux";
+import { selectUser } from "../redux/userSlice";
+import { useSelector } from "react-redux";
+import { userAdd } from "../redux/userSlice";
+import Skeleton from "@mui/material/Skeleton";
 
 const Adduser = (props) => {
 
-    const handleAddUser = () => {
+    const { isFetching } = useSelector(selectUser);
+    const dispatch = useDispatch();
+
+    const handleAdd = () => {
+        props.setUserStatus("AddStatus");
         props.setMode("Editmode");
-    }
+    };
+
     return (
         <div>
-            <Button
-                onClick={handleAddUser}
+            {isFetching ? <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} /> : <Button
+                onClick={handleAdd}
                 variant="contained"
                 style={{
                     width: "100%",
@@ -23,7 +33,8 @@ const Adduser = (props) => {
                 }}
             >
                 <EditIcon />新增會員資訊
-            </Button>
+            </Button>}
+
         </div>
     )
 }

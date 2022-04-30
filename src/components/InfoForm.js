@@ -12,11 +12,11 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import EditIcon from "@mui/icons-material/Edit";
-import { userupdate } from "../redux/userSlice";
-import "./Editmode.css";
+import { userUpdate } from "../redux/userSlice";
+import { userAdd } from "../redux/userSlice";
+import "./InfoForm.css";
 
-const Editmode = (props) => {
+const InfoForm = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -32,25 +32,8 @@ const Editmode = (props) => {
   const [inputEmail, setInputEmail] = React.useState("");
 
   const handleLeave = () => {
-    props.setMode("Readmode");
+    props.setUserStatus("");
   };
-
-  const handleEdit = () => {
-    dispatch(userupdate(Infodata));
-    props.setMode("Readmode");
-  };
-  const CssTextField = styled(TextField)({
-    "& .MuiFormHelperText-root": {},
-    "& label.Mui-focused": {
-      //上排文字
-      color: "#A0A0A0",
-    },
-    "& .MuiOutlinedInput-root": {
-      "&.Mui-focused fieldset": {
-        borderColor: "#A0A0A0", //FIELD 框
-      },
-    },
-  });
 
   let Infodata = {
     id: user.id,
@@ -60,10 +43,30 @@ const Editmode = (props) => {
     cardId: inputCard,
   };
 
+  // let Adddata = {
+  //   lockerNo: user.lockerNo,
+  //   name: inputName,
+  //   email: inputEmail,
+  //   phone: inputPhone,
+  //   cardId: inputCard,
+  // };
+
   const handleSave = () => {
-    console.log("54", Infodata);
-    dispatch(userupdate(Infodata));
-    props.setMode("Readmode");
+    switch (props.userStatus) {
+      case 'AddStatus':
+        dispatch(userUpdate(Infodata));
+        props.setUserStatus("");
+        return 'AddStatus';
+      case 'EditStatus':
+        // console.log("54", Infodata);
+        // dispatch(userAdd(Infodata));
+        props.setUserStatus("");
+        return 'AddStatus';
+      default:
+        props.setUserStatus("");
+        return true;
+    }
+
   };
 
   return (
@@ -188,4 +191,4 @@ const Editmode = (props) => {
   );
 };
 
-export default Editmode;
+export default InfoForm;

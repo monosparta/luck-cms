@@ -42,6 +42,7 @@ const Readmode = (props) => {
   }, []);
 
   const handleEdit = () => {
+    props.setUserStatus("EditStatus");
     props.setMode("Editmode");
   };
 

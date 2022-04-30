@@ -69,7 +69,7 @@ export const userUnlock = createAsyncThunk(
   "user/unlock",
   async (inputData, thunkAPI) => {
     try {
-      console.log("############", inputData);
+
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -100,7 +100,7 @@ export const userUnlock = createAsyncThunk(
   }
 );
 
-export const userupdate = createAsyncThunk(
+export const userUpdate = createAsyncThunk(
   "user/update",
   async ({ id, name, email, phone, cardId }, thunkAPI) => {
     try {
@@ -117,11 +117,6 @@ export const userupdate = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            // id: 16,
-            // name: "Dr. Oh My GGGG",
-            // email: "GG4mida@example.com",
-            // phone: "0965958958",
-            // cardId: "0164100758147681"
             id,
             name,
             email,
@@ -143,6 +138,45 @@ export const userupdate = createAsyncThunk(
     }
   }
 );
+
+export const userAdd = createAsyncThunk(
+  "user/Add",
+  async (lockerNo, name, email, phone, cardId, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "https://dd82-211-72-239-241.ngrok.io/api/addUser",
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+            body: JSON.stringify({
+              lockerNo,
+              name,
+              email,
+              phone,
+              cardId,
+            }),
+          },
+        }
+      );
+      let data = await response.json();
+      console.log("Add Response", data);
+      if (response.status === 200) {
+        console.log(data);
+        return data;
+      } else {
+        throw data.message;
+      }
+    } catch (e) {
+      console.log(thunkAPI.rejectWithValue(e));
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 
 export const userSlice = createSlice({
   name: "user",
@@ -224,22 +258,24 @@ export const userSlice = createSlice({
       state.isError = true;
       return state;
     },
-    [userupdate.fulfilled]: (state) => {
+    [userUpdate.fulfilled]: (state) => {
       state.updating = false;
       state.isSuccess = true;
       return state;
     },
-    [userupdate.pending]: (state) => {
+    [userUpdate.pending]: (state) => {
       state.updating = true;
       return state;
     },
-    [userupdate.rejected]: (state) => {
+    [userUpdate.rejected]: (state) => {
       state.updating = false;
       state.isError = true;
       return state;
     },
   },
 });
+
+
 
 export const { clearState } = userSlice.actions;
 
