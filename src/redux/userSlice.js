@@ -100,7 +100,7 @@ export const userUnlock = createAsyncThunk(
   }
 );
 
-export const userupdate = createAsyncThunk(
+export const userUpdate = createAsyncThunk(
   "user/update",
   async ({ id, name, email, phone, cardId }, thunkAPI) => {
     try {
@@ -117,11 +117,6 @@ export const userupdate = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            // id: 16,
-            // name: "Dr. Oh My GGGG",
-            // email: "GG4mida@example.com",
-            // phone: "0965958958",
-            // cardId: "0164100758147681"
             id,
             name,
             email,
@@ -263,16 +258,16 @@ export const userSlice = createSlice({
       state.isError = true;
       return state;
     },
-    [userupdate.fulfilled]: (state) => {
+    [userUpdate.fulfilled]: (state) => {
       state.updating = false;
       state.isSuccess = true;
       return state;
     },
-    [userupdate.pending]: (state) => {
+    [userUpdate.pending]: (state) => {
       state.updating = true;
       return state;
     },
-    [userupdate.rejected]: (state) => {
+    [userUpdate.rejected]: (state) => {
       state.updating = false;
       state.isError = true;
       return state;

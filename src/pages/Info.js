@@ -16,7 +16,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Record from "../components/Record";
 import _ from "lodash";
 import Readmode from "../components/Readmode";
-import Editmode from "../components/Editmode";
+import InfoForm from "../components/InfoForm";
 import Adduser from "../components/Adduser";
 
 const Info = (props) => {
@@ -26,6 +26,7 @@ const Info = (props) => {
   const dispatch = useDispatch();
   const [mode, setMode] = React.useState("Readmode");
   const [luckIconStatus, setLuckIconStatus] = React.useState(null);
+  const [userStatus, setUserStatus] = React.useState(null);
 
 
   const { user, records, isFetching, updating } = useSelector(selectUser);
@@ -46,6 +47,20 @@ const Info = (props) => {
   const handleClick = () => {
     navigate("/");
   };
+  const selectFormMode = () => {
+    console.log('check', user.id, mode, userStatus);
+    return (
+      user.id === undefined ? (
+        userStatus === "AddStatus" ? <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} /> : <Adduser setMode={setMode} setUserStatus={setUserStatus} />
+        // <Adduser setMode={setMode} setUserStatus={setUserStatus} />
+
+      ) : (
+        userStatus === "EditStatus" ? <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} /> : <Readmode setMode={setMode} setUserStatus={setUserStatus} />
+        // <Readmode setMode={setMode} setUserStatus={setUserStatus} />
+      )
+    )
+
+  }
 
   return (
     <div id="Info">
@@ -77,13 +92,9 @@ const Info = (props) => {
             )}
           </div>
           <div className="basemode">
-            {user.id === undefined && mode !== "Editmode" ? (
-              <Adduser setMode={setMode} />
-            ) : mode === "Readmode" && user.id !== undefined ? (
-              <Readmode setMode={setMode} />
-            ) : (
-              <Editmode setMode={setMode} />
-            )}
+
+            {selectFormMode()}
+
           </div>
 
           {/* <div>
