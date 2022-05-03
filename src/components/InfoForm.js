@@ -18,7 +18,7 @@ import "./InfoForm.css";
 
 const InfoForm = (props) => {
   const dispatch = useDispatch();
-  // const location = useLocation();
+  const location = useLocation();
 
   const { user, updating } = useSelector(selectUser);
   // useEffect(() => {
@@ -42,26 +42,26 @@ const InfoForm = (props) => {
     phone: inputPhone,
     cardId: inputCard,
   };
-  console.log(Infodata)
-  // let Adddata = {
-  //   lockerNo: user.lockerNo,
-  //   name: inputName,
-  //   email: inputEmail,
-  //   phone: inputPhone,
-  //   cardId: inputCard,
-  // };
+
+  let Adddata = {
+    lockerNo: location.state,
+    name: inputName,
+    email: inputEmail,
+    phone: inputPhone,
+    cardId: inputCard,
+  };
+  console.log(Adddata);
 
   const handleSave = () => {
     switch (props.userStatus) {
       case 'AddStatus':
-        dispatch(userUpdate(Infodata));
+        dispatch(userAdd(Adddata));
         props.setUserStatus("");
         return 'AddStatus';
       case 'EditStatus':
-        // console.log("54", Infodata);
-        // dispatch(userAdd(Infodata));
+        dispatch(userUpdate(Infodata));
         props.setUserStatus("");
-        return 'AddStatus';
+        return 'EditStatus';
       default:
         props.setUserStatus("");
         return true;

@@ -36,7 +36,6 @@ const Info = (props) => {
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
-    console.log("###_###")
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
         setLuckIconStatus(item.lockUp);

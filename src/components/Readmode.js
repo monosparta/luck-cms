@@ -48,6 +48,7 @@ const Readmode = (props) => {
   };
 
   useEffect(() => {
+    console.log("DDDDDDDD$$$")
     dispatch(userInfo(location.state));
     setInputDescription("");
   }, [update]);
