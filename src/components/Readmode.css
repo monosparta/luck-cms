@@ -52,7 +52,7 @@
 }
 .base.lock {
 	height: 30px;
-	margin: 35px 0 5px 20px;
+	margin: 35px 0 5px -10px;
 }
 .base h1 {
 	font-weight: 700;

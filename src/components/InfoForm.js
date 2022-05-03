@@ -114,6 +114,7 @@ const InfoForm = (props) => {
               width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
                   borderColor: "gray",
+
                   //FIELD 框
                 },
               },
@@ -140,7 +141,7 @@ const InfoForm = (props) => {
             onChange={(e) => setInputPhone(e.target.value)}
             InputLabelProps={{ style: { color: 'gray' } }}
             sx={{
-              width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
+              width: "100%", borderColor: "#000", margin: "6px", "& .MuiInputLabel-root": {}, "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
                   borderColor: "gray", //FIELD 框
                 },
@@ -217,7 +218,7 @@ const InfoForm = (props) => {
           取消
         </Button>
       </div>
-    </div>
+    </div >
   );
 };
 

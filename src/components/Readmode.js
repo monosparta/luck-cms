@@ -224,15 +224,11 @@ const Readmode = (props) => {
                 placeholder="請輸入提醒內容"
                 sx={{
                   "& .MuiOutlinedInput-root": {
+                    display: "flex",
+                    alignItems: "flex-start",
                     "&.Mui-focused fieldset": {
                       borderColor: "gray", //FIELD 框
                     },
-                  },
-                }}
-                inputProps={{
-                  style: {
-                    display: "flex",
-                    alignItems: "flex-start",
                   },
                 }}
               />
