@@ -1,11 +1,11 @@
 import React from "react";
 import Collapse from "@mui/material/Collapse";
-// import TextField from "@mui/material/TextField";
+import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
-import { selectUser, clearState } from "../redux/userSlice";
+import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -22,7 +22,8 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUnlock } from "../redux/userSlice";
 import EditIcon from "@mui/icons-material/Edit";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { TextField, styled } from "@mui/material";
+import { styles } from "@mui/material/styles";
+// import { TextField, styled } from "@mui/material";
 
 import "./Readmode.css";
 
@@ -88,29 +89,36 @@ const Readmode = (props) => {
     setCheckOpen(false);
   };
 
-  const CssTextField = styled(TextField)({
-    "& .MuiFormHelperText-root": {
-      "&.Mui-focused": {
-        //提示文字
-        color: "#02A2EE",
-      },
-    },
-    "& label.Mui-focused": {
-      //上排文字
-      color: "#02A2EE",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "black",
-      },
-      "&:hover fieldset": {
-        borderColor: "black",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#363F4E", //FIELD 框
-      },
-    },
+  const theme = (styles) => ({
+    notchedOutline: {
+      borderWidth: "1px",
+      borderColor: "yellow !important"
+    }
   });
+
+  // const CssTextField = styled(TextField)({
+  //   "& .MuiFormHelperText-root": {
+  //     "&.Mui-focused": {
+  //       //提示文字
+  //       color: "#02A2EE",
+  //     },
+  //   },
+  //   "& label.Mui-focused": {
+  //     //上排文字
+  //     color: "#02A2EE",
+  //   },
+  //   "& .MuiOutlinedInput-root": {
+  //     "& fieldset": {
+  //       borderColor: "black",
+  //     },
+  //     "&:hover fieldset": {
+  //       borderColor: "black",
+  //     },
+  //     "&.Mui-focused fieldset": {
+  //       borderColor: "#363F4E", //FIELD 框
+  //     },
+  //   },
+  // });
 
   return (
     <div>
@@ -207,13 +215,20 @@ const Readmode = (props) => {
           </DialogTitle>
           <div className="diacontent">
             <DialogContent sx={{ m: "0 auto", width: 328, height: 156 }}>
-              <CssTextField
+              <TextField
                 required
                 multiline
                 value={inputDescription}
                 onChange={(e) => setInputDescription(e.target.value)}
                 id="input-reason"
                 placeholder="請輸入提醒內容"
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "gray", //FIELD 框
+                    },
+                  },
+                }}
                 inputProps={{
                   style: {
                     display: "flex",

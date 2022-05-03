@@ -2,23 +2,23 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
-import { selectUser, clearState } from "../redux/userSlice";
+import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { userInfo } from "../redux/userSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+// import { userInfo } from "../redux/userSlice";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUpdate } from "../redux/userSlice";
-import { userAdd } from "../redux/userSlice";
+import { userAdd, userInfo } from "../redux/userSlice";
 import "./InfoForm.css";
 
 const InfoForm = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const { user, updating } = useSelector(selectUser);
   // useEffect(() => {
@@ -56,12 +56,13 @@ const InfoForm = (props) => {
     switch (props.userStatus) {
       case 'AddStatus':
         dispatch(userAdd(Adddata));
+        dispatch(userInfo(location.state));
         props.setUserStatus("");
-        return 'AddStatus';
+        break;
       case 'EditStatus':
         dispatch(userUpdate(Infodata));
         props.setUserStatus("");
-        return 'EditStatus';
+        break;
       default:
         props.setUserStatus("");
         return true;
@@ -79,7 +80,14 @@ const InfoForm = (props) => {
           <TextField
             defaultValue={user.name}
             onChange={(e) => setInputName(e.target.value)}
-            sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
+            InputLabelProps={{ style: { color: 'gray' } }}
+            sx={{
+              width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
+                "&.Mui-focused fieldset": {
+                  borderColor: "gray", //FIELD 框
+                },
+              },
+            }}
             label="姓名"
             autoComplete="current-password"
             inputProps={{
@@ -101,7 +109,15 @@ const InfoForm = (props) => {
           <TextField
             defaultValue={user.cardId}
             onChange={(e) => setInputCard(e.target.value)}
-            sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
+            InputLabelProps={{ style: { color: 'gray' } }}
+            sx={{
+              width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
+                "&.Mui-focused fieldset": {
+                  borderColor: "gray",
+                  //FIELD 框
+                },
+              },
+            }}
             label="卡號"
             autoComplete="current-password"
             inputProps={{
@@ -122,7 +138,14 @@ const InfoForm = (props) => {
           <TextField
             defaultValue={user.phone}
             onChange={(e) => setInputPhone(e.target.value)}
-            sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
+            InputLabelProps={{ style: { color: 'gray' } }}
+            sx={{
+              width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
+                "&.Mui-focused fieldset": {
+                  borderColor: "gray", //FIELD 框
+                },
+              },
+            }}
             label="電話"
             autoComplete="current-password"
             inputProps={{
@@ -143,7 +166,14 @@ const InfoForm = (props) => {
           <TextField
             defaultValue={user.email}
             onChange={(e) => setInputEmail(e.target.value)}
-            sx={{ width: "100%", borderColor: "#000", margin: "6px" }}
+            InputLabelProps={{ style: { color: 'gray' } }}
+            sx={{
+              width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
+                "&.Mui-focused fieldset": {
+                  borderColor: "gray", //FIELD 框
+                },
+              },
+            }}
             label="電子信箱"
             autoComplete="current-password"
             inputProps={{
@@ -156,7 +186,7 @@ const InfoForm = (props) => {
           </TextField>
         )}
       </div>
-      <div className="control-btn">
+      <div className="save-btn">
         <Button
           onClick={handleSave}
           variant="contained"

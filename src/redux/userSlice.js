@@ -140,25 +140,25 @@ export const userUpdate = createAsyncThunk(
 
 export const userAdd = createAsyncThunk(
   "user/Add",
-  async (lockerNo, name, email, phone, cardId, thunkAPI) => {
+  async ({ lockerNo, name, email, phone, cardId }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://dd82-211-72-239-241.ngrok.io/api/addUser",
+        "https://dd82-211-72-239-241.ngrok.io/api/user",
         {
-          method: "GET",
+          method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             token,
-            body: JSON.stringify({
-              lockerNo,
-              name,
-              email,
-              phone,
-              cardId,
-            }),
           },
+          body: JSON.stringify({
+            lockerNo,
+            name,
+            email,
+            phone,
+            cardId,
+          }),
         }
       );
       let data = await response.json();
@@ -217,7 +217,6 @@ export const userSlice = createSlice({
       console.log("payload1", payload);
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
       return state;
     },
     [userInfo.fulfilled]: (state, { payload }) => {
@@ -237,7 +236,6 @@ export const userSlice = createSlice({
       console.log("userInfo payload1", payload);
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload;
       state.user = [];
       state.records = [];
       return state;
@@ -267,6 +265,20 @@ export const userSlice = createSlice({
       return state;
     },
     [userUpdate.rejected]: (state) => {
+      state.updating = false;
+      state.isError = true;
+      return state;
+    },
+    [userAdd.fulfilled]: (state) => {
+      state.updating = false;
+      state.isSuccess = true;
+      return state;
+    },
+    [userAdd.pending]: (state) => {
+      state.updating = true;
+      return state;
+    },
+    [userAdd.rejected]: (state) => {
       state.updating = false;
       state.isError = true;
       return state;

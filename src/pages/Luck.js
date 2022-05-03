@@ -111,7 +111,10 @@ const Luck = () => {
                       <LockIcon
                         sx={{
                           position: "absolute",
-                          top: "10px",
+                          top: "5px",
+                          right: "5px",
+                          height: "16px",
+                          width: "16px",
                         }}
                       />
                     ) : (
@@ -122,6 +125,9 @@ const Luck = () => {
                         sx={{
                           position: "absolute",
                           top: "8px",
+                          right: "5px",
+                          height: "16px",
+                          width: "16px",
                         }}
                       />
                     ) : (
@@ -181,9 +187,8 @@ const Luck = () => {
               <div className="cir">
                 <CircleIcon
                   sx={{
-                    color: "#FFFFFF",
-                    border: "1px solid #C4C4C4",
-                    // borderRadius: "50%",
+                    color: "#C4C4C4",
+                    borderRadius: "50%",
                     height: "16px",
                     width: "16px",
                   }}
