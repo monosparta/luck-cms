@@ -41,8 +41,20 @@
 	font-style: "normal";
 }
 
-.status {
-	position: absolute;
-	top: 71.5%;
-	right: 15%;
+.luck__section{
+	margin: 0 80px;
+}
+
+.luck__container {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+}
+
+.status-none{
+	opacity: 0
+}
+
+.status{
+	margin-bottom: 5px;
 }
