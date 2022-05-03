@@ -108,16 +108,15 @@ export const userUpdate = createAsyncThunk(
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "https://dd82-211-72-239-241.ngrok.io/api/update",
+        `https://dd82-211-72-239-241.ngrok.io/api/user/16`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             token,
           },
           body: JSON.stringify({
-            id,
             name,
             email,
             phone,

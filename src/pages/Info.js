@@ -36,9 +36,9 @@ const Info = (props) => {
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
+    console.log("###_###")
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
-        console.log("dd", item);
         setLuckIconStatus(item.lockUp);
       }
     });
@@ -48,7 +48,6 @@ const Info = (props) => {
     navigate("/");
   };
   const selectFormMode = () => {
-    console.log('check', user.id, mode, userStatus);
     return (
       user.id === undefined ? (
         userStatus === "AddStatus" ? <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} /> : <Adduser setMode={setMode} setUserStatus={setUserStatus} />

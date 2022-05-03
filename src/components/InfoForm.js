@@ -18,18 +18,18 @@ import "./InfoForm.css";
 
 const InfoForm = (props) => {
   const dispatch = useDispatch();
-  const location = useLocation();
+  // const location = useLocation();
 
   const { user, updating } = useSelector(selectUser);
-  useEffect(() => {
-    dispatch(clearState());
-    dispatch(userInfo(location.state));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(clearState());
+  //   dispatch(userInfo(location.state));
+  // }, []);
 
-  const [inputName, setInputName] = React.useState("");
-  const [inputCard, setInputCard] = React.useState("");
-  const [inputPhone, setInputPhone] = React.useState("");
-  const [inputEmail, setInputEmail] = React.useState("");
+  const [inputName, setInputName] = React.useState(user.name);
+  const [inputCard, setInputCard] = React.useState(user.cardId);
+  const [inputPhone, setInputPhone] = React.useState(user.phone);
+  const [inputEmail, setInputEmail] = React.useState(user.email);
 
   const handleLeave = () => {
     props.setUserStatus("");
@@ -42,7 +42,7 @@ const InfoForm = (props) => {
     phone: inputPhone,
     cardId: inputCard,
   };
-
+  console.log(Infodata)
   // let Adddata = {
   //   lockerNo: user.lockerNo,
   //   name: inputName,

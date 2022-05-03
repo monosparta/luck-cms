@@ -27,6 +27,7 @@ const Luck = () => {
   const handleClickStop = (e) => {
     e.preventDefault();
   };
+  console.log(lockList)
   const { isFetching } = useSelector(selectLuck);
   let array = new Array(42);
   return (
@@ -85,8 +86,8 @@ const Luck = () => {
                         item.error === 1
                           ? "#FF5A5A"
                           : item.userId !== null
-                          ? "#363F4E"
-                          : "#FFFFFF",
+                            ? "#363F4E"
+                            : "#FFFFFF",
                       color:
                         item.error !== 1
                           ? item.userId !== null
@@ -98,11 +99,11 @@ const Luck = () => {
                           ? item.userId !== null
                             ? "none"
                             : item.lockerNo === null
-                            ? "1px dashed"
-                            : "1px solid #000"
+                              ? "1px dashed"
+                              : "1px solid #000"
                           : item.userId !== null
-                          ? "none"
-                          : "#363F4E",
+                            ? "none"
+                            : "#363F4E",
                     }}
                   >
                     {item.lockerNo}
