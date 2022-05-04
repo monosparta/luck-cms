@@ -38,22 +38,11 @@ const Readmode = (props) => {
 
   const { user, isFetching } = useSelector(selectUser);
 
-  // useEffect(() => {
-  //   dispatch(clearState());
-  //   dispatch(userInfo(location.state));
-  // }, []);
 
   const handleEdit = () => {
     props.setUserStatus("EditStatus");
     props.setMode("Editmode");
   };
-
-  useEffect(() => {
-    console.log("DDDDDDDD$$$")
-    dispatch(userInfo(location.state));
-    setInputDescription("");
-  }, [update]);
-
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -83,6 +72,11 @@ const Readmode = (props) => {
       setAlertOpen(false);
     }, 3000);
   };
+
+  if (update) {
+    dispatch(userInfo(location.state));
+    setInputDescription("");
+  }
 
   const handleCheckClose = () => {
     setInputDescription("");

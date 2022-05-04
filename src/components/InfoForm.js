@@ -30,6 +30,13 @@ const InfoForm = (props) => {
   const [inputCard, setInputCard] = React.useState(user.cardId);
   const [inputPhone, setInputPhone] = React.useState(user.phone);
   const [inputEmail, setInputEmail] = React.useState(user.email);
+  const [errorName, setErrorName] = React.useState(false);
+  const [errorCard, setErrorCard] = React.useState(false);
+  const [errorPhone, setErrorPhone] = React.useState(false);
+  const [errorEmail, setErrorEmail] = React.useState(false);
+  const [error, setError] = React.useState(false);
+
+  const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 
   const handleLeave = () => {
     props.setUserStatus("");
@@ -55,13 +62,54 @@ const InfoForm = (props) => {
   const handleSave = () => {
     switch (props.userStatus) {
       case 'AddStatus':
-        dispatch(userAdd(Adddata));
-        dispatch(userInfo(location.state));
-        props.setUserStatus("");
+        if (
+          (inputCard.length >= 20 || inputCard.length < 1)
+        ) {
+          console.log("====%%%====")
+          setError(true);
+          setErrorCard(true)
+        }
+        else if (
+          !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
+          !(inputPhone.startsWith("8869") && inputPhone.length === 12)
+        ) {
+          setError(true);
+          setErrorPhone(true);
+        }
+        else if (inputEmail.search(emailRule) !== -1) {
+          setError(true);
+          setErrorEmail(true)
+
+        } else {
+          dispatch(userAdd(Adddata));
+          dispatch(userInfo(location.state));
+          props.setUserStatus("");
+        }
+
         break;
       case 'EditStatus':
-        dispatch(userUpdate(Infodata));
-        props.setUserStatus("");
+
+        if (
+          (inputCard.length >= 20 || inputCard.length <= 0)
+        ) {
+          setError(true);
+          setErrorCard(true)
+        }
+        else if (
+          !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
+          !(inputPhone.startsWith("8869") && inputPhone.length === 12)
+        ) {
+          setError(true);
+          setErrorPhone(true);
+        }
+        else if (inputEmail.search(emailRule) !== -1) {
+          setError(true);
+          setErrorEmail(true)
+        } else {
+          dispatch(userUpdate(Infodata));
+          props.setUserStatus("");
+        }
+
         break;
       default:
         props.setUserStatus("");
@@ -78,8 +126,10 @@ const InfoForm = (props) => {
           <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
         ) : (
           <TextField
-            defaultValue={user.name}
-            onChange={(e) => setInputName(e.target.value)}
+            size="small"
+            error={errorName}
+            value={inputName}
+            onChange={(e) => setInputName(e.target.value.replace(/[^\u4e00-\u9fa5_a-zA-Z]/g, ""))}
             InputLabelProps={{ style: { color: 'gray' } }}
             sx={{
               width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
@@ -93,11 +143,11 @@ const InfoForm = (props) => {
             inputProps={{
               size: "small",
               style: {
-                height: "8px",
+
               },
             }}
           >
-            {user.name !== undefined ? user.name : "沒有使用者"}
+            {/* {user.name !== undefined ? user.name : "沒有使用者"} */}
           </TextField>
         )}
       </div>
@@ -107,8 +157,10 @@ const InfoForm = (props) => {
           <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
         ) : (
           <TextField
-            defaultValue={user.cardId}
-            onChange={(e) => setInputCard(e.target.value)}
+            size="small"
+            error={errorCard}
+            value={inputCard}
+            onChange={(e) => { setInputCard(e.target.value.replace(/[^\d.]/g, "")) }}
             InputLabelProps={{ style: { color: 'gray' } }}
             sx={{
               width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
@@ -123,11 +175,11 @@ const InfoForm = (props) => {
             autoComplete="current-password"
             inputProps={{
               style: {
-                height: "8px",
+
               },
             }}
           >
-            {user.cardId !== undefined ? user.cardId : "沒有卡號"}
+            {/* {user.cardId !== undefined ? user.cardId : "沒有卡號"} */}
           </TextField>
         )}
       </div>
@@ -137,8 +189,10 @@ const InfoForm = (props) => {
           <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
         ) : (
           <TextField
-            defaultValue={user.phone}
-            onChange={(e) => setInputPhone(e.target.value)}
+            size="small"
+            error={errorPhone}
+            value={inputPhone}
+            onChange={(e) => setInputPhone(e.target.value.replace(/[^\d.]/g, ""))}
             InputLabelProps={{ style: { color: 'gray' } }}
             sx={{
               width: "100%", borderColor: "#000", margin: "6px", "& .MuiInputLabel-root": {}, "& .MuiOutlinedInput-root": {
@@ -151,11 +205,11 @@ const InfoForm = (props) => {
             autoComplete="current-password"
             inputProps={{
               style: {
-                height: "8px",
+
               },
             }}
           >
-            {user.phone !== undefined ? user.phone : "沒有電話"}
+            {/* {user.phone !== undefined ? user.phone : "沒有電話"} */}
           </TextField>
         )}
       </div>
@@ -165,7 +219,9 @@ const InfoForm = (props) => {
           <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
         ) : (
           <TextField
-            defaultValue={user.email}
+            size="small"
+            error={errorEmail}
+            value={inputEmail}
             onChange={(e) => setInputEmail(e.target.value)}
             InputLabelProps={{ style: { color: 'gray' } }}
             sx={{
@@ -179,11 +235,11 @@ const InfoForm = (props) => {
             autoComplete="current-password"
             inputProps={{
               style: {
-                height: "8px",
+
               },
             }}
           >
-            {user.email !== undefined ? user.email : "沒有信箱"}
+            {/* {user.email !== undefined ? user.email : "沒有信箱"} */}
           </TextField>
         )}
       </div>
