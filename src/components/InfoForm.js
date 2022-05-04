@@ -6,7 +6,6 @@ import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { userInfo } from "../redux/userSlice";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
@@ -18,7 +17,7 @@ import "./InfoForm.css";
 const InfoForm = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const { user, updating } = useSelector(selectUser);
   // useEffect(() => {
