@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import "./Info.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import BuildIcon from '@mui/icons-material/Build';
+import CancelIcon from '@mui/icons-material/Cancel';
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import { selectUser, clearState } from "../redux/userSlice";
@@ -92,7 +92,7 @@ const Info = (props) => {
           <div className="base state" style={{ display: "flex" }}>
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
-            ) : error ? (<BuildIconStyle />) : user.id !== undefined ? (
+            ) : error ? (<CancelIconStyle />) : user.id !== undefined ? (
               <CheckCircleIconStyle />
             ) : (
               <AccessTimeFilledIconStyle />
@@ -203,7 +203,7 @@ const AccessTimeFilledIconStyle = () => {
   );
 };
 
-const BuildIconStyle = () => {
+const CancelIconStyle = () => {
   return (
     <div
       style={{
@@ -212,7 +212,7 @@ const BuildIconStyle = () => {
         justifyContent: "center",
       }}
     >
-      <BuildIcon style={{ color: "#FF5A5A", padding: "0px 8px 0px 0px" }} />
+      <CancelIcon style={{ color: "Red", padding: "0px 8px 0px 0px" }} />
       <h2>目前異常中</h2>
     </div>
   );

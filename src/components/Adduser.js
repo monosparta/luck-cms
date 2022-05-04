@@ -28,8 +28,9 @@ const Adduser = (props) => {
                     margin: 5,
                     fontFamily: "Roboto",
                 }}
+                startIcon={<EditIcon />}
             >
-                <EditIcon />新增會員資訊
+                新增會員資訊
             </Button>}
 
         </div>

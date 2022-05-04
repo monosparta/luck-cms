@@ -12,7 +12,6 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { userInfo } from "../redux/userSlice";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -22,8 +21,6 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUnlock } from "../redux/userSlice";
 import EditIcon from "@mui/icons-material/Edit";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
-import { styles } from "@mui/material/styles";
-// import { TextField, styled } from "@mui/material";
 
 import "./Readmode.css";
 
@@ -38,22 +35,11 @@ const Readmode = (props) => {
 
   const { user, isFetching } = useSelector(selectUser);
 
-  // useEffect(() => {
-  //   dispatch(clearState());
-  //   dispatch(userInfo(location.state));
-  // }, []);
 
   const handleEdit = () => {
     props.setUserStatus("EditStatus");
     props.setMode("Editmode");
   };
-
-  useEffect(() => {
-    console.log("DDDDDDDD$$$")
-    dispatch(userInfo(location.state));
-    setInputDescription("");
-  }, [update]);
-
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -84,17 +70,17 @@ const Readmode = (props) => {
     }, 3000);
   };
 
+  if (update) {
+    dispatch(userInfo(location.state));
+    setInputDescription("");
+  }
+
   const handleCheckClose = () => {
     setInputDescription("");
     setCheckOpen(false);
   };
 
-  const theme = (styles) => ({
-    notchedOutline: {
-      borderWidth: "1px",
-      borderColor: "yellow !important"
-    }
-  });
+
 
   // const CssTextField = styled(TextField)({
   //   "& .MuiFormHelperText-root": {
