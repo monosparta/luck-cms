@@ -188,7 +188,6 @@ export const userSlice = createSlice({
     isSuccess: false,
     isError: false,
     updating: false,
-    errorMessage: "",
   },
   reducers: {
     clearState: (state) => {

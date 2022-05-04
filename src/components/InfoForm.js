@@ -35,7 +35,7 @@ const InfoForm = (props) => {
   const [errorEmail, setErrorEmail] = React.useState(false);
   const [error, setError] = React.useState(false);
 
-  const emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+  const emailRule = "^[A-Za-z0-9+_.-]+@(.+)$";
 
   const handleLeave = () => {
     props.setUserStatus("");
@@ -58,65 +58,88 @@ const InfoForm = (props) => {
   };
   console.log(Adddata);
 
+  // const handleSave = () => {
+  //   switch (props.userStatus) {
+  //     case 'AddStatus':
+  // if (inputName === undefined) {
+  //   setError(true);
+  //   setErrorName(true)
+  // }
+  // else if (
+  //   (inputCard.length >= 20)
+  // ) {
+  //   setError(true);
+  //   setErrorCard(true)
+  // }
+  // else if (
+  //   !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
+  //   !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
+  //   inputPhone === undefined
+  // ) {
+  //   setError(true);
+  //   setErrorPhone(true);
+  // }
+  // else if (inputEmail.search(emailRule) === -1) {
+  //   setError(true);
+  //   setErrorEmail(true)
+
+  // } else {
+  //   dispatch(userAdd(Adddata));
+  //   dispatch(userInfo(location.state));
+  //   props.setUserStatus("");
+  // }
+  //   break;
+  // case 'EditStatus':
+  // if (inputName === undefined) {
+  //   setError(true);
+  //   setErrorName(true)
+  // }
+  // else if (
+  //   (inputCard.length >= 20)
+  // ) {
+  //   setError(true);
+  //   setErrorCard(true)
+  // }
+  // else if (
+  //   !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
+  //   !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
+  //   inputPhone === undefined
+  // ) {
+  //   setError(true);
+  //   setErrorPhone(true);
+  // }
+  // else if (inputEmail.search(emailRule) === -1) {
+  //   setError(true);
+  //   setErrorEmail(true)
+  // } else {
+  //   dispatch(userUpdate(Infodata));
+  //   props.setUserStatus("");
+  // }
+  //       break;
+  //     default:
+  //       props.setUserStatus("");
+  //       return true;
+  //   }
+
+  // };
+
   const handleSave = () => {
     switch (props.userStatus) {
       case 'AddStatus':
-        if (
-          (inputCard.length >= 20 || inputCard.length < 1)
-        ) {
-          console.log("====%%%====")
-          setError(true);
-          setErrorCard(true)
-        }
-        else if (
-          !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-          !(inputPhone.startsWith("8869") && inputPhone.length === 12)
-        ) {
-          setError(true);
-          setErrorPhone(true);
-        }
-        else if (inputEmail.search(emailRule) !== -1) {
-          setError(true);
-          setErrorEmail(true)
-
-        } else {
-          dispatch(userAdd(Adddata));
-          dispatch(userInfo(location.state));
-          props.setUserStatus("");
-        }
-
+        dispatch(userAdd(Adddata));
+        dispatch(userInfo(location.state));
+        props.setUserStatus("");
         break;
       case 'EditStatus':
-
-        if (
-          (inputCard.length >= 20 || inputCard.length <= 0)
-        ) {
-          setError(true);
-          setErrorCard(true)
-        }
-        else if (
-          !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-          !(inputPhone.startsWith("8869") && inputPhone.length === 12)
-        ) {
-          setError(true);
-          setErrorPhone(true);
-        }
-        else if (inputEmail.search(emailRule) !== -1) {
-          setError(true);
-          setErrorEmail(true)
-        } else {
-          dispatch(userUpdate(Infodata));
-          props.setUserStatus("");
-        }
-
+        dispatch(userUpdate(Infodata));
+        dispatch(userInfo(location.state));
+        props.setUserStatus("");
         break;
       default:
         props.setUserStatus("");
         return true;
     }
-
-  };
-
+  }
   return (
     <div>
       <div className="base name">
@@ -127,8 +150,10 @@ const InfoForm = (props) => {
           <TextField
             size="small"
             error={errorName}
-            value={inputName}
-            onChange={(e) => setInputName(e.target.value.replace(/[^\u4e00-\u9fa5_a-zA-Z]/g, ""))}
+            // value={inputName}
+            // onChange={(e) => { setInputName(e.target.value.replace(/[^\d.]/g, "")); setErrorName(false) }}
+            defaultValue={user.name}
+            onChange={(e) => setInputName(e.target.value)}
             InputLabelProps={{ style: { color: 'gray' } }}
             sx={{
               width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
@@ -158,8 +183,10 @@ const InfoForm = (props) => {
           <TextField
             size="small"
             error={errorCard}
-            value={inputCard}
-            onChange={(e) => { setInputCard(e.target.value.replace(/[^\d.]/g, "")) }}
+            // value={inputCard}
+            // onChange={(e) => { setInputCard(e.target.value.replace(/\D/g, "")); setErrorCard(false) }}
+            defaultValue={user.cardId}
+            onChange={(e) => setInputCard(e.target.value)}
             InputLabelProps={{ style: { color: 'gray' } }}
             sx={{
               width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
@@ -190,8 +217,10 @@ const InfoForm = (props) => {
           <TextField
             size="small"
             error={errorPhone}
-            value={inputPhone}
-            onChange={(e) => setInputPhone(e.target.value.replace(/[^\d.]/g, ""))}
+            // value={inputPhone}
+            // onChange={(e) => { setInputPhone(e.target.value.replace(/[^\d.]/g, "")); setErrorPhone(false) }}
+            defaultValue={user.phone}
+            onChange={(e) => setInputPhone(e.target.value)}
             InputLabelProps={{ style: { color: 'gray' } }}
             sx={{
               width: "100%", borderColor: "#000", margin: "6px", "& .MuiInputLabel-root": {}, "& .MuiOutlinedInput-root": {
@@ -220,7 +249,9 @@ const InfoForm = (props) => {
           <TextField
             size="small"
             error={errorEmail}
-            value={inputEmail}
+            // value={inputEmail}
+            // onChange={(e) => { setInputEmail(e.target.value.replace(/[^\w=@#]|_/ig, "")); setErrorEmail(false) }}
+            defaultValue={user.email}
             onChange={(e) => setInputEmail(e.target.value)}
             InputLabelProps={{ style: { color: 'gray' } }}
             sx={{
