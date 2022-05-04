@@ -73,6 +73,7 @@ const Readmode = (props) => {
   if (update) {
     dispatch(userInfo(location.state));
     setInputDescription("");
+    setUpdate(false)
   }
 
   const handleCheckClose = () => {

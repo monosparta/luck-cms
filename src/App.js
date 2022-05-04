@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -15,12 +15,20 @@ import "./App.css";
 // 第一次登入無法跳頁
 // 登出後按上一頁還是可以進到後台
 // useEffect tkn ?
-const tkn = localStorage.getItem("token");
+
 const App = () => {
+  const [tkn, setTkn] = React.useState("");
+
+  // useEffect(() => {
+
+  //   setTkn(localStorage.getItem("token"));
+  // }, []);
+  setTkn(localStorage.getItem("token"));
+
   return (
     <Router>
       <Routes>
-        {tkn ? (
+        {tkn !== "" ? (
           <Route path="/" element={<Appbar />}>
             <Route path="/" element={<Luck />} />
             <Route path="/info" element={<Info />} />
@@ -28,7 +36,7 @@ const App = () => {
         ) : (
           <Route path="*" element={<Navigate to="/login" replace />} />
         )}
-        <Route path="/login" index element={<Login />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
