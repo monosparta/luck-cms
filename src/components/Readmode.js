@@ -5,7 +5,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
-import { selectUser, clearState } from "../redux/userSlice";
+import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -22,6 +22,8 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUnlock } from "../redux/userSlice";
 import EditIcon from "@mui/icons-material/Edit";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { styles } from "@mui/material/styles";
+// import { TextField, styled } from "@mui/material";
 
 import "./Readmode.css";
 
@@ -36,10 +38,10 @@ const Readmode = (props) => {
 
   const { user, isFetching } = useSelector(selectUser);
 
-  useEffect(() => {
-    dispatch(clearState());
-    dispatch(userInfo(location.state));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(clearState());
+  //   dispatch(userInfo(location.state));
+  // }, []);
 
   const handleEdit = () => {
     props.setUserStatus("EditStatus");
@@ -47,11 +49,11 @@ const Readmode = (props) => {
   };
 
   useEffect(() => {
+    console.log("DDDDDDDD$$$")
     dispatch(userInfo(location.state));
     setInputDescription("");
   }, [update]);
 
-  console.log(inputDescription);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -86,6 +88,37 @@ const Readmode = (props) => {
     setInputDescription("");
     setCheckOpen(false);
   };
+
+  const theme = (styles) => ({
+    notchedOutline: {
+      borderWidth: "1px",
+      borderColor: "yellow !important"
+    }
+  });
+
+  // const CssTextField = styled(TextField)({
+  //   "& .MuiFormHelperText-root": {
+  //     "&.Mui-focused": {
+  //       //提示文字
+  //       color: "#02A2EE",
+  //     },
+  //   },
+  //   "& label.Mui-focused": {
+  //     //上排文字
+  //     color: "#02A2EE",
+  //   },
+  //   "& .MuiOutlinedInput-root": {
+  //     "& fieldset": {
+  //       borderColor: "black",
+  //     },
+  //     "&:hover fieldset": {
+  //       borderColor: "black",
+  //     },
+  //     "&.Mui-focused fieldset": {
+  //       borderColor: "#363F4E", //FIELD 框
+  //     },
+  //   },
+  // });
 
   return (
     <div>
@@ -189,10 +222,13 @@ const Readmode = (props) => {
                 onChange={(e) => setInputDescription(e.target.value)}
                 id="input-reason"
                 placeholder="請輸入提醒內容"
-                inputProps={{
-                  style: {
-                    width: 328,
-                    height: 156,
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    display: "flex",
+                    alignItems: "flex-start",
+                    "&.Mui-focused fieldset": {
+                      borderColor: "gray", //FIELD 框
+                    },
                   },
                 }}
               />

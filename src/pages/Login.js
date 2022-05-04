@@ -16,6 +16,9 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const { isFetching, isSuccess, isError } = useSelector(selectUser);
   const onSubmit = (data) => {
+    if (data.email === null || data.password === null) {
+      toast.error("帳號或密碼錯誤")
+    }
     dispatch(login(data));
   };
 
@@ -63,6 +66,10 @@ const Login = () => {
       },
     },
   });
+
+  const handleClick = () => {
+
+  }
   return (
     <div className="login">
       <Toaster />
@@ -120,8 +127,10 @@ const Login = () => {
                   ? toast.loading("登入中", { id: "loading" })
                   : toast.remove("loading")}
                 {isError ? toast.error("帳號或密碼錯誤") : null}
+
               </span>
               <Button
+                onClick={handleClick}
                 type="submit"
                 variant="contained"
                 style={{
