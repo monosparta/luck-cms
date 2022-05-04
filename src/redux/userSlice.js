@@ -69,7 +69,6 @@ export const userUnlock = createAsyncThunk(
   "user/unlock",
   async (inputData, thunkAPI) => {
     try {
-
       const token = localStorage.getItem("token");
 
       const response = await fetch(
@@ -163,7 +162,7 @@ export const userAdd = createAsyncThunk(
       );
       let data = await response.json();
       console.log("Add Response", data);
-      if (response.status === 200) {
+      if (data.status === 200) {
         console.log(data);
         return data;
       } else {
@@ -175,7 +174,6 @@ export const userAdd = createAsyncThunk(
     }
   }
 );
-
 
 export const userSlice = createSlice({
   name: "user",
@@ -284,8 +282,6 @@ export const userSlice = createSlice({
     },
   },
 });
-
-
 
 export const { clearState } = userSlice.actions;
 

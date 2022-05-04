@@ -35,7 +35,6 @@ const Readmode = (props) => {
 
   const { user, isFetching } = useSelector(selectUser);
 
-
   const handleEdit = () => {
     props.setUserStatus("EditStatus");
     props.setMode("Editmode");
@@ -73,15 +72,13 @@ const Readmode = (props) => {
   if (update) {
     dispatch(userInfo(location.state));
     setInputDescription("");
-    setUpdate(false)
+    setUpdate(false);
   }
 
   const handleCheckClose = () => {
     setInputDescription("");
     setCheckOpen(false);
   };
-
-
 
   // const CssTextField = styled(TextField)({
   //   "& .MuiFormHelperText-root": {

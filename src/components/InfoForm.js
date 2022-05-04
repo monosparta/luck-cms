@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
@@ -36,6 +36,8 @@ const InfoForm = (props) => {
   const [error, setError] = React.useState(false);
 
   const emailRule = "^[A-Za-z0-9+_.-]+@(.+)$";
+
+  const { isSuccess } = useSelector(selectUser);
 
   const handleLeave = () => {
     props.setUserStatus("");
@@ -125,12 +127,12 @@ const InfoForm = (props) => {
 
   const handleSave = () => {
     switch (props.userStatus) {
-      case 'AddStatus':
+      case "AddStatus":
         dispatch(userAdd(Adddata));
         dispatch(userInfo(location.state));
         props.setUserStatus("");
         break;
-      case 'EditStatus':
+      case "EditStatus":
         dispatch(userUpdate(Infodata));
         dispatch(userInfo(location.state));
         props.setUserStatus("");
@@ -139,7 +141,7 @@ const InfoForm = (props) => {
         props.setUserStatus("");
         return true;
     }
-  }
+  };
   return (
     <div>
       <div className="base name">
@@ -154,9 +156,12 @@ const InfoForm = (props) => {
             // onChange={(e) => { setInputName(e.target.value.replace(/[^\d.]/g, "")); setErrorName(false) }}
             defaultValue={user.name}
             onChange={(e) => setInputName(e.target.value)}
-            InputLabelProps={{ style: { color: 'gray' } }}
+            InputLabelProps={{ style: { color: "gray" } }}
             sx={{
-              width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
+              width: "100%",
+              borderColor: "#000",
+              margin: "6px",
+              "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
                   borderColor: "gray", //FIELD 框
                 },
@@ -166,9 +171,7 @@ const InfoForm = (props) => {
             autoComplete="current-password"
             inputProps={{
               size: "small",
-              style: {
-
-              },
+              style: {},
             }}
           >
             {/* {user.name !== undefined ? user.name : "沒有使用者"} */}
@@ -187,9 +190,12 @@ const InfoForm = (props) => {
             // onChange={(e) => { setInputCard(e.target.value.replace(/\D/g, "")); setErrorCard(false) }}
             defaultValue={user.cardId}
             onChange={(e) => setInputCard(e.target.value)}
-            InputLabelProps={{ style: { color: 'gray' } }}
+            InputLabelProps={{ style: { color: "gray" } }}
             sx={{
-              width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
+              width: "100%",
+              borderColor: "#000",
+              margin: "6px",
+              "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
                   borderColor: "gray",
 
@@ -200,9 +206,7 @@ const InfoForm = (props) => {
             label="卡號"
             autoComplete="current-password"
             inputProps={{
-              style: {
-
-              },
+              style: {},
             }}
           >
             {/* {user.cardId !== undefined ? user.cardId : "沒有卡號"} */}
@@ -221,9 +225,13 @@ const InfoForm = (props) => {
             // onChange={(e) => { setInputPhone(e.target.value.replace(/[^\d.]/g, "")); setErrorPhone(false) }}
             defaultValue={user.phone}
             onChange={(e) => setInputPhone(e.target.value)}
-            InputLabelProps={{ style: { color: 'gray' } }}
+            InputLabelProps={{ style: { color: "gray" } }}
             sx={{
-              width: "100%", borderColor: "#000", margin: "6px", "& .MuiInputLabel-root": {}, "& .MuiOutlinedInput-root": {
+              width: "100%",
+              borderColor: "#000",
+              margin: "6px",
+              "& .MuiInputLabel-root": {},
+              "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
                   borderColor: "gray", //FIELD 框
                 },
@@ -232,9 +240,7 @@ const InfoForm = (props) => {
             label="電話"
             autoComplete="current-password"
             inputProps={{
-              style: {
-
-              },
+              style: {},
             }}
           >
             {/* {user.phone !== undefined ? user.phone : "沒有電話"} */}
@@ -253,9 +259,12 @@ const InfoForm = (props) => {
             // onChange={(e) => { setInputEmail(e.target.value.replace(/[^\w=@#]|_/ig, "")); setErrorEmail(false) }}
             defaultValue={user.email}
             onChange={(e) => setInputEmail(e.target.value)}
-            InputLabelProps={{ style: { color: 'gray' } }}
+            InputLabelProps={{ style: { color: "gray" } }}
             sx={{
-              width: "100%", borderColor: "#000", margin: "6px", "& .MuiOutlinedInput-root": {
+              width: "100%",
+              borderColor: "#000",
+              margin: "6px",
+              "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
                   borderColor: "gray", //FIELD 框
                 },
@@ -264,9 +273,7 @@ const InfoForm = (props) => {
             label="電子信箱"
             autoComplete="current-password"
             inputProps={{
-              style: {
-
-              },
+              style: {},
             }}
           >
             {/* {user.email !== undefined ? user.email : "沒有信箱"} */}
@@ -304,7 +311,7 @@ const InfoForm = (props) => {
           取消
         </Button>
       </div>
-    </div >
+    </div>
   );
 };
 

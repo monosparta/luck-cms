@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import "./Info.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import CancelIcon from '@mui/icons-material/Cancel';
+import CancelIcon from "@mui/icons-material/Cancel";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import { selectUser, clearState } from "../redux/userSlice";
@@ -56,18 +56,21 @@ const Info = (props) => {
     navigate("/");
   };
   const selectFormMode = () => {
-    return (
-      user.id === undefined ? (
-        userStatus === "AddStatus" ? <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} /> : <Adduser setMode={setMode} setUserStatus={setUserStatus} />
-        // <Adduser setMode={setMode} setUserStatus={setUserStatus} />
-
+    return user.id === undefined ? (
+      userStatus === "AddStatus" ? (
+        <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
       ) : (
-        userStatus === "EditStatus" ? <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} /> : <Readmode setMode={setMode} setUserStatus={setUserStatus} />
-        // <Readmode setMode={setMode} setUserStatus={setUserStatus} />
+        <Adduser setMode={setMode} setUserStatus={setUserStatus} />
       )
-    )
+    ) : // <Adduser setMode={setMode} setUserStatus={setUserStatus} />
 
-  }
+    userStatus === "EditStatus" ? (
+      <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
+    ) : (
+      <Readmode setMode={setMode} setUserStatus={setUserStatus} />
+    );
+    // <Readmode setMode={setMode} setUserStatus={setUserStatus} />
+  };
 
   return (
     <div id="Info">
@@ -92,16 +95,15 @@ const Info = (props) => {
           <div className="base state" style={{ display: "flex" }}>
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
-            ) : error ? (<CancelIconStyle />) : user.id !== undefined ? (
+            ) : error ? (
+              <CancelIconStyle />
+            ) : user.id !== undefined ? (
               <CheckCircleIconStyle />
             ) : (
               <AccessTimeFilledIconStyle />
             )}
           </div>
-          <div className="basemode">
-            {selectFormMode()}
-
-          </div>
+          <div className="basemode">{selectFormMode()}</div>
 
           {/* <div>
             <TextField
