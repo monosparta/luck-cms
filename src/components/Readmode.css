@@ -67,7 +67,6 @@
 }
 .base p {
 	font-weight: 400;
-	margin: 0 0 15px 15px;
 }
 /* .control-btn {
 	width: 100%;
@@ -80,11 +79,11 @@
 	font-size: 24px;
 }
 .record.title {
-	padding: 30px 58px 0 58px;
+	padding: 30px 58px 20px 58px;
 }
 .record.panel {
 	padding: 18px 58px 0 58px;
-	max-height: 100%;
+	max-height: 80%;
 	overflow-y: scroll;
 }
 ::-webkit-scrollbar {
