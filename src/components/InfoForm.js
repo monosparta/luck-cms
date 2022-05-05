@@ -34,8 +34,10 @@ const InfoForm = (props) => {
   const [errorPhone, setErrorPhone] = React.useState(false);
   const [errorEmail, setErrorEmail] = React.useState(false);
   const [error, setError] = React.useState(false);
-  const [errorColor, setErrorColor] = React.useState("gray");
-
+  const [errorNameColor, setErrorNameColor] = React.useState("gray");
+  const [errorCardColor, setErrorCardColor] = React.useState("gray");
+  const [errorPhoneColor, setErrorPhoneColor] = React.useState("gray");
+  const [errorEmailColor, setErrorEmailColor] = React.useState("gray");
   const emailRule = "^[A-Za-z0-9+_.-]+@(.+)$";
 
   const { isSuccess } = useSelector(selectUser);
@@ -64,30 +66,35 @@ const InfoForm = (props) => {
   const handleSave = () => {
     switch (props.userStatus) {
       case 'AddStatus':
-        if (inputName === undefined) {
+        if (inputName === '') {
+          console.log(inputName)
           setError(true);
           setErrorName(true)
-          setErrorColor("red")
+          setErrorNameColor("red")
         }
-        else if (
-          (inputCard.length >= 20)
+        if (
+          (inputCard.length >= 20 || inputCard === undefined)
         ) {
           setError(true);
           setErrorCard(true)
+          setErrorCardColor("red")
         }
-        else if (
-          !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-          !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
-          inputPhone === undefined
+        if (
+          (
+            !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
+            !(inputPhone.startsWith("8869") && inputPhone.length === 12)
+          ) || inputPhone === undefined
         ) {
           setError(true);
           setErrorPhone(true);
+          setErrorPhoneColor("red")
         }
-        else if (inputEmail.search(emailRule) === -1) {
+        if (inputEmail.search(emailRule) === -1) {
           setError(true);
           setErrorEmail(true)
-
-        } else {
+          setErrorEmailColor("red")
+        }
+        if (setError === false) {
           dispatch(userAdd(Adddata));
           dispatch(userInfo(location.state));
           props.setUserStatus("");
@@ -97,24 +104,30 @@ const InfoForm = (props) => {
         if (inputName === undefined) {
           setError(true);
           setErrorName(true)
+          setErrorNameColor("red")
         }
         else if (
           (inputCard.length >= 20)
         ) {
           setError(true);
           setErrorCard(true)
+          setErrorCardColor("red")
         }
         else if (
-          !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-          !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
+          (
+            !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
+            !(inputPhone.startsWith("8869") && inputPhone.length === 12)
+          ) ||
           inputPhone === undefined
         ) {
           setError(true);
           setErrorPhone(true);
+          setErrorPhoneColor("red")
         }
         else if (inputEmail.search(emailRule) === -1) {
           setError(true);
           setErrorEmail(true)
+          setErrorEmailColor("red")
         } else {
           dispatch(userUpdate(Infodata));
           props.setUserStatus("");
@@ -155,10 +168,10 @@ const InfoForm = (props) => {
             size="small"
             error={errorName}
             value={inputName}
-            onChange={(e) => { setInputName(e.target.value.replace(/["'<>%;)(&+]/g, "")); setErrorName(false); setErrorColor("gray") }}
+            onChange={(e) => { setInputName(e.target.value.replace(/[\d"'˙<>;().!#$%&*+\-/=?^_`{|}~@]/g, "")); setErrorName(false); setErrorNameColor("gray") }}
             // defaultValue={user.name}
             // onChange={(e) => setInputName(e.target.value)}
-            InputLabelProps={{ style: { color: "gray" } }}
+            InputLabelProps={{ style: { color: errorNameColor } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -167,14 +180,17 @@ const InfoForm = (props) => {
                 "&.Mui-focused fieldset": {
                   borderColor: "gray", //FIELD 框
                 },
+                "&.MuiOutlinedInput-notchedOutline": {
+                  borderColor: "red", //FIELD 框
+                },
               },
             }}
             label="姓名"
             autoComplete="current-password"
             inputProps={{
               size: "small",
-              style: {},
             }}
+
           >
             {/* {user.name !== undefined ? user.name : "沒有使用者"} */}
           </TextField>
@@ -189,10 +205,10 @@ const InfoForm = (props) => {
             size="small"
             error={errorCard}
             value={inputCard}
-            onChange={(e) => { setInputCard(e.target.value.replace(/\D/g, "")); setErrorCard(false) }}
+            onChange={(e) => { setInputCard(e.target.value.replace(/\D/g, "")); setErrorCard(false); setErrorCardColor("gray") }}
             // defaultValue={user.cardId}
             // onChange={(e) => setInputCard(e.target.value)}
-            InputLabelProps={{ style: { color: "gray" } }}
+            InputLabelProps={{ style: { color: errorCardColor } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -224,10 +240,10 @@ const InfoForm = (props) => {
             size="small"
             error={errorPhone}
             value={inputPhone}
-            onChange={(e) => { setInputPhone(e.target.value.replace(/[^\d.]/g, "")); setErrorPhone(false) }}
+            onChange={(e) => { setInputPhone(e.target.value.replace(/\D/g, "")); setErrorPhone(false); setErrorPhoneColor("gray") }}
             // defaultValue={user.phone}
             // onChange={(e) => setInputPhone(e.target.value)}
-            InputLabelProps={{ style: { color: "gray" } }}
+            InputLabelProps={{ style: { color: errorPhoneColor } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -258,10 +274,10 @@ const InfoForm = (props) => {
             size="small"
             error={errorEmail}
             value={inputEmail}
-            onChange={(e) => { setInputEmail(e.target.value.replace(/[\u4e00-\u9fa5]/ig, "")); setErrorEmail(false) }}
+            onChange={(e) => { setInputEmail(e.target.value.replace(/[^\w.!#$%&'*+\-/=?^_`{|}~@]/ig, "")); setErrorEmail(false); setErrorEmailColor("gray") }}
             // defaultValue={user.email}
             // onChange={(e) => setInputEmail(e.target.value)}
-            InputLabelProps={{ style: { color: "gray" } }}
+            InputLabelProps={{ style: { color: errorEmailColor } }}
             sx={{
               width: "100%",
               borderColor: "#000",
