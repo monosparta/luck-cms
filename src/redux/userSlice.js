@@ -5,7 +5,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await fetch(
-        "https://dd82-211-72-239-241.ngrok.io/api/login",
+        "https://37f7-220-132-230-75.ngrok.io/api/login",
         {
           method: "POST",
           headers: {
@@ -40,7 +40,7 @@ export const userInfo = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://dd82-211-72-239-241.ngrok.io/api/record/${lockerNo}`,
+        `https://37f7-220-132-230-75.ngrok.io/api/record/${lockerNo}`,
         {
           method: "GET",
           headers: {
@@ -69,11 +69,10 @@ export const userUnlock = createAsyncThunk(
   "user/unlock",
   async (inputData, thunkAPI) => {
     try {
-      console.log("############", inputData);
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "https://dd82-211-72-239-241.ngrok.io/api/unlock",
+        "https://37f7-220-132-230-75.ngrok.io/api/unlock",
         {
           method: "POST",
           headers: {
@@ -100,7 +99,7 @@ export const userUnlock = createAsyncThunk(
   }
 );
 
-export const userupdate = createAsyncThunk(
+export const userUpdate = createAsyncThunk(
   "user/update",
   async ({ id, name, email, phone, cardId }, thunkAPI) => {
     try {
@@ -108,21 +107,15 @@ export const userupdate = createAsyncThunk(
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "https://dd82-211-72-239-241.ngrok.io/api/update",
+        `https://37f7-220-132-230-75.ngrok.io/api/user/${id}`,
         {
-          method: "POST",
+          method: "PATCH",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
             token,
           },
           body: JSON.stringify({
-            // id: 16,
-            // name: "Dr. Oh My GGGG",
-            // email: "GG4mida@example.com",
-            // phone: "0965958958",
-            // cardId: "0164100758147681"
-            id,
             name,
             email,
             phone,
@@ -144,24 +137,67 @@ export const userupdate = createAsyncThunk(
   }
 );
 
+export const userAdd = createAsyncThunk(
+  "user/Add",
+  async ({ lockerNo, name, email, phone, cardId }, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "https://37f7-220-132-230-75.ngrok.io/api/user",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+          body: JSON.stringify({
+            lockerNo,
+            name,
+            email,
+            phone,
+            cardId,
+          }),
+        }
+      );
+      let data = await response.json();
+      console.log("Add Response", data);
+      if (data.status === 200) {
+        console.log(data);
+        return data;
+      } else {
+        throw data.message;
+      }
+    } catch (e) {
+      console.log(thunkAPI.rejectWithValue(e));
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {
     email: "",
     password: "",
+    token: "",
     user: [],
     records: [],
     isFetching: false,
     isSuccess: false,
     isError: false,
     updating: false,
-    errorMessage: "",
   },
   reducers: {
     clearState: (state) => {
       state.isError = false;
       state.isSuccess = false;
       state.isFetching = false;
+
+      return state;
+    },
+    clearToken: (state) => {
+      state.token = "";
 
       return state;
     },
@@ -173,6 +209,7 @@ export const userSlice = createSlice({
       state.isSuccess = true;
       state.email = payload.email;
       state.password = payload.password;
+      state.token = payload.message.token;
       return state;
     },
     [login.pending]: (state) => {
@@ -184,7 +221,6 @@ export const userSlice = createSlice({
       console.log("payload1", payload);
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
       return state;
     },
     [userInfo.fulfilled]: (state, { payload }) => {
@@ -204,7 +240,6 @@ export const userSlice = createSlice({
       console.log("userInfo payload1", payload);
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload;
       state.user = [];
       state.records = [];
       return state;
@@ -224,16 +259,30 @@ export const userSlice = createSlice({
       state.isError = true;
       return state;
     },
-    [userupdate.fulfilled]: (state) => {
+    [userUpdate.fulfilled]: (state) => {
       state.updating = false;
       state.isSuccess = true;
       return state;
     },
-    [userupdate.pending]: (state) => {
+    [userUpdate.pending]: (state) => {
       state.updating = true;
       return state;
     },
-    [userupdate.rejected]: (state) => {
+    [userUpdate.rejected]: (state) => {
+      state.updating = false;
+      state.isError = true;
+      return state;
+    },
+    [userAdd.fulfilled]: (state) => {
+      state.updating = false;
+      state.isSuccess = true;
+      return state;
+    },
+    [userAdd.pending]: (state) => {
+      state.updating = true;
+      return state;
+    },
+    [userAdd.rejected]: (state) => {
       state.updating = false;
       state.isError = true;
       return state;
@@ -241,7 +290,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { clearState } = userSlice.actions;
+export const { clearState, clearToken } = userSlice.actions;
 
 export const selectUser = (state) => state.user;
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,25 +10,24 @@ import Info from "./pages/Info";
 import Luck from "./pages/Luck";
 import Appbar from "./components/Appbar";
 import "./App.css";
+import { useSelector } from "react-redux";
+import { selectUser } from "./redux/userSlice";
 
-// 若用戶已登入，則網址輸入login頁網址應直接導至後台系統頁首頁
-// 第一次登入無法跳頁
-// 登出後按上一頁還是可以進到後台
-// useEffect tkn ?
-const tkn = localStorage.getItem("token");
 const App = () => {
+  const { token } = useSelector(selectUser);
+  const ver = localStorage.getItem("token");
   return (
     <Router>
       <Routes>
-        {tkn ? (
+        {token === "" && ver == null ? (
+          <Route path="*" element={<Navigate to="/login" replace />} />
+        ) : (
           <Route path="/" element={<Appbar />}>
             <Route path="/" element={<Luck />} />
             <Route path="/info" element={<Info />} />
           </Route>
-        ) : (
-          <Route path="*" element={<Navigate to="/login" replace />} />
         )}
-        <Route path="/login" index element={<Login />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );

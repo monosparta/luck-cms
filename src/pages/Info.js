@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import "./Info.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import CancelIcon from "@mui/icons-material/Cancel";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import { selectUser, clearState } from "../redux/userSlice";
@@ -16,7 +17,7 @@ import Skeleton from "@mui/material/Skeleton";
 import Record from "../components/Record";
 import _ from "lodash";
 import Readmode from "../components/Readmode";
-import Editmode from "../components/Editmode";
+import InfoForm from "../components/InfoForm";
 import Adduser from "../components/Adduser";
 
 const Info = (props) => {
@@ -26,24 +27,49 @@ const Info = (props) => {
   const dispatch = useDispatch();
   const [mode, setMode] = React.useState("Readmode");
   const [luckIconStatus, setLuckIconStatus] = React.useState(null);
+  const [userStatus, setUserStatus] = React.useState(null);
+  const [error, setError] = React.useState(false);
 
-  const { user, records, isFetching } = useSelector(selectUser);
+  const { user, records, isFetching, updating } = useSelector(selectUser);
 
   const lockList = useSelector((state) => state.Luck.Lock);
-  // console.log('li', lockList);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
+    // _.map(lockList, (item, index) => {
+    //   if (item.lockerNo === location.state && item.userId !== null) {
+    //     dispatch(userInfo(location.state));
+    //   }
+    // });
+
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
-        console.log("dd", item);
         setLuckIconStatus(item.lockUp);
+        if (item.error === 1) {
+          setError(true);
+        }
       }
     });
   }, []);
 
   const handleClick = () => {
     navigate("/");
+  };
+  const selectFormMode = () => {
+    return user.id === undefined ? (
+      userStatus === "AddStatus" ? (
+        <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
+      ) : (
+        <Adduser setMode={setMode} setUserStatus={setUserStatus} />
+      )
+    ) : // <Adduser setMode={setMode} setUserStatus={setUserStatus} />
+
+    userStatus === "EditStatus" ? (
+      <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
+    ) : (
+      <Readmode setMode={setMode} setUserStatus={setUserStatus} />
+    );
+    // <Readmode setMode={setMode} setUserStatus={setUserStatus} />
   };
 
   return (
@@ -69,21 +95,15 @@ const Info = (props) => {
           <div className="base state" style={{ display: "flex" }}>
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
+            ) : error ? (
+              <CancelIconStyle />
             ) : user.id !== undefined ? (
               <CheckCircleIconStyle />
             ) : (
               <AccessTimeFilledIconStyle />
             )}
           </div>
-          <div className="basemode">
-            {user.id === undefined && mode !== "Editmode" ? (
-              <Adduser setMode={setMode} />
-            ) : mode === "Readmode" && user.id !== undefined ? (
-              <Readmode setMode={setMode} />
-            ) : (
-              <Editmode setMode={setMode} />
-            )}
-          </div>
+          <div className="basemode">{selectFormMode()}</div>
 
           {/* <div>
             <TextField
@@ -164,7 +184,7 @@ const CheckCircleIconStyle = () => {
       }}
     >
       <CheckCircleIcon style={{ color: "green", padding: "0px 8px 0px 0px" }} />
-      <h2>狀態：目前為使用中</h2>
+      <h2>目前為使用中</h2>
     </div>
   );
 };
@@ -180,7 +200,22 @@ const AccessTimeFilledIconStyle = () => {
       <AccessTimeFilledIcon
         style={{ color: "grey", padding: "0px 8px 0px 0px" }}
       />
-      <h2>狀態：目前為閒置中</h2>
+      <h2>目前為閒置中</h2>
+    </div>
+  );
+};
+
+const CancelIconStyle = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <CancelIcon style={{ color: "Red", padding: "0px 8px 0px 0px" }} />
+      <h2>目前異常中</h2>
     </div>
   );
 };

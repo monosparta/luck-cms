@@ -5,17 +5,26 @@ import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { login, clearState, selectUser } from "../redux/userSlice";
 
-
 import "./Login.css";
 
-import { TextField, Checkbox, Typography, FormControlLabel, Button, styled } from "@mui/material";
+import {
+  TextField,
+  Checkbox,
+  Typography,
+  FormControlLabel,
+  Button,
+  styled,
+} from "@mui/material";
 
-const Login = () => {
+const Login = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { isFetching, isSuccess, isError } = useSelector(selectUser);
+  const { isFetching, isSuccess, isError, token } = useSelector(selectUser);
   const onSubmit = (data) => {
+    if (data.email === null || data.password === null) {
+      toast.error("帳號或密碼錯誤");
+    }
     dispatch(login(data));
   };
 
@@ -63,6 +72,7 @@ const Login = () => {
       },
     },
   });
+
   return (
     <div className="login">
       <Toaster />

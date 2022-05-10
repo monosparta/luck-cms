@@ -28,7 +28,7 @@
 }
 .section-base {
 	width: 30%;
-	height: 85%;
+	height: 95%;
 	background-color: #fff;
 	padding: 5px;
 	display: flex;
@@ -37,7 +37,7 @@
 }
 .section-record {
 	width: 60%;
-	height: 85%;
+	height: 95%;
 	background-color: #fff;
 	box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
 		-4px 4px 8px rgba(54, 63, 78, 0.1);
@@ -46,13 +46,13 @@
 	flex-direction: column;
 }
 .base {
-	width: 100%;
+	width: 80%;
 	display: flex;
 	align-items: center;
 }
 .base.lock {
 	height: 30px;
-	margin: 35px 0 5px 50px;
+	margin: 35px 0 5px -10px;
 }
 .base h1 {
 	font-weight: 700;
@@ -63,11 +63,10 @@
 	margin: 0 0 0 15px;
 }
 .base.state {
-	margin: 5px 0 55px 50px;
+	margin: 0 0 55px 20px;
 }
 .base p {
 	font-weight: 400;
-	margin: 15px 0 15px 25px;
 }
 /* .control-btn {
 	width: 100%;
@@ -80,11 +79,11 @@
 	font-size: 24px;
 }
 .record.title {
-	padding: 30px 58px 0 58px;
+	padding: 30px 58px 20px 58px;
 }
 .record.panel {
 	padding: 18px 58px 0 58px;
-	max-height: 100%;
+	max-height: 80%;
 	overflow-y: scroll;
 }
 ::-webkit-scrollbar {

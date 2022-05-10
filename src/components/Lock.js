@@ -7,17 +7,17 @@ export default function Item(props) {
   return (
     <Box
       sx={{
-        width: 100,
-        height: 100,
+        width: 80,
+        height: 80,
         background: "#FFF",
         color: "#000",
         fontWeight: "bold",
         borderRadius: "12%",
         border: "1px solid #000",
-        fontSize: "25px",
+        fontSize: "21px",
         textAlign: "center",
-        lineHeight: "100px",
-        margin: "10px 5px 10px 5px",
+        lineHeight: "80px",
+        margin: "5px 5px 5px 5px",
         fontFamily: "Mulish",
         ...sx,
       }}

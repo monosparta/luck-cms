@@ -7,25 +7,23 @@ import Toolbar from "@mui/material/Toolbar";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { clearToken } from "../redux/userSlice";
 import "./Appbar.css";
 
 const Appbar = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = (e) => {
-    e.preventDefault();
     localStorage.removeItem("token");
-
+    dispatch(clearToken());
     navigate("/login");
   };
 
   return (
     <div className="Appbar">
-      <AppBar
-        position="static"
-        elevation={0}
-        style={{ background: "#363F4E", padding: "8px 0px" }}
-      >
+      <AppBar position="static" elevation={0} style={{ background: "#363F4E" }}>
         <Toolbar>
           <img src="./mono.png" alt="" className="logo" />
           <p className="title">會員置物櫃管理系統</p>
@@ -34,7 +32,7 @@ const Appbar = () => {
             <div className="Bar-user">
               <Avatar
                 className="avatar"
-                src="./user.png"
+                src="./ROSA.png"
                 sx={{ width: 36, height: 36 }}
               ></Avatar>
               <p className="username"> Rosa </p>
