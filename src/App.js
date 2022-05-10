@@ -10,18 +10,16 @@ import Info from "./pages/Info";
 import Luck from "./pages/Luck";
 import Appbar from "./components/Appbar";
 import "./App.css";
-
-// 若用戶已登入，則網址輸入login頁網址應直接導至後台系統頁首頁
-// 第一次登入無法跳頁
-// 登出後按上一頁還是可以進到後台
-// useEffect tkn ?
+import { useSelector } from "react-redux";
+import { selectUser } from "./redux/userSlice";
 
 const App = () => {
-  const tkn = localStorage.getItem("token");
+  const { token } = useSelector(selectUser);
+  const ver = localStorage.getItem("token");
   return (
     <Router>
       <Routes>
-        {tkn === null ? (
+        {token === "" && ver == null ? (
           <Route path="*" element={<Navigate to="/login" replace />} />
         ) : (
           <Route path="/" element={<Appbar />}>
