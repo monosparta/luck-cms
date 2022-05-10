@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
@@ -67,34 +67,34 @@ const InfoForm = (props) => {
     switch (props.userStatus) {
       case 'AddStatus':
         if (inputName === '') {
-          console.log(inputName)
-          setError(true);
+          // setError(true);
           setErrorName(true)
-          setErrorNameColor("red")
-        }
+          setErrorNameColor("#d32f2f")
+        } else setError(false);
         if (
           (inputCard.length >= 20 || inputCard === undefined)
         ) {
-          setError(true);
+          // setError(true);
           setErrorCard(true)
-          setErrorCardColor("red")
-        }
+          setErrorCardColor("#d32f2f")
+        } else setError(false);
         if (
           (
             !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
             !(inputPhone.startsWith("8869") && inputPhone.length === 12)
           ) || inputPhone === undefined
         ) {
-          setError(true);
+          // setError(true);
           setErrorPhone(true);
-          setErrorPhoneColor("red")
-        }
+          setErrorPhoneColor("#d32f2f")
+        } else setError(false);
         if (inputEmail.search(emailRule) === -1) {
-          setError(true);
+          // setError(true);
           setErrorEmail(true)
-          setErrorEmailColor("red")
-        }
-        if (setError === false) {
+          setErrorEmailColor("#d32f2f")
+        } else setError(false);
+        console.log(errorName, errorCard, errorPhone, errorEmail)
+        if (error === false) {
           dispatch(userAdd(Adddata));
           dispatch(userInfo(location.state));
           props.setUserStatus("");
@@ -102,16 +102,16 @@ const InfoForm = (props) => {
         break;
       case 'EditStatus':
         if (inputName === undefined) {
-          setError(true);
+          // setError(true);
           setErrorName(true)
-          setErrorNameColor("red")
+          setErrorNameColor("#d32f2f")
         }
         else if (
           (inputCard.length >= 20)
         ) {
-          setError(true);
+          // setError(true);
           setErrorCard(true)
-          setErrorCardColor("red")
+          setErrorCardColor("#d32f2f")
         }
         else if (
           (
@@ -120,14 +120,14 @@ const InfoForm = (props) => {
           ) ||
           inputPhone === undefined
         ) {
-          setError(true);
+          // setError(true);
           setErrorPhone(true);
-          setErrorPhoneColor("red")
+          setErrorPhoneColor("#d32f2f")
         }
         else if (inputEmail.search(emailRule) === -1) {
-          setError(true);
+          // setError(true);
           setErrorEmail(true)
-          setErrorEmailColor("red")
+          setErrorEmailColor("#d32f2f")
         } else {
           dispatch(userUpdate(Infodata));
           props.setUserStatus("");
