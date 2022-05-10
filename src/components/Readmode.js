@@ -80,30 +80,6 @@ const Readmode = (props) => {
     setCheckOpen(false);
   };
 
-  // const CssTextField = styled(TextField)({
-  //   "& .MuiFormHelperText-root": {
-  //     "&.Mui-focused": {
-  //       //提示文字
-  //       color: "#02A2EE",
-  //     },
-  //   },
-  //   "& label.Mui-focused": {
-  //     //上排文字
-  //     color: "#02A2EE",
-  //   },
-  //   "& .MuiOutlinedInput-root": {
-  //     "& fieldset": {
-  //       borderColor: "black",
-  //     },
-  //     "&:hover fieldset": {
-  //       borderColor: "black",
-  //     },
-  //     "&.Mui-focused fieldset": {
-  //       borderColor: "#363F4E", //FIELD 框
-  //     },
-  //   },
-  // });
-
   return (
     <div>
       <div className="base name">

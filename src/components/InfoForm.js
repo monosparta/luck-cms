@@ -67,14 +67,14 @@ const InfoForm = (props) => {
     switch (props.userStatus) {
       case 'AddStatus':
         if (inputName === '') {
-          // setError(true);
+          setError(true);
           setErrorName(true)
           setErrorNameColor("#d32f2f")
         } else setError(false);
         if (
           (inputCard.length >= 20 || inputCard === undefined)
         ) {
-          // setError(true);
+          setError(true);
           setErrorCard(true)
           setErrorCardColor("#d32f2f")
         } else setError(false);
@@ -84,16 +84,16 @@ const InfoForm = (props) => {
             !(inputPhone.startsWith("8869") && inputPhone.length === 12)
           ) || inputPhone === undefined
         ) {
-          // setError(true);
+          setError(true);
           setErrorPhone(true);
           setErrorPhoneColor("#d32f2f")
         } else setError(false);
         if (inputEmail.search(emailRule) === -1) {
-          // setError(true);
+          setError(true);
           setErrorEmail(true)
           setErrorEmailColor("#d32f2f")
         } else setError(false);
-        console.log(errorName, errorCard, errorPhone, errorEmail)
+
         if (error === false) {
           dispatch(userAdd(Adddata));
           dispatch(userInfo(location.state));
@@ -102,14 +102,14 @@ const InfoForm = (props) => {
         break;
       case 'EditStatus':
         if (inputName === undefined) {
-          // setError(true);
+          setError(true);
           setErrorName(true)
           setErrorNameColor("#d32f2f")
         }
         else if (
           (inputCard.length >= 20)
         ) {
-          // setError(true);
+          setError(true);
           setErrorCard(true)
           setErrorCardColor("#d32f2f")
         }
@@ -120,12 +120,12 @@ const InfoForm = (props) => {
           ) ||
           inputPhone === undefined
         ) {
-          // setError(true);
+          setError(true);
           setErrorPhone(true);
           setErrorPhoneColor("#d32f2f")
         }
         else if (inputEmail.search(emailRule) === -1) {
-          // setError(true);
+          setError(true);
           setErrorEmail(true)
           setErrorEmailColor("#d32f2f")
         } else {
