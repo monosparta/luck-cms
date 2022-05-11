@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
@@ -34,11 +34,15 @@ const InfoForm = (props) => {
   const [errorPhone, setErrorPhone] = React.useState(false);
   const [errorEmail, setErrorEmail] = React.useState(false);
   const [error, setError] = React.useState(false);
-  const [errorNameColor, setErrorNameColor] = React.useState("gray");
-  const [errorCardColor, setErrorCardColor] = React.useState("gray");
-  const [errorPhoneColor, setErrorPhoneColor] = React.useState("gray");
-  const [errorEmailColor, setErrorEmailColor] = React.useState("gray");
-  const emailRule = "^[A-Za-z0-9+_.-]+@(.+)$";
+  const [colorName, setColorName] = React.useState("gray");
+  const [colorCard, setColorCard] = React.useState("gray");
+  const [colorPhone, setColorPhone] = React.useState("gray");
+  const [colorEmail, setColorEmail] = React.useState("gray");
+  //^[A-Za-z0-9+_.-]+@(.+)$
+  const emailRule =
+    "^[w!#$%&'*+-/=?^_`{|}~]+(.[w!#$%&'*+-/=?^_`{|}~]+)*@[w-]+(.[w-]+)+$";
+  const phoneRule = "^(09)[0-9]{8}$";
+  const globalPhoneRule = "^(886)[0-9]{9}$";
 
   const { isSuccess } = useSelector(selectUser);
 
@@ -63,100 +67,158 @@ const InfoForm = (props) => {
   };
   console.log(Adddata);
 
-  const handleSave = () => {
-    switch (props.userStatus) {
-      case 'AddStatus':
-        if (inputName === '') {
-          setError(true);
-          setErrorName(true)
-          setErrorNameColor("#d32f2f")
-        } else setError(false);
-        if (
-          (inputCard.length >= 20 || inputCard === undefined)
-        ) {
-          setError(true);
-          setErrorCard(true)
-          setErrorCardColor("#d32f2f")
-        } else setError(false);
-        if (
-          (
-            !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-            !(inputPhone.startsWith("8869") && inputPhone.length === 12)
-          ) || inputPhone === undefined
-        ) {
-          setError(true);
-          setErrorPhone(true);
-          setErrorPhoneColor("#d32f2f")
-        } else setError(false);
-        if (inputEmail.search(emailRule) === -1) {
-          setError(true);
-          setErrorEmail(true)
-          setErrorEmailColor("#d32f2f")
-        } else setError(false);
-
-        if (error === false) {
-          dispatch(userAdd(Adddata));
-          dispatch(userInfo(location.state));
-          props.setUserStatus("");
-        }
-        break;
-      case 'EditStatus':
-        if (inputName === undefined) {
-          setError(true);
-          setErrorName(true)
-          setErrorNameColor("#d32f2f")
-        }
-        else if (
-          (inputCard.length >= 20)
-        ) {
-          setError(true);
-          setErrorCard(true)
-          setErrorCardColor("#d32f2f")
-        }
-        else if (
-          (
-            !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-            !(inputPhone.startsWith("8869") && inputPhone.length === 12)
-          ) ||
-          inputPhone === undefined
-        ) {
-          setError(true);
-          setErrorPhone(true);
-          setErrorPhoneColor("#d32f2f")
-        }
-        else if (inputEmail.search(emailRule) === -1) {
-          setError(true);
-          setErrorEmail(true)
-          setErrorEmailColor("#d32f2f")
-        } else {
-          dispatch(userUpdate(Infodata));
-          props.setUserStatus("");
-        }
-        break;
-      default:
-        props.setUserStatus("");
-        return true;
-    }
-
-  };
-
   // const handleSave = () => {
   //   switch (props.userStatus) {
-  //     case "AddStatus":
-  //       dispatch(userAdd(Adddata));
-  //       dispatch(userInfo(location.state));
-  //       props.setUserStatus("");
-  //       break;
-  //     case "EditStatus":
-  //       dispatch(userUpdate(Infodata));
-  //       dispatch(userInfo(location.state));
-  //       props.setUserStatus("");
+  //     case 'AddStatus':
+  // if (inputName === undefined) {
+  //   setError(true);
+  //   setErrorName(true)
+  // }
+  // else if (
+  //   (inputCard.length >= 20)
+  // ) {
+  //   setError(true);
+  //   setErrorCard(true)
+  // }
+  // else if (
+  //   !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
+  //   !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
+  //   inputPhone === undefined
+  // ) {
+  //   setError(true);
+  //   setErrorPhone(true);
+  // }
+  // else if (inputEmail.search(emailRule) === -1) {
+  //   setError(true);
+  //   setErrorEmail(true)
+
+  // } else {
+  //   dispatch(userAdd(Adddata));
+  //   dispatch(userInfo(location.state));
+  //   props.setUserStatus("");
+  // }
+  //   break;
+  // case 'EditStatus':
+  // if (inputName === undefined) {
+  //   setError(true);
+  //   setErrorName(true)
+  // }
+  // else if (
+  //   (inputCard.length >= 20)
+  // ) {
+  //   setError(true);
+  //   setErrorCard(true)
+  // }
+  // else if (
+  //   !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
+  //   !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
+  //   inputPhone === undefined
+  // ) {
+  //   setError(true);
+  //   setErrorPhone(true);
+  // }
+  // else if (inputEmail.search(emailRule) === -1) {
+  //   setError(true);
+  //   setErrorEmail(true)
+  // } else {
+  //   dispatch(userUpdate(Infodata));
+  //   props.setUserStatus("");
+  // }
   //       break;
   //     default:
   //       props.setUserStatus("");
   //       return true;
   //   }
+
   // };
+
+  const verifyName = (e) => {
+    if (e.target.value.length <= 0) {
+      setErrorName(true);
+      setColorName("#d32f2f");
+      setError(true);
+    } else {
+      setErrorName(false);
+      setColorName("gray");
+      setError(false);
+    }
+  };
+
+  const verifyCard = (e) => {
+    if (e.target.value.length <= 0 || e.target.value.length >= 20) {
+      setErrorCard(true);
+      setColorCard("#d32f2f");
+      setError(true);
+    } else {
+      setErrorCard(false);
+      setColorCard("gray");
+      setError(false);
+    }
+  };
+
+  const verifyPhone = (e) => {
+    if (e.target.value.length <= 0 || e.target.value.search(phoneRule) === -1) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+      setError(true);
+    } else {
+      setErrorPhone(false);
+      setColorPhone("gray");
+      setError(false);
+    }
+  };
+
+  const verifyEmail = (e) => {
+    if (e.target.value.search(emailRule) === -1 || e.target.value.length <= 0) {
+      setErrorEmail(true);
+      setColorEmail("#d32f2f");
+      setError(true);
+    } else {
+      setErrorEmail(false);
+      setColorEmail("gray");
+      setError(false);
+    }
+  };
+
+  const handleSave = () => {
+    if (inputName === undefined) {
+      setErrorName(true);
+      setColorName("#d32f2f");
+    }
+    if (inputPhone === undefined) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+    }
+    if (inputCard === undefined) {
+      setErrorCard(true);
+      setColorCard("#d32f2f");
+    }
+    if (inputEmail === undefined) {
+      setErrorEmail(true);
+      setColorEmail("#d32f2f");
+    } else if (
+      errorName === false &&
+      errorCard === false &&
+      errorPhone === false &&
+      errorEmail === false
+    ) {
+      switch (props.userStatus) {
+        case "AddStatus":
+          dispatch(userAdd(Adddata));
+          dispatch(userInfo(location.state));
+          props.setUserStatus("");
+          break;
+        case "EditStatus":
+          dispatch(userUpdate(Infodata));
+          dispatch(userInfo(location.state));
+          props.setUserStatus("");
+          break;
+        default:
+          props.setUserStatus("");
+          return true;
+      }
+    }
+  };
   return (
     <div>
       <div className="base name">
@@ -168,10 +230,18 @@ const InfoForm = (props) => {
             size="small"
             error={errorName}
             value={inputName}
-            onChange={(e) => { setInputName(e.target.value.replace(/[\d"'˙<>;().!#$%&*+\-/=?^_`{|}~@]/g, "")); setErrorName(false); setErrorNameColor("gray") }}
+            onBlur={(e) => {
+              verifyName(e);
+            }}
+            onChange={(e) => {
+              setInputName(
+                e.target.value.replace(/[\d"'˙<>;().!#$%&*+\-/=?^_`{|}~@]/g, "")
+              );
+              setErrorName(false);
+            }}
             // defaultValue={user.name}
             // onChange={(e) => setInputName(e.target.value)}
-            InputLabelProps={{ style: { color: errorNameColor } }}
+            InputLabelProps={{ style: { color: colorName } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -180,17 +250,14 @@ const InfoForm = (props) => {
                 "&.Mui-focused fieldset": {
                   borderColor: "gray", //FIELD 框
                 },
-                "&.MuiOutlinedInput-notchedOutline": {
-                  borderColor: "red", //FIELD 框
-                },
               },
             }}
             label="姓名"
             autoComplete="current-password"
             inputProps={{
               size: "small",
+              style: {},
             }}
-
           >
             {/* {user.name !== undefined ? user.name : "沒有使用者"} */}
           </TextField>
@@ -205,10 +272,16 @@ const InfoForm = (props) => {
             size="small"
             error={errorCard}
             value={inputCard}
-            onChange={(e) => { setInputCard(e.target.value.replace(/\D/g, "")); setErrorCard(false); setErrorCardColor("gray") }}
+            onBlur={(e) => {
+              verifyCard(e);
+            }}
+            onChange={(e) => {
+              setInputCard(e.target.value.replace(/\D/g, ""));
+              setErrorCard(false);
+            }}
             // defaultValue={user.cardId}
             // onChange={(e) => setInputCard(e.target.value)}
-            InputLabelProps={{ style: { color: errorCardColor } }}
+            InputLabelProps={{ style: { color: colorCard } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -240,10 +313,16 @@ const InfoForm = (props) => {
             size="small"
             error={errorPhone}
             value={inputPhone}
-            onChange={(e) => { setInputPhone(e.target.value.replace(/\D/g, "")); setErrorPhone(false); setErrorPhoneColor("gray") }}
+            onBlur={(e) => {
+              verifyPhone(e);
+            }}
+            onChange={(e) => {
+              setInputPhone(e.target.value.replace(/[^\d.]/g, ""));
+              setErrorPhone(false);
+            }}
             // defaultValue={user.phone}
             // onChange={(e) => setInputPhone(e.target.value)}
-            InputLabelProps={{ style: { color: errorPhoneColor } }}
+            InputLabelProps={{ style: { color: colorPhone } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -274,10 +353,16 @@ const InfoForm = (props) => {
             size="small"
             error={errorEmail}
             value={inputEmail}
-            onChange={(e) => { setInputEmail(e.target.value.replace(/[^\w.!#$%&'*+\-/=?^_`{|}~@]/ig, "")); setErrorEmail(false); setErrorEmailColor("gray") }}
+            onBlur={(e) => {
+              verifyEmail(e);
+            }}
+            onChange={(e) => {
+              setInputEmail(e.target.value.replace(/[^\w=@#.]|_/gi, ""));
+              setErrorEmail(false);
+            }}
             // defaultValue={user.email}
             // onChange={(e) => setInputEmail(e.target.value)}
-            InputLabelProps={{ style: { color: errorEmailColor } }}
+            InputLabelProps={{ style: { color: colorEmail } }}
             sx={{
               width: "100%",
               borderColor: "#000",
