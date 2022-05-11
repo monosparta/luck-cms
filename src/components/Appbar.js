@@ -17,6 +17,7 @@ const Appbar = () => {
 
   const handleClick = (e) => {
     localStorage.removeItem("token");
+    localStorage.clear();
     dispatch(clearToken());
     navigate("/login");
   };
