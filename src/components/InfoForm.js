@@ -38,9 +38,11 @@ const InfoForm = (props) => {
   const [colorCard, setColorCard] = React.useState("gray");
   const [colorPhone, setColorPhone] = React.useState("gray");
   const [colorEmail, setColorEmail] = React.useState("gray");
-  //^[A-Za-z0-9+_.-]+@(.+)$
+  //  ^[A-Za-z0-9+_.-]+@(.+)$
+  //  /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
   const emailRule =
-    "^[w!#$%&'*+-/=?^_`{|}~]+(.[w!#$%&'*+-/=?^_`{|}~]+)*@[w-]+(.[w-]+)+$";
+    /^[\w!#$%&'*+-/=?^_`{|}~]+(.[\w!#$%&'*+-/=?^_`{|}~]+)*@[\w-]+(.[\w-]+)+$/;
+  ///^[\w!\#$%&'*+\-\/=?^_`{|}~]+(\.[\w!#$%&'*+\-\/=?^_`{|}~]+)*@[\w\-]+(\.[\w\-]+)+$/ 原本的
   const phoneRule = "^(09)[0-9]{8}$";
   const globalPhoneRule = "^(886)[0-9]{9}$";
 
@@ -67,71 +69,6 @@ const InfoForm = (props) => {
   };
   console.log(Adddata);
 
-  // const handleSave = () => {
-  //   switch (props.userStatus) {
-  //     case 'AddStatus':
-  // if (inputName === undefined) {
-  //   setError(true);
-  //   setErrorName(true)
-  // }
-  // else if (
-  //   (inputCard.length >= 20)
-  // ) {
-  //   setError(true);
-  //   setErrorCard(true)
-  // }
-  // else if (
-  //   !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-  //   !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
-  //   inputPhone === undefined
-  // ) {
-  //   setError(true);
-  //   setErrorPhone(true);
-  // }
-  // else if (inputEmail.search(emailRule) === -1) {
-  //   setError(true);
-  //   setErrorEmail(true)
-
-  // } else {
-  //   dispatch(userAdd(Adddata));
-  //   dispatch(userInfo(location.state));
-  //   props.setUserStatus("");
-  // }
-  //   break;
-  // case 'EditStatus':
-  // if (inputName === undefined) {
-  //   setError(true);
-  //   setErrorName(true)
-  // }
-  // else if (
-  //   (inputCard.length >= 20)
-  // ) {
-  //   setError(true);
-  //   setErrorCard(true)
-  // }
-  // else if (
-  //   !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-  //   !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
-  //   inputPhone === undefined
-  // ) {
-  //   setError(true);
-  //   setErrorPhone(true);
-  // }
-  // else if (inputEmail.search(emailRule) === -1) {
-  //   setError(true);
-  //   setErrorEmail(true)
-  // } else {
-  //   dispatch(userUpdate(Infodata));
-  //   props.setUserStatus("");
-  // }
-  //       break;
-  //     default:
-  //       props.setUserStatus("");
-  //       return true;
-  //   }
-
-  // };
-
   const verifyName = (e) => {
     if (e.target.value.length <= 0) {
       setErrorName(true);
@@ -157,7 +94,27 @@ const InfoForm = (props) => {
   };
 
   const verifyPhone = (e) => {
-    if (e.target.value.length <= 0 || e.target.value.search(phoneRule) === -1) {
+    if (e.target.value.length <= 0) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+      setError(true);
+    } else if (
+      e.target.value.startsWith("09") &&
+      e.target.value.search(phoneRule) === -1
+    ) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+      setError(true);
+    } else if (
+      e.target.value.startsWith("8869") &&
+      e.target.value.search(globalPhoneRule) === -1
+    ) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+      setError(true);
+    } else if (
+      !(e.target.value.startsWith("8869") || e.target.value.startsWith("09"))
+    ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
       setError(true);
@@ -357,7 +314,7 @@ const InfoForm = (props) => {
               verifyEmail(e);
             }}
             onChange={(e) => {
-              setInputEmail(e.target.value.replace(/[^\w=@#.]|_/gi, ""));
+              setInputEmail(e.target.value.replace(/[^\w!#$%&'*+-/=?^_`{|}~@]|_/gi, ""));
               setErrorEmail(false);
             }}
             // defaultValue={user.email}
