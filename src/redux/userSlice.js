@@ -5,7 +5,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await fetch(
-        "https://37f7-220-132-230-75.ngrok.io/api/login",
+        "https://d8b5-220-132-230-75.ngrok.io/api/login",
         {
           method: "POST",
           headers: {
@@ -40,7 +40,7 @@ export const userInfo = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://37f7-220-132-230-75.ngrok.io/api/record/${lockerNo}`,
+        `https://d8b5-220-132-230-75.ngrok.io/api/record/${lockerNo}`,
         {
           method: "GET",
           headers: {
@@ -72,7 +72,7 @@ export const userUnlock = createAsyncThunk(
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "https://37f7-220-132-230-75.ngrok.io/api/unlock",
+        "https://d8b5-220-132-230-75.ngrok.io/api/unlock",
         {
           method: "POST",
           headers: {
@@ -107,7 +107,7 @@ export const userUpdate = createAsyncThunk(
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `https://37f7-220-132-230-75.ngrok.io/api/user/${id}`,
+        `https://d8b5-220-132-230-75.ngrok.io/api/user/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -143,7 +143,7 @@ export const userAdd = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://37f7-220-132-230-75.ngrok.io/api/user",
+        "https://d8b5-220-132-230-75.ngrok.io/api/user",
         {
           method: "POST",
           headers: {
