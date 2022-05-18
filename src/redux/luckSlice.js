@@ -6,7 +6,7 @@ export const LuckStatus = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://37f7-220-132-230-75.ngrok.io/api/locker",
+        "https://d8b5-220-132-230-75.ngrok.io/api/locker",
         {
           method: "GET",
           headers: {
