@@ -70,7 +70,7 @@ export const userUnlock = createAsyncThunk(
   async (inputData, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-
+      console.log(inputData)
       const response = await fetch(
         "https://d8b5-220-132-230-75.ngrok.io/api/unlock",
         {
@@ -81,12 +81,13 @@ export const userUnlock = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            cardId: inputData[0].cardId,
+            lockerNo: inputData[0].lockerNo,
             description: inputData[0].description,
           }),
         }
       );
       let data = await response.json();
+      console.log(data)
       if (response.status === 200) {
         return data;
       } else {

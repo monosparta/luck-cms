@@ -26,7 +26,6 @@ const InfoForm = (props) => {
   const [errorCard, setErrorCard] = React.useState(false);
   const [errorPhone, setErrorPhone] = React.useState(false);
   const [errorEmail, setErrorEmail] = React.useState(false);
-  const [error, setError] = React.useState(false);
   const [colorName, setColorName] = React.useState("gray");
   const [colorCard, setColorCard] = React.useState("gray");
   const [colorPhone, setColorPhone] = React.useState("gray");
@@ -57,17 +56,17 @@ const InfoForm = (props) => {
     phone: inputPhone,
     cardId: inputCard,
   };
-  console.log(Adddata);
+
 
   const verifyName = (e) => {
     if (e.target.value.length <= 0) {
       setErrorName(true);
       setColorName("#d32f2f");
-      setError(true);
+      // setError(true);
     } else {
       setErrorName(false);
       setColorName("gray");
-      setError(false);
+      // setError(false);
     }
   };
 
@@ -75,11 +74,11 @@ const InfoForm = (props) => {
     if (e.target.value.length <= 0 || e.target.value.length >= 20) {
       setErrorCard(true);
       setColorCard("#d32f2f");
-      setError(true);
+      // setError(true);
     } else {
       setErrorCard(false);
       setColorCard("gray");
-      setError(false);
+      // setError(false);
     }
   };
 
@@ -87,31 +86,31 @@ const InfoForm = (props) => {
     if (e.target.value.length <= 0) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setError(true);
+      // setError(true);
     } else if (
       e.target.value.startsWith("09") &&
       e.target.value.search(phoneRule) === -1
     ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setError(true);
+      // setError(true);
     } else if (
       e.target.value.startsWith("8869") &&
       e.target.value.search(globalPhoneRule) === -1
     ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setError(true);
+      // setError(true);
     } else if (
       !(e.target.value.startsWith("8869") || e.target.value.startsWith("09"))
     ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setError(true);
+      // setError(true);
     } else {
       setErrorPhone(false);
       setColorPhone("gray");
-      setError(false);
+      // setError(false);
     }
   };
 
@@ -119,11 +118,11 @@ const InfoForm = (props) => {
     if (e.target.value.search(emailRule) === -1 || e.target.value.length <= 0) {
       setErrorEmail(true);
       setColorEmail("#d32f2f");
-      setError(true);
+      // setError(true);
     } else {
       setErrorEmail(false);
       setColorEmail("gray");
-      setError(false);
+      // setError(false);
     }
   };
 
