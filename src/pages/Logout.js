@@ -15,7 +15,6 @@ const Logout = () => {
     e.preventDefault();
     localStorage.removeItem("token");
 
-    dispatch(login());
     navigate("/login");
   };
 

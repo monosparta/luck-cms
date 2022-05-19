@@ -1,30 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUpdate } from "../redux/userSlice";
-import { userAdd, userInfo } from "../redux/userSlice";
+import { userAdd } from "../redux/userSlice";
 import "./InfoForm.css";
 
 const InfoForm = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  // const navigate = useNavigate();
-
   const { user, updating } = useSelector(selectUser);
-  // useEffect(() => {
-  //   dispatch(clearState());
-  //   dispatch(userInfo(location.state));
-  // }, []);
-
   const [inputName, setInputName] = React.useState(user.name);
   const [inputCard, setInputCard] = React.useState(user.cardId);
   const [inputPhone, setInputPhone] = React.useState(user.phone);
@@ -33,7 +26,6 @@ const InfoForm = (props) => {
   const [errorCard, setErrorCard] = React.useState(false);
   const [errorPhone, setErrorPhone] = React.useState(false);
   const [errorEmail, setErrorEmail] = React.useState(false);
-  const [error, setError] = React.useState(false);
   const [colorName, setColorName] = React.useState("gray");
   const [colorCard, setColorCard] = React.useState("gray");
   const [colorPhone, setColorPhone] = React.useState("gray");
@@ -45,9 +37,6 @@ const InfoForm = (props) => {
   ///^[\w!\#$%&'*+\-\/=?^_`{|}~]+(\.[\w!#$%&'*+\-\/=?^_`{|}~]+)*@[\w\-]+(\.[\w\-]+)+$/ 原本的
   const phoneRule = "^(09)[0-9]{8}$";
   const globalPhoneRule = "^(886)[0-9]{9}$";
-
-  const { isSuccess } = useSelector(selectUser);
-
   const handleLeave = () => {
     props.setUserStatus("");
   };
@@ -67,17 +56,17 @@ const InfoForm = (props) => {
     phone: inputPhone,
     cardId: inputCard,
   };
-  console.log(Adddata);
+
 
   const verifyName = (e) => {
     if (e.target.value.length <= 0) {
       setErrorName(true);
       setColorName("#d32f2f");
-      setError(true);
+      // setError(true);
     } else {
       setErrorName(false);
       setColorName("gray");
-      setError(false);
+      // setError(false);
     }
   };
 
@@ -85,11 +74,11 @@ const InfoForm = (props) => {
     if (e.target.value.length <= 0 || e.target.value.length >= 20) {
       setErrorCard(true);
       setColorCard("#d32f2f");
-      setError(true);
+      // setError(true);
     } else {
       setErrorCard(false);
       setColorCard("gray");
-      setError(false);
+      // setError(false);
     }
   };
 
@@ -97,31 +86,31 @@ const InfoForm = (props) => {
     if (e.target.value.length <= 0) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setError(true);
+      // setError(true);
     } else if (
       e.target.value.startsWith("09") &&
       e.target.value.search(phoneRule) === -1
     ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setError(true);
+      // setError(true);
     } else if (
       e.target.value.startsWith("8869") &&
       e.target.value.search(globalPhoneRule) === -1
     ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setError(true);
+      // setError(true);
     } else if (
       !(e.target.value.startsWith("8869") || e.target.value.startsWith("09"))
     ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setError(true);
+      // setError(true);
     } else {
       setErrorPhone(false);
       setColorPhone("gray");
-      setError(false);
+      // setError(false);
     }
   };
 
@@ -129,11 +118,11 @@ const InfoForm = (props) => {
     if (e.target.value.search(emailRule) === -1 || e.target.value.length <= 0) {
       setErrorEmail(true);
       setColorEmail("#d32f2f");
-      setError(true);
+      // setError(true);
     } else {
       setErrorEmail(false);
       setColorEmail("gray");
-      setError(false);
+      // setError(false);
     }
   };
 
@@ -160,14 +149,16 @@ const InfoForm = (props) => {
       errorEmail === false
     ) {
       switch (props.userStatus) {
+
         case "AddStatus":
           dispatch(userAdd(Adddata));
-          dispatch(userInfo(location.state));
           props.setUserStatus("");
           break;
         case "EditStatus":
+
           dispatch(userUpdate(Infodata));
-          dispatch(userInfo(location.state));
+          // dispatch(userInfo(location.state))
+
           props.setUserStatus("");
           break;
         default:
@@ -216,7 +207,6 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.name !== undefined ? user.name : "沒有使用者"} */}
           </TextField>
         )}
       </div>
@@ -257,7 +247,6 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.cardId !== undefined ? user.cardId : "沒有卡號"} */}
           </TextField>
         )}
       </div>
@@ -297,7 +286,7 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.phone !== undefined ? user.phone : "沒有電話"} */}
+
           </TextField>
         )}
       </div>
@@ -336,7 +325,7 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.email !== undefined ? user.email : "沒有信箱"} */}
+
           </TextField>
         )}
       </div>

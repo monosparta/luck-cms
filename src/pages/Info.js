@@ -25,22 +25,15 @@ const Info = (props) => {
 
   const location = useLocation();
   const dispatch = useDispatch();
-  const [mode, setMode] = React.useState("Readmode");
   const [luckIconStatus, setLuckIconStatus] = React.useState(null);
   const [userStatus, setUserStatus] = React.useState(null);
   const [error, setError] = React.useState(false);
-
-  const { user, records, isFetching, updating } = useSelector(selectUser);
+  const { user, records, isFetching } = useSelector(selectUser);
 
   const lockList = useSelector((state) => state.Luck.Lock);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
-    // _.map(lockList, (item, index) => {
-    //   if (item.lockerNo === location.state && item.userId !== null) {
-    //     dispatch(userInfo(location.state));
-    //   }
-    // });
 
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
@@ -50,7 +43,7 @@ const Info = (props) => {
         }
       }
     });
-  }, []);
+  }, [userStatus]);
 
   const handleClick = () => {
     navigate("/");
@@ -60,16 +53,14 @@ const Info = (props) => {
       userStatus === "AddStatus" ? (
         <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
       ) : (
-        <Adduser setMode={setMode} setUserStatus={setUserStatus} />
+        <Adduser setUserStatus={setUserStatus} />
       )
-    ) : // <Adduser setMode={setMode} setUserStatus={setUserStatus} />
-
-    userStatus === "EditStatus" ? (
-      <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
-    ) : (
-      <Readmode setMode={setMode} setUserStatus={setUserStatus} />
-    );
-    // <Readmode setMode={setMode} setUserStatus={setUserStatus} />
+    ) :
+      userStatus === "EditStatus" ? (
+        <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
+      ) : (
+        <Readmode setUserStatus={setUserStatus} />
+      );
   };
 
   return (
@@ -104,18 +95,6 @@ const Info = (props) => {
             )}
           </div>
           <div className="basemode">{selectFormMode()}</div>
-
-          {/* <div>
-            <TextField
-              id="standard-read-only-input"
-              defaultValue={user.email !== undefined ? user.email : "沒有信箱"}
-              InputProps={{
-                readOnly: userInfoEdit,
-                disableUnderline: userInfoUnderline,
-              }}
-              variant="standard"
-            />
-          </div>  */}
         </div>
         <div className="section-record">
           <p className="record title">操作紀錄</p>

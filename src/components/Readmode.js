@@ -37,7 +37,7 @@ const Readmode = (props) => {
 
   const handleEdit = () => {
     props.setUserStatus("EditStatus");
-    props.setMode("Editmode");
+    // props.setMode("Editmode");
   };
 
   const handleClickOpen = () => {
@@ -58,7 +58,7 @@ const Readmode = (props) => {
 
   const handleCheckCloseAPI = () => {
     dispatch(
-      userUnlock([{ cardId: user.cardId, description: inputDescription }])
+      userUnlock([{ lockerNo: location.state, description: inputDescription }])
     );
     setUpdate(true);
     dispatch(userInfo(location.state));
@@ -87,7 +87,7 @@ const Readmode = (props) => {
         {isFetching ? (
           <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
         ) : (
-          <p>{user.name !== undefined ? user.name : "沒有使用者"}</p>
+          <p>{user.name}</p>
         )}
       </div>
       <div className="base card">
@@ -95,7 +95,7 @@ const Readmode = (props) => {
         {isFetching ? (
           <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
         ) : (
-          <p>{user.cardId !== undefined ? user.cardId : "沒有卡號"}</p>
+          <p>{user.cardId}</p>
         )}
       </div>
       <div className="base phone">
@@ -103,7 +103,7 @@ const Readmode = (props) => {
         {isFetching ? (
           <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
         ) : (
-          <p>{user.phone !== undefined ? user.phone : "沒有電話"}</p>
+          <p>{user.phone}</p>
         )}
       </div>
       <div className="base mail">
@@ -111,7 +111,7 @@ const Readmode = (props) => {
         {isFetching ? (
           <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
         ) : (
-          <p>{user.email !== undefined ? user.email : "沒有信箱"}</p>
+          <p>{user.email}</p>
         )}
       </div>
       <div className="control-btn">
