@@ -67,9 +67,6 @@ const Login = () => {
     },
   });
 
-  const handleClick = () => {
-
-  }
   return (
     <div className="login">
       <Toaster />
@@ -130,7 +127,6 @@ const Login = () => {
 
               </span>
               <Button
-                onClick={handleClick}
                 type="submit"
                 variant="contained"
                 style={{

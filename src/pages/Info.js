@@ -29,18 +29,12 @@ const Info = (props) => {
   const [luckIconStatus, setLuckIconStatus] = React.useState(null);
   const [userStatus, setUserStatus] = React.useState(null);
   const [error, setError] = React.useState(false);
-
-  const { user, records, isFetching, updating } = useSelector(selectUser);
+  const { user, records, isFetching } = useSelector(selectUser);
 
   const lockList = useSelector((state) => state.Luck.Lock);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
-    // _.map(lockList, (item, index) => {
-    //   if (item.lockerNo === location.state && item.userId !== null) {
-    //     dispatch(userInfo(location.state));
-    //   }
-    // });
 
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
@@ -50,7 +44,7 @@ const Info = (props) => {
         }
       }
     });
-  }, []);
+  }, [userStatus]);
 
   const handleClick = () => {
     navigate("/");
@@ -64,11 +58,11 @@ const Info = (props) => {
       )
     ) : // <Adduser setMode={setMode} setUserStatus={setUserStatus} />
 
-    userStatus === "EditStatus" ? (
-      <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
-    ) : (
-      <Readmode setMode={setMode} setUserStatus={setUserStatus} />
-    );
+      userStatus === "EditStatus" ? (
+        <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
+      ) : (
+        <Readmode setMode={setMode} setUserStatus={setUserStatus} />
+      );
     // <Readmode setMode={setMode} setUserStatus={setUserStatus} />
   };
 

@@ -1,30 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUpdate } from "../redux/userSlice";
-import { userAdd, userInfo } from "../redux/userSlice";
+import { userAdd } from "../redux/userSlice";
 import "./InfoForm.css";
 
 const InfoForm = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  // const navigate = useNavigate();
-
   const { user, updating } = useSelector(selectUser);
-  // useEffect(() => {
-  //   dispatch(clearState());
-  //   dispatch(userInfo(location.state));
-  // }, []);
-
   const [inputName, setInputName] = React.useState(user.name);
   const [inputCard, setInputCard] = React.useState(user.cardId);
   const [inputPhone, setInputPhone] = React.useState(user.phone);
@@ -45,9 +38,6 @@ const InfoForm = (props) => {
   ///^[\w!\#$%&'*+\-\/=?^_`{|}~]+(\.[\w!#$%&'*+\-\/=?^_`{|}~]+)*@[\w\-]+(\.[\w\-]+)+$/ 原本的
   const phoneRule = "^(09)[0-9]{8}$";
   const globalPhoneRule = "^(886)[0-9]{9}$";
-
-  const { isSuccess } = useSelector(selectUser);
-
   const handleLeave = () => {
     props.setUserStatus("");
   };
@@ -160,14 +150,16 @@ const InfoForm = (props) => {
       errorEmail === false
     ) {
       switch (props.userStatus) {
+
         case "AddStatus":
           dispatch(userAdd(Adddata));
-          dispatch(userInfo(location.state));
           props.setUserStatus("");
           break;
         case "EditStatus":
+
           dispatch(userUpdate(Infodata));
-          dispatch(userInfo(location.state));
+          // dispatch(userInfo(location.state))
+
           props.setUserStatus("");
           break;
         default:
@@ -216,7 +208,6 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.name !== undefined ? user.name : "沒有使用者"} */}
           </TextField>
         )}
       </div>
@@ -257,7 +248,6 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.cardId !== undefined ? user.cardId : "沒有卡號"} */}
           </TextField>
         )}
       </div>
@@ -297,7 +287,7 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.phone !== undefined ? user.phone : "沒有電話"} */}
+
           </TextField>
         )}
       </div>
@@ -336,7 +326,7 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.email !== undefined ? user.email : "沒有信箱"} */}
+
           </TextField>
         )}
       </div>

@@ -86,7 +86,7 @@ export const userUnlock = createAsyncThunk(
           }),
         }
       );
-      let data = response.json();
+      let data = await response.json();
       if (response.status === 200) {
         return data;
       } else {
@@ -123,9 +123,9 @@ export const userUpdate = createAsyncThunk(
           }),
         }
       );
-      let data = response.json();
-      console.log("Success");
+      let data = await response.json();
       if (response.status === 200) {
+        console.log("Success");
         return data;
       } else {
         throw data;
@@ -223,6 +223,23 @@ export const userSlice = createSlice({
       state.isError = true;
       return state;
     },
+    [userUpdate.fulfilled]: (state) => {
+      state.updating = false;
+      state.isSuccess = true;
+      console.log("userUpdate fulfilled");
+      return state;
+    },
+    [userUpdate.pending]: (state) => {
+      state.updating = true;
+      console.log("userUpdate pending");
+      return state;
+    },
+    [userUpdate.rejected]: (state) => {
+      state.updating = false;
+      state.isError = true;
+      console.log("userUpdate pending");
+      return state;
+    },
     [userInfo.fulfilled]: (state, { payload }) => {
       console.log("userInfo payload", payload);
       state.isFetching = false;
@@ -256,20 +273,6 @@ export const userSlice = createSlice({
     },
     [userUnlock.rejected]: (state) => {
       state.isFetching = false;
-      state.isError = true;
-      return state;
-    },
-    [userUpdate.fulfilled]: (state) => {
-      state.updating = false;
-      state.isSuccess = true;
-      return state;
-    },
-    [userUpdate.pending]: (state) => {
-      state.updating = true;
-      return state;
-    },
-    [userUpdate.rejected]: (state) => {
-      state.updating = false;
       state.isError = true;
       return state;
     },
