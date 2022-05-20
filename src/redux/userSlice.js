@@ -4,20 +4,17 @@ export const login = createAsyncThunk(
   "user/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await fetch(
-        "https://d8b5-220-132-230-75.ngrok.io/api/login",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
+      const response = await fetch("https://10.2.10.111:8000/api/login", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
       let data = await response.json();
       console.log("Login Response", data);
       if (response.status === 200) {
@@ -40,7 +37,7 @@ export const userInfo = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://d8b5-220-132-230-75.ngrok.io/api/record/${lockerNo}`,
+        `https://10.2.10.111:8000/api/record/${lockerNo}`,
         {
           method: "GET",
           headers: {
@@ -71,21 +68,18 @@ export const userUnlock = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       console.log(inputData);
-      const response = await fetch(
-        "https://d8b5-220-132-230-75.ngrok.io/api/unlock",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            token,
-          },
-          body: JSON.stringify({
-            lockerNo: inputData[0].lockerNo,
-            description: inputData[0].description,
-          }),
-        }
-      );
+      const response = await fetch("https://10.2.10.111:8000/api/unlock", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token,
+        },
+        body: JSON.stringify({
+          lockerNo: inputData[0].lockerNo,
+          description: inputData[0].description,
+        }),
+      });
       let data = await response.json();
       console.log(data);
       if (response.status === 200) {
@@ -107,23 +101,20 @@ export const userUpdate = createAsyncThunk(
       console.log(id, name, email, phone, cardId);
       const token = localStorage.getItem("token");
 
-      const response = await fetch(
-        `https://d8b5-220-132-230-75.ngrok.io/api/user/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            token,
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            phone,
-            cardId,
-          }),
-        }
-      );
+      const response = await fetch(`https://10.2.10.111:8000/api/user/${id}`, {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token,
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          cardId,
+        }),
+      });
       let data = await response.json();
       if (response.status === 200) {
         console.log("Success");
@@ -143,24 +134,21 @@ export const userAdd = createAsyncThunk(
   async ({ lockerNo, name, email, phone, cardId }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        "https://d8b5-220-132-230-75.ngrok.io/api/user",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            token,
-          },
-          body: JSON.stringify({
-            lockerNo,
-            name,
-            email,
-            phone,
-            cardId,
-          }),
-        }
-      );
+      const response = await fetch("https://10.2.10.111:8000/api/user", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token,
+        },
+        body: JSON.stringify({
+          lockerNo,
+          name,
+          email,
+          phone,
+          cardId,
+        }),
+      });
       let data = await response.json();
       console.log("Add Response", data);
       if (data.status === 200) {
