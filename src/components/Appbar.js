@@ -7,7 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { clearToken } from "../redux/userSlice";
 import "./Appbar.css";
 
@@ -17,6 +17,7 @@ const Appbar = () => {
 
   const handleClick = (e) => {
     localStorage.removeItem("token");
+    localStorage.clear();
     dispatch(clearToken());
     navigate("/login");
   };
