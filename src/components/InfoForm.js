@@ -1,30 +1,23 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { userUpdate } from "../redux/userSlice";
-import { userAdd, userInfo } from "../redux/userSlice";
+import { userAdd } from "../redux/userSlice";
 import "./InfoForm.css";
 
 const InfoForm = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  // const navigate = useNavigate();
-
   const { user, updating } = useSelector(selectUser);
-  // useEffect(() => {
-  //   dispatch(clearState());
-  //   dispatch(userInfo(location.state));
-  // }, []);
-
   const [inputName, setInputName] = React.useState(user.name);
   const [inputCard, setInputCard] = React.useState(user.cardId);
   const [inputPhone, setInputPhone] = React.useState(user.phone);
@@ -33,12 +26,17 @@ const InfoForm = (props) => {
   const [errorCard, setErrorCard] = React.useState(false);
   const [errorPhone, setErrorPhone] = React.useState(false);
   const [errorEmail, setErrorEmail] = React.useState(false);
-  const [error, setError] = React.useState(false);
-
-  const emailRule = "^[A-Za-z0-9+_.-]+@(.+)$";
-
-  const { isSuccess } = useSelector(selectUser);
-
+  const [colorName, setColorName] = React.useState("gray");
+  const [colorCard, setColorCard] = React.useState("gray");
+  const [colorPhone, setColorPhone] = React.useState("gray");
+  const [colorEmail, setColorEmail] = React.useState("gray");
+  //  ^[A-Za-z0-9+_.-]+@(.+)$
+  //  /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+  const emailRule =
+    /^[\w!#$%&'*+-/=?^_`{|}~]+(.[\w!#$%&'*+-/=?^_`{|}~]+)*@[\w-]+(.[\w-]+)+$/;
+  ///^[\w!\#$%&'*+\-\/=?^_`{|}~]+(\.[\w!#$%&'*+\-\/=?^_`{|}~]+)*@[\w\-]+(\.[\w\-]+)+$/ 原本的
+  const phoneRule = "^(09)[0-9]{8}$";
+  const globalPhoneRule = "^(886)[0-9]{9}$";
   const handleLeave = () => {
     props.setUserStatus("");
   };
@@ -58,88 +56,115 @@ const InfoForm = (props) => {
     phone: inputPhone,
     cardId: inputCard,
   };
-  console.log(Adddata);
 
-  // const handleSave = () => {
-  //   switch (props.userStatus) {
-  //     case 'AddStatus':
-  // if (inputName === undefined) {
-  //   setError(true);
-  //   setErrorName(true)
-  // }
-  // else if (
-  //   (inputCard.length >= 20)
-  // ) {
-  //   setError(true);
-  //   setErrorCard(true)
-  // }
-  // else if (
-  //   !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-  //   !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
-  //   inputPhone === undefined
-  // ) {
-  //   setError(true);
-  //   setErrorPhone(true);
-  // }
-  // else if (inputEmail.search(emailRule) === -1) {
-  //   setError(true);
-  //   setErrorEmail(true)
 
-  // } else {
-  //   dispatch(userAdd(Adddata));
-  //   dispatch(userInfo(location.state));
-  //   props.setUserStatus("");
-  // }
-  //   break;
-  // case 'EditStatus':
-  // if (inputName === undefined) {
-  //   setError(true);
-  //   setErrorName(true)
-  // }
-  // else if (
-  //   (inputCard.length >= 20)
-  // ) {
-  //   setError(true);
-  //   setErrorCard(true)
-  // }
-  // else if (
-  //   !(inputPhone.startsWith("09") && inputPhone.length === 10) &&
-  //   !(inputPhone.startsWith("8869") && inputPhone.length === 12) ||
-  //   inputPhone === undefined
-  // ) {
-  //   setError(true);
-  //   setErrorPhone(true);
-  // }
-  // else if (inputEmail.search(emailRule) === -1) {
-  //   setError(true);
-  //   setErrorEmail(true)
-  // } else {
-  //   dispatch(userUpdate(Infodata));
-  //   props.setUserStatus("");
-  // }
-  //       break;
-  //     default:
-  //       props.setUserStatus("");
-  //       return true;
-  //   }
+  const verifyName = (e) => {
+    if (e.target.value.length <= 0) {
+      setErrorName(true);
+      setColorName("#d32f2f");
+      // setError(true);
+    } else {
+      setErrorName(false);
+      setColorName("gray");
+      // setError(false);
+    }
+  };
 
-  // };
+  const verifyCard = (e) => {
+    if (e.target.value.length <= 0 || e.target.value.length >= 20) {
+      setErrorCard(true);
+      setColorCard("#d32f2f");
+      // setError(true);
+    } else {
+      setErrorCard(false);
+      setColorCard("gray");
+      // setError(false);
+    }
+  };
+
+  const verifyPhone = (e) => {
+    if (e.target.value.length <= 0) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+      // setError(true);
+    } else if (
+      e.target.value.startsWith("09") &&
+      e.target.value.search(phoneRule) === -1
+    ) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+      // setError(true);
+    } else if (
+      e.target.value.startsWith("8869") &&
+      e.target.value.search(globalPhoneRule) === -1
+    ) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+      // setError(true);
+    } else if (
+      !(e.target.value.startsWith("8869") || e.target.value.startsWith("09"))
+    ) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+      // setError(true);
+    } else {
+      setErrorPhone(false);
+      setColorPhone("gray");
+      // setError(false);
+    }
+  };
+
+  const verifyEmail = (e) => {
+    if (e.target.value.search(emailRule) === -1 || e.target.value.length <= 0) {
+      setErrorEmail(true);
+      setColorEmail("#d32f2f");
+      // setError(true);
+    } else {
+      setErrorEmail(false);
+      setColorEmail("gray");
+      // setError(false);
+    }
+  };
 
   const handleSave = () => {
-    switch (props.userStatus) {
-      case "AddStatus":
-        dispatch(userAdd(Adddata));
-        dispatch(userInfo(location.state));
-        props.setUserStatus("");
-        break;
-      case "EditStatus":
-        dispatch(userUpdate(Infodata));
-        dispatch(userInfo(location.state));
-        props.setUserStatus("");
-        break;
-      default:
-        props.setUserStatus("");
-        return true;
+    if (inputName === undefined) {
+      setErrorName(true);
+      setColorName("#d32f2f");
+    }
+    if (inputPhone === undefined) {
+      setErrorPhone(true);
+      setColorPhone("#d32f2f");
+    }
+    if (inputCard === undefined) {
+      setErrorCard(true);
+      setColorCard("#d32f2f");
+    }
+    if (inputEmail === undefined) {
+      setErrorEmail(true);
+      setColorEmail("#d32f2f");
+    } else if (
+      errorName === false &&
+      errorCard === false &&
+      errorPhone === false &&
+      errorEmail === false
+    ) {
+      switch (props.userStatus) {
+
+        case "AddStatus":
+          dispatch(userAdd(Adddata));
+          props.setUserStatus("");
+          break;
+        case "EditStatus":
+
+          dispatch(userUpdate(Infodata));
+          // dispatch(userInfo(location.state))
+
+          props.setUserStatus("");
+          break;
+        default:
+          props.setUserStatus("");
+          return true;
+      }
     }
   };
   return (
@@ -152,11 +177,19 @@ const InfoForm = (props) => {
           <TextField
             size="small"
             error={errorName}
-            // value={inputName}
-            // onChange={(e) => { setInputName(e.target.value.replace(/[^\d.]/g, "")); setErrorName(false) }}
-            defaultValue={user.name}
-            onChange={(e) => setInputName(e.target.value)}
-            InputLabelProps={{ style: { color: "gray" } }}
+            value={inputName}
+            onBlur={(e) => {
+              verifyName(e);
+            }}
+            onChange={(e) => {
+              setInputName(
+                e.target.value.replace(/[\d"'˙<>;().!#$%&*+\-/=?^_`{|}~@]/g, "")
+              );
+              setErrorName(false);
+            }}
+            // defaultValue={user.name}
+            // onChange={(e) => setInputName(e.target.value)}
+            InputLabelProps={{ style: { color: colorName } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -174,7 +207,6 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.name !== undefined ? user.name : "沒有使用者"} */}
           </TextField>
         )}
       </div>
@@ -186,11 +218,17 @@ const InfoForm = (props) => {
           <TextField
             size="small"
             error={errorCard}
-            // value={inputCard}
-            // onChange={(e) => { setInputCard(e.target.value.replace(/\D/g, "")); setErrorCard(false) }}
-            defaultValue={user.cardId}
-            onChange={(e) => setInputCard(e.target.value)}
-            InputLabelProps={{ style: { color: "gray" } }}
+            value={inputCard}
+            onBlur={(e) => {
+              verifyCard(e);
+            }}
+            onChange={(e) => {
+              setInputCard(e.target.value.replace(/\D/g, ""));
+              setErrorCard(false);
+            }}
+            // defaultValue={user.cardId}
+            // onChange={(e) => setInputCard(e.target.value)}
+            InputLabelProps={{ style: { color: colorCard } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -209,7 +247,6 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.cardId !== undefined ? user.cardId : "沒有卡號"} */}
           </TextField>
         )}
       </div>
@@ -221,11 +258,17 @@ const InfoForm = (props) => {
           <TextField
             size="small"
             error={errorPhone}
-            // value={inputPhone}
-            // onChange={(e) => { setInputPhone(e.target.value.replace(/[^\d.]/g, "")); setErrorPhone(false) }}
-            defaultValue={user.phone}
-            onChange={(e) => setInputPhone(e.target.value)}
-            InputLabelProps={{ style: { color: "gray" } }}
+            value={inputPhone}
+            onBlur={(e) => {
+              verifyPhone(e);
+            }}
+            onChange={(e) => {
+              setInputPhone(e.target.value.replace(/[^\d.]/g, ""));
+              setErrorPhone(false);
+            }}
+            // defaultValue={user.phone}
+            // onChange={(e) => setInputPhone(e.target.value)}
+            InputLabelProps={{ style: { color: colorPhone } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -243,7 +286,7 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.phone !== undefined ? user.phone : "沒有電話"} */}
+
           </TextField>
         )}
       </div>
@@ -255,11 +298,17 @@ const InfoForm = (props) => {
           <TextField
             size="small"
             error={errorEmail}
-            // value={inputEmail}
-            // onChange={(e) => { setInputEmail(e.target.value.replace(/[^\w=@#]|_/ig, "")); setErrorEmail(false) }}
-            defaultValue={user.email}
-            onChange={(e) => setInputEmail(e.target.value)}
-            InputLabelProps={{ style: { color: "gray" } }}
+            value={inputEmail}
+            onBlur={(e) => {
+              verifyEmail(e);
+            }}
+            onChange={(e) => {
+              setInputEmail(e.target.value.replace(/[^\w!#$%&'*+-/=?^_`{|}~@]|_/gi, ""));
+              setErrorEmail(false);
+            }}
+            // defaultValue={user.email}
+            // onChange={(e) => setInputEmail(e.target.value)}
+            InputLabelProps={{ style: { color: colorEmail } }}
             sx={{
               width: "100%",
               borderColor: "#000",
@@ -276,7 +325,7 @@ const InfoForm = (props) => {
               style: {},
             }}
           >
-            {/* {user.email !== undefined ? user.email : "沒有信箱"} */}
+
           </TextField>
         )}
       </div>

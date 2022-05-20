@@ -17,8 +17,10 @@
 	padding: 12px 0px 12px 24px;
 }
 .section-base {
-	width: 30%;
-	height: 85%;
+	margin-left: 60px;
+	min-width: 235px;
+	/* width: 30%;
+	height: 85%; */
 	background-color: #fff;
 	box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
 		-4px 4px 8px rgba(54, 63, 78, 0.1);
@@ -28,8 +30,11 @@
 	align-items: center;
 }
 .section-record {
-	width: 60%;
-	height: 85%;
+	margin-right: 100px;
+	margin-left: 70px;
+	min-width: 490px;
+	/* width: 60%;
+	height: 85%; */
 	background-color: #fff;
 	box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
 		-4px 4px 8px rgba(54, 63, 78, 0.1);
@@ -65,6 +70,7 @@
 	font-style: bold;
 	color: #363f4e;
 	margin: 0 0 0 15px;
+	/* margin: 0 auto; */
 }
 .base.state {
 	margin: 0 0 20px 90px;

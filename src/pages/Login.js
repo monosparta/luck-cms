@@ -20,7 +20,7 @@ const Login = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { isFetching, isSuccess, isError, token } = useSelector(selectUser);
+  const { isFetching, isSuccess, isError } = useSelector(selectUser);
   const onSubmit = (data) => {
     if (data.email === null || data.password === null) {
       toast.error("帳號或密碼錯誤");
@@ -32,6 +32,7 @@ const Login = (props) => {
     return () => {
       dispatch(clearState());
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -47,6 +48,7 @@ const Login = (props) => {
       dispatch(clearState());
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
 
   const CssTextField = styled(TextField)({

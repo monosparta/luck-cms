@@ -9,6 +9,8 @@
 .luck__btn {
 	display: flex;
 	align-items: flex-end;
+	/* margin-left: 50px; */
+	/* min-width: 900px; */
 }
 .luck__title {
 	text-align: center;
@@ -41,20 +43,21 @@
 	font-style: "normal";
 }
 
-.luck__section{
+.luck__section {
 	margin: 0 80px;
 }
 
 .luck__container {
 	display: flex;
 	justify-content: space-between;
-	align-items: end;
+	align-items: flex-end;
 }
 
-.status-none{
-	opacity: 0
+.status-none {
+	opacity: 0;
 }
 
-.status{
+.status {
 	margin-bottom: 5px;
+	/* margin-left: 90px; */
 }

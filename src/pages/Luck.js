@@ -16,6 +16,7 @@ const Luck = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(LuckStatus());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const lockList = useSelector((state) => state.Luck.Lock);
   useSelector(selectLuck);

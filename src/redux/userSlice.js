@@ -5,7 +5,7 @@ export const login = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       const response = await fetch(
-        "https://37f7-220-132-230-75.ngrok.io/api/login",
+        "https://d8b5-220-132-230-75.ngrok.io/api/login",
         {
           method: "POST",
           headers: {
@@ -40,7 +40,7 @@ export const userInfo = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://37f7-220-132-230-75.ngrok.io/api/record/${lockerNo}`,
+        `https://d8b5-220-132-230-75.ngrok.io/api/record/${lockerNo}`,
         {
           method: "GET",
           headers: {
@@ -70,9 +70,9 @@ export const userUnlock = createAsyncThunk(
   async (inputData, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-
+      console.log(inputData);
       const response = await fetch(
-        "https://37f7-220-132-230-75.ngrok.io/api/unlock",
+        "https://d8b5-220-132-230-75.ngrok.io/api/unlock",
         {
           method: "POST",
           headers: {
@@ -81,12 +81,13 @@ export const userUnlock = createAsyncThunk(
             token,
           },
           body: JSON.stringify({
-            cardId: inputData[0].cardId,
+            lockerNo: inputData[0].lockerNo,
             description: inputData[0].description,
           }),
         }
       );
-      let data = response.json();
+      let data = await response.json();
+      console.log(data);
       if (response.status === 200) {
         return data;
       } else {
@@ -107,7 +108,7 @@ export const userUpdate = createAsyncThunk(
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `https://37f7-220-132-230-75.ngrok.io/api/user/${id}`,
+        `https://d8b5-220-132-230-75.ngrok.io/api/user/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -123,9 +124,9 @@ export const userUpdate = createAsyncThunk(
           }),
         }
       );
-      let data = response.json();
-      console.log("Success");
+      let data = await response.json();
       if (response.status === 200) {
+        console.log("Success");
         return data;
       } else {
         throw data;
@@ -143,7 +144,7 @@ export const userAdd = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        "https://37f7-220-132-230-75.ngrok.io/api/user",
+        "https://d8b5-220-132-230-75.ngrok.io/api/user",
         {
           method: "POST",
           headers: {
@@ -223,6 +224,23 @@ export const userSlice = createSlice({
       state.isError = true;
       return state;
     },
+    [userUpdate.fulfilled]: (state) => {
+      state.updating = false;
+      state.isSuccess = true;
+      console.log("userUpdate fulfilled");
+      return state;
+    },
+    [userUpdate.pending]: (state) => {
+      state.updating = true;
+      console.log("userUpdate pending");
+      return state;
+    },
+    [userUpdate.rejected]: (state) => {
+      state.updating = false;
+      state.isError = true;
+      console.log("userUpdate pending");
+      return state;
+    },
     [userInfo.fulfilled]: (state, { payload }) => {
       console.log("userInfo payload", payload);
       state.isFetching = false;
@@ -256,20 +274,6 @@ export const userSlice = createSlice({
     },
     [userUnlock.rejected]: (state) => {
       state.isFetching = false;
-      state.isError = true;
-      return state;
-    },
-    [userUpdate.fulfilled]: (state) => {
-      state.updating = false;
-      state.isSuccess = true;
-      return state;
-    },
-    [userUpdate.pending]: (state) => {
-      state.updating = true;
-      return state;
-    },
-    [userUpdate.rejected]: (state) => {
-      state.updating = false;
       state.isError = true;
       return state;
     },
