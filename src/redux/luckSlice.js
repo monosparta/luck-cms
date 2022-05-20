@@ -5,7 +5,7 @@ export const LuckStatus = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://10.2.10.111:8000/api/locker", {
+      const response = await fetch("http://10.2.10.111:8000/api/locker", {
         method: "GET",
         headers: {
           Accept: "application/json",

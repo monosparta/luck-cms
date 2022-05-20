@@ -4,7 +4,7 @@ export const login = createAsyncThunk(
   "user/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await fetch("https://10.2.10.111:8000/api/login", {
+      const response = await fetch("http://10.2.10.111:8000/api/login", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -37,7 +37,7 @@ export const userInfo = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `https://10.2.10.111:8000/api/record/${lockerNo}`,
+        `http://10.2.10.111:8000/api/record/${lockerNo}`,
         {
           method: "GET",
           headers: {
@@ -68,7 +68,7 @@ export const userUnlock = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       console.log(inputData);
-      const response = await fetch("https://10.2.10.111:8000/api/unlock", {
+      const response = await fetch("http://10.2.10.111:8000/api/unlock", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -101,7 +101,7 @@ export const userUpdate = createAsyncThunk(
       console.log(id, name, email, phone, cardId);
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`https://10.2.10.111:8000/api/user/${id}`, {
+      const response = await fetch(`http://10.2.10.111:8000/api/user/${id}`, {
         method: "PATCH",
         headers: {
           Accept: "application/json",
@@ -134,7 +134,7 @@ export const userAdd = createAsyncThunk(
   async ({ lockerNo, name, email, phone, cardId }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://10.2.10.111:8000/api/user", {
+      const response = await fetch("http://10.2.10.111:8000/api/user", {
         method: "POST",
         headers: {
           Accept: "application/json",
