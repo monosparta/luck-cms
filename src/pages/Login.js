@@ -26,6 +26,7 @@ const Login = () => {
     return () => {
       dispatch(clearState());
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const Login = () => {
       dispatch(clearState());
       navigate("/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
 
   const CssTextField = styled(TextField)({
