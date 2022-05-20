@@ -16,16 +16,13 @@ export const login = createAsyncThunk(
         }),
       });
       let data = await response.json();
-      console.log("Login Response", data);
       if (response.status === 200) {
         localStorage.setItem("token", data.message.token);
-        console.log(data.message.token);
         return data;
       } else {
         throw data.message;
       }
     } catch (e) {
-      console.log(thunkAPI.rejectWithValue(e));
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -48,15 +45,12 @@ export const userInfo = createAsyncThunk(
         }
       );
       let data = await response.json();
-      console.log("Info Response", data);
       if (response.status === 200) {
-        console.log(data);
         return data;
       } else {
         throw data.message;
       }
     } catch (e) {
-      console.log(thunkAPI.rejectWithValue(e));
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -67,7 +61,6 @@ export const userUnlock = createAsyncThunk(
   async (inputData, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      console.log(inputData);
       const response = await fetch("http://10.2.10.111:8000/api/unlock", {
         method: "POST",
         headers: {
@@ -81,14 +74,12 @@ export const userUnlock = createAsyncThunk(
         }),
       });
       let data = await response.json();
-      console.log(data);
       if (response.status === 200) {
         return data;
       } else {
         throw data;
       }
     } catch (e) {
-      console.log(thunkAPI.rejectWithValue(e));
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -98,7 +89,6 @@ export const userUpdate = createAsyncThunk(
   "user/update",
   async ({ id, name, email, phone, cardId }, thunkAPI) => {
     try {
-      console.log(id, name, email, phone, cardId);
       const token = localStorage.getItem("token");
 
       const response = await fetch(`http://10.2.10.111:8000/api/user/${id}`, {
@@ -117,13 +107,11 @@ export const userUpdate = createAsyncThunk(
       });
       let data = await response.json();
       if (response.status === 200) {
-        console.log("Success");
         return data;
       } else {
         throw data;
       }
     } catch (e) {
-      console.log(thunkAPI.rejectWithValue(e));
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -150,15 +138,12 @@ export const userAdd = createAsyncThunk(
         }),
       });
       let data = await response.json();
-      console.log("Add Response", data);
       if (data.status === 200) {
-        console.log(data);
         return data;
       } else {
         throw data.message;
       }
     } catch (e) {
-      console.log(thunkAPI.rejectWithValue(e));
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -193,7 +178,6 @@ export const userSlice = createSlice({
   },
   extraReducers: {
     [login.fulfilled]: (state, { payload }) => {
-      console.log("payload", payload);
       state.isFetching = false;
       state.isSuccess = true;
       state.email = payload.email;
@@ -203,11 +187,9 @@ export const userSlice = createSlice({
     },
     [login.pending]: (state) => {
       state.isFetching = true;
-      console.log("loading");
       return state;
     },
     [login.rejected]: (state, { payload }) => {
-      console.log("payload1", payload);
       state.isFetching = false;
       state.isError = true;
       return state;
@@ -215,22 +197,18 @@ export const userSlice = createSlice({
     [userUpdate.fulfilled]: (state) => {
       state.updating = false;
       state.isSuccess = true;
-      console.log("userUpdate fulfilled");
       return state;
     },
     [userUpdate.pending]: (state) => {
       state.updating = true;
-      console.log("userUpdate pending");
       return state;
     },
     [userUpdate.rejected]: (state) => {
       state.updating = false;
       state.isError = true;
-      console.log("userUpdate pending");
       return state;
     },
     [userInfo.fulfilled]: (state, { payload }) => {
-      console.log("userInfo payload", payload);
       state.isFetching = false;
       state.isSuccess = true;
       state.user = payload.user;
@@ -239,11 +217,9 @@ export const userSlice = createSlice({
     },
     [userInfo.pending]: (state) => {
       state.isFetching = true;
-      console.log("userInfo loading");
       return state;
     },
     [userInfo.rejected]: (state, { payload }) => {
-      console.log("userInfo payload1", payload);
       state.isFetching = false;
       state.isError = true;
       state.user = [];
@@ -257,7 +233,6 @@ export const userSlice = createSlice({
     },
     [userUnlock.pending]: (state) => {
       state.isFetching = true;
-      console.log("userUnlock loading");
       return state;
     },
     [userUnlock.rejected]: (state) => {

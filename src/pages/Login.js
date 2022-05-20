@@ -38,11 +38,9 @@ const Login = (props) => {
   useEffect(() => {
     if (isError) {
       dispatch(clearState());
-      console.log("Error...");
     }
     if (isFetching) {
       dispatch(clearState());
-      console.log("Waiting...");
     }
     if (isSuccess) {
       dispatch(clearState());

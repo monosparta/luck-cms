@@ -14,14 +14,12 @@ export const LuckStatus = createAsyncThunk(
         },
       });
       let data = await response.json();
-      // console.log("response", data);
       if (response.status === 200) {
         return data;
       } else {
         throw data.message;
       }
     } catch (e) {
-      console.log(thunkAPI.rejectWithValue(e));
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -59,11 +57,9 @@ export const luckSlice = createSlice({
     },
     [LuckStatus.pending]: (state) => {
       state.isFetching = true;
-      console.log("loading");
       return state;
     },
     [LuckStatus.rejected]: (state, { payload }) => {
-      console.log("Bad", payload);
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
