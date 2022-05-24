@@ -5,14 +5,17 @@ export const LuckStatus = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://10.2.10.111:8000/api/locker", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token,
-        },
-      });
+      const response = await fetch(
+        "https://5089-211-72-239-241.ngrok.io/api/locker",
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+        }
+      );
       let data = await response.json();
       if (response.status === 200) {
         return data;
@@ -62,7 +65,9 @@ export const luckSlice = createSlice({
     [LuckStatus.rejected]: (state, { payload }) => {
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
+      localStorage.clear();
+      alert("請重新登入");
+      window.location.reload();
       return state;
     },
   },

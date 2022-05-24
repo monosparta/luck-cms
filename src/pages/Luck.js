@@ -11,6 +11,7 @@ import { Box, Paper, Skeleton } from "@mui/material";
 import CircleIcon from "@mui/icons-material/Circle";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 const Luck = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,10 @@ const Luck = () => {
   let array = new Array(42);
   return (
     <div id="Luck">
-      <div className="luck__title">置物櫃當前使用狀態</div>
+      <div className="luck__title">
+        置物櫃當前使用狀態
+        <RefreshIcon />
+      </div>
       <div className="luck__container">
         <div className="status-none">
           <Box

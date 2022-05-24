@@ -15,11 +15,12 @@ import { selectUser } from "./redux/userSlice";
 
 const App = () => {
   const { token } = useSelector(selectUser);
+
   const ver = localStorage.getItem("token");
   return (
     <Router>
       <Routes>
-        {token === "" && ver == null ? (
+        {token === "" && ver === null ? (
           <Route path="*" element={<Navigate to="/login" replace />} />
         ) : (
           <Route path="/" element={<Appbar />}>

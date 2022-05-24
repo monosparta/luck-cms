@@ -4,17 +4,20 @@ export const login = createAsyncThunk(
   "user/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await fetch("http://10.2.10.111:8000/api/login", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      const response = await fetch(
+        "https://5089-211-72-239-241.ngrok.io/api/login",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
       let data = await response.json();
       if (response.status === 200) {
         localStorage.setItem("token", data.message.token);
@@ -28,13 +31,38 @@ export const login = createAsyncThunk(
   }
 );
 
+export const logout = createAsyncThunk("user/logout", async (thunkAPI) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      "https://5089-211-72-239-241.ngrok.io/api/logout",
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token,
+        },
+      }
+    );
+    let data = await response.json();
+    if (response.status === 200) {
+      return data;
+    } else {
+      throw data.message;
+    }
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e);
+  }
+});
+
 export const userInfo = createAsyncThunk(
   "user/info",
   async (lockerNo, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://10.2.10.111:8000/api/record/${lockerNo}`,
+        `https://5089-211-72-239-241.ngrok.io/api/record/${lockerNo}`,
         {
           method: "GET",
           headers: {
@@ -61,18 +89,21 @@ export const userUnlock = createAsyncThunk(
   async (inputData, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://10.2.10.111:8000/api/unlock", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token,
-        },
-        body: JSON.stringify({
-          lockerNo: inputData[0].lockerNo,
-          description: inputData[0].description,
-        }),
-      });
+      const response = await fetch(
+        "https://5089-211-72-239-241.ngrok.io/api/unlock",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+          body: JSON.stringify({
+            lockerNo: inputData[0].lockerNo,
+            description: inputData[0].description,
+          }),
+        }
+      );
       let data = await response.json();
       if (response.status === 200) {
         return data;
@@ -91,20 +122,23 @@ export const userUpdate = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`http://10.2.10.111:8000/api/user/${id}`, {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token,
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          cardId,
-        }),
-      });
+      const response = await fetch(
+        `https://5089-211-72-239-241.ngrok.io/api/user/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            cardId,
+          }),
+        }
+      );
       let data = await response.json();
       if (response.status === 200) {
         return data;
@@ -122,21 +156,24 @@ export const userAdd = createAsyncThunk(
   async ({ lockerNo, name, email, phone, cardId }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://10.2.10.111:8000/api/user", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token,
-        },
-        body: JSON.stringify({
-          lockerNo,
-          name,
-          email,
-          phone,
-          cardId,
-        }),
-      });
+      const response = await fetch(
+        "https://5089-211-72-239-241.ngrok.io/api/user",
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+          body: JSON.stringify({
+            lockerNo,
+            name,
+            email,
+            phone,
+            cardId,
+          }),
+        }
+      );
       let data = await response.json();
       if (data.status === 200) {
         return data;
@@ -192,6 +229,9 @@ export const userSlice = createSlice({
     [login.rejected]: (state, { payload }) => {
       state.isFetching = false;
       state.isError = true;
+      localStorage.clear();
+      alert("請重新登入");
+      window.location.reload();
       return state;
     },
     [userUpdate.fulfilled]: (state) => {
@@ -206,6 +246,9 @@ export const userSlice = createSlice({
     [userUpdate.rejected]: (state) => {
       state.updating = false;
       state.isError = true;
+      localStorage.clear();
+      alert("請重新登入");
+      window.location.reload();
       return state;
     },
     [userInfo.fulfilled]: (state, { payload }) => {
@@ -224,6 +267,9 @@ export const userSlice = createSlice({
       state.isError = true;
       state.user = [];
       state.records = [];
+      localStorage.clear();
+      alert("請重新登入");
+      window.location.reload();
       return state;
     },
     [userUnlock.fulfilled]: (state) => {
@@ -238,6 +284,9 @@ export const userSlice = createSlice({
     [userUnlock.rejected]: (state) => {
       state.isFetching = false;
       state.isError = true;
+      localStorage.clear();
+      alert("請重新登入");
+      window.location.reload();
       return state;
     },
     [userAdd.fulfilled]: (state) => {
@@ -252,6 +301,9 @@ export const userSlice = createSlice({
     [userAdd.rejected]: (state) => {
       state.updating = false;
       state.isError = true;
+      localStorage.clear();
+      alert("請重新登入");
+      window.location.reload();
       return state;
     },
   },
