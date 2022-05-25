@@ -5,14 +5,17 @@ export const LuckStatus = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.REACT_APP_URL}/api/locker`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token,
-        },
-      });
+      const response = await fetch(
+        `http://${process.env.REACT_APP_URL}:8000/api/locker`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+        }
+      );
       let data = await response.json();
       if (response.status === 200) {
         return data;
@@ -62,10 +65,11 @@ export const luckSlice = createSlice({
     [LuckStatus.rejected]: (state, { payload }) => {
       state.isFetching = false;
       state.isError = true;
-      localStorage.clear();
-      alert("請重新登入");
-      window.location.reload();
-      return state;
+      // if (state.token !== "") {
+      //   localStorage.clear();
+      //   alert("請重新登入");
+      //   window.location.reload();
+      // }
     },
   },
 });
