@@ -56,12 +56,11 @@ const Info = (props) => {
       ) : (
         <Adduser setUserStatus={setUserStatus} />
       )
-    ) :
-      userStatus === "EditStatus" ? (
-        <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
-      ) : (
-        <Readmode setUserStatus={setUserStatus} />
-      );
+    ) : userStatus === "EditStatus" ? (
+      <InfoForm setUserStatus={setUserStatus} userStatus={userStatus} />
+    ) : (
+      <Readmode setUserStatus={setUserStatus} />
+    );
   };
 
   return (
@@ -138,11 +137,11 @@ const Info = (props) => {
                 {_.map(records, (item, index) => (
                   <Record
                     key={index}
-                    name={item.name}
+                    name={item.user.name}
                     record={item.time}
                     lucknum={location.state}
                     description={item.description}
-                    permission={item.permission}
+                    permission={item.user.permission}
                   />
                 ))}
               </div>

@@ -19,6 +19,13 @@ const Luck = () => {
     dispatch(LuckStatus());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    setInterval(() => {
+      dispatch(LuckStatus());
+      console.log("Hello!");
+    }, 5000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const lockList = useSelector((state) => state.Luck.Lock);
   useSelector(selectLuck);
   const navigate = useNavigate();

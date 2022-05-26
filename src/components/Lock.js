@@ -4,6 +4,7 @@ import "./Lock.css";
 
 export default function Item(props) {
   const { sx, ...other } = props;
+
   return (
     <Box
       sx={{
@@ -25,5 +26,3 @@ export default function Item(props) {
     />
   );
 }
-
-
