@@ -44,12 +44,12 @@ const Luck = () => {
 
   return (
     <div id="Luck">
-      <div className="luck__title">
+      <div className="luckTitle">
         置物櫃當前使用狀態
         <RefreshIcon />
       </div>
-      <div className="luck__container">
-        <div className="status-none">
+      <div className="luckContainer">
+        <div className="statusDisable">
           <Box
             sx={{
               display: "flex",
@@ -63,10 +63,10 @@ const Luck = () => {
               },
             }}
           >
-            <Paper className="p" elevation={0}></Paper>
+            <Paper className="statusPaper" elevation={0}></Paper>
           </Box>
         </div>
-        <div className="luck__section">
+        <div className="luckSection">
           {isFetching ? (
             <Box
               sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}
@@ -82,7 +82,7 @@ const Luck = () => {
               ))}
             </Box>
           ) : (
-            <div className="luck__btn" style={{ width: " 100 %" }}>
+            <div className="luckButton" style={{ width: " 100 %" }}>
               <Box
                 sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}
               >
@@ -101,8 +101,8 @@ const Luck = () => {
                         item.error === 1
                           ? "#FF5A5A"
                           : item.userId !== null
-                          ? "#363F4E"
-                          : "#FFFFFF",
+                            ? "#363F4E"
+                            : "#FFFFFF",
                       color:
                         item.error !== 1
                           ? item.userId !== null
@@ -114,11 +114,11 @@ const Luck = () => {
                           ? item.userId !== null
                             ? "none"
                             : item.lockerNo === null
-                            ? "1px dashed"
-                            : "1px solid #000"
+                              ? "1px dashed"
+                              : "1px solid #000"
                           : item.userId !== null
-                          ? "none"
-                          : "#363F4E",
+                            ? "none"
+                            : "#363F4E",
                     }}
                   >
                     {item.lockerNo}
@@ -168,8 +168,8 @@ const Luck = () => {
               },
             }}
           >
-            <Paper className="p" elevation={0}>
-              <div className="cir">
+            <Paper className="statusPaper" elevation={0}>
+              <div className="cirPaper">
                 <LockOpenIcon
                   sx={{
                     color: "#363F4E",
@@ -179,7 +179,7 @@ const Luck = () => {
                 ></LockOpenIcon>
                 開啟中
               </div>
-              <div className="cir">
+              <div className="cirPaper">
                 <LockIcon
                   sx={{
                     color: "#363F4E",
@@ -189,7 +189,7 @@ const Luck = () => {
                 ></LockIcon>
                 關閉中
               </div>
-              <div className="cir">
+              <div className="cirPaper">
                 <CircleIcon
                   sx={{
                     color: "#363F4E",
@@ -199,7 +199,7 @@ const Luck = () => {
                 ></CircleIcon>
                 使用中
               </div>
-              <div className="cir">
+              <div className="cirPaper">
                 <CircleIcon
                   sx={{
                     color: "#C4C4C4",
@@ -210,7 +210,7 @@ const Luck = () => {
                 ></CircleIcon>
                 可使用
               </div>
-              <div className="cir">
+              <div className="cirPaper">
                 <CircleIcon
                   sx={{
                     color: "#FF5A5A",
