@@ -1,6 +1,5 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import "./Lock.css";
 
 export default function Item(props) {
   const { sx, ...other } = props;
