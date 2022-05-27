@@ -309,5 +309,4 @@ const unLocked = () => {
     </div>
   );
 };
-
 export default Luck;
