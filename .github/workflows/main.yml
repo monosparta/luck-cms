@@ -1,0 +1,19 @@
+name: My Actions
+on: push
+jobs:
+  build:
+    name: Build and deploy to web server
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - run: sudo apt update
+      - run: curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+      - run: sudo apt install -y nodejs
+      - run: sudo apt install -y npm
+      - run: sudo npm install yarn
+      - run: yarn install
+      - run: yarn test --watchAll=false
+      - run: yarn build
+      - run: ssh-keygen
+      - run: ssh-copy-id deploy@10.2.10.111
+      - run: rsync -avz -e 'ssh' build/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}
