@@ -7,9 +7,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: sudo apt update
-      - run: curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
       - run: sudo apt install -y nodejs
-      - run: nodejs --version
+      - run: node --version
       - run: npm --version
       - run: yarn --version
       - run: sudo apt install -y npm
