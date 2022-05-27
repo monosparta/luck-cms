@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
@@ -10,8 +10,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import { userUpdate } from "../redux/userSlice";
-import { userAdd } from "../redux/userSlice";
+import { userAdd, userUpdate } from "../redux/userSlice";
 import "./InfoForm.css";
 
 const InfoForm = (props) => {
@@ -56,7 +55,6 @@ const InfoForm = (props) => {
     phone: inputPhone,
     cardId: inputCard,
   };
-
 
   const verifyName = (e) => {
     if (e.target.value.length <= 0) {
@@ -149,13 +147,11 @@ const InfoForm = (props) => {
       errorEmail === false
     ) {
       switch (props.userStatus) {
-
         case "AddStatus":
           dispatch(userAdd(Adddata));
           props.setUserStatus("");
           break;
         case "EditStatus":
-
           dispatch(userUpdate(Infodata));
           // dispatch(userInfo(location.state))
 
@@ -206,8 +202,7 @@ const InfoForm = (props) => {
               size: "small",
               style: {},
             }}
-          >
-          </TextField>
+          ></TextField>
         )}
       </div>
       <div className="base card">
@@ -246,8 +241,7 @@ const InfoForm = (props) => {
             inputProps={{
               style: {},
             }}
-          >
-          </TextField>
+          ></TextField>
         )}
       </div>
       <div className="base phone">
@@ -285,9 +279,7 @@ const InfoForm = (props) => {
             inputProps={{
               style: {},
             }}
-          >
-
-          </TextField>
+          ></TextField>
         )}
       </div>
       <div className="base mail">
@@ -303,7 +295,9 @@ const InfoForm = (props) => {
               verifyEmail(e);
             }}
             onChange={(e) => {
-              setInputEmail(e.target.value.replace(/[^\w!#$%&'*+-/=?^_`{|}~@]|_/gi, ""));
+              setInputEmail(
+                e.target.value.replace(/[^\w!#$%&'*+-/=?^_`{|}~@]|_/gi, "")
+              );
               setErrorEmail(false);
             }}
             // defaultValue={user.email}
@@ -324,9 +318,7 @@ const InfoForm = (props) => {
             inputProps={{
               style: {},
             }}
-          >
-
-          </TextField>
+          ></TextField>
         )}
       </div>
       <div className="save-btn">

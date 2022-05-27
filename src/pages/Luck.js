@@ -15,28 +15,33 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 
 const Luck = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(LuckStatus());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    setInterval(() => {
-      dispatch(LuckStatus());
-      console.log("Hello!");
-    }, 5000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const lockList = useSelector((state) => state.Luck.Lock);
-  useSelector(selectLuck);
-  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     dispatch(LuckStatus());
+  //     console.log("Hello!");
+  //   }, 5000);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+  const { isFetching, Lock } = useSelector(selectLuck);
+
   const handleClick = (e) => {
     navigate("/Info?No=" + e.target.innerText, { state: e.target.innerText });
   };
+
   const handleClickStop = (e) => {
     e.preventDefault();
   };
-  const { isFetching } = useSelector(selectLuck);
-  let array = new Array(42);
+
+  let loadingArray = new Array(42);
+
   return (
     <div id="Luck">
       <div className="luck__title">
@@ -66,7 +71,7 @@ const Luck = () => {
             <Box
               sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}
             >
-              {_.map(array, (item, index) => (
+              {_.map(loadingArray, (item, index) => (
                 <Skeleton
                   key={index}
                   variant="rectangular"
@@ -81,7 +86,7 @@ const Luck = () => {
               <Box
                 sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}
               >
-                {_.map(lockList, (item, index) => (
+                {_.map(Lock, (item, index) => (
                   <Item
                     key={index}
                     onClick={
@@ -219,6 +224,88 @@ const Luck = () => {
           </Box>
         </div>
       </div>
+    </div>
+  );
+};
+
+const Available = () => {
+  return (
+    <div
+      style={{
+        background: "#FFFFFF",
+        color: "#363F4E",
+        border: "1px solid #000",
+        cursor: "pointer",
+      }}
+    ></div>
+  );
+};
+
+const unAvailable = () => {
+  return (
+    <div
+      style={{
+        background: "#FF5A5A",
+        color: "#FFFFFF",
+        border: "1px solid #000",
+        cursor: "pointer",
+      }}
+    ></div>
+  );
+};
+
+const Block = () => {
+  return (
+    <div
+      style={{
+        background: "#FFFFFF",
+        border: "1px dashed",
+      }}
+    ></div>
+  );
+};
+
+const Locked = () => {
+  return (
+    <div
+      style={{
+        background: "#FFFFFF",
+        color: "#363F4E",
+        border: "1px solid #000",
+        cursor: "pointer",
+      }}
+    >
+      <LockIcon
+        sx={{
+          position: "absolute",
+          top: "5px",
+          right: "5px",
+          height: "16px",
+          width: "16px",
+        }}
+      />
+    </div>
+  );
+};
+
+const unLocked = () => {
+  return (
+    <div
+      style={{
+        background: "#FFFFFF",
+        color: "#363F4E",
+        border: "1px solid #000",
+      }}
+    >
+      <LockOpenIcon
+        sx={{
+          position: "absolute",
+          top: "5px",
+          right: "5px",
+          height: "16px",
+          width: "16px",
+        }}
+      />
     </div>
   );
 };

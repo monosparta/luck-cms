@@ -6,6 +6,7 @@ export const LuckStatus = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
+        //http://${process.env.REACT_APP_URL}:8000
         `http://${process.env.REACT_APP_URL}:8000/api/locker`,
         {
           method: "GET",
@@ -47,9 +48,6 @@ export const luckSlice = createSlice({
 
       return state;
     },
-    // saveLock: (state, { payload }) => {
-
-    // }
   },
   extraReducers: {
     [LuckStatus.fulfilled]: (state, { payload }) => {

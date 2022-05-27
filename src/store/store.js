@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 import userReducer from "../redux/userSlice";
 import luckReducer from "../redux/luckSlice";
 
 const rootReducer = combineReducers({
   userReducer,
-  luckReducer
+  luckReducer,
 });
 
 export default rootReducer;
