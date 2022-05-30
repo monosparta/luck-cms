@@ -6,10 +6,9 @@ import store from "./store/index";
 
 
 const container = document.getElementById("root");
-const root = createRoot(container);
 
-test("renders learn react link", () => {
-  root.render(
+test("renders luck link", () => {
+  render(
     <Provider store={store}>
       <App />
     </Provider>
