@@ -1,9 +1,16 @@
 name: My Actions
-on: push
+on:
+  push:
+    branches: [ staging ]
+  pull_request:
+    branches: [ staging ]
 jobs:
   build:
     name: Build and deploy to web server
     runs-on: self-hosted
+    environment: Staging
+    env:
+      REACT_APP_URL: ${{secrets.REACT_APP_URL}}
     steps:
       - uses: actions/checkout@v3
       - run: sudo apt update
