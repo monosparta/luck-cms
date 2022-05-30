@@ -1,18 +1,8 @@
-import { render, screen } from "@testing-library/react";
-import App from "./App";
-import { createRoot } from "react-dom/client";
-import { Provider } from "react-redux";
-import store from "./store/index";
+import { render, screen } from '@testing-library/react';
+import App from './App';
 
-
-const container = document.getElementById("root");
-
-test("renders luck link", () => {
-  render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+test('renders luck link', () => {
+  render(<App />);
   const linkElement = screen.getByText(/luck/i);
   expect(linkElement).toBeInTheDocument();
 });
