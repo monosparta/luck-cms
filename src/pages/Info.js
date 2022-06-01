@@ -10,6 +10,7 @@ import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import CancelIcon from "@mui/icons-material/Cancel";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import { selectUser, clearState } from "../redux/userSlice";
 import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
@@ -57,6 +58,11 @@ const Info = (props) => {
   const handleClick = () => {
     navigate("/");
   };
+
+  const handleClickRefresh = () => {
+    dispatch(userInfo(location.state));
+  };
+
   const selectFormMode = () => {
     return user.id === undefined ? (
       userStatus === "AddStatus" ? (
@@ -105,7 +111,14 @@ const Info = (props) => {
           <div className="basemode">{selectFormMode()}</div>
         </div>
         <div className="section-record">
-          <p className="record title">操作紀錄</p>
+          <p className="record title">
+            <span>操作紀錄</span>
+            <RefreshIcon
+              sx={{ cursor: "pointer", height: "20px" }}
+              onClick={handleClickRefresh}
+            />
+          </p>
+
           <div className="record panel">
             {isFetching ? (
               <Box

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -168,7 +169,23 @@ const InfoForm = (props) => {
       <div className="base name">
         <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {updating ? (
-          <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
+          <Box
+            sx={{
+              display: "flex",
+              width: "60px",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box sx={{ width: 10 }}>
+              <Skeleton animation="wave" />
+            </Box>
+            <Box sx={{ width: 10 }}>
+              <Skeleton animation="wave" />
+            </Box>
+            <Box sx={{ width: 10 }}>
+              <Skeleton animation="wave" />
+            </Box>
+          </Box>
         ) : (
           <TextField
             size="small"
