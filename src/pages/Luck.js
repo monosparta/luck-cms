@@ -21,7 +21,6 @@ const Luck = () => {
     dispatch(LuckStatus());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   // useEffect(() => {
   //   setInterval(() => {
   //     dispatch(LuckStatus());

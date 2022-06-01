@@ -4,14 +4,16 @@ jobs:
   build:
     name: Build and deploy to web server
     runs-on: self-hosted
+    environment: Staging
+    env:
+      REACT_APP_URL: ${{secrets.REACT_APP_URL}}
     steps:
       - uses: actions/checkout@v3
-      - run: sudo apt update 
+      - run: sudo apt update
       - run: node --version
       - run: npm --version
       - run: yarn --version
       - run: yarn install
+      - run: yarn test --watchAll=false
       - run: yarn build
-      - run: ssh-keygen
-      - run: ssh-copy-id deploy@10.2.10.111
       - run: rsync -avz -e 'ssh' build/ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}
