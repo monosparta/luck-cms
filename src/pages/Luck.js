@@ -21,6 +21,7 @@ const Luck = () => {
     dispatch(LuckStatus());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   // useEffect(() => {
   //   setInterval(() => {
   //     dispatch(LuckStatus());
@@ -39,13 +40,17 @@ const Luck = () => {
     e.preventDefault();
   };
 
+  const handleClickRefresh = () => {
+    dispatch(LuckStatus());
+  };
+
   let loadingArray = new Array(42);
 
   return (
     <div id="Luck">
       <div className="luckTitle">
         置物櫃當前使用狀態
-        <RefreshIcon />
+        <RefreshIcon sx={{ cursor: "pointer" }} onClick={handleClickRefresh} />
       </div>
       <div className="luckContainer">
         <div className="statusDisable">
