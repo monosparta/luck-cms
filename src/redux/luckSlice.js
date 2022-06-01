@@ -6,7 +6,6 @@ export const LuckStatus = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        //http://${process.env.REACT_APP_URL}:8000
         `http://${process.env.REACT_APP_URL}:8000/api/locker`,
         {
           method: "GET",
@@ -16,12 +15,23 @@ export const LuckStatus = createAsyncThunk(
             token,
           },
         }
-      );
+      ).then((response) => {
+        if (response.status === 200) {
+          return response;
+        }
+        if (response.status === 401) {
+          if (token !== "") {
+            localStorage.clear();
+            alert("請重新登入");
+            window.location.reload();
+          }
+        }
+      });
       let data = await response.json();
-      if (response.status === 200) {
+      if (response.ok) {
         return data;
       } else {
-        throw data.message;
+        throw data;
       }
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
