@@ -1,83 +1,83 @@
 #Info {
-	height: 80vh;
-	background-color: #f5f5f5;
+  height: 80vh;
+  background-color: #f5f5f5;
 }
 .info__section {
-	max-width: 1200px;
-	height: 100%;
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .pre-page {
-	border: none;
-	background-color: transparent;
-	cursor: pointer;
-	padding: 12px 0px 12px 24px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 12px 0px 12px 24px;
 }
 .section-base {
-	margin-left: 60px;
-	min-width: 235px;
-	/* width: 30%;
+  margin-left: 60px;
+  min-width: 235px;
+  /* width: 30%;
 	height: 85%; */
-	background-color: #fff;
-	box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
-		-4px 4px 8px rgba(54, 63, 78, 0.1);
-	padding: 5px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  background-color: #fff;
+  box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
+    -4px 4px 8px rgba(54, 63, 78, 0.1);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .section-record {
-	margin-right: 100px;
-	margin-left: 70px;
-	min-width: 490px;
-	/* width: 60%;
+  margin-right: 100px;
+  margin-left: 70px;
+  min-width: 490px;
+  /* width: 60%;
 	height: 85%; */
-	background-color: #fff;
-	box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
-		-4px 4px 8px rgba(54, 63, 78, 0.1);
-	padding: 5px;
-	display: flex;
-	flex-direction: column;
+  background-color: #fff;
+  box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
+    -4px 4px 8px rgba(54, 63, 78, 0.1);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
 }
 .base {
-	height: 53px;
-	width: 100%;
-	display: flex;
-	align-items: center;
+  height: 53px;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 .basemode,
 .basemode > div {
-	width: 95%;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	justify-content: flex-start;
+  width: 95%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .base.lock {
-	height: 30px;
-	margin: 36px 0 0 90px;
+  height: 30px;
+  margin: 36px 0 0 90px;
 }
 .base.lock > img {
-	margin: 3px 0;
+  margin: 3px 0;
 }
 .base h1 {
-	font-weight: 700;
-	font-size: 25px;
-	line-height: 30px;
-	font-style: bold;
-	color: #363f4e;
-	margin: 0 0 0 15px;
-	/* margin: 0 auto; */
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 30px;
+  font-style: bold;
+  color: #363f4e;
+  margin: 0 0 0 15px;
+  /* margin: 0 auto; */
 }
 .base.state {
-	margin: 0 0 20px 90px;
+  margin: 0 0 20px 90px;
 }
 .base p {
-	font-weight: 400;
-	margin: 15px 0 15px 25px;
+  font-weight: 400;
+  margin: 15px 0 15px 25px;
 }
 /* .control-btn {
 	width: 100%;
@@ -85,54 +85,56 @@
 	text-align: center;
 } */
 .record.title {
-	color: #363f4e;
-	font-weight: 400;
-	font-size: 24px;
+  color: #363f4e;
+  font-weight: 400;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
 }
 .record.title {
-	padding: 30px 58px 0 58px;
+  padding: 30px 58px 0 58px;
 }
 .record.panel {
-	padding: 18px 58px 0 58px;
-	max-height: 100%;
-	overflow-y: scroll;
+  padding: 18px 58px 0 58px;
+  max-height: 100%;
+  overflow-y: scroll;
 }
 ::-webkit-scrollbar {
-	width: 7px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-button {
-	background: transparent;
+  background: transparent;
 
-	border-radius: 4px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-track-piece {
-	background: transparent;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-	border-radius: 4px;
+  border-radius: 4px;
 
-	background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 
-	border: 1px solid slategrey;
+  border: 1px solid slategrey;
 }
 
 ::-webkit-scrollbar-track {
-	box-shadow: transparent;
+  box-shadow: transparent;
 }
 .diacontent {
-	margin: 10px 0;
+  margin: 10px 0;
 }
 #alert-dialog-title {
-	line-height: 1;
+  line-height: 1;
 }
 .alert img {
-	margin: 30px 0 8px 0;
+  margin: 30px 0 8px 0;
 }
 .alert p {
-	padding: 10px;
-	font-weight: 400;
-	font-size: 16px;
+  padding: 10px;
+  font-weight: 400;
+  font-size: 16px;
 }
