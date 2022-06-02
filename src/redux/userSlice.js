@@ -4,20 +4,17 @@ export const login = createAsyncThunk(
   "user/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      const response = await fetch(
-        `http://${process.env.REACT_APP_URL}:8000/api/login`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        }
-      );
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/login`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
       let data = await response.json();
       if (response.status === 200) {
         localStorage.setItem("token", data.message.token);
@@ -34,17 +31,14 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk("user/logout", async (thunkAPI) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(
-      `http://${process.env.REACT_APP_URL}:8000/api/logout`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token,
-        },
-      }
-    );
+    const response = await fetch(`${process.env.REACT_APP_URL}/api/logout`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        token,
+      },
+    });
     let data = await response.json();
     if (response.status === 200) {
       return data;
@@ -62,7 +56,7 @@ export const userInfo = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://${process.env.REACT_APP_URL}:8000/api/record/${lockerNo}`,
+        `${process.env.REACT_APP_URL}/api/record/${lockerNo}`,
         {
           method: "GET",
           headers: {
@@ -100,21 +94,18 @@ export const userUnlock = createAsyncThunk(
   async (inputData, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        `http://${process.env.REACT_APP_URL}:8000/api/unlock`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            token,
-          },
-          body: JSON.stringify({
-            lockerNo: inputData[0].lockerNo,
-            description: inputData[0].description,
-          }),
-        }
-      ).then((response) => {
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/unlock`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token,
+        },
+        body: JSON.stringify({
+          lockerNo: inputData[0].lockerNo,
+          description: inputData[0].description,
+        }),
+      }).then((response) => {
         if (response.status === 200) {
           return response;
         }
@@ -144,7 +135,7 @@ export const userUpdate = createAsyncThunk(
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://${process.env.REACT_APP_URL}:8000/api/user/${id}`,
+        `${process.env.REACT_APP_URL}/api/user/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -188,24 +179,21 @@ export const userAdd = createAsyncThunk(
   async ({ lockerNo, name, email, phone, cardId }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        `http://${process.env.REACT_APP_URL}:8000/api/user`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            token,
-          },
-          body: JSON.stringify({
-            lockerNo,
-            name,
-            email,
-            phone,
-            cardId,
-          }),
-        }
-      ).then((response) => {
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/user`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token,
+        },
+        body: JSON.stringify({
+          lockerNo,
+          name,
+          email,
+          phone,
+          cardId,
+        }),
+      }).then((response) => {
         if (response.status === 200) {
           return response;
         }
