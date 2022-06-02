@@ -269,14 +269,9 @@ export const userSlice = createSlice({
       state.isFetching = true;
       return state;
     },
-    [login.rejected]: (state, { payload }) => {
+    [login.rejected]: (state) => {
       state.isFetching = false;
       state.isError = true;
-      // if (state.token !== "") {
-      //   localStorage.clear();
-      //   alert("請重新登入");
-      //   window.location.reload();
-      // }
       return state;
     },
     [userUpdate.fulfilled]: (state) => {
@@ -291,11 +286,6 @@ export const userSlice = createSlice({
     [userUpdate.rejected]: (state) => {
       state.updating = false;
       state.isError = true;
-      // if (state.token !== "") {
-      //   localStorage.clear();
-      //   alert("請重新登入");
-      //   window.location.reload();
-      // }
       return state;
     },
     [userInfo.fulfilled]: (state, { payload }) => {
@@ -309,16 +299,11 @@ export const userSlice = createSlice({
       state.isFetching = true;
       return state;
     },
-    [userInfo.rejected]: (state, { payload }) => {
+    [userInfo.rejected]: (state) => {
       state.isFetching = false;
       state.isError = true;
       state.user = [];
       state.records = [];
-      // if (state.token !== "") {
-      //   localStorage.clear();
-      //   alert("請重新登入");
-      //   window.location.reload();
-      // }
       return state;
     },
     [userUnlock.fulfilled]: (state) => {
@@ -333,11 +318,6 @@ export const userSlice = createSlice({
     [userUnlock.rejected]: (state) => {
       state.isFetching = false;
       state.isError = true;
-      // if (state.token !== "") {
-      //   localStorage.clear();
-      //   alert("請重新登入");
-      //   window.location.reload();
-      // }
       return state;
     },
     [userAdd.fulfilled]: (state) => {
@@ -352,11 +332,6 @@ export const userSlice = createSlice({
     [userAdd.rejected]: (state) => {
       state.updating = false;
       state.isError = true;
-      // if (state.token !== "") {
-      //   localStorage.clear();
-      //   alert("請重新登入");
-      //   window.location.reload();
-      // }
       return state;
     },
   },
