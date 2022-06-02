@@ -19,15 +19,12 @@ const Luck = () => {
 
   useEffect(() => {
     dispatch(LuckStatus());
+    let refresh = setInterval(() => {
+      dispatch(LuckStatus());
+    }, 30000);
+    return () => clearInterval(refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     dispatch(LuckStatus());
-  //     console.log("Hello!");
-  //   }, 5000);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   const { isFetching, Lock } = useSelector(selectLuck);
 

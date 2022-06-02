@@ -70,14 +70,9 @@ export const luckSlice = createSlice({
       state.isFetching = true;
       return state;
     },
-    [LuckStatus.rejected]: (state, { payload }) => {
+    [LuckStatus.rejected]: (state) => {
       state.isFetching = false;
       state.isError = true;
-      // if (state.token !== "") {
-      //   localStorage.clear();
-      //   alert("請重新登入");
-      //   window.location.reload();
-      // }
     },
   },
 });

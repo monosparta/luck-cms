@@ -16,19 +16,19 @@ import { selectUser } from "./redux/userSlice";
 const App = () => {
   const { token } = useSelector(selectUser);
 
-  const ver = localStorage.getItem("token");
+  const verifyToken = localStorage.getItem("token");
   return (
     <Router>
       <Routes>
-        {token === "" && ver === null ? (
-          <Route path="*" element={<Navigate to="/login" replace />} />
+        {token === "" && verifyToken === null ? (
+          <Route path="*" element={<Navigate replace to="/login" />} />
         ) : (
           <Route path="/" element={<Appbar />}>
             <Route path="/" element={<Luck />} />
             <Route path="/info" element={<Info />} />
           </Route>
         )}
-        <Route path="/login" index element={<Login />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );

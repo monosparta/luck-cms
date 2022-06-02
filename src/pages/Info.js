@@ -47,13 +47,13 @@ const Info = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userStatus]);
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     dispatch(userInfo(location.state));
-  //     console.log("Hello!");
-  //   }, 5000);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useEffect(() => {
+    let refresh = setInterval(() => {
+      dispatch(userInfo(location.state));
+    }, 5000);
+    return () => clearInterval(refresh);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClick = () => {
     navigate("/");
