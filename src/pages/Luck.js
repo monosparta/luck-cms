@@ -21,7 +21,6 @@ const Luck = () => {
     dispatch(LuckStatus());
     let refresh = setInterval(() => {
       dispatch(LuckStatus());
-      console.log("Hello!");
     }, 30000);
     return () => clearInterval(refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
