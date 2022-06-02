@@ -5,17 +5,14 @@ export const LuckStatus = createAsyncThunk(
   async (thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        `http://${process.env.REACT_APP_URL}:8000/api/locker`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            token,
-          },
-        }
-      ).then((response) => {
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/locker`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token,
+        },
+      }).then((response) => {
         if (response.status === 200) {
           return response;
         }
