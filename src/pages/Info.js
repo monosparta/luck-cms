@@ -50,7 +50,7 @@ const Info = (props) => {
   useEffect(() => {
     let refresh = setInterval(() => {
       dispatch(userInfo(location.state));
-    }, 5000);
+    }, 30000);
     return () => clearInterval(refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
