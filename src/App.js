@@ -24,7 +24,7 @@ const App = () => {
           <Route path="*" element={<Navigate replace to="/login" />} />
         ) : (
           <Route path="/" element={<Appbar />}>
-            <Route path="/" element={<Luck />} />
+            <Route path="/" index element={<Luck />} />
             <Route path="/info" element={<Info />} />
           </Route>
         )}
