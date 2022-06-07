@@ -1,9 +1,9 @@
 name: My Actions
 on:
   push:
-    branches: [ staging ]
+    branches: [ stage ]
   pull_request:
-    branches: [ staging ]
+    branches: [ stage ]
 jobs:
   build:
     name: Build and deploy to web server
