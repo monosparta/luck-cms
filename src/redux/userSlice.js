@@ -231,6 +231,7 @@ export const userSlice = createSlice({
     isSuccess: false,
     isError: false,
     updating: false,
+    errorMessage: "",
   },
   reducers: {
     clearState: (state) => {
@@ -273,9 +274,10 @@ export const userSlice = createSlice({
       state.updating = true;
       return state;
     },
-    [userUpdate.rejected]: (state) => {
+    [userUpdate.rejected]: (state, { payload }) => {
       state.updating = false;
       state.isError = true;
+      state.errorMessage = payload;
       return state;
     },
     [userInfo.fulfilled]: (state, { payload }) => {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userInfo } from "../redux/userSlice";
+import { selectLock } from "../redux/lockSlice";
 import { useLocation } from "react-router-dom";
 import "./Info.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -32,7 +33,7 @@ const Info = (props) => {
   const { user, records, isFetching, isError, isSuccess } =
     useSelector(selectUser);
 
-  const lockList = useSelector((state) => state.Luck.Lock);
+  const { lockList } = useSelector(selectLock);
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
@@ -101,8 +102,6 @@ const Info = (props) => {
       <div className="info__section">
         <div className="section-base">
           <div className="base lock">
-            {/* {lockList[location.state].lockUp === 1 ? <LockIcon /> : <LockOpenIcon />} */}
-
             {luckIconStatus === 1 ? <LockIcon /> : <LockOpenIcon />}
 
             {isFetching ? (
