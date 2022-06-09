@@ -10,6 +10,7 @@ import Info from "./pages/Info";
 import Luck from "./pages/Luck";
 import Appbar from "./components/Appbar";
 import "./App.css";
+
 import { useSelector } from "react-redux";
 import { selectUser } from "./redux/userSlice";
 
@@ -23,10 +24,13 @@ const App = () => {
         {token === "" && verifyToken === null ? (
           <Route path="*" element={<Navigate replace to="/login" />} />
         ) : (
-          <Route path="/" element={<Appbar />}>
-            <Route path="/" index element={<Luck />} />
-            <Route path="/info" element={<Info />} />
-          </Route>
+          <>
+            <Route path="/login" element={<Navigate replace to="/" />} />
+            <Route path="/" element={<Appbar />}>
+              <Route path="/" index element={<Luck />} />
+              <Route path="/info" element={<Info />} />
+            </Route>
+          </>
         )}
         <Route path="/login" element={<Login />} />
       </Routes>

@@ -4,11 +4,11 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
-import Avatar from "@mui/material/Avatar";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearToken, logout } from "../redux/userSlice";
+import PersonIcon from "@mui/icons-material/Person";
 import "./Appbar.css";
 
 const Appbar = () => {
@@ -22,6 +22,8 @@ const Appbar = () => {
     navigate("/login");
   };
 
+  const name = localStorage.getItem("name");
+
   return (
     <div className="Appbar">
       <AppBar position="static" elevation={0} style={{ background: "#363F4E" }}>
@@ -31,12 +33,8 @@ const Appbar = () => {
           <Box sx={{ flexGrow: 1 }} />
           <div className="Bar">
             <div className="Bar-user">
-              <Avatar
-                className="avatar"
-                src="./ROSA.png"
-                sx={{ width: 36, height: 36 }}
-              ></Avatar>
-              <p className="username"> Rosa </p>
+              <PersonIcon />
+              <p className="username"> {name} </p>
             </div>
             <div className="Bar-logout">
               <Button

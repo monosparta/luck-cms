@@ -111,7 +111,7 @@ const Readmode = (props) => {
         {isFetching ? (
           <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
         ) : (
-          <p>{user.email}</p>
+          <p>{user.mail}</p>
         )}
       </div>
       <div className="control-btn">
