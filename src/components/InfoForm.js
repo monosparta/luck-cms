@@ -21,7 +21,7 @@ const InfoForm = (props) => {
   const [inputName, setInputName] = React.useState(user.name);
   const [inputCard, setInputCard] = React.useState(user.cardId);
   const [inputPhone, setInputPhone] = React.useState(user.phone);
-  const [inputEmail, setInputEmail] = React.useState(user.email);
+  const [inputEmail, setInputEmail] = React.useState(user.mail);
   const [errorName, setErrorName] = React.useState(false);
   const [errorCard, setErrorCard] = React.useState(false);
   const [errorPhone, setErrorPhone] = React.useState(false);
@@ -30,11 +30,8 @@ const InfoForm = (props) => {
   const [colorCard, setColorCard] = React.useState("gray");
   const [colorPhone, setColorPhone] = React.useState("gray");
   const [colorEmail, setColorEmail] = React.useState("gray");
-  //  ^[A-Za-z0-9+_.-]+@(.+)$
-  //  /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
   const emailRule =
     /^[\w!#$%&'*+-/=?^_`{|}~]+(.[\w!#$%&'*+-/=?^_`{|}~]+)*@[\w-]+(.[\w-]+)+$/;
-  ///^[\w!\#$%&'*+\-\/=?^_`{|}~]+(\.[\w!#$%&'*+\-\/=?^_`{|}~]+)*@[\w\-]+(\.[\w\-]+)+$/ 原本的
   const phoneRule = "^(09)[0-9]{8}$";
   const globalPhoneRule = "^(886)[0-9]{9}$";
   const handleLeave = () => {
@@ -70,7 +67,7 @@ const InfoForm = (props) => {
   };
 
   const verifyCard = (e) => {
-    if (e.target.value.length <= 0 || e.target.value.length >= 20) {
+    if (e.target.value.length <= 0 || e.target.value.length >= 10) {
       setErrorCard(true);
       setColorCard("#d32f2f");
       // setError(true);
@@ -155,7 +152,6 @@ const InfoForm = (props) => {
         case "EditStatus":
           dispatch(userUpdate(Infodata));
           // dispatch(userInfo(location.state))
-
           props.setUserStatus("");
           break;
         default:

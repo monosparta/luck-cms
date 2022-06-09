@@ -11,7 +11,7 @@ export const login = createAsyncThunk(
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email,
+          mail: email,
           password,
         }),
       });
@@ -67,6 +67,9 @@ export const userInfo = createAsyncThunk(
         }
       ).then((response) => {
         if (response.status === 200) {
+          return response;
+        }
+        if (response.status === 400) {
           return response;
         }
         if (response.status === 401) {
@@ -145,7 +148,7 @@ export const userUpdate = createAsyncThunk(
           },
           body: JSON.stringify({
             name,
-            email,
+            mail: email,
             phone,
             cardId,
           }),
@@ -189,7 +192,7 @@ export const userAdd = createAsyncThunk(
         body: JSON.stringify({
           lockerNo,
           name,
-          email,
+          mail: email,
           phone,
           cardId,
         }),
@@ -220,9 +223,8 @@ export const userAdd = createAsyncThunk(
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    email: "",
-    password: "",
     token: "",
+    name: "",
     user: [],
     records: [],
     isFetching: false,
@@ -248,9 +250,9 @@ export const userSlice = createSlice({
     [login.fulfilled]: (state, { payload }) => {
       state.isFetching = false;
       state.isSuccess = true;
-      state.email = payload.email;
-      state.password = payload.password;
+      state.name = payload.message.name;
       state.token = payload.message.token;
+      localStorage.setItem("name", payload.message.name);
       return state;
     },
     [login.pending]: (state) => {
