@@ -27,7 +27,6 @@ const Login = (props) => {
     }
     dispatch(login(data));
   };
-
   useEffect(() => {
     return () => {
       dispatch(clearState());
@@ -87,7 +86,7 @@ const Login = (props) => {
               <h1>Sign in</h1>
             </div>
             <div className="form-item-user">
-              <h2>帳號 Username or Email</h2>
+              <h2>帳號 Email</h2>
               <CssTextField
                 required
                 type="email"

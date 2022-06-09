@@ -29,7 +29,8 @@ const Info = (props) => {
   const [luckIconStatus, setLuckIconStatus] = React.useState(null);
   const [userStatus, setUserStatus] = React.useState(null);
   const [error, setError] = React.useState(false);
-  const { user, records, isFetching } = useSelector(selectUser);
+  const { user, records, isFetching, isError, isSuccess } =
+    useSelector(selectUser);
 
   const lockList = useSelector((state) => state.Luck.Lock);
   useEffect(() => {
@@ -76,6 +77,19 @@ const Info = (props) => {
       <Readmode setUserStatus={setUserStatus} />
     );
   };
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(clearState());
+    }
+    if (isFetching) {
+      dispatch(clearState());
+    }
+    if (isSuccess) {
+      dispatch(clearState());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, isSuccess]);
 
   return (
     <div id="Info">
