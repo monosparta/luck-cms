@@ -31,20 +31,14 @@ export const login = createAsyncThunk(
 export const logout = createAsyncThunk("user/logout", async (thunkAPI) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await fetch(`${process.env.REACT_APP_URL}/api/logout`, {
+    await fetch(`${process.env.REACT_APP_URL}/api/logout`, {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        token,
+        token: token,
       },
     });
-    let data = await response.json();
-    if (response.status === 200) {
-      return data;
-    } else {
-      throw data.message;
-    }
   } catch (e) {
     return thunkAPI.rejectWithValue(e);
   }
@@ -323,6 +317,21 @@ export const userSlice = createSlice({
     },
     [userAdd.rejected]: (state) => {
       state.updating = false;
+      state.isError = true;
+      return state;
+    },
+    [logout.fulfilled]: (state) => {
+      state.isFetching = false;
+      state.isSuccess = true;
+      state.isError = false;
+      return state;
+    },
+    [logout.pending]: (state) => {
+      state.isFetching = true;
+      return state;
+    },
+    [logout.rejected]: (state) => {
+      state.isFetching = false;
       state.isError = true;
       return state;
     },
