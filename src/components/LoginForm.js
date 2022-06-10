@@ -85,7 +85,7 @@ const LoginForm = (props) => {
               label={<Typography sx={{ fontSize: 12 }}>保持登入</Typography>}
             />
           </div>
-          <div className="loginFormItem-btn">
+          <div className="loginFormItemButton">
             <span>
               {isFetching
                 ? props.toast.loading("登入中", { id: "loading" })

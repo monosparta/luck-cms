@@ -71,10 +71,10 @@
   opacity: 0;
   margin: 10px 0;
 }
-.loginFormItem-btn {
+.loginFormItemButton {
   margin: 10px 0;
 }
-.loginFormItem-btn span {
+.loginFormItemButton span {
   display: none;
 }
 @media screen and (max-width: 1024px) {

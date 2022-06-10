@@ -1,43 +1,41 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { userInfo } from "../redux/userSlice";
-import { selectLock } from "../redux/lockSlice";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import _ from "lodash";
 import "./Info.css";
+import { userInfo, selectUser, clearState } from "../redux/userSlice";
+import { selectLock } from "../redux/lockSlice";
+import Record from "../components/UserRecord";
+import Readmode from "../components/Readmode";
+import InfoForm from "../components/InfoForm";
+import Adduser from "../components/Adduser";
+
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import CancelIcon from "@mui/icons-material/Cancel";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { selectUser, clearState } from "../redux/userSlice";
-import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
-import Record from "../components/Record";
-import _ from "lodash";
-import Readmode from "../components/Readmode";
-import InfoForm from "../components/InfoForm";
-import Adduser from "../components/Adduser";
 
-const Info = (props) => {
+const Info = () => {
   const navigate = useNavigate();
-
   const location = useLocation();
   const dispatch = useDispatch();
+
   const [luckIconStatus, setLuckIconStatus] = React.useState(null);
   const [userStatus, setUserStatus] = React.useState(null);
   const [error, setError] = React.useState(false);
+
   const { user, records, isFetching, isError, isSuccess } =
     useSelector(selectUser);
-
   const { lockList } = useSelector(selectLock);
+
   useEffect(() => {
     dispatch(clearState());
     dispatch(userInfo(location.state));
-
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
         setLuckIconStatus(item.lockUp);
@@ -94,8 +92,8 @@ const Info = (props) => {
 
   return (
     <div id="Info">
-      <div className="info__back">
-        <button className="pre-page" onClick={handleClick}>
+      <div className="previousPage">
+        <button className="previousPageButton" onClick={handleClick}>
           <img src="./chevron.png" alt="" />
         </button>
       </div>
