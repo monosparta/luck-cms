@@ -28,18 +28,18 @@ const Appbar = () => {
     <div className="Appbar">
       <AppBar position="static" elevation={0} style={{ background: "#363F4E" }}>
         <Toolbar>
-          <img src="./mono.png" alt="" className="logo" />
-          <p className="title">會員置物櫃管理系統</p>
+          <img src="./mono.png" alt="" className="appbarLogo" />
+          <p className="appbarTitle">會員置物櫃管理系統</p>
           <Box sx={{ flexGrow: 1 }} />
-          <div className="Bar">
-            <div className="Bar-user">
+          <div className="appbar">
+            <div className="appbarUser">
               <PersonIcon />
-              <p className="username"> {name} </p>
+              <p className="appbarUsername"> {name} </p>
             </div>
-            <div className="Bar-logout">
+            <div className="appbarLogout">
               <Button
-                variant="Logout"
-                className="Bar-logout"
+                variant="appbarLogout"
+                className="appbarLogoutButton"
                 style={{
                   border: "1px solid",
                   borderColor: "#fff",
@@ -51,7 +51,7 @@ const Appbar = () => {
                 }}
                 onClick={(e) => handleClick(e)}
               >
-                <LogoutIcon className="logout-icon"></LogoutIcon>
+                <LogoutIcon className="appbarLogoutIcon"></LogoutIcon>
                 Logout
               </Button>
             </div>
