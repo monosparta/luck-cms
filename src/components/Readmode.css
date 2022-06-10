@@ -12,7 +12,7 @@
   height: 80vh;
   background-color: #f5f5f5;
 }
-.info__section {
+.userInfoSection {
   max-width: 1200px;
   height: 100%;
   margin: 0 auto;
@@ -26,7 +26,7 @@
   cursor: pointer;
   padding: 12px 0px 12px 24px;
 }
-.section-base {
+.userInfoTitle {
   width: 30%;
   height: 95%;
   background-color: #fff;
@@ -35,7 +35,7 @@
   flex-direction: column;
   align-items: center;
 }
-.section-record {
+.userRecordSection {
   width: 60%;
   height: 95%;
   background-color: #fff;
@@ -45,16 +45,12 @@
   display: flex;
   flex-direction: column;
 }
-.base {
+.userInfo {
   width: 80%;
   display: flex;
   align-items: center;
 }
-.base.lock {
-  height: 30px;
-  margin: 35px 0 5px -10px;
-}
-.base h1 {
+.userInfo h1 {
   font-weight: 700;
   font-size: 25px;
   line-height: 30px;
@@ -62,10 +58,7 @@
   color: #363f4e;
   margin: 0 0 0 15px;
 }
-.base.state {
-  margin: 0 0 55px 20px;
-}
-.base p {
+.userInfo p {
   font-weight: 400;
 }
 /* .control-btn {
@@ -73,15 +66,15 @@
 	margin-top: 35px;
 	text-align: center;
 } */
-.record.title {
+.userRecordTitle {
   color: #363f4e;
   font-weight: 400;
   font-size: 24px;
 }
-.record.title {
+.userRecordTitle {
   padding: 30px 58px 20px 58px;
 }
-.record.panel {
+.userRecord {
   padding: 18px 58px 0 58px;
   max-height: 80%;
   overflow-y: scroll;

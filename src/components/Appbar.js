@@ -1,12 +1,11 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Toolbar from "@mui/material/Toolbar";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { clearToken, logout } from "../redux/userSlice";
 import PersonIcon from "@mui/icons-material/Person";
 import "./Appbar.css";
@@ -15,14 +14,14 @@ const Appbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
+  const name = localStorage.getItem("name");
+
+  const handleClick = () => {
     dispatch(logout());
     localStorage.clear();
     dispatch(clearToken());
     navigate("/login");
   };
-
-  const name = localStorage.getItem("name");
 
   return (
     <div className="Appbar">
