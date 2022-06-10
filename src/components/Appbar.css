@@ -1,38 +1,35 @@
-.logo{
-    width:40px;
-    height:40px;
-    margin-right: 20px;
+.appbarLogo {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
 }
 
-.title{
-    font-weight: 400;
+.appbarTitle {
+  font-weight: 400;
 }
 
-.avatar{
-    margin:10px;
+.avatar {
+  margin: 10px;
 }
 
-.username{
-    padding: 10px 0px 10px 10px;
+.appbarUsername {
+  padding: 10px 0px 10px 10px;
 }
 
-.LogoutIcon{
-    padding: 10px;
+.appbarLogout {
+  padding: 10px;
 }
 
-.Logout{
-    padding: 10px;
+.appbar {
+  display: flex;
+}
+.appbarUser,
+.appbarLogout {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
 }
 
-.Bar{
-    display:flex;
-}
-.Bar-user,.Bar-logout{
-    display:flex;
-    align-items: center;
-    margin: 0 20px;
-}
-
-.logout-icon{
-    padding-right:5px;
+.appbarLogoutIcon {
+  padding-right: 5px;
 }
