@@ -82,7 +82,7 @@ const Readmode = (props) => {
 
   return (
     <div>
-      <div className="base name">
+      <div className="userInfo name">
         <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {isFetching ? (
           <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
@@ -90,7 +90,7 @@ const Readmode = (props) => {
           <p>{user.name}</p>
         )}
       </div>
-      <div className="base card">
+      <div className="userInfo card">
         <CreditCardIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {isFetching ? (
           <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
@@ -98,7 +98,7 @@ const Readmode = (props) => {
           <p>{user.cardId}</p>
         )}
       </div>
-      <div className="base phone">
+      <div className="userInfo phone">
         <PhoneAndroidIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {isFetching ? (
           <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
@@ -106,7 +106,7 @@ const Readmode = (props) => {
           <p>{user.phone}</p>
         )}
       </div>
-      <div className="base mail">
+      <div className="userInfo mail">
         <MailOutlineIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {isFetching ? (
           <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />

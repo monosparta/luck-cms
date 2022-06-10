@@ -67,7 +67,7 @@ const InfoForm = (props) => {
   };
 
   const verifyCard = (e) => {
-    if (e.target.value.length <= 0 || e.target.value.length >= 10) {
+    if (e.target.value.length <= 0 || e.target.value.length >= 16) {
       setErrorCard(true);
       setColorCard("#d32f2f");
       // setError(true);
@@ -162,7 +162,7 @@ const InfoForm = (props) => {
   };
   return (
     <div>
-      <div className="base name">
+      <div className="userInfo name">
         <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {updating ? (
           <Box
@@ -218,7 +218,7 @@ const InfoForm = (props) => {
           ></TextField>
         )}
       </div>
-      <div className="base card">
+      <div className="userInfo card">
         <CreditCardIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {updating ? (
           <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
@@ -257,7 +257,7 @@ const InfoForm = (props) => {
           ></TextField>
         )}
       </div>
-      <div className="base phone">
+      <div className="userInfo phone">
         <PhoneAndroidIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {updating ? (
           <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
@@ -295,7 +295,7 @@ const InfoForm = (props) => {
           ></TextField>
         )}
       </div>
-      <div className="base mail">
+      <div className="userInfo mail">
         <MailOutlineIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {updating ? (
           <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
