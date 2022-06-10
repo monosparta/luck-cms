@@ -5,14 +5,15 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import { selectUser } from "./redux/userSlice";
+
 import Login from "./pages/Login";
 import Info from "./pages/Info";
-import Luck from "./pages/Luck";
+import Luck from "./pages/Lock";
 import Appbar from "./components/Appbar";
 import "./App.css";
-
-import { useSelector } from "react-redux";
-import { selectUser } from "./redux/userSlice";
 
 const App = () => {
   const { token } = useSelector(selectUser);

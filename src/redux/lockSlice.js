@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const LuckStatus = createAsyncThunk(
-  "Luck/LuckStatus",
+export const lockStatus = createAsyncThunk(
+  "lock/lockStatus",
   async (thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
@@ -36,10 +36,10 @@ export const LuckStatus = createAsyncThunk(
   }
 );
 
-export const luckSlice = createSlice({
-  name: "Luck",
+export const lockSlice = createSlice({
+  name: "lock",
   initialState: {
-    Lock: [{}],
+    lockList: [{}],
     currentNumber: "",
     isFetching: false,
     isSuccess: false,
@@ -48,7 +48,7 @@ export const luckSlice = createSlice({
   },
   reducers: {
     clearState: (state) => {
-      state.Lock = [{}];
+      state.lockList = [{}];
       state.isError = false;
       state.isSuccess = false;
       state.isFetching = false;
@@ -57,25 +57,26 @@ export const luckSlice = createSlice({
     },
   },
   extraReducers: {
-    [LuckStatus.fulfilled]: (state, { payload }) => {
+    [lockStatus.fulfilled]: (state, { payload }) => {
       state.isFetching = false;
       state.isSuccess = true;
-      state.Lock = payload;
+      state.lockList = payload;
       return state;
     },
-    [LuckStatus.pending]: (state) => {
+    [lockStatus.pending]: (state) => {
       state.isFetching = true;
       return state;
     },
-    [LuckStatus.rejected]: (state) => {
+    [lockStatus.rejected]: (state) => {
       state.isFetching = false;
       state.isError = true;
+      return state;
     },
   },
 });
 
-export const { clearState } = luckSlice.actions;
+export const { clearState } = lockSlice.actions;
 
-export const selectLuck = (state) => state.Luck;
+export const selectLock = (state) => state.lock;
 
-export default luckSlice.reducer;
+export default lockSlice.reducer;
