@@ -6,18 +6,19 @@ import _ from "lodash";
 import "./Info.css";
 import { userInfo, selectUser, clearState } from "../redux/userSlice";
 import { selectLock } from "../redux/lockSlice";
-import Record from "../components/UserRecord";
+import UserRecord from "../components/UserRecord";
 import Readmode from "../components/Readmode";
 import InfoForm from "../components/InfoForm";
 import Adduser from "../components/Adduser";
+import UserInfoTitle from "../components/UserInfoTitle";
+import {
+  CancelIconStyle,
+  CheckCircleIconStyle,
+  AccessTimeFilledIconStyle,
+} from "../components/IconStyle";
+import UserRecordSkeleton from "../components/UserRecordSkeleton";
 
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import CancelIcon from "@mui/icons-material/Cancel";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
-import LockIcon from "@mui/icons-material/Lock";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 
 const Info = () => {
@@ -97,18 +98,11 @@ const Info = () => {
           <img src="./chevron.png" alt="" />
         </button>
       </div>
-      <div className="info__section">
-        <div className="section-base">
-          <div className="base lock">
-            {luckIconStatus === 1 ? <LockIcon /> : <LockOpenIcon />}
 
-            {isFetching ? (
-              <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
-            ) : (
-              <h1>置物櫃 - {location.state}</h1>
-            )}
-          </div>
-          <div className="base state" style={{ display: "flex" }}>
+      <div className="userInfoSection">
+        <div className="userInfoTitle">
+          <UserInfoTitle luckIconStatus={luckIconStatus} />
+          <div className="userInfoLockState">
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
             ) : error ? (
@@ -119,10 +113,11 @@ const Info = () => {
               <AccessTimeFilledIconStyle />
             )}
           </div>
-          <div className="basemode">{selectFormMode()}</div>
+          <div className="userInfoMode">{selectFormMode()}</div>
         </div>
-        <div className="section-record">
-          <p className="record title">
+
+        <div className="userRecordSection">
+          <p className="userRecordTitle">
             <span>操作紀錄</span>
             <RefreshIcon
               sx={{ cursor: "pointer", height: "20px" }}
@@ -130,103 +125,15 @@ const Info = () => {
             />
           </p>
 
-          <div className="record panel">
+          <div className="userRecord">
             {isFetching ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <Skeleton
-                  variant="rectangular"
-                  width="100%"
-                  height={64}
-                  sx={{ margin: "0 0 10px 0", borderRadius: "8px" }}
-                />
-                <Skeleton
-                  variant="circular"
-                  width={10}
-                  height={10}
-                  sx={{ margin: "5px" }}
-                />
-                <Skeleton
-                  variant="circular"
-                  width={10}
-                  height={10}
-                  sx={{ margin: "5px" }}
-                />
-                <Skeleton
-                  variant="circular"
-                  width={10}
-                  height={10}
-                  sx={{ margin: "5px" }}
-                />
-              </Box>
+              <UserRecordSkeleton />
             ) : (
-              <div>
-                {_.map(records, (item, index) => (
-                  <Record
-                    key={index}
-                    name={item.user.name}
-                    record={item.time}
-                    lucknum={location.state}
-                    description={item.description}
-                    permission={item.user.permission}
-                  />
-                ))}
-              </div>
+              <UserRecord records={records} />
             )}
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-const CheckCircleIconStyle = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <CheckCircleIcon style={{ color: "green", padding: "0px 8px 0px 0px" }} />
-      <h2>目前為使用中</h2>
-    </div>
-  );
-};
-const AccessTimeFilledIconStyle = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <AccessTimeFilledIcon
-        style={{ color: "grey", padding: "0px 8px 0px 0px" }}
-      />
-      <h2>目前為閒置中</h2>
-    </div>
-  );
-};
-
-const CancelIconStyle = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <CancelIcon style={{ color: "Red", padding: "0px 8px 0px 0px" }} />
-      <h2>目前異常中</h2>
     </div>
   );
 };
