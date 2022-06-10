@@ -32,8 +32,8 @@ const LockContent = () => {
             <Skeleton
               key={index}
               variant="rectangular"
-              width={80}
-              height={80}
+              width={82}
+              height={82}
               sx={{ margin: "5px 5px 5px 5px", borderRadius: "12%" }}
             />
           ))}
