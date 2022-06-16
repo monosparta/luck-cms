@@ -214,6 +214,44 @@ export const userAdd = createAsyncThunk(
   }
 );
 
+export const userDelete = createAsyncThunk(
+  "user/delete",
+  async ({ id }, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `${process.env.REACT_APP_URL}/api/user/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+        }
+      ).then((response) => {
+        if (response.status === 200) {
+          return response;
+        }
+        if (response.status === 401) {
+          if (token !== "") {
+            localStorage.clear();
+            alert("請重新登入");
+            window.location.reload();
+          }
+        }
+      });
+      if (response.ok) {
+        return response;
+      } else {
+        throw response;
+      }
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -225,6 +263,7 @@ export const userSlice = createSlice({
     isSuccess: false,
     isError: false,
     updating: false,
+    userClear: false,
     errorMessage: "",
   },
   reducers: {
@@ -232,7 +271,7 @@ export const userSlice = createSlice({
       state.isError = false;
       state.isSuccess = false;
       state.isFetching = false;
-
+      state.userClear = false;
       return state;
     },
     clearToken: (state) => {
@@ -333,6 +372,22 @@ export const userSlice = createSlice({
     [logout.rejected]: (state) => {
       state.isFetching = false;
       state.isError = true;
+      return state;
+    },
+    [userDelete.fulfilled]: (state) => {
+      state.updating = false;
+      state.isSuccess = true;
+      state.userClear = true;
+      return state;
+    },
+    [userDelete.pending]: (state) => {
+      state.updating = true;
+      return state;
+    },
+    [userDelete.rejected]: (state, { payload }) => {
+      state.updating = false;
+      state.isError = true;
+      state.errorMessage = payload;
       return state;
     },
   },

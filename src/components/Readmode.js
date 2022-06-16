@@ -116,6 +116,22 @@ const Readmode = (props) => {
       </div>
       <div className="control-btn">
         <Button
+          onClick={handleEdit}
+          variant="contained"
+          style={{
+            width: "70%",
+            height: 39,
+            background: "#363f4e",
+            boxShadow: "none",
+            fontSize: 18,
+            margin: 5,
+          }}
+          startIcon={<EditIcon />}
+        >
+          編輯資訊
+        </Button>
+
+        <Button
           variant="contained"
           onClick={handleClickOpen}
           style={{
@@ -124,28 +140,13 @@ const Readmode = (props) => {
             background: "#FFC440",
             boxShadow: "none",
             fontSize: 18,
-            margin: 5,
+            margin: "35px 5px 5px 5px",
           }}
           startIcon={<LockOpenIcon />}
         >
           強制開鎖
         </Button>
 
-        <Button
-          onClick={handleEdit}
-          variant="contained"
-          style={{
-            width: "80%",
-            height: 39,
-            background: "#A0A0A0",
-            boxShadow: "none",
-            fontSize: 18,
-            margin: 5,
-          }}
-          startIcon={<EditIcon />}
-        >
-          編輯基本資訊
-        </Button>
         <Dialog
           open={open}
           onClose={handleClose}
