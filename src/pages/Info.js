@@ -101,7 +101,12 @@ const Info = () => {
 
       <div className="userInfoSection">
         <div className="userInfoTitle">
-          <UserInfoTitle luckIconStatus={luckIconStatus} />
+          <UserInfoTitle
+            luckIconStatus={luckIconStatus}
+            setUserStatus={setUserStatus}
+            user={user}
+            handleClickRefresh={handleClickRefresh}
+          />
           <div className="userInfoLockState">
             {isFetching ? (
               <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
