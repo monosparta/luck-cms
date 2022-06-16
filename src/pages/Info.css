@@ -54,7 +54,7 @@
 }
 .userInfoLockNumber {
   height: 30px;
-  margin: 36px 90px 15px 0;
+  margin: 36px 0 15px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,7 +71,7 @@
   margin: 0 0 0 15px;
 }
 .userInfoLockState {
-  margin: 0 90px 70px 0;
+  margin: 0 90px 55px 0;
 }
 .userInfo p {
   font-weight: 400;
@@ -131,4 +131,10 @@
   padding: 10px;
   font-weight: 400;
   font-size: 16px;
+}
+
+.userDelete{
+  text-align: right;
+  padding: 0 16px;
+  margin-left: 40px;
 }
