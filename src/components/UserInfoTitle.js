@@ -15,13 +15,14 @@ const UserInfoTitle = (props) => {
   return (
     <div className="userInfoLockNumber">
       {isFetching ? (
-        <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
+        <Skeleton animation="wave" width={"150px"} sx={{ marginLeft: 1 }} />
       ) : (
         <>
           {props.luckIconStatus === 1 ? <LockIcon /> : <LockOpenIcon />}
           <h1>置物櫃 - {location.state}</h1>
 
           <UserDelete
+            setLuckIconStatus={props.setLuckIconStatus}
             setUserStatus={props.setUserStatus}
             user={props.user}
             handleClickRefresh={props.handleClickRefresh}
