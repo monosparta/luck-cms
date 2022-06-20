@@ -30,6 +30,10 @@ const InfoForm = (props) => {
   const [colorCard, setColorCard] = React.useState("gray");
   const [colorPhone, setColorPhone] = React.useState("gray");
   const [colorEmail, setColorEmail] = React.useState("gray");
+  const [helperName, setHelperName] = React.useState(false);
+  const [helperCard, setHelperCard] = React.useState(false);
+  const [helperPhone, setHelperPhone] = React.useState(false);
+  const [helperEmail, setHelperEmail] = React.useState(false);
   const emailRule =
     /^[\w!#$%&'*+-/=?^_`{|}~]+(.[\w!#$%&'*+-/=?^_`{|}~]+)*@[\w-]+(.[\w-]+)+$/;
   const phoneRule = "^(09)[0-9]{8}$";
@@ -58,23 +62,22 @@ const InfoForm = (props) => {
     if (e.target.value.length <= 0) {
       setErrorName(true);
       setColorName("#d32f2f");
-      // setError(true);
+      setHelperName("必須為中文或英文");
     } else {
       setErrorName(false);
       setColorName("gray");
-      // setError(false);
+      setHelperName(false);
     }
   };
-
   const verifyCard = (e) => {
     if (e.target.value.length <= 0 || e.target.value.length >= 16) {
       setErrorCard(true);
       setColorCard("#d32f2f");
-      // setError(true);
+      setHelperCard("卡號輸入格式不符");
     } else {
       setErrorCard(false);
       setColorCard("gray");
-      // setError(false);
+      setHelperCard(false);
     }
   };
 
@@ -82,31 +85,31 @@ const InfoForm = (props) => {
     if (e.target.value.length <= 0) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      // setError(true);
+      setHelperPhone("手機輸入格式不符");
     } else if (
       e.target.value.startsWith("09") &&
       e.target.value.search(phoneRule) === -1
     ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      // setError(true);
+      setHelperPhone("手機輸入格式不符");
     } else if (
       e.target.value.startsWith("8869") &&
       e.target.value.search(globalPhoneRule) === -1
     ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      // setError(true);
+      setHelperPhone("手機輸入格式不符");
     } else if (
       !(e.target.value.startsWith("8869") || e.target.value.startsWith("09"))
     ) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      // setError(true);
+      setHelperPhone("手機輸入格式不符");
     } else {
       setErrorPhone(false);
       setColorPhone("gray");
-      // setError(false);
+      setHelperPhone(false);
     }
   };
 
@@ -114,11 +117,11 @@ const InfoForm = (props) => {
     if (e.target.value.search(emailRule) === -1 || e.target.value.length <= 0) {
       setErrorEmail(true);
       setColorEmail("#d32f2f");
-      // setError(true);
+      setHelperEmail("Email 輸入格式不符");
     } else {
       setErrorEmail(false);
       setColorEmail("gray");
-      // setError(false);
+      setHelperEmail(false);
     }
   };
 
@@ -126,23 +129,32 @@ const InfoForm = (props) => {
     if (inputName === undefined) {
       setErrorName(true);
       setColorName("#d32f2f");
+      setHelperName("必須為中文或英文");
     }
     if (inputPhone === undefined) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
+      setHelperCard("卡號輸入格式不符");
     }
     if (inputCard === undefined) {
       setErrorCard(true);
       setColorCard("#d32f2f");
+      setHelperPhone("手機輸入格式不符");
     }
     if (inputEmail === undefined) {
       setErrorEmail(true);
       setColorEmail("#d32f2f");
-    } else if (
+      setHelperEmail("Email 輸入格式不符");
+    }
+    if (
       errorName === false &&
       errorCard === false &&
       errorPhone === false &&
-      errorEmail === false
+      errorEmail === false &&
+      inputName !== undefined &&
+      inputCard !== undefined &&
+      inputPhone !== undefined &&
+      inputEmail !== undefined
     ) {
       switch (props.userStatus) {
         case "AddStatus":
@@ -151,7 +163,6 @@ const InfoForm = (props) => {
           break;
         case "EditStatus":
           dispatch(userUpdate(Infodata));
-          // dispatch(userInfo(location.state))
           props.setUserStatus("");
           break;
         default:
@@ -205,7 +216,7 @@ const InfoForm = (props) => {
               margin: "6px",
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "gray", //FIELD 框
+                  borderColor: { colorName }, //FIELD 框
                 },
               },
             }}
@@ -215,6 +226,7 @@ const InfoForm = (props) => {
               size: "small",
               style: {},
             }}
+            helperText={helperName}
           ></TextField>
         )}
       </div>
@@ -243,7 +255,7 @@ const InfoForm = (props) => {
               margin: "6px",
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "gray",
+                  borderColor: { colorCard },
 
                   //FIELD 框
                 },
@@ -254,6 +266,7 @@ const InfoForm = (props) => {
             inputProps={{
               style: {},
             }}
+            helperText={helperCard}
           ></TextField>
         )}
       </div>
@@ -283,7 +296,7 @@ const InfoForm = (props) => {
               "& .MuiInputLabel-root": {},
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "gray", //FIELD 框
+                  borderColor: { colorPhone }, //FIELD 框
                 },
               },
             }}
@@ -292,6 +305,7 @@ const InfoForm = (props) => {
             inputProps={{
               style: {},
             }}
+            helperText={helperPhone}
           ></TextField>
         )}
       </div>
@@ -322,7 +336,7 @@ const InfoForm = (props) => {
               margin: "6px",
               "& .MuiOutlinedInput-root": {
                 "&.Mui-focused fieldset": {
-                  borderColor: "gray", //FIELD 框
+                  borderColor: { colorEmail }, //FIELD 框
                 },
               },
             }}
@@ -331,6 +345,7 @@ const InfoForm = (props) => {
             inputProps={{
               style: {},
             }}
+            helperText={helperEmail}
           ></TextField>
         )}
       </div>
