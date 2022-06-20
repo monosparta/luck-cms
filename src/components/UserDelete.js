@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userDelete } from "../redux/userSlice";
 import { selectUser } from "../redux/userSlice";
-import ClearAllIcon from "@mui/icons-material/ClearAll";
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -38,10 +38,9 @@ const UserDelete = (props) => {
   };
   return (
     <div className="userDelete">
-      <ClearAllIcon
+      <DeleteSweepIcon
         onClick={handleCheckOpen}
         sx={{
-          color: "gray",
           height: "20px",
           width: "20px",
           cursor: "pointer",
