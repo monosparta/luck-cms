@@ -24,6 +24,7 @@ const LockContent = () => {
   };
 
   let loadingArray = new Array(42);
+
   return (
     <>
       {isFetching ? (
@@ -32,8 +33,8 @@ const LockContent = () => {
             <Skeleton
               key={index}
               variant="rectangular"
-              width={82}
-              height={82}
+              width="82px"
+              height="82px"
               sx={{ margin: "5px 5px 5px 5px", borderRadius: "12%" }}
             />
           ))}
