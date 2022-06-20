@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/userSlice";
+import { lockStatus } from "../redux/lockSlice";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -61,9 +62,9 @@ const Readmode = (props) => {
       userUnlock([{ lockerNo: location.state, description: inputDescription }])
     );
     setUpdate(true);
-    dispatch(userInfo(location.state));
     setCheckOpen(false);
-    setAlertOpen(true);
+    dispatch(lockStatus());
+    dispatch(userInfo(location.state));
     setTimeout(() => {
       setAlertOpen(false);
     }, 3000);

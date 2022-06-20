@@ -10,6 +10,7 @@ import UserRecord from "../components/UserRecord";
 import Readmode from "../components/Readmode";
 import InfoForm from "../components/InfoForm";
 import Adduser from "../components/Adduser";
+import { lockStatus } from "../redux/lockSlice";
 import UserInfoTitle from "../components/UserInfoTitle";
 import {
   CancelIconStyle,
@@ -33,9 +34,9 @@ const Info = () => {
   const { user, records, isFetching, isError, isSuccess } =
     useSelector(selectUser);
   const { lockList } = useSelector(selectLock);
-
   useEffect(() => {
     dispatch(clearState());
+    dispatch(lockStatus());
     dispatch(userInfo(location.state));
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
@@ -102,6 +103,7 @@ const Info = () => {
       <div className="userInfoSection">
         <div className="userInfoTitle">
           <UserInfoTitle
+            setLuckIconStatus={setLuckIconStatus}
             luckIconStatus={luckIconStatus}
             setUserStatus={setUserStatus}
             user={user}
@@ -109,7 +111,11 @@ const Info = () => {
           />
           <div className="userInfoLockState">
             {isFetching ? (
-              <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
+              <Skeleton
+                animation="wave"
+                width={"70px"}
+                sx={{ marginLeft: 1 }}
+              />
             ) : error ? (
               <CancelIconStyle />
             ) : user.id !== undefined ? (

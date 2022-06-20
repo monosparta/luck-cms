@@ -1,5 +1,4 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import "./UserRecord.css";
 import _ from "lodash";
 import Accordion from "@mui/material/Accordion";
@@ -9,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 const Record = (props) => {
-  const location = useLocation();
   return (
     <div>
       {_.map(props.records, (item, index) => (
@@ -28,7 +26,7 @@ const Record = (props) => {
                   {item.user.name}
                 </Typography>
                 <Typography sx={{ color: "text.secondary" }}>
-                  於 {item.time} 關閉第 {location.state} 櫃
+                  於 {item.time} 開啟
                 </Typography>
               </AccordionSummary>
             </Box>
@@ -51,7 +49,7 @@ const Record = (props) => {
                     管理員 - {item.user.name}
                   </Typography>
                   <Typography sx={{ color: "text.secondary" }}>
-                    於 {item.time} 強制開啟 {location.state} 櫃
+                    於 {item.time} 強制開啟
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails
