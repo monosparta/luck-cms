@@ -3,14 +3,13 @@ import { useForm } from "react-hook-form";
 import { selectUser } from "../redux/userSlice";
 import { useSelector } from "react-redux";
 
-import {
-  TextField,
-  Checkbox,
-  Typography,
-  FormControlLabel,
-  Button,
-  styled,
-} from "@mui/material";
+import { TextField, Button, styled } from "@mui/material";
+
+// import {
+//   Checkbox,
+//   Typography,
+//   FormControlLabel,
+// } from "@mui/material";
 
 const LoginForm = (props) => {
   const { register, handleSubmit } = useForm();
@@ -79,12 +78,12 @@ const LoginForm = (props) => {
               {...register("password")}
             />
           </div>
-          <div className="loginFormItemCheck">
+          {/* <div className="loginFormItemCheck">
             <FormControlLabel
               control={<Checkbox size="small" style={{ color: "#363F4E" }} />}
               label={<Typography sx={{ fontSize: 12 }}>保持登入</Typography>}
             />
-          </div>
+          </div> */}
           <div className="loginFormItemButton">
             <span>
               {isFetching
@@ -100,7 +99,7 @@ const LoginForm = (props) => {
                 height: 47,
                 background: "#363F4E",
                 boxShadow: "none",
-                fontSize: 18,
+                fontSize: 24,
               }}
             >
               立即登入

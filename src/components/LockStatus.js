@@ -54,10 +54,13 @@ const LockStatus = () => {
         <div className="lockCirclePaper">
           <CircleIcon
             sx={{
-              color: "#C4C4C4",
+              color: "#FFFFFF",
               borderRadius: "50%",
-              height: "16px",
-              width: "16px",
+              height: "13.33px",
+              width: "13.33px",
+              margin: "1px",
+              boxSizing: "border-box",
+              border: "1px solid #000",
             }}
           ></CircleIcon>
           可使用
