@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import _ from "lodash";
 import "./Info.css";
-import { userInfo, selectUser, clearState } from "../redux/userSlice";
+import { userInfo, selectUser, clearState, clearMsg } from "../redux/userSlice";
 import { selectLock } from "../redux/lockSlice";
 import UserRecord from "../components/UserRecord";
 import Readmode from "../components/Readmode";
 import InfoForm from "../components/InfoForm";
 import Adduser from "../components/Adduser";
 import UserInfoTitle from "../components/UserInfoTitle";
+import toast, { Toaster } from "react-hot-toast";
 import {
   CancelIconStyle,
   CheckCircleIconStyle,
@@ -30,12 +31,17 @@ const Info = () => {
   const [userStatus, setUserStatus] = React.useState(null);
   const [error, setError] = React.useState(false);
 
-  const { user, records, isFetching, isError, isSuccess } =
+  const { user, records, isFetching, isError, isSuccess, errorMessage } =
     useSelector(selectUser);
   const { lockList } = useSelector(selectLock);
-
+  if (isError) {
+    toast.error(errorMessage);
+  } else {
+    toast.remove("loading");
+  }
   useEffect(() => {
     dispatch(clearState());
+    dispatch(clearMsg());
     dispatch(userInfo(location.state));
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
@@ -93,6 +99,7 @@ const Info = () => {
 
   return (
     <div id="Info">
+      <Toaster />
       <div className="previousPage">
         <button className="previousPageButton" onClick={handleClick}>
           <img src="./chevron.png" alt="" />

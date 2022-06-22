@@ -70,7 +70,7 @@ const InfoForm = (props) => {
     }
   };
   const verifyCard = (e) => {
-    if (e.target.value.length <= 0 || e.target.value.length >= 16) {
+    if (e.target.value.length <= 6 || e.target.value.length >= 16) {
       setErrorCard(true);
       setColorCard("#d32f2f");
       setHelperCard("卡號輸入格式不符");
