@@ -100,25 +100,31 @@ const Info = () => {
       </div>
 
       <div className="userInfoSection">
-        <div className="userInfoTitle">
-          <UserInfoTitle
-            luckIconStatus={luckIconStatus}
-            setUserStatus={setUserStatus}
-            user={user}
-            handleClickRefresh={handleClickRefresh}
-          />
-          <div className="userInfoLockState">
-            {isFetching ? (
-              <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
-            ) : error ? (
-              <CancelIconStyle />
-            ) : user.id !== undefined ? (
-              <CheckCircleIconStyle />
-            ) : (
-              <AccessTimeFilledIconStyle />
-            )}
+        <div className="userInfoContainer">
+          <div className="userInfoTitle">
+            <UserInfoTitle
+              luckIconStatus={luckIconStatus}
+              setUserStatus={setUserStatus}
+              user={user}
+              handleClickRefresh={handleClickRefresh}
+            />
+            <div className="userInfoLockState">
+              {isFetching ? (
+                <Skeleton
+                  animation="wave"
+                  width={"50%"}
+                  sx={{ marginLeft: 1 }}
+                />
+              ) : error ? (
+                <CancelIconStyle />
+              ) : user.id !== undefined ? (
+                <CheckCircleIconStyle />
+              ) : (
+                <AccessTimeFilledIconStyle />
+              )}
+            </div>
+            <div className="userInfoMode">{selectFormMode()}</div>
           </div>
-          <div className="userInfoMode">{selectFormMode()}</div>
         </div>
 
         <div className="userRecordSection">

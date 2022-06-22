@@ -134,12 +134,12 @@ const InfoForm = (props) => {
     if (inputPhone === undefined) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setHelperCard("卡號輸入格式不符");
+      setHelperPhone("卡號輸入格式不符");
     }
     if (inputCard === undefined) {
       setErrorCard(true);
       setColorCard("#d32f2f");
-      setHelperPhone("手機輸入格式不符");
+      setHelperCard("手機輸入格式不符");
     }
     if (inputEmail === undefined) {
       setErrorEmail(true);
@@ -354,7 +354,7 @@ const InfoForm = (props) => {
           onClick={handleSave}
           variant="contained"
           style={{
-            width: "40%",
+            width: "41%",
             height: 39,
             background: "#363F4E",
             boxShadow: "none",
@@ -369,7 +369,7 @@ const InfoForm = (props) => {
           onClick={handleLeave}
           variant="contained"
           style={{
-            width: "40%",
+            width: "41%",
             height: 39,
             background: "#363F4E",
             boxShadow: "none",

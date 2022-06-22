@@ -6,6 +6,7 @@ export const CheckCircleIconStyle = () => {
   return (
     <div
       style={{
+        width: "80%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
