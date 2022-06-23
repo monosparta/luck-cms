@@ -348,7 +348,6 @@ export const userSlice = createSlice({
     },
     [userUnlock.rejected]: (state) => {
       state.isFetching = false;
-      state.isError = true;
       return state;
     },
     [userAdd.fulfilled]: (state) => {
@@ -392,7 +391,6 @@ export const userSlice = createSlice({
     },
     [userDelete.rejected]: (state) => {
       state.updating = false;
-      state.isError = true;
       return state;
     },
   },

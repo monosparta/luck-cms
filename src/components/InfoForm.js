@@ -18,10 +18,10 @@ const InfoForm = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { user, updating } = useSelector(selectUser);
-  const [inputName, setInputName] = React.useState(user.name);
-  const [inputCard, setInputCard] = React.useState(user.cardId);
-  const [inputPhone, setInputPhone] = React.useState(user.phone);
-  const [inputEmail, setInputEmail] = React.useState(user.mail);
+  const [inputName, setInputName] = React.useState(user.name || "");
+  const [inputCard, setInputCard] = React.useState(user.cardId || "");
+  const [inputPhone, setInputPhone] = React.useState(user.phone || "");
+  const [inputEmail, setInputEmail] = React.useState(user.mail || "");
   const [errorName, setErrorName] = React.useState(false);
   const [errorCard, setErrorCard] = React.useState(false);
   const [errorPhone, setErrorPhone] = React.useState(false);

@@ -1,0 +1,51 @@
+#register {
+  height: 80vh;
+}
+
+.registerArea {
+  max-width: 581px;
+  height: 100%;
+  margin: 40px auto 0 auto;
+  background: #ffffff;
+  box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
+    -4px 4px 8px rgba(54, 63, 78, 0.1);
+  border-radius: 10px;
+}
+
+.registerForm {
+  padding: 37.5px 50px 20px 50px;
+}
+
+.registerFormItemTitle h1 {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 40px;
+  margin-bottom: 28px;
+}
+
+.registerFormItem h2 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 8px;
+}
+
+.registerFormItemUser {
+  margin-bottom: 4%;
+}
+
+.registerFormItemEmail {
+  margin-bottom: 4%;
+}
+
+.registerFormItemPassword {
+  margin-bottom: 4%;
+}
+
+.registerFormItemConfirm {
+  margin-bottom: 4%;
+}
+
+.registerFormItemButton {
+  margin-top: 8%;
+}

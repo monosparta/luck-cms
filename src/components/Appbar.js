@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -27,13 +27,17 @@ const Appbar = () => {
     <div className="Appbar">
       <AppBar position="static" elevation={0} style={{ background: "#363F4E" }}>
         <Toolbar>
-          <img src="./mono.png" alt="" className="appbarLogo" />
-          <p className="appbarTitle">會員置物櫃管理系統</p>
+          <Link to="/" className="appbarHomePage">
+            <img src="./mono.png" alt="" className="appbarLogo" />
+            <p className="appbarTitle">會員置物櫃管理系統</p>
+          </Link>
           <Box sx={{ flexGrow: 1 }} />
           <div className="appbar">
             <div className="appbarUser">
-              <PersonIcon />
-              <p className="appbarUsername"> {name} </p>
+              <Link to="/register">
+                <PersonIcon />
+                <p className="appbarUsername"> {name} </p>
+              </Link>
             </div>
             <div className="appbarLogout">
               <Button
