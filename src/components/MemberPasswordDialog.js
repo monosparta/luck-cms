@@ -1,54 +1,34 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userDelete } from "../redux/userSlice";
-import { selectUser } from "../redux/userSlice";
-import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import Button from "@mui/material/Button";
+import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogTitle from "@mui/material/DialogTitle";
-import Collapse from "@mui/material/Collapse";
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
-import CheckIcon from "@mui/icons-material/Check";
-
-const UserDelete = (props) => {
-  const dispatch = useDispatch();
-
-  const [checkOpen, setCheckOpen] = React.useState(false);
-  const [alertOpen, setAlertOpen] = React.useState(false);
-  const { userClear } = useSelector(selectUser);
-
-  const handleUserDelete = () => {
-    dispatch(userDelete({ id: props.user.id }));
-    setCheckOpen(false);
-    setAlertOpen(true);
+const MemberPasswordDialog = (props) => {
+  const HandleModtify = () => {
+    props.setCheckOpen(false);
+    props.setAlertOpen(true);
     setTimeout(() => {
-      setAlertOpen(false);
+      props.setAlertOpen(false);
     }, 3000);
   };
 
-  if (userClear) {
-    props.handleClickRefresh();
-  }
-  const handleCheckOpen = () => {
-    setCheckOpen(true);
+  const HandleDelete = () => {
+    setTimeout(() => {
+      props.setAlertOpen(false);
+    }, 3000);
   };
+
+  const handleCheckOpen = () => {
+    props.setCheckOpen(true);
+  };
+
   const handleCheckClose = () => {
-    setCheckOpen(false);
+    props.setCheckOpen(false);
   };
   return (
-    <div className="userDelete">
-      <DeleteSweepIcon
-        onClick={handleCheckOpen}
-        sx={{
-          height: "20px",
-          width: "20px",
-          cursor: "pointer",
-        }}
-      />
+    <>
       <Dialog
-        open={checkOpen}
+        open={props.checkOpen}
         onClose={handleCheckClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -82,13 +62,13 @@ const UserDelete = (props) => {
         >
           <div className="alert">
             <img src="./alert.png" alt="" className="alert" />
-            <p>確定要執行刪除會員資料的動作嗎？</p>
+            <p>確定要修改密碼嗎？</p>
           </div>
         </DialogTitle>
         <DialogActions sx={{ width: 244 }}>
           <Button
             variant="contained"
-            onClick={handleUserDelete}
+            onClick={HandleModtify}
             style={{
               width: 108,
               height: 36,
@@ -118,29 +98,8 @@ const UserDelete = (props) => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Stack
-        className="success"
-        sx={{
-          width: "478px",
-          height: "52px",
-          top: "107px",
-          position: "absolute",
-          right: "24px",
-        }}
-        spacing={2}
-      >
-        <Collapse in={alertOpen}>
-          <Alert
-            icon={<CheckIcon fontSize="inherit" />}
-            variant="filled"
-            severity="error"
-          >
-            已刪除該會員資料
-          </Alert>
-        </Collapse>
-      </Stack>
-    </div>
+    </>
   );
 };
 
-export default UserDelete;
+export default MemberPasswordDialog;

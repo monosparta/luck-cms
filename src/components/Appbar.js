@@ -34,7 +34,7 @@ const Appbar = () => {
           <Box sx={{ flexGrow: 1 }} />
           <div className="appbar">
             <div className="appbarUser">
-              <Link to="/register">
+              <Link to="/memberlist">
                 <PersonIcon />
                 <p className="appbarUsername"> {name} </p>
               </Link>

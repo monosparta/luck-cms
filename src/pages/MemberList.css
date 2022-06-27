@@ -1,0 +1,45 @@
+#memberList {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.memberHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 28px;
+  font-weight: 700;
+  font-style: bold;
+  line-height: 30px;
+  color: #000000;
+  margin: 70px 0 0 0;
+}
+.memberHeader a {
+  text-decoration: none;
+}
+.memberList {
+  margin: 40px 0 0 0;
+  text-align: justify;
+}
+.memberOption {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.css-1jbbcbn-MuiDataGrid-columnHeaderTitle {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.css-3ihp42-MuiDataGrid-root .MuiDataGrid-cellContent {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+}
+.css-1t7si7r-MuiDataGrid-root .MuiDataGrid-iconSeparator {
+  display: none !important;
+}
