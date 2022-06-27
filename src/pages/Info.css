@@ -16,85 +16,6 @@
   cursor: pointer;
   padding: 12px 0px 12px 24px;
 }
-.userInfoTitle {
-  margin-left: 60px;
-  min-width: 235px;
-  background-color: #fff;
-  box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
-    -4px 4px 8px rgba(54, 63, 78, 0.1);
-  border-radius: 10px;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.userRecordSection {
-  margin-right: 100px;
-  margin-left: 70px;
-  min-width: 490px;
-  background-color: #fff;
-  box-shadow: 4px -4px 8px rgba(54, 63, 78, 0.1),
-    -4px 4px 8px rgba(54, 63, 78, 0.1);
-  border-radius: 10px;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-}
-.userInfo {
-  height: 53px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-.userInfoMode,
-.userInfoMode > div {
-  width: 95%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.userInfoLockNumber {
-  height: 30px;
-  margin: 36px 0 15px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.userInfoLockNumber > img {
-  margin: 3px 0;
-}
-.userInfoLockNumber h1 {
-  font-weight: 700;
-  font-size: 25px;
-  line-height: 30px;
-  font-style: bold;
-  color: #363f4e;
-  margin: 0 0 0 15px;
-}
-.userInfoLockState {
-  margin: 0 90px 55px 0;
-}
-.userInfo p {
-  font-weight: 400;
-  margin: 15px 0 15px 25px;
-}
-
-.userRecordTitle {
-  color: #363f4e;
-  font-weight: 400;
-  font-size: 24px;
-  display: flex;
-  align-items: center;
-}
-.userRecordTitle {
-  padding: 30px 58px 0 58px;
-}
-.userRecord {
-  padding: 18px 58px 0 58px;
-  max-height: 100%;
-  overflow-y: scroll;
-}
 ::-webkit-scrollbar {
   width: 7px;
 }
@@ -119,24 +40,4 @@
 
 ::-webkit-scrollbar-track {
   box-shadow: transparent;
-}
-.diacontent {
-  margin: 10px 0;
-}
-#alert-dialog-title {
-  line-height: 1;
-}
-.alert img {
-  margin: 30px 0 8px 0;
-}
-.alert p {
-  padding: 10px;
-  font-weight: 400;
-  font-size: 16px;
-}
-
-.userDelete {
-  text-align: right;
-  padding: 0 16px;
-  margin-left: 40px;
 }

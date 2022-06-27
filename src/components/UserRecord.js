@@ -16,7 +16,7 @@ const Record = (props) => {
             <Box
               sx={{
                 marginBottom: "16px",
-                border: "1px solid black",
+                border: "1px solid #363F4E",
                 boxShadow: "none",
                 borderRadius: "4px",
               }}
@@ -34,7 +34,7 @@ const Record = (props) => {
             <div className="recordBox">
               <Accordion
                 sx={{
-                  border: "1px solid black",
+                  border: "1px solid #363F4E",
                   boxShadow: "none",
                   borderRadius: "4px",
                 }}

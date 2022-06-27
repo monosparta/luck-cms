@@ -65,6 +65,7 @@ const Readmode = (props) => {
     setCheckOpen(false);
     dispatch(lockStatus());
     dispatch(userInfo(location.state));
+    setAlertOpen(true);
     setTimeout(() => {
       setAlertOpen(false);
     }, 3000);
@@ -88,7 +89,7 @@ const Readmode = (props) => {
         {isFetching ? (
           <Skeleton animation="wave" width={"50%"} sx={{ marginLeft: 1 }} />
         ) : (
-          <p>{user.name}</p>
+          <p className="detail">{user.name}</p>
         )}
       </div>
       <div className="userInfo card">
@@ -96,7 +97,7 @@ const Readmode = (props) => {
         {isFetching ? (
           <Skeleton animation="wave" width={"60%"} sx={{ marginLeft: 1 }} />
         ) : (
-          <p>{user.cardId}</p>
+          <p className="detail">{user.cardId}</p>
         )}
       </div>
       <div className="userInfo phone">
@@ -104,7 +105,7 @@ const Readmode = (props) => {
         {isFetching ? (
           <Skeleton animation="wave" width={"40%"} sx={{ marginLeft: 1 }} />
         ) : (
-          <p>{user.phone}</p>
+          <p className="detail">{user.phone}</p>
         )}
       </div>
       <div className="userInfo mail">
@@ -112,7 +113,7 @@ const Readmode = (props) => {
         {isFetching ? (
           <Skeleton animation="wave" width={"80%"} sx={{ marginLeft: 1 }} />
         ) : (
-          <p>{user.mail}</p>
+          <p className="detail">{user.mail}</p>
         )}
       </div>
       <div className="control-btn">
@@ -141,7 +142,7 @@ const Readmode = (props) => {
             background: "#FFC440",
             boxShadow: "none",
             fontSize: 18,
-            margin: "35px 5px 5px 5px",
+            margin: "15px 5px 5px 5px",
           }}
           startIcon={<LockOpenIcon />}
         >
