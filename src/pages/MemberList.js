@@ -5,16 +5,17 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import Collapse from "@mui/material/Collapse";
 import Alert from "@mui/material/Alert";
-import DialogTitle from "@mui/material/DialogTitle";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import Stack from "@mui/material/Stack";
 import CheckIcon from "@mui/icons-material/Check";
 import "./MemberList.css";
+import MemberDialog from "../components/MemberDialog";
 
 const MemberList = () => {
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [checkOpen, setCheckOpen] = React.useState(false);
+  const [checkAction, setCheckAction] = React.useState("");
+  const [alertText, setAlertText] = React.useState("");
+  const [open, setOpen] = React.useState(false);
 
   const HandleModtify = () => {
     setCheckOpen(false);
@@ -55,7 +56,11 @@ const MemberList = () => {
         return (
           <div className="memberOption">
             <Button
-              onClick={handleCheckOpen}
+              onClick={() => {
+                setAlertOpen(false);
+                handleCheckOpen();
+                setCheckAction("edit");
+              }}
               style={{
                 width: 108,
                 height: 36,
@@ -69,11 +74,16 @@ const MemberList = () => {
             >
               修改密碼
             </Button>
+
             <img
-              o
+              onClick={() => {
+                setAlertOpen(false);
+                handleCheckOpen();
+                setCheckAction("delete");
+              }}
               src={require("../assets/delete.png")}
               alt=""
-              style={{ height: "24px", width: "24px" }}
+              style={{ height: "24px", width: "24px", cursor: "pointer" }}
             ></img>
           </div>
         );
@@ -97,79 +107,25 @@ const MemberList = () => {
   const handleCheckClose = () => {
     setCheckOpen(false);
   };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div id="memberList">
-      <Dialog
-        open={checkOpen}
-        onClose={handleCheckClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          m: "auto",
-          borderRadius: "10px",
-          "& .MuiDialog-container": {
-            "& .MuiPaper-root": {
-              width: 375,
-              height: 250, // Set your width here
-              borderRadius: "10px",
-            },
-            "& .MuiOutlinedInput-root": {
-              width: 244, // Set your width here
-              height: 150,
-            },
-            "& .MuiDialogContent-root ": {
-              padding: 0,
-            },
-            "& .MuiDialogActions-root ": {
-              margin: "0 auto",
-            },
-          },
-        }}
-      >
-        <DialogTitle
-          id="alert-dialog-title"
-          sx={{ textAlign: "center", padding: "16px 24px 0 24px" }}
-        >
-          <div className="alert">
-            <img src="./alert.png" alt="" className="alert" />
-            <p>確定要修改密碼嗎？</p>
-          </div>
-        </DialogTitle>
-        <DialogActions sx={{ width: 244 }}>
-          <Button
-            variant="contained"
-            onClick={HandleModtify}
-            style={{
-              width: 108,
-              height: 36,
-              background: "#2F384F",
-              boxShadow: "none",
-              fontSize: 12,
-              margin: 5,
-            }}
-          >
-            確認
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleCheckClose}
-            style={{
-              width: 108,
-              height: 36,
-              background: "#fff",
-              color: "#2F384F",
-              boxShadow: "none",
-              fontSize: 12,
-              margin: 5,
-              border: "1px solid #2F384F",
-            }}
-          >
-            取消
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <MemberDialog
+        handleClose={handleClose}
+        setCheckOpen={setCheckOpen}
+        checkOpen={checkOpen}
+        handleCheckClose={handleCheckClose}
+        HandleModtify={HandleModtify}
+        checkAction={checkAction}
+        setAlertText={setAlertText}
+        alertText={alertText}
+        alertOpen={alertOpen}
+        open={open}
+        setOpen={setOpen}
+        setCheckAction={setCheckAction}
+      />
       <Stack
         className="success"
         sx={{
@@ -187,7 +143,7 @@ const MemberList = () => {
             variant="filled"
             severity="info"
           >
-            修改密碼成功
+            {alertText}成功
           </Alert>
         </Collapse>
       </Stack>
