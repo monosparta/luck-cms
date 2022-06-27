@@ -1,10 +1,14 @@
 name: My Actions
-on: push
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 jobs:
   build:
     name: Build and deploy to web server
     runs-on: self-hosted
-    environment: Staging
+    environment: Prod
     env:
       REACT_APP_URL: ${{secrets.REACT_APP_URL}}
     steps:

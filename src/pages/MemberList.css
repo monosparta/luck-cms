@@ -1,0 +1,14 @@
+.MemberHeader {
+	text-align: left;
+	font-size: 28px;
+	font-weight: 700;
+	font-style: bold;
+	line-height: 30px;
+	margin: 36px 0 16px 0;
+	color: #363f4e;
+	margin: 80px 60px;
+}
+.MemberList {
+	margin: 80px;
+	text-align: justify;
+}
