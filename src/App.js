@@ -12,6 +12,7 @@ import { selectUser } from "./redux/userSlice";
 import Login from "./pages/Login";
 import Info from "./pages/Info";
 import Luck from "./pages/Lock";
+import MemberList from "./pages/MemberList";
 import Appbar from "./components/Appbar";
 import "./App.css";
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/" element={<Appbar />}>
               <Route path="/" index element={<Luck />} />
               <Route path="/info" element={<Info />} />
+              <Route path="/MemberList" element={<MemberList />} />
             </Route>
           </>
         )}
