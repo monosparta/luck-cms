@@ -18,10 +18,10 @@ const InfoForm = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { user, updating } = useSelector(selectUser);
-  const [inputName, setInputName] = React.useState(user.name);
-  const [inputCard, setInputCard] = React.useState(user.cardId);
-  const [inputPhone, setInputPhone] = React.useState(user.phone);
-  const [inputEmail, setInputEmail] = React.useState(user.mail);
+  const [inputName, setInputName] = React.useState(user.name || "");
+  const [inputCard, setInputCard] = React.useState(user.cardId || "");
+  const [inputPhone, setInputPhone] = React.useState(user.phone || "");
+  const [inputEmail, setInputEmail] = React.useState(user.mail || "");
   const [errorName, setErrorName] = React.useState(false);
   const [errorCard, setErrorCard] = React.useState(false);
   const [errorPhone, setErrorPhone] = React.useState(false);
@@ -70,7 +70,7 @@ const InfoForm = (props) => {
     }
   };
   const verifyCard = (e) => {
-    if (e.target.value.length <= 0 || e.target.value.length >= 16) {
+    if (e.target.value.length <= 6 || e.target.value.length >= 16) {
       setErrorCard(true);
       setColorCard("#d32f2f");
       setHelperCard("卡號輸入格式不符");
@@ -134,12 +134,12 @@ const InfoForm = (props) => {
     if (inputPhone === undefined) {
       setErrorPhone(true);
       setColorPhone("#d32f2f");
-      setHelperCard("卡號輸入格式不符");
+      setHelperPhone("卡號輸入格式不符");
     }
     if (inputCard === undefined) {
       setErrorCard(true);
       setColorCard("#d32f2f");
-      setHelperPhone("手機輸入格式不符");
+      setHelperCard("手機輸入格式不符");
     }
     if (inputEmail === undefined) {
       setErrorEmail(true);
@@ -354,7 +354,7 @@ const InfoForm = (props) => {
           onClick={handleSave}
           variant="contained"
           style={{
-            width: "40%",
+            width: "41%",
             height: 39,
             background: "#363F4E",
             boxShadow: "none",
@@ -369,7 +369,7 @@ const InfoForm = (props) => {
           onClick={handleLeave}
           variant="contained"
           style={{
-            width: "40%",
+            width: "41%",
             height: 39,
             background: "#363F4E",
             boxShadow: "none",

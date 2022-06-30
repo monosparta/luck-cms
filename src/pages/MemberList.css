@@ -1,14 +1,67 @@
-.MemberHeader {
-	text-align: left;
-	font-size: 28px;
-	font-weight: 700;
-	font-style: bold;
-	line-height: 30px;
-	margin: 36px 0 16px 0;
-	color: #363f4e;
-	margin: 80px 60px;
+#memberList {
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.MemberList {
-	margin: 80px;
-	text-align: justify;
+.memberHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 28px;
+  font-weight: 700;
+  font-style: bold;
+  line-height: 30px;
+  color: #000000;
+  margin: 70px 0 0 0;
+}
+.memberHeader a {
+  text-decoration: none;
+}
+.memberList {
+  margin: 40px 0 0 0;
+  text-align: justify;
+}
+.memberOption {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.css-1jbbcbn-MuiDataGrid-columnHeaderTitle {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.css-3ihp42-MuiDataGrid-root .MuiDataGrid-cellContent {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+}
+.css-1t7si7r-MuiDataGrid-root .MuiDataGrid-iconSeparator {
+  display: none !important;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #2f384f !important;
+}
+
+.css-1wc848c-MuiFormHelperText-root {
+  text-align: center !important;
+}
+
+.css-7qy1f3-MuiDialogActions-root {
+  position: absolute !important;
+  bottom: 20px;
+}
+
+.MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+  outline: none !important;
+}
+
+.MuiDataGrid-columnHeader {
+  outline: none !important;
 }

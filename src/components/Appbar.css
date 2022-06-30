@@ -29,7 +29,19 @@
   align-items: center;
   margin: 0 20px;
 }
-
+.appbarUser a{
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+}
 .appbarLogoutIcon {
   padding-right: 5px;
+}
+
+.appbarHomePage{
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
 }

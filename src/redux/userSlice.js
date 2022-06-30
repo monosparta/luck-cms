@@ -64,7 +64,7 @@ export const userInfo = createAsyncThunk(
           return response;
         }
         if (response.status === 400) {
-          return response;
+          return response.text();
         }
         if (response.status === 401) {
           if (token !== "") {
@@ -74,11 +74,10 @@ export const userInfo = createAsyncThunk(
           }
         }
       });
-      let data = await response.json();
       if (response.ok) {
-        return data;
+        return await response.json();
       } else {
-        throw data;
+        throw response;
       }
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -151,6 +150,9 @@ export const userUpdate = createAsyncThunk(
         if (response.status === 200) {
           return response;
         }
+        if (response.status === 400) {
+          return response.json();
+        }
         if (response.status === 401) {
           if (token !== "") {
             localStorage.clear();
@@ -159,11 +161,10 @@ export const userUpdate = createAsyncThunk(
           }
         }
       });
-      let data = await response.json();
       if (response.ok) {
-        return data;
+        return response.json();
       } else {
-        throw data;
+        throw response;
       }
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -279,6 +280,11 @@ export const userSlice = createSlice({
 
       return state;
     },
+    clearMsg: (state) => {
+      state.errorMessage = "";
+
+      return state;
+    },
   },
   extraReducers: {
     [login.fulfilled]: (state, { payload }) => {
@@ -301,6 +307,7 @@ export const userSlice = createSlice({
     [userUpdate.fulfilled]: (state) => {
       state.updating = false;
       state.isSuccess = true;
+      state.errorMessage = "";
       return state;
     },
     [userUpdate.pending]: (state) => {
@@ -310,7 +317,7 @@ export const userSlice = createSlice({
     [userUpdate.rejected]: (state, { payload }) => {
       state.updating = false;
       state.isError = true;
-      state.errorMessage = payload;
+      state.errorMessage = payload.cardId;
       return state;
     },
     [userInfo.fulfilled]: (state, { payload }) => {
@@ -326,7 +333,6 @@ export const userSlice = createSlice({
     },
     [userInfo.rejected]: (state) => {
       state.isFetching = false;
-      state.isError = true;
       state.user = [];
       state.records = [];
       return state;
@@ -342,7 +348,6 @@ export const userSlice = createSlice({
     },
     [userUnlock.rejected]: (state) => {
       state.isFetching = false;
-      state.isError = true;
       return state;
     },
     [userAdd.fulfilled]: (state) => {
@@ -384,16 +389,14 @@ export const userSlice = createSlice({
       state.updating = true;
       return state;
     },
-    [userDelete.rejected]: (state, { payload }) => {
+    [userDelete.rejected]: (state) => {
       state.updating = false;
-      state.isError = true;
-      state.errorMessage = payload;
       return state;
     },
   },
 });
 
-export const { clearState, clearToken } = userSlice.actions;
+export const { clearState, clearToken, clearMsg } = userSlice.actions;
 
 export const selectUser = (state) => state.user;
 
