@@ -43,3 +43,25 @@
 .css-1t7si7r-MuiDataGrid-root .MuiDataGrid-iconSeparator {
   display: none !important;
 }
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #2f384f !important;
+}
+
+.css-1wc848c-MuiFormHelperText-root {
+  text-align: center !important;
+}
+
+.css-7qy1f3-MuiDialogActions-root {
+  position: absolute !important;
+  bottom: 20px;
+}
+
+.MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+  outline: none !important;
+}
+
+.MuiDataGrid-columnHeader {
+  outline: none !important;
+}

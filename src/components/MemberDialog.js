@@ -4,7 +4,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import { TextField, styled } from "@mui/material";
+import Collapse from "@mui/material/Collapse";
+import CheckIcon from "@mui/icons-material/Check";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import { TextField } from "@mui/material";
+
 const MemberDialog = (props) => {
   if (props.checkAction === "edit") {
     props.setCheckAction("");
@@ -16,34 +21,37 @@ const MemberDialog = (props) => {
     props.setOpen(true);
   }
 
-  const CssTextField = styled(TextField)({
-    "& .MuiFormHelperText-root": {
-      "&.Mui-focused": {
-        //提示文字
-        color: "#02A2EE",
-      },
-    },
-    "& label.Mui-focused": {
-      //上排文字
-      color: "#02A2EE",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "black",
-      },
-      "&:hover fieldset": {
-        borderColor: "black",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "#363F4E", //FIELD 框
-      },
-    },
-  });
+  const [errorPassword, setErrorPassword] = React.useState(false);
+  const [inputNewPassword, setInputNewPassword] = React.useState("");
+  const [inputCheckNewPassword, setInputCheckNewPassword] = React.useState("");
+  const [helperText, setHelperText] = React.useState("");
+
   return (
     <>
+      <Stack
+        className="success"
+        sx={{
+          width: "478px",
+          height: "52px",
+          top: "107px",
+          position: "absolute",
+          right: "24px",
+        }}
+        spacing={2}
+      >
+        <Collapse in={props.alertOpen}>
+          <Alert
+            icon={<CheckIcon fontSize="inherit" />}
+            variant="filled"
+            severity="info"
+          >
+            {props.alertText}成功
+          </Alert>
+        </Collapse>
+      </Stack>
       <Dialog
         open={props.checkOpen}
-        onClose={props.handleCheckClose}
+        onClose={() => props.setCheckOpen(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
@@ -56,8 +64,9 @@ const MemberDialog = (props) => {
               height: 300, // Set your width here
             },
             "& .MuiOutlinedInput-root": {
-              width: 328,
-              height: 156, // Set your width here
+              margin: "10px auto",
+              width: "60%",
+              height: 45, // Set your width here
             },
             "& .MuiDialogContent-root ": {
               padding: 0,
@@ -66,30 +75,42 @@ const MemberDialog = (props) => {
         }}
       >
         <DialogTitle id="alert-dialog-title" sx={{ textAlign: "center" }}>
-          {"強制開鎖原因"}
+          {"重設密碼"}
         </DialogTitle>
         <div className="diacontent">
-          <DialogContent sx={{ m: "0 auto", width: 328, height: 156 }}>
-            {/* <TextField
+          <DialogContent sx={{ m: "0 auto" }}>
+            <TextField
+              error={errorPassword}
+              value={inputNewPassword}
+              onChange={(e) =>
+                setInputNewPassword(
+                  e.target.value.replace(/["'˙<>;().!#$%&*+\-/=?^_`{|}~@]/g, "")
+                )
+              }
               required
-              multiline
-              id="input-reason"
-              placeholder="請輸入提醒內容"
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  display: "flex",
-                  alignItems: "flex-start",
-                  "&.Mui-focused fieldset": {
-                    borderColor: "gray", //FIELD 框
-                  },
+              type="password"
+              id="input-password"
+              placeholder="請輸入新密碼"
+              sx={{ width: "100%" }}
+              inputProps={{
+                style: {
+                  height: "14px",
                 },
               }}
-            /> */}
-            <CssTextField
+            />
+            <TextField
+              error={errorPassword}
+              value={inputCheckNewPassword}
+              onChange={(e) =>
+                setInputCheckNewPassword(
+                  e.target.value.replace(/["'˙<>;().!#$%&*+\-/=?^_`{|}~@]/g, "")
+                )
+              }
               required
-              type="email"
-              id="input-email"
-              placeholder="請輸入帳號"
+              type="password"
+              id="input-newpassword"
+              placeholder="再次確認新密碼"
+              helperText={helperText}
               sx={{ width: "100%" }}
               inputProps={{
                 style: {
@@ -103,8 +124,23 @@ const MemberDialog = (props) => {
           <Button
             variant="contained"
             onClick={() => {
-              props.setOpen(true);
-              props.handleCheckClose();
+              if (
+                inputNewPassword === inputCheckNewPassword &&
+                inputNewPassword !== ""
+              ) {
+                props.setOpen(true);
+                props.setCheckOpen(false);
+                setInputCheckNewPassword("");
+                setInputNewPassword("");
+                setErrorPassword(false);
+                setHelperText("");
+              } else if (inputNewPassword === "") {
+                setErrorPassword(true);
+                setHelperText("欄位不可以為空");
+              } else {
+                setErrorPassword(true);
+                setHelperText("密碼輸入不一致");
+              }
             }}
             style={{
               width: 108,
@@ -119,7 +155,13 @@ const MemberDialog = (props) => {
           </Button>
           <Button
             variant="contained"
-            onClick={props.handleCheckClose}
+            onClick={() => {
+              props.setCheckOpen(false);
+              setInputCheckNewPassword("");
+              setInputNewPassword("");
+              setErrorPassword(false);
+              setHelperText("");
+            }}
             style={{
               width: 108,
               height: 36,
@@ -136,11 +178,9 @@ const MemberDialog = (props) => {
         </DialogActions>
       </Dialog>
 
-      {/* ----------------------------------------------------- */}
-
       <Dialog
         open={props.open}
-        onClose={props.handleClose}
+        onClose={() => props.setOpen(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
@@ -168,8 +208,11 @@ const MemberDialog = (props) => {
         }}
       >
         <DialogTitle
-          id="alert-dialog-title"
-          sx={{ textAlign: "center", padding: "16px 24px 0 24px" }}
+          id="dialog-title"
+          sx={{
+            textAlign: "center",
+            padding: "16px 24px 0 24px",
+          }}
         >
           <div className="alert">
             <img src="./alert.png" alt="" className="alert" />
@@ -181,7 +224,7 @@ const MemberDialog = (props) => {
             variant="contained"
             onClick={() => {
               props.setOpen(false);
-              props.HandleModtify();
+              props.handleModify();
             }}
             style={{
               width: 108,
