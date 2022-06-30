@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Collapse from "@mui/material/Collapse";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import CheckIcon from "@mui/icons-material/Check";
 
 const UserDelete = (props) => {
   const dispatch = useDispatch();
@@ -129,7 +130,11 @@ const UserDelete = (props) => {
         spacing={2}
       >
         <Collapse in={alertOpen}>
-          <Alert variant="filled" severity="error">
+          <Alert
+            icon={<CheckIcon fontSize="inherit" />}
+            variant="filled"
+            severity="error"
+          >
             已刪除該會員資料
           </Alert>
         </Collapse>

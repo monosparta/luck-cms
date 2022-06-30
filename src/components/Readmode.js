@@ -121,7 +121,7 @@ const Readmode = (props) => {
           onClick={handleEdit}
           variant="contained"
           style={{
-            width: "70%",
+            width: "90%",
             height: 39,
             background: "#363f4e",
             boxShadow: "none",
@@ -137,12 +137,12 @@ const Readmode = (props) => {
           variant="contained"
           onClick={handleClickOpen}
           style={{
-            width: "80%",
+            width: "100%",
             height: 39,
             background: "#FFC440",
             boxShadow: "none",
             fontSize: 18,
-            margin: "15px 5px 5px 5px",
+            margin: "15px 0 0 0",
           }}
           startIcon={<LockOpenIcon />}
         >

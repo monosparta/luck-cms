@@ -1,83 +1,145 @@
-import React from "react";
-import { DataGrid } from '@mui/x-data-grid';
-import Box from '@mui/material/Box';
+import React, { useEffect } from "react";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 import "./MemberList.css";
+import MemberDialog from "../components/MemberDialog";
+import MemberListDataGrid from "../components/MemberListDataGrid";
+import { useDispatch, useSelector } from "react-redux";
+import { selectAdmin, getAdminList, clearState } from "../redux/adminSlice";
+import MemberOption from "../components/MemberOption";
 
-const MemberList = (props) => {
+const MemberList = () => {
+  const [alertOpen, setAlertOpen] = React.useState(false);
+  const [checkOpen, setCheckOpen] = React.useState(false);
+  const [checkAction, setCheckAction] = React.useState("");
+  const [alertText, setAlertText] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const [rows, setRows] = React.useState([]);
+  const [rowId, setRowId] = React.useState("");
+  const [refresh, setRefresh] = React.useState(false);
 
-    const columns = [
-        {
-            field: 'firstName',
-            headerName: '使用者名稱',
-            width: 150,
-            editable: true,
-        },
-        {
-            field: 'lastName',
-            headerName: '信箱',
-            width: 150,
-            editable: true,
-        },
-        {
-            field: 'age',
-            headerName: '身份',
-            width: 150,
-            editable: true,
-        },
-        {
-            field: 'button',
-            headerName: '',
-            type: Button,
-            width: 150,
-            editable: true,
-        },
-    ];
-    const rows = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-        { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-        { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-        { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-        { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-        { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    ];
-    return (
+  const dispatch = useDispatch();
+
+  const { adminList, isFetching, isError, isSuccess } =
+    useSelector(selectAdmin);
+
+  const handleModify = () => {
+    setCheckOpen(false);
+    setAlertOpen(true);
+    setTimeout(() => {
+      setAlertOpen(false);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    dispatch(getAdminList());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refresh]);
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(clearState());
+    }
+    if (isFetching) {
+      dispatch(clearState());
+    }
+    if (isSuccess) {
+      setRows(adminList);
+      dispatch(clearState());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, isSuccess]);
+
+  const columns = [
+    {
+      field: "name",
+      headerName: "使用者名稱",
+      flex: 1,
+      disableColumnMenu: true,
+      sortable: false,
+    },
+    {
+      field: "mail",
+      headerName: "信箱",
+      flex: 1,
+      disableColumnMenu: true,
+      sortable: false,
+    },
+    {
+      field: "age",
+      headerName: "身份",
+      flex: 1,
+      disableColumnMenu: true,
+      sortable: false,
+    },
+    {
+      field: "button",
+      headerName: "",
+      flex: 1,
+      disableColumnMenu: true,
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <MemberOption
+            setRowId={setRowId}
+            id={params.id}
+            setAlertOpen={setAlertOpen}
+            setCheckOpen={setCheckOpen}
+            setCheckAction={setCheckAction}
+          />
+        );
+      },
+    },
+  ];
+  return (
+    <div id="memberList">
+      <MemberDialog
+        refresh={refresh}
+        setRefresh={setRefresh}
+        rowId={rowId}
+        setCheckOpen={setCheckOpen}
+        checkOpen={checkOpen}
+        handleModify={handleModify}
+        checkAction={checkAction}
+        setAlertText={setAlertText}
+        alertText={alertText}
+        alertOpen={alertOpen}
+        open={open}
+        setOpen={setOpen}
+        setCheckAction={setCheckAction}
+      />
+      <div className="memberHeader">
+        <p>管理者列表</p>
         <div>
-            <div className="MemberHeader">
-                管理者列表
-                <Button
-                    variant="contained"
-                    style={{
-                        width: 124,
-                        height: 44,
-                        background: "#2F384F",
-                        boxShadow: "none",
-                        fontSize: 16,
-                        margin: 5,
-                        textAlign: "left"
-                    }}
-                >
-                    新增使用者
-                </Button>
-            </div>
-            <div className="AddMember">
-
-            </div>
-            <div className="MemberList">
-                <Box sx={{ height: 400, width: '100%' }}>
-                    <DataGrid
-                        rows={rows}
-                        columns={columns}
-                        pageSize={10}
-                        rowsPerPageOptions={[3]}
-                    />
-                </Box>
-            </div>
+          <Link to="/register">
+            <Button
+              variant="contained"
+              style={{
+                width: 124,
+                height: 44,
+                border: "1px solid #2F384F",
+                background: "transparent",
+                color: "#2F384F",
+                boxShadow: "none",
+                borderRadius: "10px",
+                fontSize: 16,
+                textAlign: "left",
+                textDecoration: "none",
+              }}
+            >
+              新增管理者
+            </Button>
+          </Link>
         </div>
-    );
+      </div>
+      <div className="memberList">
+        <Box sx={{ height: 450, width: "100%" }}>
+          <MemberListDataGrid adminList={rows} columns={columns} />
+        </Box>
+      </div>
+    </div>
+  );
 };
 
 export default MemberList;
