@@ -49,3 +49,8 @@
 .registerFormItemButton {
   margin-top: 8%;
 }
+
+.registerFormItemButton span {
+  height: 0;
+  opacity: 0;
+}

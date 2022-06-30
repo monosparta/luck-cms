@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TextField, Button, styled } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { addAdmin, selectAdmin, clearState } from "../redux/adminSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const RegisterForm = (props) => {
   const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isSuccess, isError } = useSelector(selectAdmin);
   const CssTextField = styled(TextField)({
     "& .MuiFormHelperText-root": {
       "&.Mui-focused": {
@@ -29,10 +36,26 @@ const RegisterForm = (props) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(addAdmin(data));
   };
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(clearState());
+    }
+    if (isSuccess) {
+      toast.success("新增成功");
+      dispatch(clearState());
+      setTimeout(() => {
+        navigate("/memberlist");
+      }, 1000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, isSuccess]);
+
   return (
     <>
+      <Toaster />
       <form className="registerForm" onSubmit={handleSubmit(onSubmit)}>
         <div className="registerFormItem">
           <div className="registerFormItemTitle">
@@ -50,7 +73,7 @@ const RegisterForm = (props) => {
                   height: "14px",
                 },
               }}
-              {...register("user")}
+              {...register("name")}
             />
           </div>
           <div className="registerFormItemEmail">
@@ -65,7 +88,7 @@ const RegisterForm = (props) => {
                   height: "14px",
                 },
               }}
-              {...register("email")}
+              {...register("mail")}
             />
           </div>
           <div className="registerFormItemPassword">
@@ -99,12 +122,6 @@ const RegisterForm = (props) => {
             />
           </div>
           <div className="registerFormItemButton">
-            {/* <span>
-              {isFetching
-                ? props.toast.loading("登入中", { id: "loading" })
-                : props.toast.remove("loading")}
-              {isError ? props.toast.error("帳號或密碼錯誤") : null}
-            </span> */}
             <Button
               type="submit"
               variant="contained"
@@ -118,6 +135,7 @@ const RegisterForm = (props) => {
             >
               新增管理者
             </Button>
+            <span>{isError ? toast.error("新增失敗") : null}</span>
           </div>
         </div>
       </form>

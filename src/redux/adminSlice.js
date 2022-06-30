@@ -34,17 +34,20 @@ export const getAdminList = createAsyncThunk("admin/get", async (thunkAPI) => {
 
 export const deleteAdmin = createAsyncThunk(
   "admin/delete",
-  async (thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.REACT_APP_URL}/api/admin`, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token,
-        },
-      }).then((response) => {
+      const response = await fetch(
+        `${process.env.REACT_APP_URL}/api/admin/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+        }
+      ).then((response) => {
         if (response.status === 200) {
           return response;
         }
@@ -57,7 +60,7 @@ export const deleteAdmin = createAsyncThunk(
         }
       });
       if (response.ok) {
-        return response;
+        return response.json();
       } else {
         throw response;
       }
@@ -69,25 +72,26 @@ export const deleteAdmin = createAsyncThunk(
 
 export const updateAdmin = createAsyncThunk(
   "admin/update",
-  async ({ password }, thunkAPI) => {
+  async ({ id, password, confirm }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.REACT_APP_URL}/api/admin`, {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          token,
-        },
-        body: JSON.stringify({
-          password,
-        }),
-      }).then((response) => {
+      const response = await fetch(
+        `${process.env.REACT_APP_URL}/api/admin/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            token,
+          },
+          body: JSON.stringify({
+            password,
+            confirm,
+          }),
+        }
+      ).then((response) => {
         if (response.status === 200) {
           return response;
-        }
-        if (response.status === 400) {
-          return response.json();
         }
         if (response.status === 401) {
           if (token !== "") {
@@ -110,7 +114,7 @@ export const updateAdmin = createAsyncThunk(
 
 export const addAdmin = createAsyncThunk(
   "admin/add",
-  async ({ name, email, password, confirm }, thunkAPI) => {
+  async ({ name, mail, password, confirm }, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(`${process.env.REACT_APP_URL}/api/admin`, {
@@ -122,7 +126,7 @@ export const addAdmin = createAsyncThunk(
         },
         body: JSON.stringify({
           name,
-          email,
+          mail,
           password,
           confirm,
         }),
@@ -138,7 +142,7 @@ export const addAdmin = createAsyncThunk(
           }
         }
       });
-      let data = await response.json();
+      let data = await response.text();
       if (response.ok) {
         return data;
       } else {
@@ -201,6 +205,7 @@ export const adminSlice = createSlice({
     },
     [deleteAdmin.rejected]: (state) => {
       state.isFetching = false;
+      state.isError = true;
       return state;
     },
     [updateAdmin.fulfilled]: (state) => {
@@ -214,6 +219,7 @@ export const adminSlice = createSlice({
     },
     [updateAdmin.rejected]: (state) => {
       state.isFetching = false;
+      state.isError = true;
       return state;
     },
     [addAdmin.fulfilled]: (state) => {
@@ -227,6 +233,7 @@ export const adminSlice = createSlice({
     },
     [addAdmin.rejected]: (state) => {
       state.isFetching = false;
+      state.isError = true;
       return state;
     },
   },

@@ -8,7 +8,6 @@ const MemberListDataGrid = (props) => {
         sx={{ border: 0 }}
         rows={props.adminList}
         columns={props.columns}
-        pageSize={10}
         rowsPerPageOptions={[3]}
         hideFooter
       />

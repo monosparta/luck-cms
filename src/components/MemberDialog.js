@@ -9,8 +9,17 @@ import CheckIcon from "@mui/icons-material/Check";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { TextField } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { deleteAdmin, updateAdmin } from "../redux/adminSlice";
 
 const MemberDialog = (props) => {
+  const [errorPassword, setErrorPassword] = React.useState(false);
+  const [inputNewPassword, setInputNewPassword] = React.useState("");
+  const [inputCheckNewPassword, setInputCheckNewPassword] = React.useState("");
+  const [helperText, setHelperText] = React.useState("");
+
+  const dispatch = useDispatch();
+
   if (props.checkAction === "edit") {
     props.setCheckAction("");
     props.setAlertText("修改密碼");
@@ -21,10 +30,24 @@ const MemberDialog = (props) => {
     props.setOpen(true);
   }
 
-  const [errorPassword, setErrorPassword] = React.useState(false);
-  const [inputNewPassword, setInputNewPassword] = React.useState("");
-  const [inputCheckNewPassword, setInputCheckNewPassword] = React.useState("");
-  const [helperText, setHelperText] = React.useState("");
+  const handelDelete = () => {
+    if (props.alertText === "刪除使用者") {
+      dispatch(deleteAdmin(props.rowId));
+      props.setRefresh(!props.refresh);
+    } else if (props.alertText === "修改密碼") {
+      dispatch(
+        updateAdmin({
+          id: props.rowId,
+          password: inputNewPassword,
+          confirm: inputCheckNewPassword,
+        })
+      );
+
+      setInputCheckNewPassword("");
+      setInputNewPassword("");
+      props.setRefresh(!props.refresh);
+    }
+  };
 
   return (
     <>
@@ -130,8 +153,6 @@ const MemberDialog = (props) => {
               ) {
                 props.setOpen(true);
                 props.setCheckOpen(false);
-                setInputCheckNewPassword("");
-                setInputNewPassword("");
                 setErrorPassword(false);
                 setHelperText("");
               } else if (inputNewPassword === "") {
@@ -224,6 +245,7 @@ const MemberDialog = (props) => {
             variant="contained"
             onClick={() => {
               props.setOpen(false);
+              handelDelete();
               props.handleModify();
             }}
             style={{

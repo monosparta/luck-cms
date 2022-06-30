@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@mui/material/Button";
+
 const MemberOption = (props) => {
   return (
     <div className="memberOption">
@@ -8,6 +9,7 @@ const MemberOption = (props) => {
           props.setAlertOpen(false);
           props.setCheckOpen(true);
           props.setCheckAction("edit");
+          props.setRowId(props.id);
         }}
         style={{
           width: 108,
@@ -28,6 +30,7 @@ const MemberOption = (props) => {
           props.setAlertOpen(false);
           props.setCheckOpen(true);
           props.setCheckAction("delete");
+          props.setRowId(props.id);
         }}
         src={require("../assets/delete.png")}
         alt=""

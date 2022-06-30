@@ -6,12 +6,7 @@ import "./MemberList.css";
 import MemberDialog from "../components/MemberDialog";
 import MemberListDataGrid from "../components/MemberListDataGrid";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectAdmin,
-  getAdminList,
-  deleteAdmin,
-  clearState,
-} from "../redux/adminSlice";
+import { selectAdmin, getAdminList, clearState } from "../redux/adminSlice";
 import MemberOption from "../components/MemberOption";
 
 const MemberList = () => {
@@ -20,7 +15,9 @@ const MemberList = () => {
   const [checkAction, setCheckAction] = React.useState("");
   const [alertText, setAlertText] = React.useState("");
   const [open, setOpen] = React.useState(false);
-  const [rows, setRows] = React.useState({});
+  const [rows, setRows] = React.useState([]);
+  const [rowId, setRowId] = React.useState("");
+  const [refresh, setRefresh] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -38,7 +35,7 @@ const MemberList = () => {
   useEffect(() => {
     dispatch(getAdminList());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     if (isError) {
@@ -82,9 +79,11 @@ const MemberList = () => {
       flex: 1,
       disableColumnMenu: true,
       sortable: false,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <MemberOption
+            setRowId={setRowId}
+            id={params.id}
             setAlertOpen={setAlertOpen}
             setCheckOpen={setCheckOpen}
             setCheckAction={setCheckAction}
@@ -96,6 +95,9 @@ const MemberList = () => {
   return (
     <div id="memberList">
       <MemberDialog
+        refresh={refresh}
+        setRefresh={setRefresh}
+        rowId={rowId}
         setCheckOpen={setCheckOpen}
         checkOpen={checkOpen}
         handleModify={handleModify}
