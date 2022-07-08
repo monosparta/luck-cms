@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Item from "./Lock";
 import _ from "lodash";
 
-import { Box, Skeleton } from "@mui/material";
+import { Box, Skeleton, Tooltip } from "@mui/material";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 
@@ -16,7 +16,8 @@ const LockContent = () => {
   const { isFetching, lockList } = useSelector(selectLock);
 
   const handleClick = (e) => {
-    navigate("/Info?No=" + e.target.innerText, { state: e.target.innerText });
+    if (e.target.innerText)
+      navigate("/Info?No=" + e.target.innerText, { state: e.target.innerText });
   };
 
   const handleClickStop = (e) => {
@@ -79,28 +80,32 @@ const LockContent = () => {
               >
                 {item.lockerNo}
                 {item.userId !== null && item.lockUp === 1 ? (
-                  <LockIcon
-                    sx={{
-                      position: "absolute",
-                      top: "5px",
-                      right: "5px",
-                      height: "16px",
-                      width: "16px",
-                    }}
-                  />
+                  <Tooltip title="已鎖上" placement="top">
+                    <LockIcon
+                      sx={{
+                        position: "absolute",
+                        top: "5px",
+                        right: "5px",
+                        height: "16px",
+                        width: "16px",
+                      }}
+                    />
+                  </Tooltip>
                 ) : (
                   ""
                 )}
                 {item.userId !== null && item.lockUp === 0 ? (
-                  <LockOpenIcon
-                    sx={{
-                      position: "absolute",
-                      top: "8px",
-                      right: "5px",
-                      height: "16px",
-                      width: "16px",
-                    }}
-                  />
+                  <Tooltip title="已解鎖" placement="top">
+                    <LockOpenIcon
+                      sx={{
+                        position: "absolute",
+                        top: "8px",
+                        right: "5px",
+                        height: "16px",
+                        width: "16px",
+                      }}
+                    />
+                  </Tooltip>
                 ) : (
                   ""
                 )}

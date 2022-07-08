@@ -90,7 +90,7 @@ export const userUnlock = createAsyncThunk(
   async (inputData, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.REACT_APP_URL}/api/unlock`, {
+      return await fetch(`${process.env.REACT_APP_URL}/api/unlock`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -103,7 +103,7 @@ export const userUnlock = createAsyncThunk(
         }),
       }).then((response) => {
         if (response.status === 200) {
-          return response;
+          return 0;
         }
         if (response.status === 401) {
           if (token !== "") {
@@ -112,14 +112,16 @@ export const userUnlock = createAsyncThunk(
             window.location.reload();
           }
         }
+        return 1;
       });
-      let data = await response.json();
-      if (response.ok) {
-        return data;
-      } else {
-        throw data;
-      }
+      // let data = response;
+      // if (response.ok) {
+      //   return data;
+      // } else {
+      //   throw data;
+      // }
     } catch (e) {
+      console.log(e.response.status);
       return thunkAPI.rejectWithValue(e);
     }
   }
