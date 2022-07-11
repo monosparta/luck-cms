@@ -45,45 +45,56 @@ export const logout = createAsyncThunk("user/logout", async (thunkAPI) => {
 });
 
 export const userInfo = createAsyncThunk(
-  "user/info",
+  "lock/userInfo",
   async (lockerNo, thunkAPI) => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        `${process.env.REACT_APP_URL}/api/record/${lockerNo}`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            token,
-          },
-        }
-      ).then((response) => {
-        if (response.status === 200) {
-          return response;
-        }
-        if (response.status === 400) {
-          return response.text();
-        }
-        if (response.status === 401) {
-          if (token !== "") {
-            localStorage.clear();
-            alert("請重新登入");
-            window.location.reload();
-          }
-        }
-      });
-      if (response.ok) {
-        return await response.json();
-      } else {
-        throw response;
-      }
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e);
-    }
+    return getUserInfo(lockerNo, thunkAPI);
   }
 );
+
+export const userInfoNoLoading = createAsyncThunk(
+  "lock/userInfoNoLoading",
+  async (lockerNo, thunkAPI) => {
+    return getUserInfo(lockerNo, thunkAPI);
+  }
+);
+
+const getUserInfo = async (lockerNo, thunkAPI) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/api/record/${lockerNo}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token,
+        },
+      }
+    ).then((response) => {
+      if (response.status === 200) {
+        return response;
+      }
+      if (response.status === 400) {
+        return response.text();
+      }
+      if (response.status === 401) {
+        if (token !== "") {
+          localStorage.clear();
+          alert("請重新登入");
+          window.location.reload();
+        }
+      }
+    });
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw response;
+    }
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e);
+  }
+};
 
 export const userUnlock = createAsyncThunk(
   "user/unlock",
@@ -336,6 +347,20 @@ export const userSlice = createSlice({
     },
     [userInfo.rejected]: (state) => {
       state.isFetching = false;
+      state.user = [];
+      state.records = [];
+      return state;
+    },
+    [userInfoNoLoading.fulfilled]: (state, { payload }) => {
+      state.isSuccess = true;
+      state.user = payload.user;
+      state.records = payload.records;
+      return state;
+    },
+    [userInfoNoLoading.pending]: (state) => {
+      return state;
+    },
+    [userInfoNoLoading.rejected]: (state) => {
       state.user = [];
       state.records = [];
       return state;

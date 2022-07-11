@@ -15,7 +15,10 @@ const UserInfoTitle = (props) => {
   return (
     <div className="userInfoLockNumber">
       {lockIsFetching ? (
-        <Skeleton animation="wave" width={"150px"} sx={{ marginLeft: 1 }} />
+        <Skeleton
+          animation="wave"
+          sx={{ width: "90%", height: "30px" }}
+        />
       ) : (
         <>
           {props.luckIconStatus === 1 ? <LockIcon /> : <LockOpenIcon />}

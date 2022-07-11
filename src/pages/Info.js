@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import _ from "lodash";
 import "./Info.css";
-import { userInfo, selectUser, clearState, clearMsg } from "../redux/userSlice";
-import { selectLock, lockStatus } from "../redux/lockSlice";
+import { userInfo, userInfoNoLoading, selectUser, clearState, clearMsg } from "../redux/userSlice";
+import { selectLock, lockStatus, lockStatusNoLoading } from "../redux/lockSlice";
 import UserRecord from "../components/UserRecord";
 import Readmode from "../components/Readmode";
 import InfoForm from "../components/InfoForm";
@@ -68,8 +68,8 @@ const Info = () => {
     dispatch(lockStatus());
     dispatch(userInfo(location.state));
     let refresh = setInterval(() => {
-      dispatch(lockStatus());
-      dispatch(userInfo(location.state));
+      dispatch(lockStatusNoLoading());
+      dispatch(userInfoNoLoading(location.state));
     }, 30000);
     return () => clearInterval(refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -134,6 +134,7 @@ const Info = () => {
                   animation="wave"
                   sx={{
                     width: "50%",
+                    height: "24px",
                     marginLeft: "15%",
                     display: "flex",
                     alignItems: "center",}}
