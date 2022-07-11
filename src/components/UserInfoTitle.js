@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUser } from "../redux/userSlice";
+import { selectLock } from "../redux/lockSlice";
 
 import UserDelete from "../components/UserDelete";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
@@ -10,11 +10,11 @@ import Skeleton from "@mui/material/Skeleton";
 
 const UserInfoTitle = (props) => {
   const location = useLocation();
-  const { isFetching } = useSelector(selectUser);
+  const { lockIsFetching } = useSelector(selectLock);
 
   return (
     <div className="userInfoLockNumber">
-      {isFetching ? (
+      {lockIsFetching ? (
         <Skeleton animation="wave" width={"150px"} sx={{ marginLeft: 1 }} />
       ) : (
         <>

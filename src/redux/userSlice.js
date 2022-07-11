@@ -263,6 +263,7 @@ export const userSlice = createSlice({
     user: [],
     records: [],
     isFetching: false,
+    isUnlocking: false,
     isSuccess: false,
     isError: false,
     updating: false,
@@ -340,16 +341,16 @@ export const userSlice = createSlice({
       return state;
     },
     [userUnlock.fulfilled]: (state) => {
-      state.isFetching = false;
+      state.isUnlocking = false;
       state.isSuccess = true;
       return state;
     },
     [userUnlock.pending]: (state) => {
-      state.isFetching = true;
+      state.isUnlocking = true;
       return state;
     },
     [userUnlock.rejected]: (state) => {
-      state.isFetching = false;
+      state.isUnlocking = false;
       return state;
     },
     [userAdd.fulfilled]: (state) => {

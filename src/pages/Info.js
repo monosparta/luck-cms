@@ -33,7 +33,7 @@ const Info = () => {
 
   const { user, records, isFetching, isError, isSuccess, errorMessage } =
     useSelector(selectUser);
-  const { lockList } = useSelector(selectLock);
+  const { lockList, lockIsFetching } = useSelector(selectLock);
   if (isError) {
     toast.error(errorMessage);
   } else {
@@ -51,12 +51,25 @@ const Info = () => {
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userStatus, lockList]);
+  }, [userStatus]);
 
   useEffect(() => {
+    _.map(lockList, (item, index) => {
+      if (item.lockerNo === location.state) {
+        setLuckIconStatus(item.lockUp);
+        setError(item.error);
+        console.log(item.lockUp, item.error);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lockList]);
+
+  useEffect(() => {
+    dispatch(lockStatus());
+    dispatch(userInfo(location.state));
     let refresh = setInterval(() => {
-      dispatch(userInfo(location.state));
       dispatch(lockStatus());
+      dispatch(userInfo(location.state));
     }, 30000);
     return () => clearInterval(refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,11 +129,14 @@ const Info = () => {
               handleClickRefresh={handleClickRefresh}
             />
             <div className="userInfoLockState">
-              {isFetching ? (
+              {lockIsFetching ? (
                 <Skeleton
                   animation="wave"
-                  width={"50%"}
-                  sx={{ marginLeft: 1 }}
+                  sx={{
+                    width: "50%",
+                    marginLeft: "15%",
+                    display: "flex",
+                    alignItems: "center",}}
                 />
               ) : error ? (
                 <CancelIconStyle />

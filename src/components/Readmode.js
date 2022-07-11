@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -40,7 +41,7 @@ const Readmode = (props) => {
   const location = useLocation();
   const [update, setUpdate] = React.useState(false);
 
-  const { user, isFetching } = useSelector(selectUser);
+  const { user, isFetching, isUnlocking } = useSelector(selectUser);
 
   const handleEdit = () => {
     props.setUserStatus("EditStatus");
@@ -106,7 +107,7 @@ const Readmode = (props) => {
   };
 
   return (
-    <div>
+    <div style={{}}>
       <div className="userInfo name">
         <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {isFetching ? (
@@ -156,7 +157,9 @@ const Readmode = (props) => {
           編輯資訊
         </Button>
 
-        <Button
+        <LoadingButton
+          loading={isUnlocking}
+          disabled={isUnlocking}
           variant="contained"
           onClick={handleClickOpen}
           style={{
@@ -170,7 +173,7 @@ const Readmode = (props) => {
           startIcon={<LockOpenIcon />}
         >
           強制開鎖
-        </Button>
+        </LoadingButton>
 
         <Dialog
           open={open}

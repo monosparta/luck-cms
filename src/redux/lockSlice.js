@@ -41,7 +41,7 @@ export const lockSlice = createSlice({
   initialState: {
     lockList: [{}],
     currentNumber: "",
-    isFetching: false,
+    locklockIsFetching: false,
     isSuccess: false,
     isError: false,
     errorMessage: "",
@@ -51,25 +51,25 @@ export const lockSlice = createSlice({
       state.lockList = [{}];
       state.isError = false;
       state.isSuccess = false;
-      state.isFetching = false;
+      state.locklockIsFetching = false;
 
       return state;
     },
   },
   extraReducers: {
     [lockStatus.fulfilled]: (state, { payload }) => {
-      state.isFetching = false;
       state.isSuccess = true;
       state.lockList = payload;
+      state.lockIsFetching = false;
       return state;
     },
     [lockStatus.pending]: (state) => {
-      state.isFetching = true;
+      state.lockIsFetching = true;
       return state;
     },
     [lockStatus.rejected]: (state) => {
-      state.isFetching = false;
       state.isError = true;
+      state.lockIsFetching = false;
       return state;
     },
   },
