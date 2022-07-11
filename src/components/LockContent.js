@@ -13,11 +13,11 @@ import LockIcon from "@mui/icons-material/Lock";
 const LockContent = () => {
   const navigate = useNavigate();
 
-  const { isFetching, lockList } = useSelector(selectLock);
+  const { lockIsFetching, lockList } = useSelector(selectLock);
 
   const handleClick = (e) => {
-    if (e.target.innerText)
-      navigate("/Info?No=" + e.target.innerText, { state: e.target.innerText });
+    if (e.currentTarget.innerText)
+      navigate("/Info?No=" + e.currentTarget.innerText, { state: e.currentTarget.innerText });
   };
 
   const handleClickStop = (e) => {
@@ -28,7 +28,7 @@ const LockContent = () => {
 
   return (
     <>
-      {isFetching ? (
+      {lockIsFetching ? (
         <Box sx={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)" }}>
           {_.map(loadingArray, (item, index) => (
             <Skeleton
@@ -46,7 +46,7 @@ const LockContent = () => {
             {_.map(lockList, (item, index) => (
               <Item
                 key={index}
-                onClick={
+                onClickCapture={
                   item.lockerNo !== null
                     ? (e) => handleClick(e)
                     : () => handleClickStop

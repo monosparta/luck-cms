@@ -47,7 +47,6 @@ const Info = () => {
       if (item.lockerNo === location.state) {
         setLuckIconStatus(item.lockUp);
         setError(item.error);
-        console.log(item.lockUp, item.error);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,7 +57,6 @@ const Info = () => {
       if (item.lockerNo === location.state) {
         setLuckIconStatus(item.lockUp);
         setError(item.error);
-        console.log(item.lockUp, item.error);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { lockStatus } from "../redux/lockSlice";
+import { lockStatus, lockStatusNoLoading } from "../redux/lockSlice";
 import { useDispatch } from "react-redux";
 
 import "./Lock.css";
@@ -19,8 +19,8 @@ const Luck = () => {
   useEffect(() => {
     dispatch(lockStatus());
     let refresh = setInterval(() => {
-      dispatch(lockStatus());
-    }, 30000);
+      dispatch(lockStatusNoLoading());
+    }, 3000);
     return () => clearInterval(refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

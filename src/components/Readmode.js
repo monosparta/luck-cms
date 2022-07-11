@@ -32,7 +32,7 @@ const Readmode = (props) => {
   const [open, setOpen] = React.useState(false);
   const [alertValue, setAlertValue] = React.useState({
     show: false,
-    type: "",
+    type: "success",
     text: "",
   });
   const [checkOpen, setCheckOpen] = React.useState(false);
@@ -69,7 +69,6 @@ const Readmode = (props) => {
     const a = await dispatch(
       userUnlock([{ lockerNo: location.state, description: inputDescription }])
     );
-    console.log(a.payload);
     setUpdate(true);
     dispatch(lockStatus());
     if (a.payload === 0) {
@@ -85,12 +84,6 @@ const Readmode = (props) => {
         show: true,
       });
     }
-    setTimeout(() => {
-      setAlertValue({
-        ...alertValue,
-        show: true,
-      });
-    }, 3000);
   };
 
   useEffect(() => {
@@ -100,6 +93,17 @@ const Readmode = (props) => {
       setUpdate(false);
     }
   }, [update, dispatch, location]);
+
+  useEffect(() => {
+    if (alertValue.show) {
+      setTimeout(() => {
+        setAlertValue({
+          ...alertValue,
+          show: false,
+        });
+      }, 3000);
+    }
+  }, [alertValue]);
 
   const handleCheckClose = () => {
     setInputDescription("");
