@@ -41,3 +41,6 @@
 ::-webkit-scrollbar-track {
   box-shadow: transparent;
 }
+.userInfoTitle {
+  width: 90%;
+}

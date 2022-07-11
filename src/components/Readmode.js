@@ -1,40 +1,47 @@
-import React from "react";
-import Collapse from "@mui/material/Collapse";
-import TextField from "@mui/material/TextField";
-import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
-import Skeleton from "@mui/material/Skeleton";
-import { useSelector } from "react-redux";
-import { selectUser } from "../redux/userSlice";
-import { lockStatus } from "../redux/lockSlice";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { userInfo } from "../redux/userSlice";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import React, { useEffect } from "react";
+import {
+  Collapse,
+  TextField,
+  Alert,
+  Stack,
+  Skeleton,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import { userUnlock } from "../redux/userSlice";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EditIcon from "@mui/icons-material/Edit";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { userUnlock } from "../redux/userSlice";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/userSlice";
+import { lockStatus } from "../redux/lockSlice";
+import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { userInfo } from "../redux/userSlice";
 
 import "./Readmode.css";
 
 const Readmode = (props) => {
   const [open, setOpen] = React.useState(false);
-  const [alertOpen, setAlertOpen] = React.useState(false);
+  const [alertValue, setAlertValue] = React.useState({
+    show: false,
+    type: "success",
+    text: "",
+  });
   const [checkOpen, setCheckOpen] = React.useState(false);
   const [inputDescription, setInputDescription] = React.useState("");
   const dispatch = useDispatch();
   const location = useLocation();
   const [update, setUpdate] = React.useState(false);
 
-  const { user, isFetching } = useSelector(selectUser);
+  const { user, isFetching, isUnlocking } = useSelector(selectUser);
 
   const handleEdit = () => {
     props.setUserStatus("EditStatus");
@@ -57,25 +64,46 @@ const Readmode = (props) => {
     }
   };
 
-  const handleCheckCloseAPI = () => {
-    dispatch(
+  const handleCheckCloseAPI = async () => {
+    setCheckOpen(false);
+    const a = await dispatch(
       userUnlock([{ lockerNo: location.state, description: inputDescription }])
     );
     setUpdate(true);
-    setCheckOpen(false);
     dispatch(lockStatus());
-    dispatch(userInfo(location.state));
-    setAlertOpen(true);
-    setTimeout(() => {
-      setAlertOpen(false);
-    }, 3000);
+    if (a.payload === 0) {
+      setAlertValue({
+        type: "success",
+        text: "已完成強制開鎖",
+        show: true,
+      });
+    } else {
+      setAlertValue({
+        type: "error",
+        text: "強制開鎖失敗",
+        show: true,
+      });
+    }
   };
 
-  if (update) {
-    dispatch(userInfo(location.state));
-    setInputDescription("");
-    setUpdate(false);
-  }
+  useEffect(() => {
+    if (update) {
+      dispatch(userInfo(location.state));
+      setInputDescription("");
+      setUpdate(false);
+    }
+  }, [update, dispatch, location]);
+
+  useEffect(() => {
+    if (alertValue.show) {
+      setTimeout(() => {
+        setAlertValue({
+          ...alertValue,
+          show: false,
+        });
+      }, 3000);
+    }
+  }, [alertValue]);
 
   const handleCheckClose = () => {
     setInputDescription("");
@@ -83,7 +111,7 @@ const Readmode = (props) => {
   };
 
   return (
-    <div>
+    <div style={{}}>
       <div className="userInfo name">
         <AccountCircleIcon style={{ fontSize: "30", margin: "8px 0" }} />
         {isFetching ? (
@@ -121,7 +149,7 @@ const Readmode = (props) => {
           onClick={handleEdit}
           variant="contained"
           style={{
-            width: "90%",
+            width: "100%",
             height: 39,
             background: "#363f4e",
             boxShadow: "none",
@@ -133,7 +161,9 @@ const Readmode = (props) => {
           編輯資訊
         </Button>
 
-        <Button
+        <LoadingButton
+          loading={isUnlocking}
+          disabled={isUnlocking}
           variant="contained"
           onClick={handleClickOpen}
           style={{
@@ -142,12 +172,12 @@ const Readmode = (props) => {
             background: "#FFC440",
             boxShadow: "none",
             fontSize: 18,
-            margin: "15px 0 0 0",
+            margin: 5,
           }}
           startIcon={<LockOpenIcon />}
         >
           強制開鎖
-        </Button>
+        </LoadingButton>
 
         <Dialog
           open={open}
@@ -313,9 +343,9 @@ const Readmode = (props) => {
         }}
         spacing={2}
       >
-        <Collapse in={alertOpen}>
-          <Alert variant="filled" severity="success">
-            已完成強制開鎖
+        <Collapse in={alertValue.show}>
+          <Alert variant="filled" severity={alertValue.type}>
+            {alertValue.text}
           </Alert>
         </Collapse>
       </Stack>

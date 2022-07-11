@@ -45,52 +45,63 @@ export const logout = createAsyncThunk("user/logout", async (thunkAPI) => {
 });
 
 export const userInfo = createAsyncThunk(
-  "user/info",
+  "lock/userInfo",
   async (lockerNo, thunkAPI) => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        `${process.env.REACT_APP_URL}/api/record/${lockerNo}`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            token,
-          },
-        }
-      ).then((response) => {
-        if (response.status === 200) {
-          return response;
-        }
-        if (response.status === 400) {
-          return response.text();
-        }
-        if (response.status === 401) {
-          if (token !== "") {
-            localStorage.clear();
-            alert("請重新登入");
-            window.location.reload();
-          }
-        }
-      });
-      if (response.ok) {
-        return await response.json();
-      } else {
-        throw response;
-      }
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e);
-    }
+    return getUserInfo(lockerNo, thunkAPI);
   }
 );
+
+export const userInfoNoLoading = createAsyncThunk(
+  "lock/userInfoNoLoading",
+  async (lockerNo, thunkAPI) => {
+    return getUserInfo(lockerNo, thunkAPI);
+  }
+);
+
+const getUserInfo = async (lockerNo, thunkAPI) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/api/record/${lockerNo}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          token,
+        },
+      }
+    ).then((response) => {
+      if (response.status === 200) {
+        return response;
+      }
+      if (response.status === 400) {
+        return response.text();
+      }
+      if (response.status === 401) {
+        if (token !== "") {
+          localStorage.clear();
+          alert("請重新登入");
+          window.location.reload();
+        }
+      }
+    });
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw response;
+    }
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e);
+  }
+};
 
 export const userUnlock = createAsyncThunk(
   "user/unlock",
   async (inputData, thunkAPI) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.REACT_APP_URL}/api/unlock`, {
+      return await fetch(`${process.env.REACT_APP_URL}/api/unlock`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -103,7 +114,7 @@ export const userUnlock = createAsyncThunk(
         }),
       }).then((response) => {
         if (response.status === 200) {
-          return response;
+          return 0;
         }
         if (response.status === 401) {
           if (token !== "") {
@@ -112,14 +123,16 @@ export const userUnlock = createAsyncThunk(
             window.location.reload();
           }
         }
+        return 1;
       });
-      let data = await response.json();
-      if (response.ok) {
-        return data;
-      } else {
-        throw data;
-      }
+      // let data = response;
+      // if (response.ok) {
+      //   return data;
+      // } else {
+      //   throw data;
+      // }
     } catch (e) {
+      console.log(e.response.status);
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -261,6 +274,7 @@ export const userSlice = createSlice({
     user: [],
     records: [],
     isFetching: false,
+    isUnlocking: false,
     isSuccess: false,
     isError: false,
     updating: false,
@@ -337,17 +351,31 @@ export const userSlice = createSlice({
       state.records = [];
       return state;
     },
+    [userInfoNoLoading.fulfilled]: (state, { payload }) => {
+      state.isSuccess = true;
+      state.user = payload.user;
+      state.records = payload.records;
+      return state;
+    },
+    [userInfoNoLoading.pending]: (state) => {
+      return state;
+    },
+    [userInfoNoLoading.rejected]: (state) => {
+      state.user = [];
+      state.records = [];
+      return state;
+    },
     [userUnlock.fulfilled]: (state) => {
-      state.isFetching = false;
+      state.isUnlocking = false;
       state.isSuccess = true;
       return state;
     },
     [userUnlock.pending]: (state) => {
-      state.isFetching = true;
+      state.isUnlocking = true;
       return state;
     },
     [userUnlock.rejected]: (state) => {
-      state.isFetching = false;
+      state.isUnlocking = false;
       return state;
     },
     [userAdd.fulfilled]: (state) => {

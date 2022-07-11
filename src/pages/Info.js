@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import _ from "lodash";
 import "./Info.css";
-import { userInfo, selectUser, clearState, clearMsg } from "../redux/userSlice";
-import { selectLock } from "../redux/lockSlice";
+import { userInfo, userInfoNoLoading, selectUser, clearState, clearMsg } from "../redux/userSlice";
+import { selectLock, lockStatus, lockStatusNoLoading } from "../redux/lockSlice";
 import UserRecord from "../components/UserRecord";
 import Readmode from "../components/Readmode";
 import InfoForm from "../components/InfoForm";
@@ -33,7 +33,7 @@ const Info = () => {
 
   const { user, records, isFetching, isError, isSuccess, errorMessage } =
     useSelector(selectUser);
-  const { lockList } = useSelector(selectLock);
+  const { lockList, lockIsFetching } = useSelector(selectLock);
   if (isError) {
     toast.error(errorMessage);
   } else {
@@ -46,17 +46,28 @@ const Info = () => {
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
         setLuckIconStatus(item.lockUp);
-        if (item.error === 1) {
-          setError(true);
-        }
+        setError(item.error);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userStatus]);
 
   useEffect(() => {
+    _.map(lockList, (item, index) => {
+      if (item.lockerNo === location.state) {
+        setLuckIconStatus(item.lockUp);
+        setError(item.error);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lockList]);
+
+  useEffect(() => {
+    dispatch(lockStatus());
+    dispatch(userInfo(location.state));
     let refresh = setInterval(() => {
-      dispatch(userInfo(location.state));
+      dispatch(lockStatusNoLoading());
+      dispatch(userInfoNoLoading(location.state));
     }, 30000);
     return () => clearInterval(refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,11 +127,15 @@ const Info = () => {
               handleClickRefresh={handleClickRefresh}
             />
             <div className="userInfoLockState">
-              {isFetching ? (
+              {lockIsFetching ? (
                 <Skeleton
                   animation="wave"
-                  width={"50%"}
-                  sx={{ marginLeft: 1 }}
+                  sx={{
+                    width: "50%",
+                    height: "24px",
+                    marginLeft: "15%",
+                    display: "flex",
+                    alignItems: "center",}}
                 />
               ) : error ? (
                 <CancelIconStyle />
