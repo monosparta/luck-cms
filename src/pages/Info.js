@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import "./Info.css";
 import { userInfo, selectUser, clearState, clearMsg } from "../redux/userSlice";
-import { selectLock } from "../redux/lockSlice";
+import { selectLock, lockStatus } from "../redux/lockSlice";
 import UserRecord from "../components/UserRecord";
 import Readmode from "../components/Readmode";
 import InfoForm from "../components/InfoForm";
@@ -46,17 +46,17 @@ const Info = () => {
     _.map(lockList, (item, index) => {
       if (item.lockerNo === location.state) {
         setLuckIconStatus(item.lockUp);
-        if (item.error === 1) {
-          setError(true);
-        }
+        setError(item.error);
+        console.log(item.lockUp, item.error);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userStatus]);
+  }, [userStatus, lockList]);
 
   useEffect(() => {
     let refresh = setInterval(() => {
       dispatch(userInfo(location.state));
+      dispatch(lockStatus());
     }, 30000);
     return () => clearInterval(refresh);
     // eslint-disable-next-line react-hooks/exhaustive-deps

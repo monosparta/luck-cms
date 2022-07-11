@@ -71,7 +71,7 @@ const Readmode = (props) => {
     console.log(a.payload);
     setUpdate(true);
     dispatch(lockStatus());
-    if (a.payload == 0) {
+    if (a.payload === 0) {
       setAlertValue({
         type: "success",
         text: "已完成強制開鎖",
