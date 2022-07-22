@@ -17,7 +17,7 @@ const UserDelete = (props) => {
 
   const [checkOpen, setCheckOpen] = React.useState(false);
   const [alertOpen, setAlertOpen] = React.useState(false);
-  const { userClear } = useSelector(selectUser);
+  const { user, userClear } = useSelector(selectUser);
 
   const handleUserDelete = () => {
     dispatch(userDelete({ id: props.user.id }));
@@ -39,14 +39,17 @@ const UserDelete = (props) => {
   };
   return (
     <div className="userDelete">
-      <DeleteSweepIcon
-        onClick={handleCheckOpen}
-        sx={{
-          height: "20px",
-          width: "20px",
-          cursor: "pointer",
-        }}
-      />
+      {user.id ? (
+        <DeleteSweepIcon
+          onClick={handleCheckOpen}
+          sx={{
+            height: "20px",
+            width: "20px",
+            cursor: "pointer",
+          }}
+        />
+      ) : null}
+
       <Dialog
         open={checkOpen}
         onClose={handleCheckClose}
